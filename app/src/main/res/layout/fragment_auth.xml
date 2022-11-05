@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_app"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/walking"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_app_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_header"
+        android:fontFamily="@font/merriweather_bold"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/iv_app"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_app_header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:fontFamily="@font/merriweather_bold"
+            android:textSize="14sp"
+            android:hint="Почта"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/custom_auth_input"
+            />
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/merriweather_bold"
+            android:padding="5dp"
+            android:hint="Пароль"
+            android:textSize="14sp"
+            android:inputType="textPassword"
+            android:background="@drawable/custom_auth_input"
+            />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
