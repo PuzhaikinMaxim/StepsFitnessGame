@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Шаги. Фитнес игра</string>
     <string name="app_header">Шаги квест: Испытай себя</string>
+    <string name="enter_username">Имя пользователя</string>
+    <string name="enter_password">Пароль</string>
+    <string name="register_text">Нет аккаунта? Зарегистрируйтесь</string>
+    <string name="forgot_password_text">Забыли пароль?</string>
+    <string name="enter_button_text">Войти</string>
 </resources>
