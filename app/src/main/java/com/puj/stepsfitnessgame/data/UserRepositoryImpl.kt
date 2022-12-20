@@ -16,6 +16,7 @@ class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : Use
     }
 
     override fun loginUser(userCredentials: UserCredentials): Response<Unit> {
+        println("cock and balls")
         return when (val response = userRemoteDataSource.loginUser(userCredentials)) {
             is Response.Success -> {
                 saveToSharedPreferences(TOKEN_KEY, response.data)

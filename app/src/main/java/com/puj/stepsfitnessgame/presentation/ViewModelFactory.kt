@@ -1,6 +1,5 @@
 package com.puj.stepsfitnessgame.presentation
 
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +9,7 @@ class ViewModelFactory(
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(Context::class.java).newInstance(sharedPreferences)
+        println(sharedPreferences.toString())
+        return modelClass.getConstructor(SharedPreferences::class.java).newInstance(sharedPreferences)
     }
 }

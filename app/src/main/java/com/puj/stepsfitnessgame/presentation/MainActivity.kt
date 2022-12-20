@@ -15,7 +15,7 @@ import java.net.SocketTimeoutException
 
 class MainActivity : AppCompatActivity() {
 
-    val scope = CoroutineScope(Dispatchers.Default)
+    private val scope = CoroutineScope(Dispatchers.Default)
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
