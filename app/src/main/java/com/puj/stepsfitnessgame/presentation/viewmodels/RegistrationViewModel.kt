@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.puj.stepsfitnessgame.data.UserRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.Response
+import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
 import com.puj.stepsfitnessgame.domain.usecases.LoginUserUseCase
 import com.puj.stepsfitnessgame.domain.usecases.RegisterUserUseCase
@@ -24,6 +25,10 @@ class RegistrationViewModel(sharedPreferences: SharedPreferences) : ViewModel() 
     private val _isRegistered = MutableLiveData<Unit>()
     val isRegistered: LiveData<Unit>
         get() = _isRegistered
+
+    private val _isAuthenticated = MutableLiveData<Unit>()
+    val isAuthenticated: LiveData<Unit>
+        get() = _isAuthenticated
 
     private val _isRegistrationError = MutableLiveData<Unit>()
     val isRegistrationError: LiveData<Unit>
@@ -43,11 +48,21 @@ class RegistrationViewModel(sharedPreferences: SharedPreferences) : ViewModel() 
         viewModelScope.launch(Dispatchers.Default) {
             when(registerUserUseCase(userCredentials)) {
                 is Response.Success -> {
-                    _isRegistered.value = Unit
+                    _isRegistered.postValue(Unit)
                 }
                 is Response.Error -> {
                     _isRegistrationError.postValue(Unit)
                 }
+            }
+        }
+    }
+
+    fun loginUser(username: String, password: String) {
+        val userCredentials = UserCredentials(username, password)
+        viewModelScope.launch(Dispatchers.Default) {
+            val result = loginUserUseCase(userCredentials)
+            if(result is Response.Success){
+                _isAuthenticated.postValue(Unit)
             }
         }
     }

@@ -11,12 +11,14 @@ class UserRemoteDataSource {
     fun loginUser(userCredentials: UserCredentials): Response<String> {
         try {
             val result = userService.loginUser(userCredentials).execute()
+            println(result.body())
             if(result.isSuccessful) {
                 return Response.Success(result.body()!!)
             }
             return Response.Error(result.code())
         }
         catch (ex: Exception) {
+            println(ex.printStackTrace())
             return Response.Error(SERVER_NOT_RESPONDING_CODE)
         }
     }

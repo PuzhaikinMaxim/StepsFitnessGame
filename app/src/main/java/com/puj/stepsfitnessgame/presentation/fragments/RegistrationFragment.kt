@@ -45,7 +45,13 @@ class RegistrationFragment : Fragment() {
 
     private fun observeLiveData() {
         viewModel.isRegistered.observe(requireActivity()){
-            println("Registration completed")
+            val usernameInput = binding.etUsername.text.toString()
+            val passwordInput = binding.etPassword.text.toString()
+            viewModel.loginUser(usernameInput, passwordInput)
+        }
+
+        viewModel.isAuthenticated.observe(requireActivity()){
+            println("Success")
         }
 
         viewModel.isRegistrationError.observe(requireActivity()){
