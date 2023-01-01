@@ -23,6 +23,7 @@
     </style>
 
     <style name="ChallengeProgress" parent="Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/challenge_progress_bar</item>
+        <item name="android:progressDrawable">@drawable/item_challenge_progress_bar_background</item>
+        <item name="android:elevation">5dp</item>
     </style>
 </resources>

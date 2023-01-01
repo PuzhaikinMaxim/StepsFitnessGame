@@ -6,4 +6,13 @@
     <string name="register_text">Нет аккаунта? Зарегистрируйтесь</string>
     <string name="forgot_password_text">Забыли пароль?</string>
     <string name="enter_button_text">Войти</string>
+    <string name="points_gained">Очков получено: %d</string>
+    <string name="goal">Цель: %d</string>
+    <string name="steps_taken">Шагов пройдено всего: %d</string>
+    <string name="time_till_finish">Времени до окончания: %s</string>
+    <string name="statistics_amount_of_steps_passed">Вы прошли <font color="#FF7A00">%d</font> шагов что равно <font color="#FF7A00">%f</font> км</string>
+    <string name="statistics_percent_of_completion"><font color="#FF7A00">d%</font>% от цели на день</string>
+    <string name="statistics_button_text">Статистика</string>
+    <string name="statistics_amount_of_completed_tasks"><font color="#FF7A00">%d</font> из текущих %d испытаний выполнено</string>
+
 </resources>

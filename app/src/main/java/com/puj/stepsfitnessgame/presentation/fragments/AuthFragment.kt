@@ -46,11 +46,15 @@ class AuthFragment: Fragment() {
         }
 
         viewModel.isAuthenticationError.observe(requireActivity()){
-            Toast.makeText(requireActivity(), "Пользователь не обнаружен", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireActivity(), "Пользователь не обнаружен", Toast.LENGTH_SHORT
+            ).show()
         }
 
         viewModel.isInputWrong.observe(requireActivity()){
-            Toast.makeText(requireActivity(), "Неверно введены данные", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireActivity(), "Неверно введены данные", Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

@@ -4,47 +4,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#9C5F51"
+    android:background="@drawable/item_challenge_card_background"
+    android:elevation="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp">
     <LinearLayout
         android:id="@+id/ll_challenge_name_container"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_show"
         >
         <ImageView
+            android:id="@+id/iv_challenge_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/dungeon"
+            android:src="@drawable/ic_dungeon"
             />
         <TextView
+            android:id="@+id/tv_challenge_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="5dp"
             android:text="Испытание 1"
-            android:textColor="#000000"
+            android:textColor="#FFF"
             android:textSize="22sp"
             />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_show"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:elevation="5dp"
+        android:background="@drawable/item_challenge_show_btn_background"
+        android:src="@drawable/ic_down_arrow"
+        app:layout_constraintBottom_toTopOf="@+id/pb_challenge_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
+        android:id="@+id/pb_challenge_progress"
+        style="@style/ChallengeProgress"
         android:layout_width="match_parent"
         android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/ll_challenge_name_container"
+        android:layout_marginEnd="10dp"
+        android:max="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/ChallengeProgress"
-        android:layout_gravity="center"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp"
-        android:max="100"
-        tools:progress="80"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/ll_challenge_name_container"
+        tools:progress="80" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/pb_challenge_progress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/points_gained"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/goal"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/steps_taken"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/time_till_finish"
+            />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
