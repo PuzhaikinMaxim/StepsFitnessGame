@@ -1,14 +1,15 @@
-package com.puj.stepsfitnessgame.data.network
+package com.puj.stepsfitnessgame.data.network.user
 
+import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
 
-class UserRemoteDataSource {
+class UserRemoteDataSourceImpl: UserRemoteDataSource {
 
     private val userService = ServiceFactory.create(UserApiService::class.java)
 
-    fun loginUser(userCredentials: UserCredentials): Response<String> {
+    override fun loginUser(userCredentials: UserCredentials): Response<String> {
         try {
             val result = userService.loginUser(userCredentials).execute()
             println(result.body())
@@ -23,7 +24,7 @@ class UserRemoteDataSource {
         }
     }
 
-    fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit> {
+    override fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit> {
         try {
             val result = userService.registerUser(userRegistrationInfo).execute()
             if(result.isSuccessful) {
@@ -36,7 +37,7 @@ class UserRemoteDataSource {
         }
     }
 
-    fun test() {
+    override fun test() {
         try {
             println(userService.test().execute().body())
         }

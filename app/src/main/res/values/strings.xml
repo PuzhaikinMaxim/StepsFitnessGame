@@ -14,5 +14,6 @@
     <string name="statistics_percent_of_completion"><font color="#FF7A00">d%</font>% от цели на день</string>
     <string name="statistics_button_text">Статистика</string>
     <string name="statistics_amount_of_completed_tasks"><font color="#FF7A00">%d</font> из текущих %d испытаний выполнено</string>
+    <string name="user_icon_description">Изображение пользователя</string>
 
 </resources>

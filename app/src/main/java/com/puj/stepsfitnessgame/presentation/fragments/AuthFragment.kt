@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentAuthBinding
+import com.puj.stepsfitnessgame.presentation.MainActivity
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.viewmodels.AuthViewModel
 
@@ -43,6 +44,10 @@ class AuthFragment: Fragment() {
     private fun observeLiveData() {
         viewModel.isAuthenticated.observe(requireActivity()){
             println("Auth completed")
+            val activity = requireActivity()
+            if(activity is MainActivity) {
+                activity.openMainScreen()
+            }
         }
 
         viewModel.isAuthenticationError.observe(requireActivity()){

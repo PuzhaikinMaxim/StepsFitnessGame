@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.data.network
+package com.puj.stepsfitnessgame.data.network.user
 
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo

@@ -1,7 +1,8 @@
 package com.puj.stepsfitnessgame.data
 
 import android.content.SharedPreferences
-import com.puj.stepsfitnessgame.data.network.UserRemoteDataSource
+import com.puj.stepsfitnessgame.data.network.user.FakeUserRemoteDataSource
+import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.domain.UserRepository
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
@@ -9,14 +10,13 @@ import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
 
 class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : UserRepository {
 
-    private val userRemoteDataSource = UserRemoteDataSource()
+    private val userRemoteDataSource = FakeUserRemoteDataSource()
 
     override fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit> {
         return userRemoteDataSource.registerUser(userRegistrationInfo)
     }
 
     override fun loginUser(userCredentials: UserCredentials): Response<Unit> {
-        println("cock and balls")
         return when (val response = userRemoteDataSource.loginUser(userCredentials)) {
             is Response.Success -> {
                 saveToSharedPreferences(TOKEN_KEY, response.data)

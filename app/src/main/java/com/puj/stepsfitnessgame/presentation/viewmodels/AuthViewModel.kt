@@ -41,7 +41,7 @@ class AuthViewModel(sharedPreferences: SharedPreferences): ViewModel(){
         viewModelScope.launch(Dispatchers.Default) {
             when(loginUserUseCase(userCredentials)) {
                 is Response.Success -> {
-                    _isAuthenticated.value = Unit
+                    _isAuthenticated.postValue(Unit)
                 }
                 is Response.Error -> {
                     _isAuthenticationError.postValue(Unit)

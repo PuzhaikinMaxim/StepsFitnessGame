@@ -4,9 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.puj.stepsfitnessgame.R
-import com.puj.stepsfitnessgame.data.network.UserRemoteDataSource
+import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.databinding.ActivityMainBinding
-import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.presentation.fragments.AuthFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         startFragment(AuthFragment.newFragment())
-        val source = UserRemoteDataSource()
+        val source = UserRemoteDataSourceImpl()
         scope.launch {
             try {
                 source.test()
@@ -41,5 +40,11 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fc_main, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    fun openMainScreen() {
+        val intent = ContainerFragmentActivity.newIntent(this)
+        startActivity(intent)
+        finish()
     }
 }
