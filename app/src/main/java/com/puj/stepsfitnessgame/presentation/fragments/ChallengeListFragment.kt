@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.databinding.FragmentChallengeListBinding
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
+import com.puj.stepsfitnessgame.presentation.adapters.ChallengeListAdapter
 import com.puj.stepsfitnessgame.presentation.viewmodels.ChallengeListViewModel
+import com.puj.stepsfitnessgame.presentation.viewmodels.RegistrationViewModel
 
 class ChallengeListFragment: Fragment() {
 
@@ -27,10 +29,24 @@ class ChallengeListFragment: Fragment() {
         _binding = FragmentChallengeListBinding.inflate(inflater, container, false)
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: throw RuntimeException()
         viewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(sharedPref)
+            this, ViewModelFactory(sharedPref)
         )[ChallengeListViewModel::class.java]
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupChallengeList()
+    }
+
+    private fun setupChallengeList() {
+        val adapter = ChallengeListAdapter()
+
+        viewModel.challengeList.observe(requireActivity()){
+            adapter.challengeList = it
+        }
+
+        binding.rvChallengesList.adapter = adapter
     }
 
     override fun onDestroy() {

@@ -79,6 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         >
         <TextView
+            android:id="@+id/tv_points_gained"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
@@ -87,6 +88,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -96,6 +98,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_steps_taken"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -105,12 +108,13 @@
             />
 
         <TextView
+            android:id="@+id/tv_time_till_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="18sp"
             android:textColor="@color/white"
-            android:text="@string/time_till_finish"
+            android:text="@string/time_till_end"
             />
     </LinearLayout>
 
