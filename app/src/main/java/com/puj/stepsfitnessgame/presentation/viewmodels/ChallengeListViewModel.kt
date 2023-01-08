@@ -8,25 +8,31 @@ import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 
 class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() {
 
-    private val _challengeList = MutableLiveData<List<Challenge>>()
-    val challengeList: LiveData<List<Challenge>>
+    private val _challengeList = MutableLiveData<MutableList<Challenge>>()
+    val challengeList: LiveData<out List<Challenge>>
         get() = _challengeList
 
     init {
-        val challengeList = arrayListOf<Challenge>(
+        val challengeList = arrayListOf(
             Challenge(
-                "Испытание1",20,100,1000,"5ч 30 мин"
+                0,"Испытание1",20,100,1000,"5ч 30 мин"
             ),
             Challenge(
-                "Испытание2",50,100,1000,"5ч 30 мин"
+                1,"Испытание2",50,100,1000,"5ч 30 мин"
             ),
             Challenge(
-                "Испытание3",70,100,1000,"5ч 30 мин"
+                2,"Испытание3",70,100,1000,"5ч 30 мин"
             ),
             Challenge(
-                "Испытание4",90,100,1000,"5ч 30 мин"
+                3,"Испытание4",90,100,1000,"5ч 30 мин"
             ),
         )
         _challengeList.value = challengeList
+    }
+
+    fun changeChallengeDetailsVisibility(challenge: Challenge) {
+        val newList = _challengeList.value?.toMutableList()
+        newList?.set(challenge.id, challenge.copy(isShown = !challenge.isShown))
+        _challengeList.value = newList
     }
 }

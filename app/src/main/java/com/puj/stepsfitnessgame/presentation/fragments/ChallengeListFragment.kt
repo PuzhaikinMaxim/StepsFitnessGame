@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.databinding.FragmentChallengeListBinding
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.adapters.ChallengeListAdapter
+import com.puj.stepsfitnessgame.presentation.adapters.ChallengeListItemAnimator
 import com.puj.stepsfitnessgame.presentation.viewmodels.ChallengeListViewModel
-import com.puj.stepsfitnessgame.presentation.viewmodels.RegistrationViewModel
 
 class ChallengeListFragment: Fragment() {
 
@@ -41,10 +41,18 @@ class ChallengeListFragment: Fragment() {
 
     private fun setupChallengeList() {
         val adapter = ChallengeListAdapter()
+        adapter.onItemIsShownListener = {
+            println("changeable value $it")
+            viewModel.changeChallengeDetailsVisibility(it)
+        }
 
         viewModel.challengeList.observe(requireActivity()){
             adapter.challengeList = it
         }
+
+        val challengeListItemAnimator = ChallengeListItemAnimator()
+
+        binding.rvChallengesList.itemAnimator = challengeListItemAnimator
 
         binding.rvChallengesList.adapter = adapter
     }
@@ -52,5 +60,12 @@ class ChallengeListFragment: Fragment() {
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    companion object {
+
+        fun newFragment(): ChallengeListFragment {
+            return ChallengeListFragment()
+        }
     }
 }

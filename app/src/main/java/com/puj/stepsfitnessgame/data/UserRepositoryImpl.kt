@@ -34,7 +34,13 @@ class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : Use
         }
     }
 
+    override fun isUserLoggedIn(): Response<Unit> {
+        val token = sharedPreferences.getString(TOKEN_KEY, DEFAULT) ?: DEFAULT
+        return userRemoteDataSource.isUserLoggedIn(token)
+    }
+
     companion object {
         private const val TOKEN_KEY = "authToken"
+        private const val DEFAULT = "default"
     }
 }

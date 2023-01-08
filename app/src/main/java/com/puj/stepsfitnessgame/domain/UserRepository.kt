@@ -10,4 +10,6 @@ interface UserRepository {
     fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit>
 
     fun loginUser(userCredentials: UserCredentials): Response<Unit>
+
+    fun isUserLoggedIn(): Response<Unit>
 }

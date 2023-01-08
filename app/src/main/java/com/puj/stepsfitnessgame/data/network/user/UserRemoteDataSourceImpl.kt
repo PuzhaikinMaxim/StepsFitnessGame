@@ -37,6 +37,10 @@ class UserRemoteDataSourceImpl: UserRemoteDataSource {
         }
     }
 
+    override fun isUserLoggedIn(token: String): Response<Unit> {
+        TODO("Not yet implemented")
+    }
+
     override fun test() {
         try {
             println(userService.test().execute().body())

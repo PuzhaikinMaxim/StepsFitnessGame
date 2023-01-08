@@ -9,5 +9,7 @@ interface UserRemoteDataSource {
 
     fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit>
 
+    fun isUserLoggedIn(token: String): Response<Unit>
+
     fun test()
 }

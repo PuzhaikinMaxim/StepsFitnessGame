@@ -23,7 +23,7 @@ class ContainerFragmentActivity: AppCompatActivity() {
 
     private fun openChallengeListFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fc_main_fragments_container, ChallengeListFragment())
+            .replace(R.id.fc_main_fragments_container, ChallengeListFragment.newFragment())
             .addToBackStack(null)
             .commit()
     }

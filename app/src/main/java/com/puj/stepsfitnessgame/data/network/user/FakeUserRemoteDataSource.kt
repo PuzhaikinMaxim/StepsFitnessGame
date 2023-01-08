@@ -24,6 +24,10 @@ class FakeUserRemoteDataSource: UserRemoteDataSource {
         return Response.Success(Unit)
     }
 
+    override fun isUserLoggedIn(token: String): Response<Unit> {
+        return Response.Success(Unit)
+    }
+
     override fun test() {
         TODO("Not yet implemented")
     }
