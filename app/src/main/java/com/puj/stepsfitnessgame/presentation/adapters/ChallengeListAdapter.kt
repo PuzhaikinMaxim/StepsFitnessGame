@@ -24,8 +24,6 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
             field = value
         }
 
-    private var isIvShowAnimationEnded = true
-
     private lateinit var context: Context
 
     var onItemIsShownListener: ((Challenge) -> Unit)? = null
@@ -55,8 +53,8 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
                     llChallengeInfoContainer.visibility = View.VISIBLE
                 }
                 false -> {
-                    pbChallengeProgress.visibility = View.GONE
-                    llChallengeInfoContainer.visibility = View.GONE
+                    //pbChallengeProgress.visibility = View.GONE
+                    //llChallengeInfoContainer.visibility = View.GONE
                 }
             }
             setOnShowClickListener(ivShow, item)
@@ -65,48 +63,8 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
 
     private fun setOnShowClickListener(ivShow: ImageView, item: Challenge) {
         ivShow.setOnClickListener {
-            if(isIvShowAnimationEnded){
-                onItemIsShownListener?.invoke(item)
-                startShowButtonOnClickAnimation(ivShow)
-                isIvShowAnimationEnded = false
-            }
+            onItemIsShownListener?.invoke(item)
         }
-    }
-
-    private fun startShowButtonOnClickAnimation(ivShow: ImageView) {
-        val prevRotation = ivShow.rotation
-        val animator = ObjectAnimator.ofFloat(
-            ivShow,
-            "rotation",
-            prevRotation,
-            prevRotation + ROTATION_ANGLE
-        )
-
-        addAnimationListener(animator)
-
-        animator.setDuration(ANIMATION_DURATION).start()
-    }
-
-    private fun addAnimationListener(animator: ObjectAnimator) {
-        val animationListener = object : Animator.AnimatorListener {
-            override fun onAnimationStart(p0: Animator?) {
-
-            }
-
-            override fun onAnimationEnd(p0: Animator?) {
-                isIvShowAnimationEnded = true
-            }
-
-            override fun onAnimationCancel(p0: Animator?) {
-
-            }
-
-            override fun onAnimationRepeat(p0: Animator?) {
-
-            }
-        }
-
-        animator.addListener(animationListener)
     }
 
     override fun getItemCount(): Int {
@@ -114,9 +72,4 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
     }
 
     class ChallengeListViewHolder(val binding: ItemChallengeBinding): ViewHolder(binding.root)
-
-    companion object {
-        private const val ROTATION_ANGLE = 180
-        private const val ANIMATION_DURATION = 500L
-    }
 }
