@@ -47,15 +47,9 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
             tvStepsTaken.text = context.getString(R.string.steps_taken, item.stepsTaken)
             tvTimeTillEnd.text = context.getString(R.string.time_till_end, item.timeTillEnd)
             pbChallengeProgress.progress = item.progress
-            when(item.isShown){
-                true -> {
-                    pbChallengeProgress.visibility = View.VISIBLE
-                    llChallengeInfoContainer.visibility = View.VISIBLE
-                }
-                false -> {
-                    //pbChallengeProgress.visibility = View.GONE
-                    //llChallengeInfoContainer.visibility = View.GONE
-                }
+            if(item.isShown){
+                pbChallengeProgress.visibility = View.VISIBLE
+                llChallengeInfoContainer.visibility = View.VISIBLE
             }
             setOnShowClickListener(ivShow, item)
         }

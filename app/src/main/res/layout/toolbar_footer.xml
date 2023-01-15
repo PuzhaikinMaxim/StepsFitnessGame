@@ -8,26 +8,31 @@
     app:tabGravity="fill"
     app:tabIndicatorColor="@color/dark_orange"
     app:tabIndicatorHeight="3dp"
+    app:tabTextAppearance="@style/ToolbarTabText"
     android:background="@drawable/toolbar_footer_background"
     android:orientation="vertical">
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:icon="@drawable/ic_down_arrow"
+        android:icon="@drawable/ic_menu_dungeon"
+        android:text="@string/toolbar_tab_challenges_text"
         />
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:icon="@drawable/ic_down_arrow"
+        android:icon="@drawable/ic_menu_daily_challenges"
+        android:text="@string/toolbar_tab_daily_text"
         />
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:icon="@drawable/ic_down_arrow"
+        android:icon="@drawable/ic_menu_rating"
+        android:text="@string/toolbar_tab_rating_text"
         />
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:icon="@drawable/ic_down_arrow"
+        android:icon="@drawable/ic_menu_guilds"
+        android:text="@string/toolbar_tab_guilds_text"
         />
 </com.google.android.material.tabs.TabLayout>

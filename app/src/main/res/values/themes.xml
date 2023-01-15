@@ -26,4 +26,9 @@
         <item name="android:progressDrawable">@drawable/item_challenge_progress_bar_background</item>
         <item name="android:elevation">5dp</item>
     </style>
+
+    <style name="ToolbarTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>

@@ -34,8 +34,8 @@ class ChallengeListItemAnimator: DefaultItemAnimator() {
             if(preInfo is ChallengeItemHolderInfo){
                 if(preInfo.isOpened){
                     setupShowButtonAnimation(ivShow, holder)
-                    //clChallengeItemBackground.layoutParams.height = LayoutParams.WRAP_CONTENT
-                    //clChallengeItemBackground.requestLayout()
+                    pbChallengeProgress.visibility = View.VISIBLE
+                    llChallengeInfoContainer.visibility = View.VISIBLE
                 }
                 else {
                     setupShowButtonAnimation(ivShow, holder)

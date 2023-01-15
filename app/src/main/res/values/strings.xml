@@ -15,5 +15,9 @@
     <string name="statistics_button_text">Статистика</string>
     <string name="statistics_amount_of_completed_tasks"><font color="#FF7A00">%d</font> из текущих %d испытаний выполнено</string>
     <string name="user_icon_description">Изображение пользователя</string>
+    <string name="toolbar_tab_challenges_text">Испытания</string>
+    <string name="toolbar_tab_rating_text">Рейтинг</string>
+    <string name="toolbar_tab_daily_text">Заказы</string>
+    <string name="toolbar_tab_guilds_text">Гильдии</string>
 
 </resources>

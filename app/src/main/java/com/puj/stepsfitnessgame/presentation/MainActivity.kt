@@ -9,8 +9,6 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.databinding.ActivityMainBinding
 import com.puj.stepsfitnessgame.presentation.fragments.AuthFragment
-import com.puj.stepsfitnessgame.presentation.fragments.ChallengeListFragment
-import com.puj.stepsfitnessgame.presentation.viewmodels.AuthViewModel
 import com.puj.stepsfitnessgame.presentation.viewmodels.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -67,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openMainScreen() {
-        val intent = ContainerFragmentActivity.newIntent(this)
+        val intent = MainMenuActivity.newIntent(this)
         startActivity(intent)
         finish()
     }
