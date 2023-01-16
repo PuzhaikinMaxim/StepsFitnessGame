@@ -19,5 +19,10 @@
     <string name="toolbar_tab_rating_text">Рейтинг</string>
     <string name="toolbar_tab_daily_text">Заказы</string>
     <string name="toolbar_tab_guilds_text">Гильдии</string>
+    <string name="toolbar_tab_duels">Дуэли</string>
+    <string name="menu_profile_title">Профиль</string>
+    <string name="menu_inventory_title">Инвентарь</string>
+    <string name="menu_rewards_title">Награды</string>
+    <string name="user_level_text">Уровень: %d</string>
 
 </resources>

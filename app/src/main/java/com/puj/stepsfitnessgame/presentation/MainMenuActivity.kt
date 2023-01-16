@@ -6,10 +6,16 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
+import android.view.MenuItem
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
+import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.puj.stepsfitnessgame.R
@@ -30,6 +36,7 @@ class MainMenuActivity: AppCompatActivity() {
 
         setupGoogleSignIn()
         setupRequestPermission()
+        setDrawerLayout()
 
         val provider = GoogleFitDataProvider()
         println(provider.getTodayStepCount())
@@ -65,6 +72,32 @@ class MainMenuActivity: AppCompatActivity() {
                 Manifest.permission.ACTIVITY_RECOGNITION
             )
         }
+    }
+
+    private fun setDrawerLayout() {
+        val listener = object : SimpleDrawerListener() {
+            override fun onDrawerOpened(drawerView: View) {
+                invalidateOptionsMenu()
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                invalidateOptionsMenu()
+            }
+        }
+
+        with(binding){
+            tbHeader.ivUserIcon.setOnClickListener {
+                if(!dlMainMenuContainer.isDrawerOpen(navView)){
+                    dlMainMenuContainer.openDrawer(GravityCompat.START)
+                }
+                else {
+                    dlMainMenuContainer.closeDrawer(GravityCompat.START)
+                }
+            }
+
+            dlMainMenuContainer.addDrawerListener(listener)
+        }
+
     }
 
     private fun openChallengeListFragment() {
