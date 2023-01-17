@@ -89,7 +89,7 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_authenticate"
         style="@style/AuthButton"
         android:layout_width="match_parent"
@@ -103,7 +103,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_register"
         app:layout_constraintTop_toBottomOf="@id/ll_auth_container" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_register"
         style="@style/AuthButton"
         android:layout_width="match_parent"

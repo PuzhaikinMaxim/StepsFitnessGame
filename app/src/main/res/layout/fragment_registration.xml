@@ -80,7 +80,7 @@
 
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         style="@style/AuthButton"
         android:id="@+id/btn_register"
         android:layout_width="match_parent"
