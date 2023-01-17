@@ -6,10 +6,6 @@
         android:icon="@drawable/ic_side_menu_profile"
         />
     <item
-        android:id="@+id/menu_level"
-        android:title="Уровень"
-        />
-    <item
         android:id="@+id/menu_inventory"
         android:title="@string/menu_inventory_title"
         android:icon="@drawable/ic_side_menu_inventory"
@@ -18,5 +14,10 @@
         android:id="@+id/menu_rewards"
         android:title="@string/menu_rewards_title"
         android:icon="@drawable/ic_side_menu_rewards"
+        />
+    <item
+        android:id="@+id/menu_level"
+        android:title="@string/menu_rewards_settings"
+        android:icon="@drawable/ic_side_menu_settings"
         />
 </menu>

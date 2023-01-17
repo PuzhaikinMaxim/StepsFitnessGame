@@ -24,5 +24,6 @@
     <string name="menu_inventory_title">Инвентарь</string>
     <string name="menu_rewards_title">Награды</string>
     <string name="user_level_text">Уровень: %d</string>
+    <string name="menu_rewards_settings">Настройки</string>
 
 </resources>
