@@ -9,7 +9,7 @@
     <string name="points_gained">Очков получено: %d</string>
     <string name="goal">Цель: %d</string>
     <string name="steps_taken">Шагов пройдено всего: %d</string>
-    <string name="time_till_end">Времени до окончания: %s</string>
+    <string name="time_till_end">Время на завершение: %s</string>
     <string name="statistics_amount_of_steps_passed">Вы прошли <font color="#FF7A00">%d</font> шагов что равно <font color="#FF7A00">%f</font> км</string>
     <string name="statistics_percent_of_completion"><font color="#FF7A00">d%</font>% от цели на день</string>
     <string name="statistics_button_text">Статистика</string>

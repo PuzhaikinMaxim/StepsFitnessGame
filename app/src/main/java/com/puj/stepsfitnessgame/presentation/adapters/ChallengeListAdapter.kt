@@ -1,7 +1,5 @@
 package com.puj.stepsfitnessgame.presentation.adapters
 
-import android.animation.Animator
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +8,10 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.viewbinding.ViewBinding
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.ItemChallengeBinding
+import com.puj.stepsfitnessgame.databinding.ItemChallengeNotStartedBinding
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 
 class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder>() {
@@ -29,18 +29,40 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
     var onItemIsShownListener: ((Challenge) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeListViewHolder {
-        val binding = ItemChallengeBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+        val binding = when (viewType) {
+            VIEW_TYPE_STARTED -> {
+                ItemChallengeBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            }
+            VIEW_TYPE_NOT_STARTED -> {
+                ItemChallengeNotStartedBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            }
+            else -> throw RuntimeException("Unknown view type^ $viewType")
+        }
         context = parent.context
         return ChallengeListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ChallengeListViewHolder, position: Int) {
         val item = challengeList[position]
-        with(holder.binding){
+        when(holder.binding){
+            is ItemChallengeBinding -> setOnChallengeStartedView(holder.binding, item)
+            is ItemChallengeNotStartedBinding -> setOnChallengeNotStartedView(holder.binding, item)
+        }
+    }
+
+    private fun setOnChallengeStartedView(
+        binding: ItemChallengeBinding,
+        item: Challenge
+    ) {
+        with(binding){
             tvChallengeName.text = item.challengeName
             tvPointsGained.text = context.getString(R.string.points_gained, item.pointsGained)
             tvGoal.text = context.getString(R.string.goal, item.goal)
@@ -55,9 +77,34 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
         }
     }
 
+    private fun setOnChallengeNotStartedView(
+        binding: ItemChallengeNotStartedBinding,
+        item: Challenge
+    ) {
+        with(binding){
+            tvChallengeName.text = item.challengeName
+            tvGoal.text = context.getString(R.string.goal, item.goal)
+            tvTimeTillEnd.text = context.getString(R.string.time_till_end, item.timeTillEnd)
+            if(item.isShown){
+                llChallengeInfoContainer.visibility = View.VISIBLE
+            }
+            setOnShowClickListener(ivShow, item)
+        }
+    }
+
     private fun setOnShowClickListener(ivShow: ImageView, item: Challenge) {
         ivShow.setOnClickListener {
             onItemIsShownListener?.invoke(item)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        val item = challengeList[position]
+        return if(item.isStarted){
+            VIEW_TYPE_STARTED
+        }
+        else{
+            VIEW_TYPE_NOT_STARTED
         }
     }
 
@@ -65,5 +112,13 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
         return challengeList.size
     }
 
-    class ChallengeListViewHolder(val binding: ItemChallengeBinding): ViewHolder(binding.root)
+    class ChallengeListViewHolder(val binding: ViewBinding): ViewHolder(binding.root)
+
+    companion object {
+
+        const val VIEW_TYPE_NOT_STARTED = 100
+        const val VIEW_TYPE_STARTED = 101
+
+        const val MAX_POOL_SIZE = 30
+    }
 }

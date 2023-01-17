@@ -16,6 +16,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
+import com.puj.stepsfitnessgame.databinding.ItemChallengeBinding
+import com.puj.stepsfitnessgame.databinding.ItemChallengeNotStartedBinding
 
 class ChallengeListItemAnimator: DefaultItemAnimator() {
 
@@ -30,27 +32,98 @@ class ChallengeListItemAnimator: DefaultItemAnimator() {
 
         val holder = newHolder as ChallengeListAdapter.ChallengeListViewHolder
 
-        with(holder.binding){
-            if(preInfo is ChallengeItemHolderInfo){
-                if(preInfo.isOpened){
-                    setupShowButtonAnimation(ivShow, holder)
-                    pbChallengeProgress.visibility = View.VISIBLE
-                    llChallengeInfoContainer.visibility = View.VISIBLE
+        when(holder.binding){
+            is ItemChallengeBinding -> {
+                with(holder.binding){
+                    if(preInfo is ChallengeItemHolderInfo){
+                        if(preInfo.isOpened){
+                            setupShowButtonAnimation(ivShow, holder)
+                            pbChallengeProgress.visibility = View.VISIBLE
+                            llChallengeInfoContainer.visibility = View.VISIBLE
+                        }
+                        else {
+                            setupShowButtonAnimation(ivShow, holder)
+                            startSlideAnimation(
+                                clChallengeItemBackground,
+                                llChallengeNameContainer,
+                                pbChallengeProgress,
+                                llChallengeInfoContainer
+                            )
+                        }
+                        return true
+                    }
                 }
-                else {
-                    setupShowButtonAnimation(ivShow, holder)
-                    startSlideAnimation(
-                        clChallengeItemBackground,
-                        llChallengeNameContainer,
-                        pbChallengeProgress,
-                        llChallengeInfoContainer
-                    )
+            }
+            is ItemChallengeNotStartedBinding -> {
+                with(holder.binding){
+                    if(preInfo is ChallengeItemHolderInfo){
+                        println(preInfo.isOpened)
+                        if(preInfo.isOpened){
+                            setupShowButtonAnimation(ivShow, holder)
+                            llChallengeInfoContainer.visibility = View.VISIBLE
+                        }
+                        else {
+                            setupShowButtonAnimation(ivShow, holder)
+                            startSlideAnimationForNotStartedItem(
+                                clChallengeItemBackground,
+                                llChallengeNameContainer,
+                                llChallengeInfoContainer
+                            )
+                        }
+                        return true
+                    }
                 }
-                return true
             }
         }
 
         return super.animateChange(oldHolder, newHolder, preInfo, postInfo)
+    }
+
+    private fun startSlideAnimationForNotStartedItem(
+        clChallengeItemBackground: ConstraintLayout,
+        llChallengeNameContainer: LinearLayout,
+        llChallengeInfoContainer: LinearLayout) {
+        val toHeight =
+            llChallengeNameContainer.height +
+                    clChallengeItemBackground.paddingTop +
+                    clChallengeItemBackground.paddingBottom
+
+        val fromHeight = clChallengeItemBackground.height
+
+        val animationUpdateListener = AnimatorUpdateListener {
+            val animatedValue = it.animatedValue as Int
+            clChallengeItemBackground.layoutParams.height = animatedValue
+            clChallengeItemBackground.requestLayout()
+        }
+
+        setupAlphaAnimation(llChallengeInfoContainer)
+
+        val animationListener = object : AnimatorListener {
+            override fun onAnimationStart(p0: Animator?) {
+
+            }
+
+            override fun onAnimationEnd(p0: Animator?) {
+                llChallengeInfoContainer.visibility = View.GONE
+                clChallengeItemBackground.layoutParams.height = LayoutParams.WRAP_CONTENT
+                clChallengeItemBackground.requestLayout()
+            }
+
+            override fun onAnimationCancel(p0: Animator?) {
+
+            }
+
+            override fun onAnimationRepeat(p0: Animator?) {
+
+            }
+
+        }
+
+        val slideUpAnimator = ValueAnimator.ofInt(fromHeight, toHeight)
+            .setDuration(ANIMATION_DURATION)
+        slideUpAnimator.addUpdateListener(animationUpdateListener)
+        slideUpAnimator.addListener(animationListener)
+        slideUpAnimator.start()
     }
 
     private fun startSlideAnimation(
@@ -171,9 +244,16 @@ class ChallengeListItemAnimator: DefaultItemAnimator() {
             }
 
             override fun onAnimationEnd(p0: Animator?) {
-                holder.binding.ivShow.isClickable = true
-                isIvShowAnimationEnded = true
-                dispatchAnimationFinished(holder)
+                if(holder.binding is ItemChallengeBinding) {
+                    holder.binding.ivShow.isClickable = true
+                    isIvShowAnimationEnded = true
+                    dispatchAnimationFinished(holder)
+                }
+                if(holder.binding is ItemChallengeNotStartedBinding) {
+                    holder.binding.ivShow.isClickable = true
+                    isIvShowAnimationEnded = true
+                    dispatchAnimationFinished(holder)
+                }
             }
 
             override fun onAnimationCancel(p0: Animator?) {
