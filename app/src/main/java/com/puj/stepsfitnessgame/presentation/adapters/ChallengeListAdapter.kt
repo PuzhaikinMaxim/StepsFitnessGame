@@ -28,6 +28,8 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
 
     var onItemIsShownListener: ((Challenge) -> Unit)? = null
 
+    var onItemChallengeStartListener: ((Challenge) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeListViewHolder {
         val binding = when (viewType) {
             VIEW_TYPE_STARTED -> {
@@ -89,6 +91,9 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
                 llChallengeInfoContainer.visibility = View.VISIBLE
             }
             setOnShowClickListener(ivShow, item)
+            btnStartChallenge.setOnClickListener{
+                onItemChallengeStartListener?.invoke(item)
+            }
         }
     }
 

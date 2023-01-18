@@ -46,6 +46,20 @@ class ChallengeListFragment: Fragment() {
             viewModel.changeChallengeDetailsVisibility(it)
         }
 
+        adapter.onItemChallengeStartListener = {
+            viewModel.startChallenge(it)
+        }
+
+        binding.rvChallengesList.recycledViewPool.setMaxRecycledViews(
+            ChallengeListAdapter.VIEW_TYPE_STARTED,
+            1
+        )
+
+        binding.rvChallengesList.recycledViewPool.setMaxRecycledViews(
+            ChallengeListAdapter.VIEW_TYPE_STARTED,
+            ChallengeListAdapter.MAX_POOL_SIZE
+        )
+
         viewModel.challengeList.observe(requireActivity()){
             adapter.challengeList = it
         }

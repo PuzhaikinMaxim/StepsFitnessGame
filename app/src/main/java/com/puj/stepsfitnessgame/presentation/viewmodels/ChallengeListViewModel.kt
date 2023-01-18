@@ -35,4 +35,10 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
         newList?.set(challenge.id, challenge.copy(isShown = !challenge.isShown))
         _challengeList.value = newList
     }
+
+    fun startChallenge(challenge: Challenge) {
+        val newList = _challengeList.value?.toMutableList()
+        newList?.set(challenge.id, challenge.copy(isStarted = true))
+        _challengeList.value = newList
+    }
 }
