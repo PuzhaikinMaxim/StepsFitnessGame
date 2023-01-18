@@ -31,5 +31,10 @@
     <string name="statistics_scale_days">Дни</string>
     <string name="statistics_scale_weeks">Недели</string>
     <string name="statistics_scale_months">Месяцы</string>
+    <string name="profile_statistics_header_text">Статистика</string>
+    <string name="profile_amount_of_completed_tasks">Количество выполненных испытаний: %d</string>
+    <string name="profile_amount_of_achievements">Всего получено достижений: %d</string>
+    <string name="profile_guild_header_text">Гильдия</string>
+    <string name="user_profile_guild_name_text">Состоит в гильдии: %s</string>
 
 </resources>

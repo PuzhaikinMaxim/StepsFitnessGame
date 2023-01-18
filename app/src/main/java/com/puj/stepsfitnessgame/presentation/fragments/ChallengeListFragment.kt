@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.databinding.FragmentChallengeListBinding
+import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.adapters.ChallengeListAdapter
 import com.puj.stepsfitnessgame.presentation.adapters.ChallengeListItemAnimator
@@ -21,6 +22,8 @@ class ChallengeListFragment: Fragment() {
 
     private lateinit var viewModel: ChallengeListViewModel
 
+    private lateinit var mainMenuContainer: MainMenuContainer
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,12 +34,18 @@ class ChallengeListFragment: Fragment() {
         viewModel = ViewModelProvider(
             this, ViewModelFactory(sharedPref)
         )[ChallengeListViewModel::class.java]
+
+        val activity = requireActivity()
+        if(activity is MainMenuContainer){
+            mainMenuContainer = activity
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupChallengeList()
+        setShowStatisticsButton()
     }
 
     private fun setupChallengeList() {
@@ -69,6 +78,12 @@ class ChallengeListFragment: Fragment() {
         binding.rvChallengesList.itemAnimator = challengeListItemAnimator
 
         binding.rvChallengesList.adapter = adapter
+    }
+
+    private fun setShowStatisticsButton() {
+        binding.btnShowStatisticsButton.setOnClickListener {
+            mainMenuContainer.startNewScreen(MainMenuContainer.STATISTICS_FRAGMENT_CODE)
+        }
     }
 
     override fun onDestroy() {

@@ -53,6 +53,7 @@
                 />
 
             <Button
+                android:id="@+id/btn_show_statistics_button"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"

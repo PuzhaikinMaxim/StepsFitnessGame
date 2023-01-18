@@ -16,14 +16,16 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
+import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.fragments.ChallengeListFragment
+import com.puj.stepsfitnessgame.presentation.fragments.StatisticsFragment
 
-class MainMenuActivity: AppCompatActivity() {
+class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
     private val binding by lazy {
         ActivityMenuContainerBinding.inflate(layoutInflater)
@@ -107,6 +109,13 @@ class MainMenuActivity: AppCompatActivity() {
             .commit()
     }
 
+    private fun openFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fc_main_fragments_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun onBackPressed() {
         if(supportFragmentManager.backStackEntryCount > 1) {
             super.onBackPressed()
@@ -132,6 +141,15 @@ class MainMenuActivity: AppCompatActivity() {
 
         fun newIntent(context: Context): Intent {
             return Intent(context, MainMenuActivity::class.java)
+        }
+    }
+
+    override fun startNewScreen(screenId: Int) {
+        when(screenId){
+            MainMenuContainer.CHALLENGE_LIST_FRAGMENT_CODE -> openChallengeListFragment()
+            MainMenuContainer.STATISTICS_FRAGMENT_CODE -> openFragment(
+                StatisticsFragment.newFragment()
+            )
         }
     }
 }
