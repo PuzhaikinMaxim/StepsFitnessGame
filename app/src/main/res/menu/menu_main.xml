@@ -11,12 +11,17 @@
         android:icon="@drawable/ic_side_menu_inventory"
         />
     <item
-        android:id="@+id/menu_rewards"
-        android:title="@string/menu_rewards_title"
-        android:icon="@drawable/ic_side_menu_rewards"
+        android:id="@+id/menu_characteristics"
+        android:title="@string/menu_characteristics_title"
+        android:icon="@drawable/ic_menu_characteristics"
         />
     <item
-        android:id="@+id/menu_level"
+        android:id="@+id/menu_achievements"
+        android:title="@string/manu_achievements_title"
+        android:icon="@drawable/ic_side_menu_achievements"
+        />
+    <item
+        android:id="@+id/menu_settings"
         android:title="@string/menu_rewards_settings"
         android:icon="@drawable/ic_side_menu_settings"
         />

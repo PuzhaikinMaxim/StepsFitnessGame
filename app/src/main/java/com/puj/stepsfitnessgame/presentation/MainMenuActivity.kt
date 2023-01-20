@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.presentation
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -17,13 +18,20 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import androidx.fragment.app.Fragment
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.OutOfQuotaPolicy
+import androidx.work.WorkManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.puj.stepsfitnessgame.R
+import com.puj.stepsfitnessgame.data.StepCountingWorker
+import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.fragments.ChallengeListFragment
 import com.puj.stepsfitnessgame.presentation.fragments.StatisticsFragment
+import java.util.concurrent.TimeUnit
 
 class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
@@ -42,6 +50,17 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
         val provider = GoogleFitDataProvider()
         println(provider.getTodayStepCount())
+
+        FitnessGameDatabase.getDatabase(this)
+
+        val request = OneTimeWorkRequestBuilder<StepCountingWorker>()
+            .build()
+
+        WorkManager.getInstance(applicationContext).enqueueUniqueWork(
+            "step_counting_work",
+            ExistingWorkPolicy.REPLACE,
+            request
+        )
     }
 
     private fun setupGoogleSignIn() {
@@ -100,6 +119,26 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             dlMainMenuContainer.addDrawerListener(listener)
         }
 
+        setupSlideMenu()
+    }
+
+    private fun closeDrawer() {
+        binding.dlMainMenuContainer.closeDrawer(GravityCompat.START)
+    }
+
+    private fun setupSlideMenu() {
+        val navigationView = binding.navView
+        navigationView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.menu_profile -> {
+                    val intent = UserProfileActivity.newIntent(this)
+                    startActivity(intent)
+                }
+                else -> {}
+            }
+            closeDrawer()
+            true
+        }
     }
 
     private fun openChallengeListFragment() {
