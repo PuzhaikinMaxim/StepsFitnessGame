@@ -8,6 +8,10 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.puj.stepsfitnessgame.R
+import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
+import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
+import com.puj.stepsfitnessgame.data.network.stepactivity.StepActivityDataProvider
+import com.puj.stepsfitnessgame.data.network.stepactivity.StepActivityDataSource
 import kotlinx.coroutines.delay
 
 class StepCountingWorker(
@@ -15,11 +19,16 @@ class StepCountingWorker(
     private val workerParameters: WorkerParameters
 ): CoroutineWorker(context, workerParameters) {
 
+    private val lastStepCountUpdateDao = FitnessGameDatabase.getDatabase(context).taskDao()
+    private val stepActivityDataSource: StepActivityDataSource = StepActivityDataSource()
+
     override suspend fun doWork(): Result {
         startForegroundService()
-        for (i in 0..1000){
+        var i = 0
+        while (true) {
             delay(1000)
             println(i)
+            i++
         }
         return Result.success(
             workDataOf(
@@ -35,6 +44,7 @@ class StepCountingWorker(
                 NotificationCompat.Builder(context, "step_counting_channel")
                     .setContentText("Test")
                     .setContentTitle("Test")
+                    .setOngoing(true)
                     .setSmallIcon(R.drawable.ic_launcher_background)
                     .build()
             )

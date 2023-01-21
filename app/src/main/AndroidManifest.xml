@@ -33,6 +33,10 @@
         </activity>
         <activity android:name=".presentation.MainMenuActivity" />
         <activity android:name=".presentation.UserProfileActivity"/>
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType=""
+            tools:node="merge" />
     </application>
 
 </manifest>

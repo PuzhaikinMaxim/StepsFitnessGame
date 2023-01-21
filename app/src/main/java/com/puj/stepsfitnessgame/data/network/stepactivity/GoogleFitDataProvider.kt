@@ -22,7 +22,7 @@ class GoogleFitDataProvider: StepActivityDataProvider {
             .build()
 
         val googleSignInAccount = GoogleSignIn.getAccountForExtension(context, fitnessOptions)
-
+        //val googleSignInAccount = GoogleSignIn.getLastSignedInAccount(context)
         historyClient = Fitness.getHistoryClient(context, googleSignInAccount)
     }
 
@@ -31,8 +31,15 @@ class GoogleFitDataProvider: StepActivityDataProvider {
         historyClient
             .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA  )
             .addOnSuccessListener {
+                println("Data points" + it.dataPoints)
+                val dataPoints = it.dataPoints
                 totalSteps = it.dataPoints.firstOrNull()?.getValue(Field.FIELD_STEPS)?.asInt() ?: 0
             }
+            .addOnFailureListener {
+                println("Failure")
+                println(it)
+            }
+        println(totalSteps)
         return totalSteps ?: 0
     }
 

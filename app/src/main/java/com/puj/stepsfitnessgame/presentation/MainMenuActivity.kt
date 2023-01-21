@@ -24,6 +24,9 @@ import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.fitness.Fitness
+import com.google.android.gms.fitness.FitnessOptions
+import com.google.android.gms.fitness.data.DataType
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
@@ -74,6 +77,16 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         if(GoogleSignIn.getLastSignedInAccount(this) == null){
             val signInIntent = gc.signInIntent
             startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN)
+        }
+        val fitnessOptions = FitnessOptions.builder()
+            .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+            .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+            .build()
+
+        val googleSignInAccount = GoogleSignIn.getAccountForExtension(applicationContext, fitnessOptions)
+
+        if(!GoogleSignIn.hasPermissions(googleSignInAccount, fitnessOptions)){
+            GoogleSignIn.requestPermissions(this,1001,googleSignInAccount,fitnessOptions)
         }
     }
 
