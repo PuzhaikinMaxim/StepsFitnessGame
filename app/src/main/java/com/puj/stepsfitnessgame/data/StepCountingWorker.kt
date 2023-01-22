@@ -3,6 +3,7 @@ package com.puj.stepsfitnessgame.data
 import android.app.Notification
 import android.content.Context
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
@@ -30,6 +31,7 @@ class StepCountingWorker(
             println(i)
             i++
         }
+        val ld = MutableLiveData<Int>()
         return Result.success(
             workDataOf(
                 "test" to "test"

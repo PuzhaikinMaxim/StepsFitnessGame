@@ -1,5 +1,7 @@
 package com.puj.stepsfitnessgame.domain.models.stepactivity
 
 data class StepData(
-    private val i: Int
+    val stepAmount: Int,
+    val metersAmount: Int,
+    val goal: Int
 )

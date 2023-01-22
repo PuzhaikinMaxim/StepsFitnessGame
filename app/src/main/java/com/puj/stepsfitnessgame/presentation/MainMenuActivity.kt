@@ -63,9 +63,8 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         println(endTime)
         val scope = CoroutineScope(Dispatchers.Default)
         scope.launch {
-            provider.getStepCountInInterval(startTime, endTime) {
-                println("Test$it")
-            }
+            val stepCount = provider.getStepCountInInterval(startTime, endTime)
+            println("DSDSDS" + stepCount)
         }
 
         FitnessGameDatabase.getDatabase(this)
