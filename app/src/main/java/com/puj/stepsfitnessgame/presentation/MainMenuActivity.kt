@@ -34,6 +34,11 @@ import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.fragments.ChallengeListFragment
 import com.puj.stepsfitnessgame.presentation.fragments.StatisticsFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
 class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
@@ -52,7 +57,16 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         setDrawerLayout()
 
         val provider = GoogleFitDataProvider()
-        println(provider.getTodayStepCount())
+        val startTime = LocalDate.now().atStartOfDay().minusDays(1)
+        val endTime = LocalDateTime.now()
+        println(startTime)
+        println(endTime)
+        val scope = CoroutineScope(Dispatchers.Default)
+        scope.launch {
+            provider.getStepCountInInterval(startTime, endTime) {
+                println("Test$it")
+            }
+        }
 
         FitnessGameDatabase.getDatabase(this)
 
@@ -94,7 +108,9 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         val requestPermissionLauncher =
             registerForActivityResult(
                 ActivityResultContracts.RequestPermission()
-            ) {}
+            ) {
+
+            }
 
         if(
             ContextCompat.checkSelfPermission(
@@ -102,9 +118,11 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                 Manifest.permission.ACTIVITY_RECOGNITION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            requestPermissionLauncher.launch(
-                Manifest.permission.ACTIVITY_RECOGNITION
-            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                requestPermissionLauncher.launch(
+                    Manifest.permission.ACTIVITY_RECOGNITION
+                )
+            }
         }
     }
 

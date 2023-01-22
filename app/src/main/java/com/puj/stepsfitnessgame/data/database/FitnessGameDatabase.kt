@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import java.lang.RuntimeException
 
-@Database(entities = [LastStepCountUpdateTable::class], version = 1, exportSchema = false)
+@Database(entities = [LastStepCountUpdateTable::class], version = 2, exportSchema = false)
 @TypeConverters(GregorianCalendarConverter::class)
 abstract class FitnessGameDatabase: RoomDatabase() {
     abstract fun taskDao(): LastStepCountUpdateDao
