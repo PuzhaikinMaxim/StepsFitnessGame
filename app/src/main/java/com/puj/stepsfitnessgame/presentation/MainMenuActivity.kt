@@ -1,14 +1,11 @@
 package com.puj.stepsfitnessgame.presentation
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
-import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -63,11 +60,12 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         println(endTime)
         val scope = CoroutineScope(Dispatchers.Default)
         scope.launch {
-            val stepCount = provider.getStepCountInInterval(startTime, endTime)
-            println("DSDSDS" + stepCount)
+            //val stepCount = provider.getStepCountInInterval(startTime, endTime)
+            val stepData = provider.getLastDaysStatistics(30)
+            println("Data" + stepData)
         }
 
-        FitnessGameDatabase.getDatabase(this)
+        FitnessGameDatabase.initializeDatabase(this)
 
         val request = OneTimeWorkRequestBuilder<StepCountingWorker>()
             .build()

@@ -4,14 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import java.time.LocalDateTime
-import java.time.ZonedDateTime
-import java.util.GregorianCalendar
 
 @Entity(tableName = "last_step_count_update")
-data class LastStepCountUpdateTable(
+data class LastStepCountUpdateDbModel(
     @PrimaryKey
-    val id: Int,
-    @field:TypeConverters(GregorianCalendarConverter::class)
+    val id: Int = ID,
+    @field:TypeConverters(LocalDateTimeConverter::class)
     val lastStepCountUpdate: LocalDateTime
 ){
     companion object {

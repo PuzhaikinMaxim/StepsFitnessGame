@@ -14,5 +14,15 @@ interface StepActivityDataProvider {
         end: LocalDateTime
     ): Int
 
-    suspend fun getTodayStepData(): StepData
+    suspend fun getLastMonthsStatistics(
+        amount: Int
+    ): List<StepData>
+
+    suspend fun getLastWeeksStatistics(
+        amount: Int
+    ): List<StepData>
+
+    suspend fun getLastDaysStatistics(
+        amount: Int
+    ): List<StepData>
 }

@@ -6,11 +6,11 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface LastStepCountUpdateDao {
+interface UserGoalDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun setLastStepCountUpdate(lastUpdate: LastStepCountUpdateDbModel)
+    fun setNewGoal(newGoal: UserGoalDbModel)
 
-    @Query("SELECT * FROM last_step_count_update LIMIT 1")
-    fun getLastUpdate(): LastStepCountUpdateDbModel
+    @Query("SELECT * FROM user_goal LIMIT 1")
+    fun getGoal(): UserGoalDbModel
 }

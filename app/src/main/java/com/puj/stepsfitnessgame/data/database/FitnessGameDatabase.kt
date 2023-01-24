@@ -7,19 +7,25 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import java.lang.RuntimeException
 
-@Database(entities = [LastStepCountUpdateTable::class], version = 2, exportSchema = false)
-@TypeConverters(GregorianCalendarConverter::class)
+@Database(
+    entities = [LastStepCountUpdateDbModel::class, UserGoalDbModel::class],
+    version = 2,
+    exportSchema = false
+)
+@TypeConverters(LocalDateTimeConverter::class)
 abstract class FitnessGameDatabase: RoomDatabase() {
-    abstract fun taskDao(): LastStepCountUpdateDao
+
+    abstract fun lastStepCountUpdateDao(): LastStepCountUpdateDao
+    abstract fun goalDao(): UserGoalDao
 
     companion object{
         @Volatile
         private var INSTANCE: FitnessGameDatabase? = null
 
-        fun getDatabase(context: Context): FitnessGameDatabase{
+        fun initializeDatabase(context: Context){
             val tempDatabase = INSTANCE
             if(tempDatabase != null){
-                return tempDatabase
+                return
             }
             synchronized(this){
                 val instance = Room.databaseBuilder(
@@ -28,7 +34,6 @@ abstract class FitnessGameDatabase: RoomDatabase() {
                     "task_database.db"
                 ).allowMainThreadQueries().build()
                 INSTANCE = instance
-                return instance
             }
         }
 
