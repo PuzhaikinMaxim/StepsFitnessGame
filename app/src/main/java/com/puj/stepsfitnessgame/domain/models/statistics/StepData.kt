@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.domain.models.stepactivity
+package com.puj.stepsfitnessgame.domain.models.statistics
 
 import java.time.LocalDate
 

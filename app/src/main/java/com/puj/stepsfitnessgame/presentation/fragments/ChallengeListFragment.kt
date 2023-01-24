@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentChallengeListBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
@@ -39,6 +40,7 @@ class ChallengeListFragment: Fragment() {
         if(activity is MainMenuContainer){
             mainMenuContainer = activity
         }
+        setupTodayStatistics()
         return binding.root
     }
 
@@ -46,6 +48,24 @@ class ChallengeListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupChallengeList()
         setShowStatisticsButton()
+    }
+
+    private fun setupTodayStatistics() {
+        viewModel.todayStatistics.observe(requireActivity()){
+            println("T: $it")
+            binding.tvAmountOfStepsToday.text = getString(
+                R.string.statistics_amount_of_steps_passed,
+                it.stepsPassed,
+                it.kilometersPassed
+            )
+            binding.tvPercentOfGoalCompleted.text = getString(
+                R.string.statistics_percent_of_completion,
+                it.percentOfGoal
+            )
+
+            println("Percent ${it.percentOfGoal}")
+            binding.pbDailyStepCountProgress.progress = it.percentOfGoal
+        }
     }
 
     private fun setupChallengeList() {

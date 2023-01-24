@@ -7,5 +7,8 @@ data class TodayStatistics(
 ) {
 
     val percentOfGoal: Int
-        get() = metersPassed * 100 / dailyGoal
+        get() = stepsPassed * 100 / dailyGoal
+
+    val kilometersPassed: Float
+        get() = (metersPassed.toFloat() / 1000)
 }

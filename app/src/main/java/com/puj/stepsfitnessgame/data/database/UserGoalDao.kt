@@ -12,5 +12,5 @@ interface UserGoalDao {
     fun setNewGoal(newGoal: UserGoalDbModel)
 
     @Query("SELECT * FROM user_goal LIMIT 1")
-    fun getGoal(): UserGoalDbModel
+    fun getGoal(): UserGoalDbModel?
 }

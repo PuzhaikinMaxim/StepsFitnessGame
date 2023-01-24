@@ -10,7 +10,7 @@ import com.google.android.gms.fitness.data.DataType.TYPE_DISTANCE_DELTA
 import com.google.android.gms.fitness.data.DataType.TYPE_STEP_COUNT_DELTA
 import com.google.android.gms.fitness.data.Field
 import com.google.android.gms.fitness.request.DataReadRequest
-import com.puj.stepsfitnessgame.domain.models.stepactivity.StepData
+import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import com.puj.stepsfitnessgame.presentation.ApplicationContextProvider
 import java.time.DayOfWeek
 import java.time.LocalDateTime
@@ -59,8 +59,12 @@ class GoogleFitDataProvider: StepActivityDataProvider {
         historyClient
             .readDailyTotal(dataType)
             .addOnSuccessListener {
-                value = it.dataPoints.firstOrNull()?.getValue(field)?.asInt() ?: 0
-                println(it)
+                if(dataType == TYPE_STEP_COUNT_DELTA) {
+                    value = it.dataPoints.firstOrNull()?.getValue(field)?.asInt() ?: 0
+                }
+                else if(dataType == TYPE_DISTANCE_DELTA){
+                    value = it.dataPoints.firstOrNull()?.getValue(field)?.asFloat()?.toInt() ?: 0
+                }
                 cont.resume(value)
             }
             .addOnFailureListener {

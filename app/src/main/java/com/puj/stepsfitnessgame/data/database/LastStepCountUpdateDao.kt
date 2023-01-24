@@ -12,5 +12,5 @@ interface LastStepCountUpdateDao {
     fun setLastStepCountUpdate(lastUpdate: LastStepCountUpdateDbModel)
 
     @Query("SELECT * FROM last_step_count_update LIMIT 1")
-    fun getLastUpdate(): LastStepCountUpdateDbModel
+    fun getLastUpdate(): LastStepCountUpdateDbModel?
 }

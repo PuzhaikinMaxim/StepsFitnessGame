@@ -5,11 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 class ViewModelFactory(
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences?
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         println(sharedPreferences.toString())
-        return modelClass.getConstructor(SharedPreferences::class.java).newInstance(sharedPreferences)
+        if(sharedPreferences != null){
+            return modelClass.getConstructor(SharedPreferences::class.java).newInstance(sharedPreferences)
+        }
+        return modelClass.newInstance()
     }
 }

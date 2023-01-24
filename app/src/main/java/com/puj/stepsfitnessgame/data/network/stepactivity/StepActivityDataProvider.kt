@@ -1,6 +1,6 @@
 package com.puj.stepsfitnessgame.data.network.stepactivity
 
-import com.puj.stepsfitnessgame.domain.models.stepactivity.StepData
+import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import java.time.LocalDateTime
 
 interface StepActivityDataProvider {

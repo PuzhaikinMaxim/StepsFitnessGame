@@ -3,7 +3,7 @@ package com.puj.stepsfitnessgame.data.network.stepactivity
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.database.LastStepCountUpdateDbModel
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
-import com.puj.stepsfitnessgame.domain.models.stepactivity.StepData
+import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import java.time.LocalDateTime
 
 class StepActivityDataSource {
@@ -21,15 +21,15 @@ class StepActivityDataSource {
     }
 
     suspend fun getStepCountInInterval(): Int {
-        val start = lastStepCountDao.getLastUpdate().lastStepCountUpdate
+        val start = lastStepCountDao.getLastUpdate()?.lastStepCountUpdate ?: LocalDateTime.now()
         val end = LocalDateTime.now()
         return stepActivityDataProvider.getStepCountInInterval(start, end)
     }
 
-    suspend fun getTodayStepData(): TodayStatistics {
+    suspend fun getTodayStatistics(): TodayStatistics {
         val todayStepAmount = stepActivityDataProvider.getTodayStepCount()
         val todayMeterPassed = stepActivityDataProvider.getTodayMetersPassed()
-        val todayGoal = userGoalDao.getGoal().goal
+        val todayGoal = userGoalDao.getGoal()?.goal ?: 500
         return TodayStatistics(
             todayStepAmount,
             todayMeterPassed,

@@ -4,15 +4,35 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.puj.stepsfitnessgame.data.StatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
+import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
+import com.puj.stepsfitnessgame.domain.usecases.GetTodayStatisticsUseCase
+import com.puj.stepsfitnessgame.domain.usecases.SetTodayStatisticsUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() {
+
+    private val statisticsRepository = StatisticsRepositoryImpl()
+
+    private val setTodayStatisticsUseCase = SetTodayStatisticsUseCase(statisticsRepository)
+
+    private val getTodayStatisticsUseCase = GetTodayStatisticsUseCase(statisticsRepository)
 
     private val _challengeList = MutableLiveData<MutableList<Challenge>>()
     val challengeList: LiveData<out List<Challenge>>
         get() = _challengeList
 
+    private var _todayStatistics = getTodayStatisticsUseCase.invoke()
+    val todayStatistics: LiveData<TodayStatistics>
+        get() = _todayStatistics
+
     init {
+        viewModelScope.launch(Dispatchers.Default) {
+            setTodayStatisticsUseCase()
+        }
         val challengeList = arrayListOf(
             Challenge(
                 0,"Испытание1",20,100,1000,"5ч 30 мин"

@@ -44,6 +44,7 @@
                 />
 
             <ProgressBar
+                android:id="@+id/pb_daily_step_count_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:progressTint="@color/bright_orange"
