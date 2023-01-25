@@ -102,7 +102,7 @@
                 />
         </com.google.android.material.tabs.TabLayout>
 
-        <com.github.mikephil.charting.charts.HorizontalBarChart
+        <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/hbr_chart"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -111,7 +111,8 @@
             android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tl_scale" />
+            app:layout_constraintTop_toBottomOf="@+id/tl_scale" >
+        </com.github.mikephil.charting.charts.BarChart>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -133,11 +133,13 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                 TimeUnit.DAYS,
                 TYPE_DISTANCE_DELTA
             )
+            val month = start.toLocalDate().month.value
             list.add(
                 StepData(
                     stepAmount,
                     metersAmount,
-                    start.toLocalDate()
+                    start.toLocalDate(),
+                    StepData.getMonthRepresentation(month)
                 )
             )
             println(start)

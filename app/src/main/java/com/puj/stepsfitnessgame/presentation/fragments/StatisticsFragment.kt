@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.android.material.tabs.TabLayout
 import com.puj.stepsfitnessgame.databinding.FragmentStatisticsBinding
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
@@ -48,8 +51,9 @@ class StatisticsFragment: Fragment() {
         with(binding){
             val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
+                    println("tab selected")
                     if (tab != null) {
-                        when(tab.id){
+                        when(tab.position){
                             0 -> {
                                 viewModel.setLastThirtyDaysStepData()
                             }
@@ -78,16 +82,55 @@ class StatisticsFragment: Fragment() {
 
     private fun setupGraph() {
         viewModel.stepData.observe(requireActivity()){
+            val chart = binding.hbrChart
             val entries = ArrayList<BarEntry>()
+
+            var maxValue = 0
+            val labels = ArrayList<String>()
             for((i, elem) in it.withIndex()){
                 entries.add(BarEntry(i.toFloat(), elem.stepAmount.toFloat()))
+
+                if(elem.monthRepresentation == ""){
+                    labels.add(elem.formattedDate)
+                }
+                else {
+                    labels.add(elem.monthRepresentation)
+                }
+
                 println(elem)
+                if(elem.stepAmount > maxValue){
+                    maxValue = elem.stepAmount
+                }
             }
-            val dataSet = BarDataSet(entries, "Test")
+            binding.hbrChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+            val dataSet = BarDataSet(entries, "")
+            dataSet.setDrawValues(false)
             val barData = BarData(dataSet)
             binding.hbrChart.data = barData
+            setupChartStyles(chart, maxValue.toFloat())
             binding.hbrChart.invalidate()
         }
+    }
+
+    private fun setupChartStyles(
+        chart: BarChart,
+        maximumYAxisValue: Float
+    ) {
+        chart.setVisibleXRangeMaximum(7f)
+        chart.legend.isEnabled = false
+        chart.description.text = ""
+        chart.isDragYEnabled = false
+        chart.axisLeft.isEnabled = false
+        with(chart.axisRight){
+            setDrawAxisLine(false)
+            setLabelCount(3, true)
+            axisMinimum = 0f
+            axisMaximum = maximumYAxisValue
+        }
+        chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        chart.xAxis.setDrawGridLines(false)
+        chart.xAxis.setDrawAxisLine(false)
+        chart.setScaleEnabled(false)
     }
 
     override fun onDestroy() {

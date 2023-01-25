@@ -31,15 +31,15 @@ class StatisticsRepositoryImpl: StatisticsRepository {
     }
 
     override suspend fun setLastTwelveMonthStepData() {
-        stepData.postValue(stepActivityDataSource.getLastTwelveMonthStatistics())
+        stepData.postValue(stepActivityDataSource.getLastTwelveMonthStatistics().reversed())
     }
 
     override suspend fun setLastTwelveWeeksStepData() {
-        stepData.postValue(stepActivityDataSource.getLastTwelveWeeksStatistics())
+        stepData.postValue(stepActivityDataSource.getLastTwelveWeeksStatistics().reversed())
     }
 
     override suspend fun setThirtyDaysStepData() {
-        stepData.postValue(stepActivityDataSource.getLastThirtyDaysStatistics())
+        stepData.postValue(stepActivityDataSource.getLastThirtyDaysStatistics().reversed())
     }
 
     companion object {
