@@ -2,9 +2,11 @@ package com.puj.stepsfitnessgame.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.network.stepactivity.StepActivityDataSource
 import com.puj.stepsfitnessgame.domain.StatisticsRepository
+import com.puj.stepsfitnessgame.domain.models.statistics.DayData
 import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
 
@@ -17,6 +19,8 @@ class StatisticsRepositoryImpl: StatisticsRepository {
     private val todayStatistics = MutableLiveData<TodayStatistics>()
 
     private val userGoalDao = FitnessGameDatabase.getDatabase().goalDao()
+
+    private val lastWeekStepData = MutableLiveData<List<StepData>>()
 
     override fun getTodayStatistics(): LiveData<TodayStatistics> {
         return todayStatistics
@@ -40,6 +44,29 @@ class StatisticsRepositoryImpl: StatisticsRepository {
 
     override suspend fun setThirtyDaysStepData() {
         stepData.postValue(stepActivityDataSource.getLastThirtyDaysStatistics().reversed())
+    }
+
+    override fun getLastWeekDayData(): LiveData<List<DayData>> {
+        return Transformations.map(lastWeekStepData) {
+            val newList = ArrayList<DayData>()
+            val goal = userGoalDao.getGoal()?.goal ?: DEFAULT_GOAL
+
+            for (elem in it){
+                newList.add(
+                    DayData(
+                        elem.stepAmount,
+                        goal,
+                        elem.date,
+                        DayData.getWeekRepresentation(elem.date.dayOfWeek.value)
+                    )
+                )
+            }
+            newList
+        }
+    }
+
+    override suspend fun setLastWeekDayData() {
+        lastWeekStepData.postValue(stepActivityDataSource.getLastSevenDaysStatistics().reversed())
     }
 
     companion object {

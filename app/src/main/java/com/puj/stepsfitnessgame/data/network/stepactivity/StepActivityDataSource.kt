@@ -37,6 +37,10 @@ class StepActivityDataSource {
         )
     }
 
+    suspend fun getLastSevenDaysStatistics(): List<StepData> {
+        return stepActivityDataProvider.getLastDaysStatistics(7)
+    }
+
     suspend fun getLastTwelveMonthStatistics(): List<StepData> {
         return stepActivityDataProvider.getLastMonthsStatistics(12)
     }

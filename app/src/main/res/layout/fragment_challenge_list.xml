@@ -29,7 +29,7 @@
                 android:fontFamily="@font/merriweather_bold"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:text="@string/statistics_amount_of_steps_passed"
+                tools:text="@string/statistics_amount_of_steps_passed"
                 />
 
             <TextView
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/statistics_percent_of_completion"
+                tools:text="@string/statistics_percent_of_completion"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/merriweather_bold"
@@ -74,7 +74,7 @@
                 android:fontFamily="@font/merriweather_bold"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="@string/statistics_amount_of_completed_tasks"
+                tools:text="@string/statistics_amount_of_completed_tasks"
                 />
         </LinearLayout>
 

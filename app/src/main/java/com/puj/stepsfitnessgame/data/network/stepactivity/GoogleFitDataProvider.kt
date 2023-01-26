@@ -33,7 +33,6 @@ class GoogleFitDataProvider: StepActivityDataProvider {
             .build()
 
         val googleSignInAccount = GoogleSignIn.getAccountForExtension(context, fitnessOptions)
-        println(googleSignInAccount)
         historyClient = Fitness.getHistoryClient(context, googleSignInAccount)
         Fitness
             .getRecordingClient(context, googleSignInAccount)
@@ -68,7 +67,6 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                 cont.resume(value)
             }
             .addOnFailureListener {
-                println(it)
                 cont.resume(value)
             }
     }
@@ -110,13 +108,14 @@ class GoogleFitDataProvider: StepActivityDataProvider {
             .with(lastDayOfMonth())
             .withHour(23)
             .withMinute(59)
-        println("End " + end)
+
         var start = end
             .withDayOfMonth(1)
             .withHour(0)
             .withMinute(0)
-        println("Start " + start)
+
         val list = ArrayList<StepData>()
+
         for (i in 1 until  amount + 1){
             val monthDayDuration = end.dayOfMonth
             val stepAmount = getIntervalStatistics(
@@ -124,14 +123,14 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                 end,
                 monthDayDuration,
                 TimeUnit.DAYS,
-                TYPE_STEP_COUNT_DELTA
+                FitnessDataType.STEPS
             )
             val metersAmount = getIntervalStatistics(
                 start,
                 end,
                 monthDayDuration,
                 TimeUnit.DAYS,
-                TYPE_DISTANCE_DELTA
+                FitnessDataType.DISTANCE
             )
             val month = start.toLocalDate().month.value
             list.add(
@@ -139,6 +138,7 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                     stepAmount,
                     metersAmount,
                     start.toLocalDate(),
+                    stepAmount / amount,
                     StepData.getMonthRepresentation(month)
                 )
             )
@@ -147,6 +147,7 @@ class GoogleFitDataProvider: StepActivityDataProvider {
             start = start.minusMonths(1)
             end = end.minusMonths(1)
         }
+
         return list
     }
 
@@ -156,37 +157,41 @@ class GoogleFitDataProvider: StepActivityDataProvider {
             .with(DayOfWeek.SUNDAY)
             .withHour(23)
             .withMinute(59)
-        println("End " + end)
+
         var start = end
             .with(DayOfWeek.MONDAY)
             .withHour(0)
             .withMinute(0)
+
         val list = ArrayList<StepData>()
+
         for(i in 1 until amount + 1){
             val stepAmount = getIntervalStatistics(
                 start,
                 end,
                 WEEK,
                 TimeUnit.DAYS,
-                TYPE_STEP_COUNT_DELTA
+                FitnessDataType.STEPS
             )
             val metersAmount = getIntervalStatistics(
                 start,
                 end,
                 WEEK,
                 TimeUnit.DAYS,
-                TYPE_DISTANCE_DELTA
+                FitnessDataType.DISTANCE
             )
             list.add(
                 StepData(
                     stepAmount,
                     metersAmount,
-                    start.toLocalDate()
+                    start.toLocalDate(),
+                    stepAmount/amount
                 )
             )
             start = start.minusWeeks(1)
             end = end.minusWeeks(1)
         }
+
         return list
     }
 
@@ -195,110 +200,72 @@ class GoogleFitDataProvider: StepActivityDataProvider {
             .now()
             .withHour(23)
             .withMinute(59)
-        println("End " + end)
+
         var start = end
             .withHour(0)
             .withMinute(0)
+
         val list = ArrayList<StepData>()
+
         for(i in 1 until amount + 1){
             val stepAmount = getIntervalStatistics(
                 start,
                 end,
                 DAY,
                 TimeUnit.DAYS,
-                TYPE_STEP_COUNT_DELTA
+                FitnessDataType.STEPS
             )
             val metersAmount = getIntervalStatistics(
                 start,
                 end,
                 DAY,
                 TimeUnit.DAYS,
-                TYPE_DISTANCE_DELTA
+                FitnessDataType.DISTANCE
             )
             list.add(
                 StepData(
                     stepAmount,
                     metersAmount,
-                    start.toLocalDate()
+                    start.toLocalDate(),
+                    stepAmount/amount
                 )
             )
             start = start.minusDays(1)
             end = end.minusDays(1)
         }
+
         return list
     }
-
-    /*
-    private suspend fun getLastIntervalStatistics(
-        start: LocalDateTime,
-        end: LocalDateTime,
-        duration: Int,
-        timeUnit: TimeUnit
-    ): List<StepData> = suspendCoroutine { cont ->
-        val datasource = DataSource.Builder()
-            .setAppPackageName("com.google.android.gms")
-            .setDataType(AGGREGATE_STEP_COUNT_DELTA)
-            .setType(DataSource.TYPE_DERIVED)
-            .setStreamName("estimated_steps")
-            .build()
-
-        val request = DataReadRequest.Builder()
-            .aggregate(datasource)
-            .bucketByTime(duration, timeUnit)
-            .setTimeRange(
-                start.toEpochSecond(ZoneOffset.UTC),
-                end.toEpochSecond(ZoneOffset.UTC),
-                TimeUnit.SECONDS
-            )
-            .build()
-
-        val list = ArrayList<StepData>()
-
-        historyClient.readData(request)
-            .addOnSuccessListener { response ->
-                println(response.buckets)
-                response.buckets
-                    .flatMap { println(it); it.dataSets }
-                    .flatMap { println(it.dataPoints); it.dataPoints }
-                    .forEach {
-                        val stepCount = it.getValue(Field.FIELD_STEPS).asInt()
-                        val date = Instant.ofEpochMilli(
-                            it.getStartTime(TimeUnit.MILLISECONDS)
-                        ).atZone(ZoneId.systemDefault()).toLocalDate()
-                        println(date)
-                        println(
-                            Instant.ofEpochMilli(
-                                it.getEndTime(TimeUnit.MILLISECONDS)
-                            ).atZone(ZoneId.systemDefault()).toLocalDate()
-                        )
-                        val stepData = StepData(
-                            stepCount,
-                            0,
-                            date
-                        )
-                        list.add(stepData)
-                    }
-                cont.resume(list)
-            }
-            .addOnFailureListener {
-                cont.resume(listOf())
-            }
-    }
-
-     */
 
     private suspend fun getIntervalStatistics(
         start: LocalDateTime,
         end: LocalDateTime,
         duration: Int,
         timeUnit: TimeUnit,
-        dataType: DataType
+        fitnessDataType: FitnessDataType
     ): Int = suspendCoroutine { cont ->
+        val dataType: DataType?
+        val streamName: String?
+        val filed: Field?
+
+        when(fitnessDataType){
+            FitnessDataType.STEPS -> {
+                dataType = TYPE_STEP_COUNT_DELTA
+                streamName = "estimated_steps"
+                filed = Field.FIELD_STEPS
+            }
+            FitnessDataType.DISTANCE -> {
+                dataType = TYPE_DISTANCE_DELTA
+                streamName = "merge_distance_delta"
+                filed = Field.FIELD_DISTANCE
+            }
+        }
+
         val datasource = DataSource.Builder()
             .setAppPackageName("com.google.android.gms")
             .setDataType(dataType)
             .setType(DataSource.TYPE_DERIVED)
-            .setStreamName("estimated_steps")
+            .setStreamName(streamName)
             .build()
 
         val request = DataReadRequest.Builder()
@@ -318,7 +285,17 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                 value = response.buckets
                     .flatMap { it.dataSets }
                     .flatMap { it.dataPoints }
-                    .sumOf { it.getValue(Field.FIELD_STEPS).asInt() }
+                    .sumOf {
+                        if(fitnessDataType == FitnessDataType.STEPS){
+                            it.getValue(filed).asInt()
+                        }
+                        else if(fitnessDataType == FitnessDataType.DISTANCE){
+                            it.getValue(filed).asFloat().toInt()
+                        }
+                        else {
+                            throw RuntimeException("Unknown fitness data type")
+                        }
+                    }
                 cont.resume(value)
             }
             .addOnFailureListener {
@@ -333,6 +310,11 @@ class GoogleFitDataProvider: StepActivityDataProvider {
             .setType(DataSource.TYPE_DERIVED)
             .setStreamName("estimated_steps")
             .build()
+    }
+
+    private enum class FitnessDataType {
+        STEPS,
+        DISTANCE
     }
 
     companion object {

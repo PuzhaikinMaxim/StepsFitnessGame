@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.puj.stepsfitnessgame.data.StatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.StatisticsRepository
+import com.puj.stepsfitnessgame.domain.models.statistics.DayData
 import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
 import com.puj.stepsfitnessgame.domain.usecases.*
@@ -30,18 +31,27 @@ class StatisticsViewModel: ViewModel() {
 
     private val getLastDatesStepData = GetLastDatesStepData(statisticsRepository)
 
-    private val _stepData = getLastDatesStepData.invoke()
+    private val getLastWeekStepDataUseCase = GetLastWeekStepDataUseCase(statisticsRepository)
+
+    private val setLastWeekStepDataUseCase = SetLastWeekStepDataUseCase(statisticsRepository)
+
+    private val _stepData = getLastDatesStepData()
     val stepData: LiveData<List<StepData>>
         get() = _stepData
 
-    private var _todayStatistics = getTodayStatisticsUseCase.invoke()
+    private var _todayStatistics = getTodayStatisticsUseCase()
     val todayStatistics: LiveData<TodayStatistics>
         get() = _todayStatistics
+
+    private var _weekStepData = getLastWeekStepDataUseCase()
+    val weekStatistics: LiveData<List<DayData>>
+        get() = _weekStepData
 
     init {
         viewModelScope.launch(Dispatchers.Default) {
             setTodayStatisticsUseCase()
             setLastThirtyDaysStepDataUseCase()
+            setLastWeekStepDataUseCase()
         }
     }
 

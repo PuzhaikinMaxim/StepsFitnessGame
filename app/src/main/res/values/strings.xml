@@ -43,5 +43,13 @@
     <string name="achievements_list_header_text">Витрина достижений</string>
     <string name="menu_characteristics_title">Характеристики</string>
     <string name="profile_change_button_text">Редактировать профиль</string>
+    <string name="item_day_percent_of_goal_text">%d%%</string>
+    <string name="statistics_step_count_day">%d шаг за день</string>
+    <string name="statistics_step_count_week">%d шаг за неделю</string>
+    <string name="statistics_step_count_month">%d шаг за месяц</string>
+    <string name="statistics_kilometers_count_day">%f км расстояние за день</string>
+    <string name="statistics_kilometers_count_week">%f км расстояние за неделю</string>
+    <string name="statistics_kilometers_count_month">%f км расстояние за месяц</string>
+    <string name="statistics_average_steps">%d в среднем за день</string>
 
 </resources>

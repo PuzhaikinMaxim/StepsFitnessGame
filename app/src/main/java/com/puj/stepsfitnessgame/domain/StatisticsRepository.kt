@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.domain
 
 import androidx.lifecycle.LiveData
+import com.puj.stepsfitnessgame.domain.models.statistics.DayData
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
 import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 
@@ -17,4 +18,8 @@ interface StatisticsRepository {
     suspend fun setLastTwelveWeeksStepData()
 
     suspend fun setThirtyDaysStepData()
+
+    fun getLastWeekDayData(): LiveData<List<DayData>>
+
+    suspend fun setLastWeekDayData()
 }

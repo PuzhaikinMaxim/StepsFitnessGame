@@ -55,7 +55,7 @@ class ChallengeListFragment: Fragment() {
             println("T: $it")
             binding.tvAmountOfStepsToday.text = getString(
                 R.string.statistics_amount_of_steps_passed,
-                it.stepsPassed,
+                it.stepAmount,
                 it.kilometersPassed
             )
             binding.tvPercentOfGoalCompleted.text = getString(

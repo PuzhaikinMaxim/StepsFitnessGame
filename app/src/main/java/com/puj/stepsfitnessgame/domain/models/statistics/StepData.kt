@@ -1,5 +1,6 @@
 package com.puj.stepsfitnessgame.domain.models.statistics
 
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -7,11 +8,15 @@ data class StepData(
     val stepAmount: Int,
     val metersAmount: Int,
     val date: LocalDate,
-    val monthRepresentation: String = ""
+    val averageStepAmount: Int,
+    val inUiRepresentation: String = ""
 ) {
 
     val formattedDate: String
         get() = date.format(formatter)
+
+    val kilometersPassed: Float
+        get() = (metersAmount.toFloat() / 1000)
 
     companion object {
 

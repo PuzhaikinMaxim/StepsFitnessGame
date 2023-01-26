@@ -1,21 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
+
     <ProgressBar
         android:id="@+id/pb_day_progress"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:indeterminateOnly="false"
+        android:progressDrawable="@drawable/statistics_day_progress_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:progress="20" />
+
+    <ImageView
+        android:id="@+id/iv_percent_of_goal"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_item_day_checkmark"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/pb_day_progress"
+        app:layout_constraintStart_toStartOf="@+id/pb_day_progress"
+        app:layout_constraintTop_toTopOf="@+id/pb_day_progress"
+        app:layout_constraintBottom_toBottomOf="@+id/pb_day_progress"
+        />
+
     <TextView
         android:id="@+id/tv_day_of_week"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/merriweather_regular"
         android:layout_gravity="center"
-        android:textSize="16sp"
-        android:textColor="@color/black"
+        android:fontFamily="@font/merriweather_regular"
         android:text="Пт"
-        />
-</LinearLayout>
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pb_day_progress" />
+</androidx.constraintlayout.widget.ConstraintLayout>

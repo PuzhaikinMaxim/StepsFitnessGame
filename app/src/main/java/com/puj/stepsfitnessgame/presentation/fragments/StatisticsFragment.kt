@@ -12,10 +12,14 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.android.material.tabs.TabLayout
+import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentStatisticsBinding
+import com.puj.stepsfitnessgame.databinding.ItemDayOfWeekBinding
+import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.viewmodels.StatisticsViewModel
 
@@ -44,7 +48,34 @@ class StatisticsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupOnTabsItemClickListener()
+        setupTodayStatistics()
+        setupLastWeekStatistics()
         setupGraph()
+    }
+
+    private fun setupTodayStatistics() {
+        viewModel.todayStatistics.observe(requireActivity()){
+            binding.tvTodayGoalStatus.text = getString(
+                R.string.statistics_today_step_count_goal,
+                it.stepAmount,
+                it.goal
+            )
+        }
+    }
+
+    private fun setupLastWeekStatistics() {
+        viewModel.weekStatistics.observe(requireActivity()){
+            val container = binding.llWeekStatisticsContainer
+            for (elem in it){
+                val dayItem = ItemDayOfWeekBinding.inflate(layoutInflater)
+                dayItem.tvDayOfWeek.text = elem.dayOfWeek
+                dayItem.pbDayProgress.progress = elem.percentOfGoal
+                if(elem.percentOfGoal >= 100){
+                    dayItem.ivPercentOfGoal.visibility = View.VISIBLE
+                }
+                container.addView(dayItem.root)
+            }
+        }
     }
 
     private fun setupOnTabsItemClickListener() {
@@ -88,13 +119,13 @@ class StatisticsFragment: Fragment() {
             var maxValue = 0
             val labels = ArrayList<String>()
             for((i, elem) in it.withIndex()){
-                entries.add(BarEntry(i.toFloat(), elem.stepAmount.toFloat()))
+                entries.add(BarEntry(i.toFloat(), elem.stepAmount.toFloat(), elem))
 
-                if(elem.monthRepresentation == ""){
+                if(elem.inUiRepresentation == ""){
                     labels.add(elem.formattedDate)
                 }
                 else {
-                    labels.add(elem.monthRepresentation)
+                    labels.add(elem.inUiRepresentation)
                 }
 
                 println(elem)
@@ -102,6 +133,7 @@ class StatisticsFragment: Fragment() {
                     maxValue = elem.stepAmount
                 }
             }
+            setupSelectedItemStatistics(chart)
             binding.hbrChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
             val dataSet = BarDataSet(entries, "")
             dataSet.setDrawValues(false)
@@ -110,6 +142,61 @@ class StatisticsFragment: Fragment() {
             setupChartStyles(chart, maxValue.toFloat())
             binding.hbrChart.invalidate()
         }
+    }
+
+    private fun setupSelectedItemStatistics(hbrChart: BarChart) {
+        hbrChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+            override fun onValueSelected(e: Entry?, h: Highlight?) {
+                if (e != null) {
+                    setSelectedDateStatistics(e)
+                }
+            }
+
+            override fun onNothingSelected() {
+
+            }
+
+        })
+    }
+
+    private fun setSelectedDateStatistics(entry: Entry) {
+        val data = entry.data as StepData
+
+        val amountOfStepsText: String?
+
+        val amountOfKilometersText: String?
+
+        val averageAmountOfStepsText: String?
+
+        when(getSelectedTab()){
+            0 -> {
+                amountOfStepsText = getString(R.string.statistics_step_count_day, data.stepAmount)
+                println(data.metersAmount)
+                amountOfKilometersText = getString(R.string.statistics_kilometers_count_day, data.kilometersPassed)
+                averageAmountOfStepsText = ""
+            }
+            1 -> {
+                amountOfStepsText = getString(R.string.statistics_step_count_week, data.stepAmount)
+                amountOfKilometersText = getString(R.string.statistics_kilometers_count_week, data.kilometersPassed)
+                averageAmountOfStepsText = getString(R.string.statistics_average_steps, data.averageStepAmount)
+            }
+            2 -> {
+                amountOfStepsText = getString(R.string.statistics_step_count_month, data.stepAmount)
+                amountOfKilometersText = getString(R.string.statistics_kilometers_count_month, data.kilometersPassed)
+                averageAmountOfStepsText = getString(R.string.statistics_average_steps, data.averageStepAmount)
+            }
+            else -> {
+                throw RuntimeException("Selected tab is not specified")
+            }
+        }
+
+        binding.tvAmountOfStepsOnDate.text = amountOfStepsText
+        binding.tvAmountOfKilometersOnDate.text = amountOfKilometersText
+        binding.tvAverageAmountOfStepsOnDate.text = averageAmountOfStepsText
+    }
+
+    private fun getSelectedTab(): Int{
+        return binding.tlScale.selectedTabPosition
     }
 
     private fun setupChartStyles(
