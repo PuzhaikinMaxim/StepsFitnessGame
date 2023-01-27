@@ -6,7 +6,7 @@ import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
 import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import java.time.LocalDateTime
 
-class StepActivityDataSource {
+object StepActivityDataSource {
 
     private val stepActivityDataProvider: StepActivityDataProvider by lazy {
         GoogleFitDataProvider()

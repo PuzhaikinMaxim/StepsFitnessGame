@@ -20,6 +20,7 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentStatisticsBinding
 import com.puj.stepsfitnessgame.databinding.ItemDayOfWeekBinding
 import com.puj.stepsfitnessgame.domain.models.statistics.StepData
+import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.viewmodels.StatisticsViewModel
 
@@ -31,6 +32,8 @@ class StatisticsFragment: Fragment() {
 
     private lateinit var viewModel: StatisticsViewModel
 
+    private lateinit var mainMenuContainer: MainMenuContainer
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,6 +43,11 @@ class StatisticsFragment: Fragment() {
             this,
             ViewModelFactory(null)
         )[StatisticsViewModel::class.java]
+
+        val activity = requireActivity()
+        if(activity is MainMenuContainer){
+            mainMenuContainer = activity
+        }
 
         _binding = FragmentStatisticsBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,6 +59,7 @@ class StatisticsFragment: Fragment() {
         setupTodayStatistics()
         setupLastWeekStatistics()
         setupGraph()
+        setupChangeGoalButton()
     }
 
     private fun setupTodayStatistics() {
@@ -141,6 +150,12 @@ class StatisticsFragment: Fragment() {
             binding.hbrChart.data = barData
             setupChartStyles(chart, maxValue.toFloat())
             binding.hbrChart.invalidate()
+        }
+    }
+
+    private fun setupChangeGoalButton() {
+        binding.tvChangeGoal.setOnClickListener {
+            mainMenuContainer.startNewScreen(MainMenuContainer.GOAL_SELECTION_FRAGMENT_CODE)
         }
     }
 

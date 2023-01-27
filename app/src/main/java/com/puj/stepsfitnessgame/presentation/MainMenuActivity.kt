@@ -8,20 +8,16 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import androidx.fragment.app.Fragment
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
 import com.puj.stepsfitnessgame.R
@@ -30,13 +26,13 @@ import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.fragments.ChallengeListFragment
+import com.puj.stepsfitnessgame.presentation.fragments.GoalSelectionFragment
 import com.puj.stepsfitnessgame.presentation.fragments.StatisticsFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.util.concurrent.TimeUnit
 
 class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
@@ -170,10 +166,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
     }
 
     private fun openChallengeListFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fc_main_fragments_container, ChallengeListFragment.newFragment())
-            .addToBackStack(null)
-            .commit()
+        openFragment(ChallengeListFragment.newFragment())
     }
 
     private fun openFragment(fragment: Fragment) {
@@ -216,6 +209,9 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             MainMenuContainer.CHALLENGE_LIST_FRAGMENT_CODE -> openChallengeListFragment()
             MainMenuContainer.STATISTICS_FRAGMENT_CODE -> openFragment(
                 StatisticsFragment.newFragment()
+            )
+            MainMenuContainer.GOAL_SELECTION_FRAGMENT_CODE -> openFragment(
+                GoalSelectionFragment.newFragment()
             )
         }
     }

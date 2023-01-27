@@ -10,7 +10,7 @@
     <string name="goal">Цель: %d</string>
     <string name="steps_taken">Шагов пройдено всего: %d</string>
     <string name="time_till_end">Время на завершение: %s</string>
-    <string name="statistics_amount_of_steps_passed">Вы прошли <font color="#FF7A00">%d</font> шагов что равно <font color="#FF7A00">%f</font> км</string>
+    <string name="statistics_amount_of_steps_passed">Вы прошли <font color="#FF7A00">%d</font> шагов что равно <font color="#FF7A00">%s</font> км</string>
     <string name="statistics_percent_of_completion"><font color="#FF7A00">%d</font>%% от цели на день</string>
     <string name="statistics_button_text">Статистика</string>
     <string name="statistics_amount_of_completed_tasks"><font color="#FF7A00">%d</font> из текущих %d испытаний выполнено</string>
@@ -47,9 +47,10 @@
     <string name="statistics_step_count_day">%d шаг за день</string>
     <string name="statistics_step_count_week">%d шаг за неделю</string>
     <string name="statistics_step_count_month">%d шаг за месяц</string>
-    <string name="statistics_kilometers_count_day">%f км расстояние за день</string>
-    <string name="statistics_kilometers_count_week">%f км расстояние за неделю</string>
-    <string name="statistics_kilometers_count_month">%f км расстояние за месяц</string>
-    <string name="statistics_average_steps">%d в среднем за день</string>
+    <string name="statistics_kilometers_count_day">%s км расстояние за день</string>
+    <string name="statistics_kilometers_count_week">%s км расстояние за неделю</string>
+    <string name="statistics_kilometers_count_month">%s км расстояние за месяц</string>
+    <string name="statistics_average_steps">%d шаг в среднем за день</string>
+    <string name="item_goal_selection_text">%d шагов (%s км)</string>
 
 </resources>

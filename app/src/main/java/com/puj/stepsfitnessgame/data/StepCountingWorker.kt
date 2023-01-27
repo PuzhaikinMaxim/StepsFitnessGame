@@ -21,7 +21,7 @@ class StepCountingWorker(
         FitnessGameDatabase.initializeDatabase(context)
     }
 
-    private val stepActivityDataSource: StepActivityDataSource = StepActivityDataSource()
+    private val stepActivityDataSource: StepActivityDataSource = StepActivityDataSource
 
     override suspend fun doWork(): Result {
         startForegroundService()

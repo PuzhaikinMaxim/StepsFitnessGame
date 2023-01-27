@@ -125,13 +125,17 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                 TimeUnit.DAYS,
                 FitnessDataType.STEPS
             )
-            val metersAmount = getIntervalStatistics(
+            var metersAmount = getIntervalStatistics(
                 start,
                 end,
                 monthDayDuration,
                 TimeUnit.DAYS,
                 FitnessDataType.DISTANCE
             )
+            if(stepAmount != 0 && metersAmount == 0){
+                metersAmount = (stepAmount / 1.4).toInt()
+            }
+            println("meters_amount: $metersAmount")
             val month = start.toLocalDate().month.value
             list.add(
                 StepData(
@@ -142,10 +146,10 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                     StepData.getMonthRepresentation(month)
                 )
             )
-            println(start)
-            println(end)
             start = start.minusMonths(1)
             end = end.minusMonths(1)
+            println("start_date: $start")
+            println("end_date: $end")
         }
 
         return list
@@ -173,13 +177,16 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                 TimeUnit.DAYS,
                 FitnessDataType.STEPS
             )
-            val metersAmount = getIntervalStatistics(
+            var metersAmount = getIntervalStatistics(
                 start,
                 end,
                 WEEK,
                 TimeUnit.DAYS,
                 FitnessDataType.DISTANCE
             )
+            if(stepAmount != 0 && metersAmount == 0){
+                metersAmount = (stepAmount / 1.4).toInt()
+            }
             list.add(
                 StepData(
                     stepAmount,
@@ -215,13 +222,16 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                 TimeUnit.DAYS,
                 FitnessDataType.STEPS
             )
-            val metersAmount = getIntervalStatistics(
+            var metersAmount = getIntervalStatistics(
                 start,
                 end,
                 DAY,
                 TimeUnit.DAYS,
                 FitnessDataType.DISTANCE
             )
+            if(stepAmount != 0 && metersAmount == 0){
+                metersAmount = (stepAmount / 1.4).toInt()
+            }
             list.add(
                 StepData(
                     stepAmount,

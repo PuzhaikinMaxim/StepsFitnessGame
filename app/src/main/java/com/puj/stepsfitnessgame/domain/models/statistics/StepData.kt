@@ -15,8 +15,8 @@ data class StepData(
     val formattedDate: String
         get() = date.format(formatter)
 
-    val kilometersPassed: Float
-        get() = (metersAmount.toFloat() / 1000)
+    val kilometersPassed: String
+        get() = (metersAmount.toDouble() / 1000).toString()
 
     companion object {
 
