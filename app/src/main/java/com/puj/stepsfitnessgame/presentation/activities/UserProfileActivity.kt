@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.presentation
+package com.puj.stepsfitnessgame.presentation.activities
 
 import android.content.Context
 import android.content.Intent

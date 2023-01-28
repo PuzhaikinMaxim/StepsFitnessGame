@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.data.database
+package com.puj.stepsfitnessgame.data.database.laststepcount
 
 import androidx.room.TypeConverter
 import java.time.LocalDateTime

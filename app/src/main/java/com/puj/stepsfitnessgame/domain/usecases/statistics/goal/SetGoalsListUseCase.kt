@@ -1,12 +1,12 @@
-package com.puj.stepsfitnessgame.domain.usecases
+package com.puj.stepsfitnessgame.domain.usecases.statistics.goal
 
 import com.puj.stepsfitnessgame.domain.StatisticsRepository
 
-class SetLastWeekStepDataUseCase(
+class SetGoalsListUseCase(
     private val repository: StatisticsRepository
 ) {
 
     suspend operator fun invoke() {
-        repository.setLastWeekDayData()
+        repository.setGoalsList()
     }
 }

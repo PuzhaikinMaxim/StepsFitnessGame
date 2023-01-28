@@ -8,7 +8,7 @@ import com.puj.stepsfitnessgame.domain.StatisticsRepository
 import com.puj.stepsfitnessgame.domain.models.statistics.DayData
 import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
-import com.puj.stepsfitnessgame.domain.usecases.*
+import com.puj.stepsfitnessgame.domain.usecases.statistics.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -70,6 +70,13 @@ class StatisticsViewModel: ViewModel() {
     fun setLastTwelveMonthsStepData() {
         viewModelScope.launch(Dispatchers.Default) {
             setLastTwelveMonthsStepDataUseCase()
+        }
+    }
+
+    fun resetStatistics() {
+        viewModelScope.launch(Dispatchers.Default) {
+            setTodayStatisticsUseCase()
+            setLastWeekStepDataUseCase()
         }
     }
 }

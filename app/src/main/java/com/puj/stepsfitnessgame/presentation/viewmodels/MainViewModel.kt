@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.puj.stepsfitnessgame.data.UserRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.Response
-import com.puj.stepsfitnessgame.domain.usecases.GetIsUserLoggedInUseCase
+import com.puj.stepsfitnessgame.domain.usecases.auth.GetIsUserLoggedInUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

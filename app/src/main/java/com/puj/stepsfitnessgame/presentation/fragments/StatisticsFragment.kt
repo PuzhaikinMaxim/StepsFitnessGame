@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.BarChart
@@ -75,6 +76,7 @@ class StatisticsFragment: Fragment() {
     private fun setupLastWeekStatistics() {
         viewModel.weekStatistics.observe(requireActivity()){
             val container = binding.llWeekStatisticsContainer
+            container.removeAllViews()
             for (elem in it){
                 val dayItem = ItemDayOfWeekBinding.inflate(layoutInflater)
                 dayItem.tvDayOfWeek.text = elem.dayOfWeek
@@ -238,6 +240,12 @@ class StatisticsFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        viewModel.resetStatistics()
+        println("On restore")
     }
 
     companion object {

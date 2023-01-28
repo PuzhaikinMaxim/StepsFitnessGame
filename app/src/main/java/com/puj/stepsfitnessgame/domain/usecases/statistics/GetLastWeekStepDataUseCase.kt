@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.domain.usecases
+package com.puj.stepsfitnessgame.domain.usecases.statistics
 
 import androidx.lifecycle.LiveData
 import com.puj.stepsfitnessgame.domain.StatisticsRepository

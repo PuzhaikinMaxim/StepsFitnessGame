@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.presentation
+package com.puj.stepsfitnessgame.presentation.activities
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.databinding.ActivityMainBinding
+import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.AuthFragment
 import com.puj.stepsfitnessgame.presentation.viewmodels.MainViewModel
 import kotlinx.coroutines.CoroutineScope

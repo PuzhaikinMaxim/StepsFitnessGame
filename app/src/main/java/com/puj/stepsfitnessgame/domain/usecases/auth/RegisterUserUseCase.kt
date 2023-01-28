@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.domain.usecases
+package com.puj.stepsfitnessgame.domain.usecases.auth
 
 import com.puj.stepsfitnessgame.domain.UserRepository
 import com.puj.stepsfitnessgame.domain.models.Response

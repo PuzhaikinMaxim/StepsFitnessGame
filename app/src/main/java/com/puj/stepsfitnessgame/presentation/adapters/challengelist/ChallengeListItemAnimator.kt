@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.presentation.adapters
+package com.puj.stepsfitnessgame.presentation.adapters.challengelist
 
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener

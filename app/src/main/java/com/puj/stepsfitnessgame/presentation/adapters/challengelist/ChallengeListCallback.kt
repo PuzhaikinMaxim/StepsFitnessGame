@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.presentation.adapters
+package com.puj.stepsfitnessgame.presentation.adapters.challengelist
 
 import androidx.recyclerview.widget.DiffUtil
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge

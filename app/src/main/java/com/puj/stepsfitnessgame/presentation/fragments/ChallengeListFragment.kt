@@ -11,8 +11,8 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentChallengeListBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
-import com.puj.stepsfitnessgame.presentation.adapters.ChallengeListAdapter
-import com.puj.stepsfitnessgame.presentation.adapters.ChallengeListItemAnimator
+import com.puj.stepsfitnessgame.presentation.adapters.challengelist.ChallengeListAdapter
+import com.puj.stepsfitnessgame.presentation.adapters.challengelist.ChallengeListItemAnimator
 import com.puj.stepsfitnessgame.presentation.viewmodels.ChallengeListViewModel
 
 class ChallengeListFragment: Fragment() {

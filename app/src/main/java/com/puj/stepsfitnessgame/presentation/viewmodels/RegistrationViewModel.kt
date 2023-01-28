@@ -9,8 +9,8 @@ import com.puj.stepsfitnessgame.data.UserRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
-import com.puj.stepsfitnessgame.domain.usecases.LoginUserUseCase
-import com.puj.stepsfitnessgame.domain.usecases.RegisterUserUseCase
+import com.puj.stepsfitnessgame.domain.usecases.auth.LoginUserUseCase
+import com.puj.stepsfitnessgame.domain.usecases.auth.RegisterUserUseCase
 import com.puj.stepsfitnessgame.presentation.InputValidator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

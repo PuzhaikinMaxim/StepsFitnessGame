@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.data.database
+package com.puj.stepsfitnessgame.data.database.usergoal
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

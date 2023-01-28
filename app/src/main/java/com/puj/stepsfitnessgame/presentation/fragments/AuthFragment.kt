@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentAuthBinding
-import com.puj.stepsfitnessgame.presentation.MainActivity
+import com.puj.stepsfitnessgame.presentation.activities.MainActivity
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.viewmodels.AuthViewModel
 

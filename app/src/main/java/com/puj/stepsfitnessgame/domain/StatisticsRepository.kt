@@ -24,7 +24,9 @@ interface StatisticsRepository {
 
     suspend fun setLastWeekDayData()
 
-    fun getGoalList(): LiveData<List<Goal>>
+    fun getGoalsList(): LiveData<List<Goal>>
+
+    suspend fun setGoalsList()
 
     suspend fun setGoal(goalValue: Int)
 }

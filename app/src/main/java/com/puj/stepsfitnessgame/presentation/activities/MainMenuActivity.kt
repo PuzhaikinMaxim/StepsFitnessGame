@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.presentation
+package com.puj.stepsfitnessgame.presentation.activities
 
 import android.Manifest
 import android.content.Context
@@ -25,6 +25,7 @@ import com.puj.stepsfitnessgame.data.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
+import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.fragments.ChallengeListFragment
 import com.puj.stepsfitnessgame.presentation.fragments.GoalSelectionFragment
 import com.puj.stepsfitnessgame.presentation.fragments.StatisticsFragment
