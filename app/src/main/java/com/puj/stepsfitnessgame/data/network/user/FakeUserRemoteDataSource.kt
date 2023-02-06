@@ -9,7 +9,7 @@ class FakeUserRemoteDataSource: UserRemoteDataSource {
     private val testUser =
         UserCredentials(username = "Test12345678", password = "Password1")
 
-    override fun loginUser(userCredentials: UserCredentials): Response<String> {
+    override suspend fun loginUser(userCredentials: UserCredentials): Response<String> {
         return if(userCredentials == testUser) {
             Response.Success("testCred")
         } else {
@@ -17,18 +17,18 @@ class FakeUserRemoteDataSource: UserRemoteDataSource {
         }
     }
 
-    override fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit> {
+    override suspend fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit> {
         if(userRegistrationInfo.username == testUser.username){
             return Response.Error(403)
         }
         return Response.Success(Unit)
     }
 
-    override fun isUserLoggedIn(token: String): Response<Unit> {
+    override suspend fun isUserLoggedIn(token: String): Response<Unit> {
         return Response.Success(Unit)
     }
 
-    override fun test() {
+    override suspend fun test() {
         TODO("Not yet implemented")
     }
 }

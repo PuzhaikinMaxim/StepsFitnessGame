@@ -1,6 +1,6 @@
 package com.puj.stepsfitnessgame.domain.usecases.statistics.goal
 
-import com.puj.stepsfitnessgame.domain.StatisticsRepository
+import com.puj.stepsfitnessgame.domain.repositories.StatisticsRepository
 
 class SetGoalUseCase(
     private val repository: StatisticsRepository

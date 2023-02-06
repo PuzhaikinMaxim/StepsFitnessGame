@@ -7,7 +7,7 @@ object ApplicationContextProvider {
 
     private lateinit var application: Application
 
-    fun setApplication(application: Application) {
+    fun setApplicationContext(application: Application) {
         this.application = application
     }
 

@@ -1,6 +1,6 @@
 package com.puj.stepsfitnessgame.domain.usecases.statistics
 
-import com.puj.stepsfitnessgame.domain.StatisticsRepository
+import com.puj.stepsfitnessgame.domain.repositories.StatisticsRepository
 
 class SetTodayStatisticsUseCase(
     private val statisticsRepository: StatisticsRepository

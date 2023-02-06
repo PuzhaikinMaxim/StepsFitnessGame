@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.puj.stepsfitnessgame.data.UserRepositoryImpl
+import com.puj.stepsfitnessgame.data.repositories.UserRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo

@@ -40,6 +40,7 @@ class GoogleFitDataProvider: StepActivityDataProvider {
         Fitness
             .getRecordingClient(context, googleSignInAccount)
             .subscribe(TYPE_DISTANCE_DELTA)
+        println(googleSignInAccount.account)
     }
 
     override suspend fun getTodayStepCount(): Int {
@@ -60,6 +61,7 @@ class GoogleFitDataProvider: StepActivityDataProvider {
             .addOnSuccessListener {
                 if(dataType == TYPE_STEP_COUNT_DELTA) {
                     value = it.dataPoints.firstOrNull()?.getValue(field)?.asInt() ?: 0
+                    println(value)
                 }
                 else if(dataType == TYPE_DISTANCE_DELTA){
                     value = it.dataPoints.firstOrNull()?.getValue(field)?.asFloat()?.toInt() ?: 0
@@ -67,6 +69,7 @@ class GoogleFitDataProvider: StepActivityDataProvider {
                 cont.resume(value)
             }
             .addOnFailureListener {
+                println(it)
                 cont.resume(value)
             }
     }

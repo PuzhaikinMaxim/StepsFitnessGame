@@ -1,9 +1,8 @@
-package com.puj.stepsfitnessgame.data
+package com.puj.stepsfitnessgame.data.repositories
 
 import android.content.SharedPreferences
 import com.puj.stepsfitnessgame.data.network.user.FakeUserRemoteDataSource
-import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
-import com.puj.stepsfitnessgame.domain.UserRepository
+import com.puj.stepsfitnessgame.domain.repositories.UserRepository
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
@@ -12,11 +11,11 @@ class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : Use
 
     private val userRemoteDataSource = FakeUserRemoteDataSource()
 
-    override fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit> {
+    override suspend fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit> {
         return userRemoteDataSource.registerUser(userRegistrationInfo)
     }
 
-    override fun loginUser(userCredentials: UserCredentials): Response<Unit> {
+    override suspend fun loginUser(userCredentials: UserCredentials): Response<Unit> {
         return when (val response = userRemoteDataSource.loginUser(userCredentials)) {
             is Response.Success -> {
                 saveToSharedPreferences(TOKEN_KEY, response.data)
@@ -34,7 +33,7 @@ class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : Use
         }
     }
 
-    override fun isUserLoggedIn(): Response<Unit> {
+    override suspend fun isUserLoggedIn(): Response<Unit> {
         val token = sharedPreferences.getString(TOKEN_KEY, DEFAULT) ?: DEFAULT
         return userRemoteDataSource.isUserLoggedIn(token)
     }

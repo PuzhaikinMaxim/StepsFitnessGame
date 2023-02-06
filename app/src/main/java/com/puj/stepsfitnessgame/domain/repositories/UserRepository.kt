@@ -1,15 +1,15 @@
-package com.puj.stepsfitnessgame.data.network.user
+package com.puj.stepsfitnessgame.domain.repositories
 
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
+import retrofit2.http.Body
 
-interface UserRemoteDataSource {
-    suspend fun loginUser(userCredentials: UserCredentials): Response<String>
+interface UserRepository {
 
     suspend fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit>
 
-    suspend fun isUserLoggedIn(token: String): Response<Unit>
+    suspend fun loginUser(userCredentials: UserCredentials): Response<Unit>
 
-    suspend fun test()
+    suspend fun isUserLoggedIn(): Response<Unit>
 }

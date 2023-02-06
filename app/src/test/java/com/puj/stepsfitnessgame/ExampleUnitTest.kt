@@ -4,10 +4,13 @@ import android.app.Instrumentation
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
+import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
+import com.puj.stepsfitnessgame.domain.models.Response
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -26,7 +29,7 @@ class ExampleUnitTest {
 
     @Before
     fun setup() {
-        context = InstrumentationRegistry.getInstrumentation().context
+        //context = InstrumentationRegistry.getInstrumentation().context
     }
     @Test
     fun addition_isCorrect() {
@@ -34,6 +37,7 @@ class ExampleUnitTest {
     }
     @Test
     fun time() {
+        /*
         val localDateTime = LocalDateTime.now().withHour(23).withMinute(59)
         println(localDateTime)
         println(localDateTime.atOffset(ZoneOffset.UTC))
@@ -48,14 +52,15 @@ class ExampleUnitTest {
             .withMinute(0)
         println(start)
         println(end)
+
+         */
     }
+
     @Test
-    fun getStepData() {
-        val googleFitDataProvider = GoogleFitDataProvider()
-        val coroutine = CoroutineScope(Dispatchers.Default)
-        coroutine.launch {
-            val l = googleFitDataProvider.getLastMonthsStatistics(12)
-            println(l)
+    fun challengeApiTest() {
+        val challengeRemoteDataSource = ChallengeRemoteDataSourceImpl("fuckin689c49c3-0521-4007-a4df-c07ab58020ab")
+        runBlocking {
+            println(challengeRemoteDataSource.getChallengesListByLevel(1))
         }
     }
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.puj.stepsfitnessgame.data.StatisticsRepositoryImpl
+import com.puj.stepsfitnessgame.data.repositories.StatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
 import com.puj.stepsfitnessgame.domain.usecases.statistics.GetTodayStatisticsUseCase

@@ -26,14 +26,10 @@ class StepCountingWorker(
     override suspend fun doWork(): Result {
         startForegroundService()
         var i = 0
-        /*
         while (true) {
-            delay(1000)
-            println(i)
-            i++
-        }
+            delay(THREE_MINUTES)
 
-         */
+        }
         val ld = MutableLiveData<Int>()
         return Result.success(
             workDataOf(
@@ -58,5 +54,6 @@ class StepCountingWorker(
 
     companion object {
         private const val ID = 1
+        private const val THREE_MINUTES = 3 * 60 * 1000L
     }
 }

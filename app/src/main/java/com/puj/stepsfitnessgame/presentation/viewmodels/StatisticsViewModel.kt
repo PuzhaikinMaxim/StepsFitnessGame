@@ -3,8 +3,8 @@ package com.puj.stepsfitnessgame.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.puj.stepsfitnessgame.data.StatisticsRepositoryImpl
-import com.puj.stepsfitnessgame.domain.StatisticsRepository
+import com.puj.stepsfitnessgame.data.repositories.StatisticsRepositoryImpl
+import com.puj.stepsfitnessgame.domain.repositories.StatisticsRepository
 import com.puj.stepsfitnessgame.domain.models.statistics.DayData
 import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
