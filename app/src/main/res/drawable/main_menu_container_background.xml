@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Test -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item>
+        <bitmap
+            android:src="@drawable/brick_wall"
+            android:tileMode="repeat"
+            />
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#CD333131"/>
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:type="radial" android:startColor="#27E3AD25" android:endColor="#68050505" android:gradientRadius="60%"/>
+        </shape>
+    </item>
+</layer-list>
+<!--
+<shape android:shape="rectangle"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="#333131"/>
+</shape>
+-->
+<!--
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+<item>
+    <bitmap
+        android:src="@drawable/brick_wall"
+        android:tileMode="repeat"
+        />
+</item>
+<item>
+    <shape android:shape="rectangle">
+        <solid android:color="#E6333131"/>
+    </shape>
+</item>
+<item>
+    <shape android:shape="rectangle">
+        <gradient android:type="radial" android:startColor="#4BC1B809" android:endColor="#68050505" android:gradientRadius="60%"/>
+    </shape>
+</item>
+</layer-list>-->

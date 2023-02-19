@@ -79,6 +79,10 @@ class ChallengeListFragment: Fragment() {
             viewModel.startChallenge(it)
         }
 
+        adapter.onItemChallengeCancelListener = {
+            viewModel.cancelActiveChallenge()
+        }
+
         binding.rvChallengesList.recycledViewPool.setMaxRecycledViews(
             ChallengeListAdapter.VIEW_TYPE_STARTED,
             1

@@ -52,5 +52,6 @@
     <string name="statistics_kilometers_count_month">%s км расстояние за месяц</string>
     <string name="statistics_average_steps">%d шаг в среднем за день</string>
     <string name="item_goal_selection_text">%d шагов (%s км)</string>
+    <string name="item_challenge_end_challenge_button">Завершить испытание</string>
 
 </resources>

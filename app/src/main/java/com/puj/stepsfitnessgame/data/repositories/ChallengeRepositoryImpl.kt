@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
+import com.puj.stepsfitnessgame.data.network.challenge.FakeChallengeRemoteDataSource
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 import com.puj.stepsfitnessgame.domain.repositories.ChallengeRepository
@@ -17,11 +18,11 @@ class ChallengeRepositoryImpl(
 
     private val token: String = sharedPreferences.getString(TOKEN_KEY, DEFAULT) ?: DEFAULT
 
-    private val challengeRemoteDataSource = ChallengeRemoteDataSourceImpl(token)
+    private val challengeRemoteDataSource = FakeChallengeRemoteDataSource(token)
 
     private val challengeList = MutableLiveData<List<Challenge>>()
 
-    override fun getChallengesList(): LiveData<List<Challenge>> {
+    override fun getChallengesList(): MutableLiveData<List<Challenge>> {
         val coroutine = CoroutineScope(Dispatchers.Default)
         coroutine.launch {
             setChallengesList()
@@ -43,7 +44,18 @@ class ChallengeRepositoryImpl(
     private suspend fun setChallengesList() {
         val response = challengeRemoteDataSource.getChallengesListByLevel(1)
         if(response is Response.Success){
-            challengeList.postValue(response.data)
+            val newChallengeList = ArrayList(response.data)
+
+            val activeChallenge = challengeRemoteDataSource.getActiveChallenge()
+            if(activeChallenge != null){
+                newChallengeList.add(activeChallenge)
+            }
+
+            newChallengeList.sortByDescending { it.isStarted }
+
+            println("new challenge list: $newChallengeList")
+
+            challengeList.postValue(newChallengeList)
         }
     }
 

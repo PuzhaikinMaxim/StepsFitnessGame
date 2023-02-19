@@ -93,7 +93,6 @@ class StatisticsFragment: Fragment() {
         with(binding){
             val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    println("tab selected")
                     if (tab != null) {
                         when(tab.position){
                             0 -> {
@@ -139,7 +138,6 @@ class StatisticsFragment: Fragment() {
                     labels.add(elem.inUiRepresentation)
                 }
 
-                println(elem)
                 if(elem.stepAmount > maxValue){
                     maxValue = elem.stepAmount
                 }
@@ -188,7 +186,6 @@ class StatisticsFragment: Fragment() {
         when(getSelectedTab()){
             0 -> {
                 amountOfStepsText = getString(R.string.statistics_step_count_day, data.stepAmount)
-                println(data.metersAmount)
                 amountOfKilometersText = getString(R.string.statistics_kilometers_count_day, data.kilometersPassed)
                 averageAmountOfStepsText = ""
             }
