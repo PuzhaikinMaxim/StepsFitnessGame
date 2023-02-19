@@ -53,8 +53,6 @@ class ChallengeRepositoryImpl(
 
             newChallengeList.sortByDescending { it.isStarted }
 
-            println("new challenge list: $newChallengeList")
-
             challengeList.postValue(newChallengeList)
         }
     }

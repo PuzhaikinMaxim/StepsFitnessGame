@@ -44,7 +44,6 @@ class FakeChallengeRemoteDataSource(token: String): ChallengeRemoteDataSource {
             newChallengeList.removeIf { it.id == activeChallenge!!.id }
         }
 
-        println("newChallengeList: $newChallengeList")
         return Response.Success(newChallengeList)
     }
 

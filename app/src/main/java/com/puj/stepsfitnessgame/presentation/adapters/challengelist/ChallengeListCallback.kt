@@ -27,6 +27,9 @@ class ChallengeListCallback(
     override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
         val oldItem = oldList[oldItemPosition]
         val newItem = newList[newItemPosition]
+        //println("newItem: ${newItem.isShown}")
+        //println("oldItem: ${oldItem.isShown}")
+        //println("payload changed")
         return when {
             !oldItem.isShown && newItem.isShown -> ChallengeListItemAnimator.OPENED
             oldItem.isShown && !newItem.isShown -> ChallengeListItemAnimator.CLOSED

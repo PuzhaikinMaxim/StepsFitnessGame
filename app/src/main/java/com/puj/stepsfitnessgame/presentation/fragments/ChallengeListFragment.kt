@@ -52,7 +52,6 @@ class ChallengeListFragment: Fragment() {
 
     private fun setupTodayStatistics() {
         viewModel.todayStatistics.observe(requireActivity()){
-            println("T: $it")
             binding.tvAmountOfStepsToday.text = getString(
                 R.string.statistics_amount_of_steps_passed,
                 it.stepAmount,
@@ -62,8 +61,6 @@ class ChallengeListFragment: Fragment() {
                 R.string.statistics_percent_of_completion,
                 it.percentOfGoal
             )
-
-            println("Percent ${it.percentOfGoal}")
             binding.pbDailyStepCountProgress.progress = it.percentOfGoal
         }
     }
@@ -71,7 +68,6 @@ class ChallengeListFragment: Fragment() {
     private fun setupChallengeList() {
         val adapter = ChallengeListAdapter()
         adapter.onItemIsShownListener = {
-            println("changeable value $it")
             viewModel.changeChallengeDetailsVisibility(it)
         }
 

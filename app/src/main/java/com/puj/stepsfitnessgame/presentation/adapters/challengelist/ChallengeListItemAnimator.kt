@@ -15,7 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
-import com.puj.stepsfitnessgame.databinding.ItemChallengeBinding
 import com.puj.stepsfitnessgame.databinding.ItemChallengeNotStartedBinding
 
 class ChallengeListItemAnimator: DefaultItemAnimator() {
@@ -35,14 +34,14 @@ class ChallengeListItemAnimator: DefaultItemAnimator() {
             is ItemChallengeNotStartedBinding -> {
                 with(holder.binding){
                     if(preInfo is ChallengeItemHolderInfo){
-                        println(preInfo.isShow)
+                        //println(preInfo.isShow)
                         if(preInfo.isShow){
                             setupShowButtonAnimation(ivShow, holder)
                             llChallengeInfoContainer.visibility = View.VISIBLE
                         }
                         else {
                             setupShowButtonAnimation(ivShow, holder)
-                            startSlideAnimationForNotStartedItem(
+                            startSlideAnimation(
                                 clChallengeItemBackground,
                                 llChallengeNameContainer,
                                 llChallengeInfoContainer
@@ -57,7 +56,7 @@ class ChallengeListItemAnimator: DefaultItemAnimator() {
         return super.animateChange(oldHolder, newHolder, preInfo, postInfo)
     }
 
-    private fun startSlideAnimationForNotStartedItem(
+    private fun startSlideAnimation(
         clChallengeItemBackground: ConstraintLayout,
         llChallengeNameContainer: LinearLayout,
         llChallengeInfoContainer: LinearLayout) {
@@ -199,7 +198,7 @@ class ChallengeListItemAnimator: DefaultItemAnimator() {
         payloads: MutableList<Any>
     ): ItemHolderInfo {
 
-        if(changeFlags == FLAG_CHANGED){
+        if(changeFlags == FLAG_CHANGED || changeFlags == FLAG_ALL_ELEMENTS_CHANGED){
             for(payload in payloads){
                 if(payload as? Int == OPENED){
                     return ChallengeItemHolderInfo(true)
@@ -219,5 +218,7 @@ class ChallengeListItemAnimator: DefaultItemAnimator() {
 
         private const val ROTATION_ANGLE = 180
         private const val ANIMATION_DURATION = 500L
+
+        private const val FLAG_ALL_ELEMENTS_CHANGED = 2050
     }
 }
