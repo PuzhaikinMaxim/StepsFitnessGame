@@ -23,7 +23,7 @@ class UserRemoteDataSourceImpl: UserRemoteDataSource {
             return Response.Error(result.code())
         }
         catch (ex: Exception) {
-            println(ex.printStackTrace())
+            //println(ex.printStackTrace())
             return Response.Error(SERVER_NOT_RESPONDING_CODE)
         }
     }
@@ -64,7 +64,7 @@ class UserRemoteDataSourceImpl: UserRemoteDataSource {
             println(userService.test().body())
         }
         catch (ex: Exception) {
-            ex.printStackTrace()
+            //ex.printStackTrace()
         }
     }
 }

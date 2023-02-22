@@ -52,7 +52,7 @@ class FakeChallengeRemoteDataSource(token: String): ChallengeRemoteDataSource {
     }
 
     override suspend fun startChallenge(challengeId: Int): Response<Unit> {
-        activeChallenge = challengeList.find { it.id == challengeId }?.copy(isStarted = true)
+        activeChallenge = challengeList.find { it.id == challengeId }?.copy(isStarted = true, isShown = true)
         return Response.Success(Unit)
     }
 

@@ -53,5 +53,9 @@
     <string name="statistics_average_steps">%d шаг в среднем за день</string>
     <string name="item_goal_selection_text">%d шагов (%s км)</string>
     <string name="item_challenge_end_challenge_button">Завершить испытание</string>
+    <string name="fragment_daily_tasks_claim_reward_button_text">Забрать награду</string>
+    <string name="fragment_daily_tasks_amount_of_completed_daily_tasks_text">%d из %d</string>
+    <string name="item_level_amount_of_challenges_completed">%d из %d испытаний</string>
+    <string name="item_level_minimal_level_requirement_text">Мин. уровень - %d</string>
 
 </resources>

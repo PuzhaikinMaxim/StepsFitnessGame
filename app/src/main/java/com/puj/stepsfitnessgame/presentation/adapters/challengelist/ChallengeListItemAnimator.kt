@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
+import com.puj.stepsfitnessgame.databinding.ItemChallengeBinding
 import com.puj.stepsfitnessgame.databinding.ItemChallengeNotStartedBinding
 
 class ChallengeListItemAnimator: DefaultItemAnimator() {
@@ -197,8 +198,7 @@ class ChallengeListItemAnimator: DefaultItemAnimator() {
         changeFlags: Int,
         payloads: MutableList<Any>
     ): ItemHolderInfo {
-
-        if(changeFlags == FLAG_CHANGED || changeFlags == FLAG_ALL_ELEMENTS_CHANGED){
+        if(changeFlags == FLAG_CHANGED || changeFlags == FLAG_MULTIPLE_ELEMENTS_CHANGED){
             for(payload in payloads){
                 if(payload as? Int == OPENED){
                     return ChallengeItemHolderInfo(true)
@@ -219,6 +219,6 @@ class ChallengeListItemAnimator: DefaultItemAnimator() {
         private const val ROTATION_ANGLE = 180
         private const val ANIMATION_DURATION = 500L
 
-        private const val FLAG_ALL_ELEMENTS_CHANGED = 2050
+        private const val FLAG_MULTIPLE_ELEMENTS_CHANGED = 2050
     }
 }

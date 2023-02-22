@@ -20,6 +20,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
@@ -27,6 +29,7 @@ import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.fragments.ChallengeListFragment
+import com.puj.stepsfitnessgame.presentation.fragments.DailyTasksFragment
 import com.puj.stepsfitnessgame.presentation.fragments.GoalSelectionFragment
 import com.puj.stepsfitnessgame.presentation.fragments.StatisticsFragment
 import kotlinx.coroutines.CoroutineScope
@@ -49,18 +52,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         setupGoogleSignIn()
         setupRequestPermission()
         setDrawerLayout()
-
-        val provider = GoogleFitDataProvider()
-        val startTime = LocalDate.now().atStartOfDay().minusDays(1)
-        val endTime = LocalDateTime.now()
-        println(startTime)
-        println(endTime)
-        val scope = CoroutineScope(Dispatchers.Default)
-        scope.launch {
-            //val stepCount = provider.getStepCountInInterval(startTime, endTime)
-            val stepData = provider.getLastDaysStatistics(30)
-            println("Data" + stepData)
-        }
+        setupBottomNavigationMenu()
 
         FitnessGameDatabase.initializeDatabase(this)
 
@@ -72,6 +64,47 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             ExistingWorkPolicy.REPLACE,
             request
         )
+    }
+
+    private fun setupBottomNavigationMenu() {
+        val onMenuItemSelectedListener = object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab != null) {
+                    val fragment = when(tab.position){
+                        0 -> {
+                            ChallengeListFragment.newFragment()
+                        }
+                        1 -> {
+                            DailyTasksFragment.newFragment()
+                        }
+                        2 -> {
+                            ChallengeListFragment.newFragment()
+                        }
+                        3 -> {
+                            ChallengeListFragment.newFragment()
+                        }
+                        4 -> {
+                            ChallengeListFragment.newFragment()
+                        }
+                        else -> {
+                            throw RuntimeException("Bottom menu item not selected")
+                        }
+                    }
+                    openFragment(fragment)
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+        }
+
+        binding.tbFooter.root.addOnTabSelectedListener(onMenuItemSelectedListener)
     }
 
     private fun setupGoogleSignIn() {
@@ -91,10 +124,17 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
             .build()
 
-        val googleSignInAccount = GoogleSignIn.getAccountForExtension(applicationContext, fitnessOptions)
+        val googleSignInAccount = GoogleSignIn.getAccountForExtension(
+            applicationContext,
+            fitnessOptions
+        )
 
         if(!GoogleSignIn.hasPermissions(googleSignInAccount, fitnessOptions)){
-            GoogleSignIn.requestPermissions(this,1001,googleSignInAccount,fitnessOptions)
+            GoogleSignIn.requestPermissions(this,
+                1001,
+                googleSignInAccount,
+                fitnessOptions
+            )
         }
     }
 

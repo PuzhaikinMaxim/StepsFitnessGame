@@ -93,7 +93,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/item_challenge_points_gained"
+                android:src="@drawable/ic_item_challenge_points_gained"
                 />
             <TextView
                 android:id="@+id/tv_points_gained"
@@ -116,7 +116,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/item_challenge_goal"
+                android:src="@drawable/ic_item_challenge_goal"
                 />
             <TextView
                 android:id="@+id/tv_goal"
@@ -139,7 +139,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/item_challenge_time_left"
+                android:src="@drawable/ic_item_challenge_time_left"
                 />
             <TextView
                 android:id="@+id/tv_time_till_end"

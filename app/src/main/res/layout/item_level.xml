@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_level_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/level_3" />
+
+    <TextView
+        android:id="@+id/tv_level_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/merriweather_bold"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/iv_level_background"
+        app:layout_constraintTop_toTopOf="@+id/iv_level_background"
+        tools:text="Уровень 1 - Шахты" />
+
+    <ProgressBar
+        android:id="@+id/pb_challenge_progress"
+        style="@style/DungeonLevelProgress"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:max="100"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_level_background"
+        app:layout_constraintStart_toStartOf="@+id/iv_level_background"
+        app:layout_constraintTop_toBottomOf="@+id/tv_level_name"
+        tools:progress="80"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_amount_of_challenges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/merriweather_bold"
+        android:textColor="@color/white"
+        android:text="@string/item_level_amount_of_challenges_completed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_level_background"
+        app:layout_constraintTop_toBottomOf="@+id/pb_challenge_progress"
+        tools:visibility="gone"
+        tools:text="10 из 20 испытаний" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_lock"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_level_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_level_background"
+        tools:visibility="visible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:translationZ="15dp"
+        android:fontFamily="@font/merriweather_regular"
+        android:text="@string/item_level_minimal_level_requirement_text"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        tools:text="Мин уровень - 3" />
+</androidx.constraintlayout.widget.ConstraintLayout>
