@@ -47,6 +47,7 @@ class ChallengeListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupChallengeList()
+        setupChooseLevelButton()
         setShowStatisticsButton()
     }
 
@@ -103,6 +104,12 @@ class ChallengeListFragment: Fragment() {
     private fun setShowStatisticsButton() {
         binding.btnShowStatisticsButton.setOnClickListener {
             mainMenuContainer.startNewScreen(MainMenuContainer.STATISTICS_FRAGMENT_CODE)
+        }
+    }
+
+    private fun setupChooseLevelButton() {
+        binding.btnChooseLevel.setOnClickListener {
+            mainMenuContainer.startNewScreen(MainMenuContainer.LEVEL_SELECTION_FRAGMENT_CODE)
         }
     }
 

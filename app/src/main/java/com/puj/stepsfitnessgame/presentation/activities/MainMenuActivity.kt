@@ -28,10 +28,7 @@ import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
-import com.puj.stepsfitnessgame.presentation.fragments.ChallengeListFragment
-import com.puj.stepsfitnessgame.presentation.fragments.DailyTasksFragment
-import com.puj.stepsfitnessgame.presentation.fragments.GoalSelectionFragment
-import com.puj.stepsfitnessgame.presentation.fragments.StatisticsFragment
+import com.puj.stepsfitnessgame.presentation.fragments.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -253,6 +250,9 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             )
             MainMenuContainer.GOAL_SELECTION_FRAGMENT_CODE -> openFragment(
                 GoalSelectionFragment.newFragment()
+            )
+            MainMenuContainer.LEVEL_SELECTION_FRAGMENT_CODE -> openFragment(
+                ChooseLevelFragment.newFragment()
             )
         }
     }

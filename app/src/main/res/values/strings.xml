@@ -57,5 +57,6 @@
     <string name="fragment_daily_tasks_amount_of_completed_daily_tasks_text">%d из %d</string>
     <string name="item_level_amount_of_challenges_completed">%d из %d испытаний</string>
     <string name="item_level_minimal_level_requirement_text">Мин. уровень - %d</string>
-
+    <string name="item_level_name_text">Уровень %d - %s</string>
+    <string name="choose_level_button_text">Выбрать уровень</string>
 </resources>

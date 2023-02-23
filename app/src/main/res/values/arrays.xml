@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="item_level_dungeon_level_names">
+        <item>Подземелье (верхний уровень)</item>
+        <item>Подземелье (нижний уровень)</item>
+        <item>Шахты</item>
+        <item>Пещеры</item>
+        <item>Кристальные пещеры</item>
+    </string-array>
+</resources>

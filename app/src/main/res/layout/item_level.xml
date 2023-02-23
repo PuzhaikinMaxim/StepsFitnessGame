@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
+    android:layout_margin="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
@@ -58,7 +58,7 @@
         tools:text="10 из 20 испытаний" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_lock_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/ic_lock"
@@ -70,15 +70,16 @@
         tools:visibility="visible" />
 
     <TextView
+        android:id="@+id/tv_minimal_level_requirements"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:translationZ="15dp"
         android:fontFamily="@font/merriweather_regular"
         android:text="@string/item_level_minimal_level_requirement_text"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_lock_icon"
+        app:layout_constraintEnd_toEndOf="@+id/iv_lock_icon"
+        app:layout_constraintStart_toStartOf="@+id/iv_lock_icon"
+        app:layout_constraintTop_toTopOf="@+id/iv_lock_icon"
         tools:text="Мин уровень - 3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
