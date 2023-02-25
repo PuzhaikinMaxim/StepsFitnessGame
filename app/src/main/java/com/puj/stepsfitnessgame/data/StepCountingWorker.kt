@@ -9,6 +9,9 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
+import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSource
+import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
+import com.puj.stepsfitnessgame.data.network.dailytask.DailyTaskRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.stepactivity.StepActivityDataSource
 import kotlinx.coroutines.delay
 
@@ -23,12 +26,15 @@ class StepCountingWorker(
 
     private val stepActivityDataSource: StepActivityDataSource = StepActivityDataSource
 
+    //private val challengeRemoteDataSource = ChallengeRemoteDataSourceImpl()
+
+    //private val dailyTaskRemoteDataSourceImpl = DailyTaskRemoteDataSourceImpl()
+
     override suspend fun doWork(): Result {
         startForegroundService()
         var i = 0
         while (true) {
             delay(THREE_MINUTES)
-
         }
         val ld = MutableLiveData<Int>()
         return Result.success(

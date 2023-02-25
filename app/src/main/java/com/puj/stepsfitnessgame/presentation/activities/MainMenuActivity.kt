@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -25,15 +26,9 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
-import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.fragments.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
@@ -223,6 +218,15 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         }
     }
 
+    private fun removeTwoPreviousFragments() {
+        supportFragmentManager.popBackStack(
+            supportFragmentManager.getBackStackEntryAt(
+                supportFragmentManager.backStackEntryCount-2
+            ).id,
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == RC_GOOGLE_SIGN_IN){
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -252,8 +256,12 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                 GoalSelectionFragment.newFragment()
             )
             MainMenuContainer.LEVEL_SELECTION_FRAGMENT_CODE -> openFragment(
-                ChooseLevelFragment.newFragment()
+                SelectLevelFragment.newFragment()
             )
+            MainMenuContainer.BACK_TO_CHALLENGE_LIST_CODE -> {
+                removeTwoPreviousFragments()
+                openChallengeListFragment()
+            }
         }
     }
 }

@@ -7,25 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.puj.stepsfitnessgame.databinding.FragmentChooseLevelBinding
+import com.puj.stepsfitnessgame.databinding.FragmentSelectLevelBinding
+import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.adapters.levellist.LevelAdapter
-import com.puj.stepsfitnessgame.presentation.viewmodels.ChooseLevelViewModel
+import com.puj.stepsfitnessgame.presentation.viewmodels.SelectLevelViewModel
 
-class ChooseLevelFragment: Fragment() {
+class SelectLevelFragment: Fragment() {
 
-    private var _binding: FragmentChooseLevelBinding? = null
-    private val binding: FragmentChooseLevelBinding
+    private var _binding: FragmentSelectLevelBinding? = null
+    private val binding: FragmentSelectLevelBinding
         get() = _binding ?: throw RuntimeException("Choose level fragment not set")
 
-    private lateinit var viewModel: ChooseLevelViewModel
+    private lateinit var viewModel: SelectLevelViewModel
+
+    private lateinit var mainMenuContainer: MainMenuContainer
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentChooseLevelBinding.inflate(
+        _binding = FragmentSelectLevelBinding.inflate(
             inflater,
             container,
             false
@@ -37,7 +40,12 @@ class ChooseLevelFragment: Fragment() {
 
         viewModel = ViewModelProvider(this,
             ViewModelFactory(sharedPreferences)
-        )[ChooseLevelViewModel::class.java]
+        )[SelectLevelViewModel::class.java]
+
+        val activity = requireActivity()
+        if(activity is MainMenuContainer){
+            mainMenuContainer = activity
+        }
 
         return binding.root
     }
@@ -54,13 +62,18 @@ class ChooseLevelFragment: Fragment() {
             adapter.levelList = it
         }
 
+        adapter.onLevelClickListener = {
+            viewModel.selectLevel(it.dungeonLevel)
+            mainMenuContainer.startNewScreen(MainMenuContainer.BACK_TO_CHALLENGE_LIST_CODE)
+        }
+
         binding.rvLevelList.adapter = adapter
     }
 
     companion object {
 
-        fun newFragment(): ChooseLevelFragment {
-            return ChooseLevelFragment()
+        fun newFragment(): SelectLevelFragment {
+            return SelectLevelFragment()
         }
     }
 }

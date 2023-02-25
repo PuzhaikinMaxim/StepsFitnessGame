@@ -1,9 +1,7 @@
 package com.puj.stepsfitnessgame.data.repositories
 
 import android.content.SharedPreferences
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.challenge.FakeChallengeRemoteDataSource
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
@@ -16,7 +14,9 @@ class ChallengeRepositoryImpl(
     sharedPreferences: SharedPreferences
     ): ChallengeRepository {
 
-    private val token: String = sharedPreferences.getString(TOKEN_KEY, DEFAULT) ?: DEFAULT
+    private val token: String = sharedPreferences.getString(TOKEN_KEY, TOKEN_DEFAULT) ?: TOKEN_DEFAULT
+
+    private val level: Int = sharedPreferences.getInt(LEVEL_KEY, LEVEL_DEFAULT)
 
     private val challengeRemoteDataSource = FakeChallengeRemoteDataSource(token)
 
@@ -42,7 +42,7 @@ class ChallengeRepositoryImpl(
     }
 
     private suspend fun setChallengesList() {
-        val response = challengeRemoteDataSource.getChallengesListByLevel(1)
+        val response = challengeRemoteDataSource.getChallengesListByLevel(level)
         if(response is Response.Success){
             val newChallengeList = ArrayList(response.data)
 
@@ -59,6 +59,9 @@ class ChallengeRepositoryImpl(
 
     companion object {
         private const val TOKEN_KEY = "authToken"
-        private const val DEFAULT = "default"
+        private const val TOKEN_DEFAULT = "default"
+
+        private const val LEVEL_KEY = "selectedLevel"
+        private const val LEVEL_DEFAULT = 1
     }
 }

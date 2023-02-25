@@ -30,6 +30,7 @@ class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : Use
     private fun saveToSharedPreferences(key: String, value: String) {
         with(sharedPreferences.edit()){
             putString(key, value)
+            apply()
         }
     }
 
