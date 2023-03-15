@@ -60,4 +60,17 @@
         app:layout_constraintStart_toEndOf="@+id/iv_user_icon"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_level"
         tools:progress="80" />
+
+    <TextView
+        android:id="@+id/tv_amount_of_xp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/merriweather_regular"
+        android:text="@string/amount_of_xp_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/iv_user_icon"
+        app:layout_constraintTop_toBottomOf="@+id/pb_user_level_progress"
+        tools:text="100/200"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

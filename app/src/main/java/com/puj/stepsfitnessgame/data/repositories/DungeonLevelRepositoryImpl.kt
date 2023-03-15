@@ -4,11 +4,11 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.puj.stepsfitnessgame.domain.models.dungeonlevel.DungeonLevel
-import com.puj.stepsfitnessgame.domain.repositories.LevelRepository
+import com.puj.stepsfitnessgame.domain.repositories.DungeonLevelRepository
 
-class LevelRepositoryImpl(
+class DungeonLevelRepositoryImpl(
     private val sharedPreferences: SharedPreferences
-): LevelRepository {
+): DungeonLevelRepository {
 
     val levelList = MutableLiveData<List<DungeonLevel>>()
 

@@ -36,6 +36,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="5dp"
             android:text="Испытание 1"
+            android:fontFamily="@font/merriweather_bold"
             android:textColor="#FFF"
             android:textSize="22sp"
             />
@@ -88,6 +89,7 @@
                 android:layout_marginStart="5dp"
                 android:textSize="18sp"
                 android:textColor="@color/white"
+                android:fontFamily="@font/merriweather_regular"
                 android:text="@string/goal"
                 />
         </LinearLayout>
@@ -111,6 +113,7 @@
                 android:layout_marginStart="5dp"
                 android:textSize="18sp"
                 android:textColor="@color/white"
+                android:fontFamily="@font/merriweather_regular"
                 android:text="@string/time_till_end"
                 />
         </LinearLayout>

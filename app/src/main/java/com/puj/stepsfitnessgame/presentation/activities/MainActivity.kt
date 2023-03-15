@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.databinding.ActivityMainBinding
+import com.puj.stepsfitnessgame.presentation.AuthPreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.AuthFragment
 import com.puj.stepsfitnessgame.presentation.viewmodels.MainViewModel
@@ -29,7 +30,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: throw RuntimeException()
+        val sharedPref =
+            getSharedPreferences(
+                AuthPreferencesValues.PREFERENCES_KEY,
+                Context.MODE_PRIVATE
+            ) ?: throw RuntimeException()
         viewModel =
             ViewModelProvider(this, ViewModelFactory(sharedPref))[MainViewModel::class.java]
         setIsUserAuthorizedListener()

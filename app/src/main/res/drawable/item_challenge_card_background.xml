@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_stone_wall"/>
+    <item>
+        <shape>
+            <corners android:radius="4dp"/>
+            <solid android:color="#F0774337"/>
+        </shape>
+    </item>
+</layer-list>-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners android:radius="4dp"/>
-    <solid android:color="#774337"/>
+    <!--<solid android:color="#774337"/>-->
+    <gradient
+        android:type="radial"
+        android:gradientRadius="90%"
+        android:endColor="#532F27"
+        android:startColor="#8A4E40"/>
 </shape>

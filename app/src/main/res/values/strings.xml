@@ -59,4 +59,5 @@
     <string name="item_level_minimal_level_requirement_text">Мин. уровень - %d</string>
     <string name="item_level_name_text">Уровень %d - %s</string>
     <string name="choose_level_button_text">Выбрать уровень</string>
+    <string name="amount_of_xp_text">%d/%d</string>
 </resources>

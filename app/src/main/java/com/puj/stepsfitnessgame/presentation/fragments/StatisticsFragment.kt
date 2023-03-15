@@ -78,7 +78,11 @@ class StatisticsFragment: Fragment() {
             val container = binding.llWeekStatisticsContainer
             container.removeAllViews()
             for (elem in it){
-                val dayItem = ItemDayOfWeekBinding.inflate(layoutInflater)
+                val dayItem = ItemDayOfWeekBinding.inflate(
+                    layoutInflater,
+                    container,
+                    false
+                )
                 dayItem.tvDayOfWeek.text = elem.dayOfWeek
                 dayItem.pbDayProgress.progress = elem.percentOfGoal
                 if(elem.percentOfGoal >= 100){

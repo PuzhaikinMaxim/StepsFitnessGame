@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -14,6 +16,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -27,8 +30,11 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
+import com.puj.stepsfitnessgame.presentation.AuthPreferencesValues
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
+import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.*
+import com.puj.stepsfitnessgame.presentation.viewmodels.MainMenuViewModel
 
 class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
@@ -36,15 +42,30 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         ActivityMenuContainerBinding.inflate(layoutInflater)
     }
 
+    private lateinit var viewModel: MainMenuViewModel
+
+    private var isOnBackPressed = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val sharedPref = getSharedPreferences(
+            AuthPreferencesValues.PREFERENCES_KEY,
+            Context.MODE_PRIVATE
+        )
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(sharedPref)
+        )[MainMenuViewModel::class.java]
+
         openChallengeListFragment()
 
         setupGoogleSignIn()
         setupRequestPermission()
         setDrawerLayout()
         setupBottomNavigationMenu()
+        setupUserLevel()
 
         FitnessGameDatabase.initializeDatabase(this)
 
@@ -58,9 +79,35 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         )
     }
 
+    private fun setupUserLevel() {
+        val headerView = binding.navView.getHeaderView(0)
+        val tvUserLevel = headerView.findViewById<TextView>(R.id.tv_user_level)
+        val pbUserLevelProgress = headerView.findViewById<ProgressBar>(R.id.pb_user_level_progress)
+        val tvAmountOfXp = headerView.findViewById<TextView>(R.id.tv_amount_of_xp)
+        val tvUserName = headerView.findViewById<TextView>(R.id.tv_user_name)
+
+        viewModel.userData.observe(this){
+            tvUserLevel.text = getString(
+                R.string.user_level_text,
+                it.level
+            )
+            pbUserLevelProgress.progress = it.progress
+            tvAmountOfXp.text = getString(
+                R.string.amount_of_xp_text,
+                it.amountOfXp,
+                it.amountToGain
+            )
+            tvUserName.text = it.username
+        }
+    }
+
     private fun setupBottomNavigationMenu() {
         val onMenuItemSelectedListener = object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
+                if(isOnBackPressed) {
+                    isOnBackPressed = false
+                    return
+                }
                 if (tab != null) {
                     val fragment = when(tab.position){
                         0 -> {
@@ -212,6 +259,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
     override fun onBackPressed() {
         if(supportFragmentManager.backStackEntryCount > 1) {
             super.onBackPressed()
+            setSelectedItem()
         }
         else {
             finishAffinity()
@@ -225,6 +273,26 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             ).id,
             FragmentManager.POP_BACK_STACK_INCLUSIVE
         )
+    }
+
+    private fun setSelectedItem() {
+        when(supportFragmentManager.fragments.lastOrNull()){
+            is ChallengeListFragment -> {
+                selectTab(0)
+            }
+            is DailyTasksFragment -> {
+                selectTab(1)
+            }
+        }
+    }
+
+    private fun selectTab(tabIndex: Int){
+        if(binding.tbFooter.root.selectedTabPosition == tabIndex){
+            return
+        }
+        val tab = binding.tbFooter.root.getTabAt(tabIndex)
+        isOnBackPressed = true
+        binding.tbFooter.root.selectTab(tab)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
