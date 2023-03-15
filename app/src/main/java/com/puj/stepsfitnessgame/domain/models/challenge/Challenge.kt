@@ -8,7 +8,8 @@ data class Challenge(
     val stepsTaken: Int,
     val timeTillEnd: String,
     val isShown: Boolean = false,
-    val isStarted: Boolean = false
+    val isStarted: Boolean = false,
+    val isCompleted: Boolean = false
 ) {
     val progress: Int
         get() = pointsGained*100/goal

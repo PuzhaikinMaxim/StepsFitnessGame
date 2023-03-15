@@ -10,6 +10,7 @@ import com.puj.stepsfitnessgame.data.repositories.StatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
 import com.puj.stepsfitnessgame.domain.usecases.challenge.CancelActiveChallengeUseCase
+import com.puj.stepsfitnessgame.domain.usecases.challenge.EndActiveChallengeUseCase
 import com.puj.stepsfitnessgame.domain.usecases.challenge.GetChallengeListUseCase
 import com.puj.stepsfitnessgame.domain.usecases.challenge.StartChallengeUseCase
 import com.puj.stepsfitnessgame.domain.usecases.statistics.GetTodayStatisticsUseCase
@@ -32,6 +33,8 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
     private val cancelActiveChallengeUseCase = CancelActiveChallengeUseCase(challengeRepository)
 
     private val startChallengeUseCase = StartChallengeUseCase(challengeRepository)
+
+    private val endActiveChallengeUseCase = EndActiveChallengeUseCase(challengeRepository)
 
     private var _challengeList = getChallengeListUseCase.invoke()
     val challengeList: LiveData<List<Challenge>>
@@ -65,6 +68,12 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
     fun cancelActiveChallenge() {
         viewModelScope.launch(Dispatchers.Default) {
             cancelActiveChallengeUseCase.invoke()
+        }
+    }
+
+    fun endActiveChallenge() {
+        viewModelScope.launch(Dispatchers.Default) {
+            endActiveChallengeUseCase.invoke()
         }
     }
 }

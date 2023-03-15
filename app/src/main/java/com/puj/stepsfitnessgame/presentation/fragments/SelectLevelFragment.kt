@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.databinding.FragmentSelectLevelBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
+import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.adapters.levellist.LevelAdapter
 import com.puj.stepsfitnessgame.presentation.viewmodels.SelectLevelViewModel
@@ -34,7 +35,8 @@ class SelectLevelFragment: Fragment() {
             false
         )
 
-        val sharedPreferences = activity?.getPreferences(
+        val sharedPreferences = activity?.getSharedPreferences(
+            PreferencesValues.PREFERENCES_KEY,
             Context.MODE_PRIVATE
         ) ?: throw RuntimeException()
 

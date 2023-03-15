@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.databinding.ActivityMainBinding
-import com.puj.stepsfitnessgame.presentation.AuthPreferencesValues
+import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.AuthFragment
 import com.puj.stepsfitnessgame.presentation.viewmodels.MainViewModel
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val sharedPref =
             getSharedPreferences(
-                AuthPreferencesValues.PREFERENCES_KEY,
+                PreferencesValues.PREFERENCES_KEY,
                 Context.MODE_PRIVATE
             ) ?: throw RuntimeException()
         viewModel =

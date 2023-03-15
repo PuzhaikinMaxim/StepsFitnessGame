@@ -32,6 +32,8 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
 
     var onItemChallengeCancelListener: (() -> Unit)? = null
 
+    var onItemChallengeEndListener: (() -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeListViewHolder {
         val binding = when (viewType) {
             VIEW_TYPE_STARTED -> {
@@ -73,7 +75,16 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
             tvStepsTaken.text = context.getString(R.string.steps_taken, item.stepsTaken)
             tvTimeTillEnd.text = context.getString(R.string.time_till_end, item.timeTillEnd)
             pbChallengeProgress.progress = item.progress
-            btnCancelChallenge.setOnClickListener {
+            if(item.isCompleted) {
+                btnEndChallenge.visibility = View.VISIBLE
+                btnEndChallenge.setOnClickListener {
+
+                }
+            }
+            else{
+                btnEndChallenge.visibility = View.GONE
+            }
+            ivCancelChallenge.setOnClickListener {
                 onItemChallengeCancelListener?.invoke()
             }
         }

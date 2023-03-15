@@ -21,7 +21,7 @@ interface ChallengeApiService {
     @GET("active_challenges/active_challenge")
     suspend fun getActiveChallenge(
         @Header("token") enterToken: String
-    ): Response<Challenge?>
+    ): Response<ActiveChallengeDto?>
 
     @POST("active_challenges/start_challenge")
     suspend fun startChallenge(

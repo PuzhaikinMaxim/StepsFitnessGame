@@ -10,7 +10,7 @@ class DungeonLevelRepositoryImpl(
     private val sharedPreferences: SharedPreferences
 ): DungeonLevelRepository {
 
-    val levelList = MutableLiveData<List<DungeonLevel>>()
+    private val levelList = MutableLiveData<List<DungeonLevel>>()
 
     override fun getLevelList(): LiveData<List<DungeonLevel>> {
         levelList.value = listOf(

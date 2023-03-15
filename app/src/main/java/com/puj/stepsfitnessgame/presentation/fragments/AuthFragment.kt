@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentAuthBinding
-import com.puj.stepsfitnessgame.presentation.AuthPreferencesValues
+import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.activities.MainActivity
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.viewmodels.AuthViewModel
@@ -31,7 +31,7 @@ class AuthFragment: Fragment() {
         _binding = FragmentAuthBinding.inflate(inflater, container, false)
         val sharedPref =
             activity?.getSharedPreferences(
-                AuthPreferencesValues.PREFERENCES_KEY,
+                PreferencesValues.PREFERENCES_KEY,
                 Context.MODE_PRIVATE
             ) ?: throw RuntimeException()
         viewModel =

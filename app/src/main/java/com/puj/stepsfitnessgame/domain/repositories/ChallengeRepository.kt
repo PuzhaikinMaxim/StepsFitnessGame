@@ -11,4 +11,6 @@ interface ChallengeRepository {
     suspend fun startChallenge(challengeId: Int)
 
     suspend fun cancelActiveChallenge()
+
+    suspend fun endActiveChallenge()
 }

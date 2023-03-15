@@ -12,8 +12,10 @@ class ChallengeRemoteDataSourceImpl(
 
     private val challengeApiService = ServiceFactory.create(ChallengeApiService::class.java)
 
+    private val activeChallengeMapper = ActiveChallengeMapper()
+
     override suspend fun updateChallengeProgress(stepCount: Int) {
-        challengeApiService.updateChallengeProgress(enterToken,stepCount)
+        challengeApiService.updateChallengeProgress(enterToken, stepCount)
     }
 
     override suspend fun getChallengesListByLevel(challengeLevel: Int): Response<List<Challenge>> {
@@ -32,7 +34,13 @@ class ChallengeRemoteDataSourceImpl(
     }
 
     override suspend fun getActiveChallenge(): Challenge? {
-        return challengeApiService.getActiveChallenge(enterToken).body()
+        return try {
+            activeChallengeMapper.mapActiveChallengeDtoToChallenge(
+                challengeApiService.getActiveChallenge(enterToken).body()
+            )
+        } catch (e: Exception) {
+            null
+        }
     }
 
     override suspend fun startChallenge(challengeId: Int): Response<Unit> {
@@ -61,5 +69,9 @@ class ChallengeRemoteDataSourceImpl(
         } catch (ex: Exception) {
             Response.Error(SERVER_NOT_RESPONDING_CODE)
         }
+    }
+
+    override suspend fun endActiveChallenge() {
+        TODO("Not yet implemented")
     }
 }

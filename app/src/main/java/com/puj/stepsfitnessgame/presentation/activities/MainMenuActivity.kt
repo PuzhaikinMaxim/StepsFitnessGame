@@ -30,7 +30,7 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
-import com.puj.stepsfitnessgame.presentation.AuthPreferencesValues
+import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.*
@@ -51,7 +51,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         setContentView(binding.root)
 
         val sharedPref = getSharedPreferences(
-            AuthPreferencesValues.PREFERENCES_KEY,
+            PreferencesValues.PREFERENCES_KEY,
             Context.MODE_PRIVATE
         )
         viewModel = ViewModelProvider(
@@ -98,6 +98,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                 it.amountToGain
             )
             tvUserName.text = it.username
+            binding.tbHeader.tvUserName.text = it.username
         }
     }
 

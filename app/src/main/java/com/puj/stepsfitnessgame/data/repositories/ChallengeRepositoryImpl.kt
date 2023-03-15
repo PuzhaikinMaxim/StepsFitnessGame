@@ -2,6 +2,7 @@ package com.puj.stepsfitnessgame.data.repositories
 
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
+import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.challenge.FakeChallengeRemoteDataSource
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
@@ -18,7 +19,7 @@ class ChallengeRepositoryImpl(
 
     private val level: Int = sharedPreferences.getInt(LEVEL_KEY, LEVEL_DEFAULT)
 
-    private val challengeRemoteDataSource = FakeChallengeRemoteDataSource(token)
+    private val challengeRemoteDataSource = ChallengeRemoteDataSourceImpl(token)
 
     private val challengeList = MutableLiveData<List<Challenge>>()
 
@@ -39,6 +40,10 @@ class ChallengeRepositoryImpl(
     override suspend fun cancelActiveChallenge() {
         challengeRemoteDataSource.cancelActiveChallenge()
         setChallengesList()
+    }
+
+    override suspend fun endActiveChallenge() {
+        TODO("Not yet implemented")
     }
 
     private suspend fun setChallengesList() {

@@ -18,6 +18,7 @@ import org.junit.Before
 import org.junit.runner.RunWith
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.ZonedDateTime
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -54,6 +55,10 @@ class ExampleUnitTest {
         println(end)
 
          */
+        println(ZonedDateTime.now().offset.id)
+        val offset = ZoneOffset.of(ZonedDateTime.now().offset.id)
+        println(offset)
+        //LocalDateTime.now().atOffset()
     }
 
     @Test

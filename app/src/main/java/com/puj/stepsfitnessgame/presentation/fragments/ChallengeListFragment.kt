@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentChallengeListBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
+import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.adapters.challengelist.ChallengeListAdapter
 import com.puj.stepsfitnessgame.presentation.adapters.challengelist.ChallengeListItemAnimator
@@ -31,7 +32,11 @@ class ChallengeListFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChallengeListBinding.inflate(inflater, container, false)
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: throw RuntimeException()
+        val sharedPref =
+            activity?.getSharedPreferences(
+                PreferencesValues.PREFERENCES_KEY,
+                Context.MODE_PRIVATE
+            ) ?: throw RuntimeException()
         viewModel = ViewModelProvider(
             this, ViewModelFactory(sharedPref)
         )[ChallengeListViewModel::class.java]
@@ -78,6 +83,10 @@ class ChallengeListFragment: Fragment() {
 
         adapter.onItemChallengeCancelListener = {
             viewModel.cancelActiveChallenge()
+        }
+
+        adapter.onItemChallengeEndListener = {
+            viewModel.endActiveChallenge()
         }
 
         binding.rvChallengesList.recycledViewPool.setMaxRecycledViews(
