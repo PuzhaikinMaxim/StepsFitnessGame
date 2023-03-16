@@ -1,109 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/cl_statistics"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/title_page_statistics_background"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical"
-            android:padding="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-            <TextView
-                android:id="@+id/tv_amount_of_steps_today"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/merriweather_bold"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                tools:text="@string/statistics_amount_of_steps_passed"
-                />
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_percent_of_goal_completed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                tools:text="@string/statistics_percent_of_completion"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/merriweather_bold"
-                />
-
-            <ProgressBar
-                android:id="@+id/pb_daily_step_count_progress"
+            <LinearLayout
+                android:id="@+id/cl_statistics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progressTint="@color/bright_orange"
-                android:max="100"
-                tools:progress="58"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                />
+                android:background="@drawable/title_page_statistics_background"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+                <TextView
+                    android:id="@+id/tv_amount_of_steps_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/merriweather_bold"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    tools:text="@string/statistics_amount_of_steps_passed"
+                    />
 
-            <Button
-                android:id="@+id/btn_show_statistics_button"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:backgroundTint="@color/gray"
-                android:text="@string/statistics_button_text"
-                android:textAllCaps="false"
-                android:textSize="18sp"
-                android:letterSpacing="0"
-                android:textColor="@color/black"
-                android:fontFamily="@font/merriweather_bold"
-                />
+                <TextView
+                    android:id="@+id/tv_percent_of_goal_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    tools:text="@string/statistics_percent_of_completion"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/merriweather_bold"
+                    />
 
-            <Button
-                android:id="@+id/btn_choose_level"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:backgroundTint="#FF4A00"
-                android:text="@string/choose_level_button_text"
-                android:textAllCaps="false"
-                android:textSize="18sp"
-                android:letterSpacing="0"
-                android:textColor="@color/black"
-                android:fontFamily="@font/merriweather_bold"
-                />
+                <ProgressBar
+                    android:id="@+id/pb_daily_step_count_progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:progressTint="@color/bright_orange"
+                    android:max="100"
+                    tools:progress="58"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    />
 
-            <TextView
-                android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/btn_show_statistics_button"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/gray"
+                    android:text="@string/statistics_button_text"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:letterSpacing="0"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/merriweather_bold"
+                    />
+
+                <Button
+                    android:id="@+id/btn_choose_level"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:backgroundTint="#FF4A00"
+                    android:text="@string/choose_level_button_text"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:letterSpacing="0"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/merriweather_bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/merriweather_bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    tools:text="@string/statistics_amount_of_completed_tasks"
+                    />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_challenges_list"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/merriweather_bold"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                tools:text="@string/statistics_amount_of_completed_tasks"
+                android:paddingBottom="10dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/cl_statistics"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_challenge"
                 />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+    <include
+        android:id="@+id/l_modal"
+        layout="@layout/layout_reward"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_challenges_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingBottom="10dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintTop_toBottomOf="@id/cl_statistics"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_challenge"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>

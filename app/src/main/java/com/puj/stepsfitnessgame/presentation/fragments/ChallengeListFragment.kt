@@ -14,6 +14,7 @@ import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.adapters.challengelist.ChallengeListAdapter
 import com.puj.stepsfitnessgame.presentation.adapters.challengelist.ChallengeListItemAnimator
+import com.puj.stepsfitnessgame.presentation.adapters.items.ItemListAdapter
 import com.puj.stepsfitnessgame.presentation.viewmodels.ChallengeListViewModel
 
 class ChallengeListFragment: Fragment() {
@@ -54,6 +55,7 @@ class ChallengeListFragment: Fragment() {
         setupChallengeList()
         setupChooseLevelButton()
         setShowStatisticsButton()
+        setupItemsModal()
     }
 
     private fun setupTodayStatistics() {
@@ -119,6 +121,37 @@ class ChallengeListFragment: Fragment() {
     private fun setupChooseLevelButton() {
         binding.btnChooseLevel.setOnClickListener {
             mainMenuContainer.startNewScreen(MainMenuContainer.LEVEL_SELECTION_FRAGMENT_CODE)
+        }
+    }
+
+    private fun setupItemsModal() {
+        val modal = binding.lModal
+
+        viewModel.shouldShowRewardModal.observe(requireActivity()){
+            if(it){
+                modal.clLayoutRewardContainer.visibility = View.VISIBLE
+            }
+            else{
+                modal.clLayoutRewardContainer.visibility = View.GONE
+            }
+        }
+
+        val adapter = ItemListAdapter()
+
+        viewModel.completedChallengeData.observe(requireActivity()){
+            if(it != null){
+                adapter.itemsList = it.itemsList
+                modal.tvAmountOfXpGained.text = getString(
+                    R.string.amount_of_xp_gained,
+                    it.amountOfXp
+                )
+            }
+        }
+
+        modal.rvGainedItems.adapter = adapter
+        modal.tvHeaderMessage.text = getString(R.string.header_message_challenge)
+        modal.btnConfirm.setOnClickListener {
+            viewModel.closeRewardModal()
         }
     }
 

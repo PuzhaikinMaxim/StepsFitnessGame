@@ -23,6 +23,11 @@ interface ChallengeApiService {
         @Header("token") enterToken: String
     ): Response<ActiveChallengeDto?>
 
+    @GET("active_challenges/end_challenge")
+    suspend fun endActiveChallenge(
+        @Header("token") enterToken: String
+    ): Response<CompletedChallengeDataDto>
+
     @POST("active_challenges/start_challenge")
     suspend fun startChallenge(
         @Header("token") enterToken: String,

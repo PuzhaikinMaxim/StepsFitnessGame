@@ -71,7 +71,17 @@ class ChallengeRemoteDataSourceImpl(
         }
     }
 
-    override suspend fun endActiveChallenge() {
-        TODO("Not yet implemented")
+    override suspend fun endActiveChallenge(): Response<CompletedChallengeDataDto> {
+        return try {
+            val response = challengeApiService.endActiveChallenge(enterToken)
+
+            if (response.isSuccessful && response.body() != null) {
+                Response.Success(response.body()!!)
+            } else {
+                Response.Error(DEFAULT_ERROR_CODE)
+            }
+        } catch (ex: Exception){
+            Response.Error(SERVER_NOT_RESPONDING_CODE)
+        }
     }
 }

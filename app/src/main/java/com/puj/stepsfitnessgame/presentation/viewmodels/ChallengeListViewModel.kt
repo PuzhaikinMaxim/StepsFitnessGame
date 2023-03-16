@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.puj.stepsfitnessgame.data.repositories.ChallengeRepositoryImpl
 import com.puj.stepsfitnessgame.data.repositories.StatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
+import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeData
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
 import com.puj.stepsfitnessgame.domain.usecases.challenge.CancelActiveChallengeUseCase
 import com.puj.stepsfitnessgame.domain.usecases.challenge.EndActiveChallengeUseCase
@@ -36,6 +37,14 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
 
     private val endActiveChallengeUseCase = EndActiveChallengeUseCase(challengeRepository)
 
+    private var _completedChallengeData = MutableLiveData<CompletedChallengeData>()
+    val completedChallengeData: LiveData<CompletedChallengeData>
+        get() = _completedChallengeData
+
+    private var _shouldShowRewardModal = MutableLiveData(false)
+    val shouldShowRewardModal: LiveData<Boolean>
+        get() = _shouldShowRewardModal
+
     private var _challengeList = getChallengeListUseCase.invoke()
     val challengeList: LiveData<List<Challenge>>
         get() = _challengeList
@@ -62,6 +71,7 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
     fun startChallenge(challenge: Challenge) {
         viewModelScope.launch(Dispatchers.Default) {
             startChallengeUseCase.invoke(challenge.id)
+            getChallengeListUseCase()
         }
     }
 
@@ -73,7 +83,16 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
 
     fun endActiveChallenge() {
         viewModelScope.launch(Dispatchers.Default) {
-            endActiveChallengeUseCase.invoke()
+            val result = endActiveChallengeUseCase.invoke()
+            if(result != null){
+                _completedChallengeData.postValue(result)
+                _shouldShowRewardModal.postValue(true)
+            }
+            getChallengeListUseCase()
         }
+    }
+
+    fun closeRewardModal() {
+        _shouldShowRewardModal.value = false
     }
 }

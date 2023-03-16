@@ -14,5 +14,5 @@ interface ChallengeRemoteDataSource {
 
     suspend fun cancelActiveChallenge(): Response<Unit>
 
-    suspend fun endActiveChallenge()
+    suspend fun endActiveChallenge(): Response<CompletedChallengeDataDto>
 }

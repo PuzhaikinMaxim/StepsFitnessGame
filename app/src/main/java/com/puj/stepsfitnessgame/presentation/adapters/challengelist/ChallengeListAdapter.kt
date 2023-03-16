@@ -78,7 +78,7 @@ class ChallengeListAdapter: Adapter<ChallengeListAdapter.ChallengeListViewHolder
             if(item.isCompleted) {
                 btnEndChallenge.visibility = View.VISIBLE
                 btnEndChallenge.setOnClickListener {
-
+                    onItemChallengeEndListener?.invoke()
                 }
             }
             else{

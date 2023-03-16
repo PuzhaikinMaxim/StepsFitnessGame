@@ -9,6 +9,7 @@ class ActiveChallengeMapper {
     fun mapActiveChallengeDtoToChallenge(activeChallengeDto: ActiveChallengeDto?): Challenge? {
         if(activeChallengeDto == null) return null
 
+        /*
         val challengeEndDateTime = LocalDateTime.parse(activeChallengeDto.challengeEndDateTime)
 
         println(challengeEndDateTime)
@@ -30,13 +31,16 @@ class ActiveChallengeMapper {
             }
         }
 
+         */
+        println(activeChallengeDto.isCompleted)
+
         return Challenge(
             activeChallengeDto.challengeId,
             activeChallengeDto.challengeName,
             activeChallengeDto.progress,
             activeChallengeDto.amountOfPoints,
             activeChallengeDto.amountOfSteps,
-            timeTillEndText,
+            activeChallengeDto.challengeEndDateTime,
             isShown = true,
             isStarted = true,
             isCompleted = activeChallengeDto.isCompleted

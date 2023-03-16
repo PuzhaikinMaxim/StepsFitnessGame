@@ -60,4 +60,11 @@
     <string name="item_level_name_text">Уровень %d - %s</string>
     <string name="choose_level_button_text">Выбрать уровень</string>
     <string name="amount_of_xp_text">%d/%d</string>
+    <string name="amount_of_points_fixed">+ %d очков к 100 шагам</string>
+    <string name="amount_of_points_multiplier">+ %s к количеству очков</string>
+    <string name="amount_of_minutes_fixed">+ %d мин к продолжительности испытания</string>
+    <string name="time_multiplier">+ %s к продолжительности испытания</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="amount_of_xp_gained">Получено опыта: %d</string>
+    <string name="header_message_challenge">Испытание выполнено</string>
 </resources>
