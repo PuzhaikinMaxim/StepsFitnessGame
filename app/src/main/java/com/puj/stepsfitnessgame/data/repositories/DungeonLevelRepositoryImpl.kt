@@ -3,24 +3,43 @@ package com.puj.stepsfitnessgame.data.repositories
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.puj.stepsfitnessgame.data.network.dungeonlevel.DungeonLevelDto
+import com.puj.stepsfitnessgame.data.network.dungeonlevel.DungeonLevelMapper
+import com.puj.stepsfitnessgame.data.network.dungeonlevel.LevelRemoteDataSourceImpl
+import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.dungeonlevel.DungeonLevel
 import com.puj.stepsfitnessgame.domain.repositories.DungeonLevelRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DungeonLevelRepositoryImpl(
     private val sharedPreferences: SharedPreferences
 ): DungeonLevelRepository {
 
-    private val levelList = MutableLiveData<List<DungeonLevel>>()
+    private val levelList = MutableLiveData<List<DungeonLevelDto>>()
+
+    private val mapper = DungeonLevelMapper()
+
+    private val token: String = sharedPreferences.getString(
+        TOKEN_KEY,
+        TOKEN_DEFAULT
+    ) ?: TOKEN_DEFAULT
+
+    private val levelDataSource = LevelRemoteDataSourceImpl(token)
 
     override fun getLevelList(): LiveData<List<DungeonLevel>> {
-        levelList.value = listOf(
-            DungeonLevel(1,30,10,false,1),
-            DungeonLevel(2,30,0,true,5),
-            DungeonLevel(3,30,0,true,9),
-            DungeonLevel(4,30,0,true,14),
-            DungeonLevel(5,30,0,true,19),
-        )
-        return levelList
+        val scope = CoroutineScope(Dispatchers.Default)
+        scope.launch {
+            val response = levelDataSource.getLevelList()
+            if(response is Response.Success){
+                levelList.postValue(response.data)
+            }
+        }
+        return Transformations.map(levelList) {
+            mapper.mapDungeonLevelDtoListToDungeonLevelList(it)
+        }
     }
 
     override fun selectLevel(level: Int) {
@@ -29,6 +48,8 @@ class DungeonLevelRepositoryImpl(
 
     companion object {
         private const val LEVEL_KEY = "selectedLevel"
-        private const val DEFAULT = 1
+        private const val LEVEL_DEFAULT = 1
+        private const val TOKEN_KEY = "authToken"
+        private const val TOKEN_DEFAULT = "default"
     }
 }

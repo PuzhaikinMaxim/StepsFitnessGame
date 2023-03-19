@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.puj.stepsfitnessgame.data.repositories.ChallengeRepositoryImpl
 import com.puj.stepsfitnessgame.data.repositories.StatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
-import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeData
+import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
 import com.puj.stepsfitnessgame.domain.usecases.challenge.CancelActiveChallengeUseCase
 import com.puj.stepsfitnessgame.domain.usecases.challenge.EndActiveChallengeUseCase
@@ -37,9 +37,9 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
 
     private val endActiveChallengeUseCase = EndActiveChallengeUseCase(challengeRepository)
 
-    private var _completedChallengeData = MutableLiveData<CompletedChallengeData>()
-    val completedChallengeData: LiveData<CompletedChallengeData>
-        get() = _completedChallengeData
+    private var _completedChallengeReward = MutableLiveData<CompletedChallengeReward>()
+    val completedChallengeReward: LiveData<CompletedChallengeReward>
+        get() = _completedChallengeReward
 
     private var _shouldShowRewardModal = MutableLiveData(false)
     val shouldShowRewardModal: LiveData<Boolean>
@@ -85,7 +85,7 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
         viewModelScope.launch(Dispatchers.Default) {
             val result = endActiveChallengeUseCase.invoke()
             if(result != null){
-                _completedChallengeData.postValue(result)
+                _completedChallengeReward.postValue(result)
                 _shouldShowRewardModal.postValue(true)
             }
             getChallengeListUseCase()

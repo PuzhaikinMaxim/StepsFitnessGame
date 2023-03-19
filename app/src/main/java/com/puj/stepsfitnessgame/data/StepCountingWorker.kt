@@ -9,9 +9,6 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
-import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSource
-import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
-import com.puj.stepsfitnessgame.data.network.dailytask.DailyTaskRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.stepactivity.StepActivityDataSource
 import kotlinx.coroutines.delay
 

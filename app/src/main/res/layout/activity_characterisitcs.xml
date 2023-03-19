@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A15A24">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#A15A24">
+
+        <ImageView
+            android:id="@+id/iv_use_icon"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_user"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:fontFamily="@font/merriweather_regular"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_use_icon"
+            tools:text="user" />
+
+        <TextView
+            android:id="@+id/tv_user_level"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:fontFamily="@font/merriweather_bold"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:layout_marginTop="10dp"
+            android:text="@string/user_level_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
+
+        <TextView
+            android:id="@+id/tv_unassigned_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:fontFamily="@font/merriweather_regular"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:layout_marginTop="10dp"
+            android:text="@string/unassigned_points"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_level"
+            tools:text="Нераспределенные очки характеристик: 10" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_unassigned_points">
+
+            <TextView
+                android:id="@+id/tv_strength_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:fontFamily="@font/merriweather_bold"
+                android:textColor="@color/black"
+                android:textSize="32sp"
+                tools:text="20"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_strength"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_strength"
+                android:background="@drawable/bc_characteristics"
+                android:backgroundTint="#882525"
+                android:foreground="@drawable/bc_characteristics"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_add_strength_characteristic"
+                    android:layout_width="100dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@drawable/bc_add_characteristic_button"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:translationZ="10dp"
+                    android:src="@drawable/ic_add_characteristic_button"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_add_strength_characteristic"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_add_strength_characteristic"
+                    app:layout_constraintStart_toStartOf="@+id/btn_add_strength_characteristic"
+                    app:layout_constraintTop_toTopOf="@+id/btn_add_strength_characteristic" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_points_multiplier"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:fontFamily="@font/merriweather_regular"
+                android:textColor="@color/black"
+                android:text="@string/plus_points_multiplier"
+                tools:text="(+20% к очкам)"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_unassigned_points">
+
+            <TextView
+                android:id="@+id/tv_endurance_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:fontFamily="@font/merriweather_bold"
+                android:textColor="@color/black"
+                android:textSize="32sp"
+                tools:text="10"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_endurance"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_endurance"
+                android:background="@drawable/bc_characteristics"
+                android:backgroundTint="#427124"
+                android:foreground="@drawable/bc_characteristics"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_add_endurance_characteristic"
+                    android:layout_width="100dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@drawable/bc_add_characteristic_button"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:translationZ="10dp"
+                    android:src="@drawable/ic_add_characteristic_button"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_add_endurance_characteristic"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_add_endurance_characteristic"
+                    app:layout_constraintStart_toStartOf="@+id/btn_add_endurance_characteristic"
+                    app:layout_constraintTop_toTopOf="@+id/btn_add_endurance_characteristic" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_time_multiplier"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:text="@string/plus_time_multiplier"
+                android:textSize="16sp"
+                android:fontFamily="@font/merriweather_regular"
+                android:textColor="@color/black"
+                tools:text="(+10% ко времени)"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

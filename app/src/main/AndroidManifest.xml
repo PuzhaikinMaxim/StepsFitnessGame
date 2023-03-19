@@ -33,6 +33,7 @@
         </activity>
         <activity android:name=".presentation.activities.MainMenuActivity" />
         <activity android:name=".presentation.activities.UserProfileActivity"/>
+        <activity android:name=".presentation.activities.CharacteristicsActivity"/>
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"
             android:foregroundServiceType=""

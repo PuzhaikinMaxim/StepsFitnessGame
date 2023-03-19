@@ -8,30 +8,36 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
-import com.puj.stepsfitnessgame.databinding.FragmentDailyTasksBinding
+import com.puj.stepsfitnessgame.databinding.FragmentDailyChallengesBinding
 import com.puj.stepsfitnessgame.databinding.ItemDailyTaskBinding
+import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
-import com.puj.stepsfitnessgame.presentation.viewmodels.DailyTasksViewModel
+import com.puj.stepsfitnessgame.presentation.adapters.items.ItemListAdapter
+import com.puj.stepsfitnessgame.presentation.viewmodels.DailyChallengeViewModel
 
-class DailyTasksFragment: Fragment() {
+class DailyChallengeFragment: Fragment() {
 
-    private var _binding: FragmentDailyTasksBinding? = null
-    private val binding: FragmentDailyTasksBinding
+    private var _binding: FragmentDailyChallengesBinding? = null
+    private val binding: FragmentDailyChallengesBinding
         get() = _binding ?: throw RuntimeException("${_binding.toString()} is not set")
 
-    private lateinit var viewModel: DailyTasksViewModel
+    private lateinit var viewModel: DailyChallengeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDailyTasksBinding.inflate(inflater, container, false)
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: throw RuntimeException()
+        _binding = FragmentDailyChallengesBinding.inflate(inflater, container, false)
+        val sharedPref =
+            activity?.getSharedPreferences(
+                PreferencesValues.PREFERENCES_KEY,
+                Context.MODE_PRIVATE
+            ) ?: throw RuntimeException()
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(sharedPref)
-        )[DailyTasksViewModel::class.java]
+        )[DailyChallengeViewModel::class.java]
 
         return binding.root
     }
@@ -40,6 +46,8 @@ class DailyTasksFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupDailyTasksList()
         setupAmountOfDailyTasksCompletedTextView()
+        setupClaimRewardButton()
+        setupModal()
     }
 
     private fun setupDailyTasksList() {
@@ -53,7 +61,9 @@ class DailyTasksFragment: Fragment() {
                     false
                 )
                 with(dailyTaskItem){
-                    tvTaskDescription.text = elem.dailyChallengeDescription
+                    tvTaskDescription.text = getString(
+                        R.string.task_description, elem.amountOfSteps
+                    )
                     if(elem.isCompleted){
                         ivTaskCompleted.visibility = View.VISIBLE
                         vTaskCrossing.visibility = View.VISIBLE
@@ -74,6 +84,40 @@ class DailyTasksFragment: Fragment() {
         }
     }
 
+    private fun setupClaimRewardButton() {
+        binding.btnClaimReward.setOnClickListener {
+            viewModel.claimDailyChallengeReward()
+        }
+    }
+
+    private fun setupModal() {
+        viewModel.shouldShowRewardModal.observe(requireActivity()){
+            if(it){
+                binding.lModal.clLayoutRewardContainer.visibility = View.VISIBLE
+            }
+            else{
+                binding.lModal.clLayoutRewardContainer.visibility = View.GONE
+            }
+        }
+
+        val adapter = ItemListAdapter()
+
+        viewModel.completedDailyChallengeReward.observe(requireActivity()){
+            binding.lModal.tvHeaderMessage.text = getString(R.string.header_message_daily_challenge)
+            binding.lModal.tvAmountOfXpGained.text = getString(
+                R.string.amount_of_xp_gained,
+                it.xp
+            )
+            adapter.itemsList = it.reward
+        }
+
+        binding.lModal.rvGainedItems.adapter = adapter
+
+        binding.lModal.btnConfirm.setOnClickListener {
+            viewModel.closeModal()
+        }
+    }
+
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
@@ -81,8 +125,8 @@ class DailyTasksFragment: Fragment() {
 
     companion object {
 
-        fun newFragment(): DailyTasksFragment {
-            return DailyTasksFragment()
+        fun newFragment(): DailyChallengeFragment {
+            return DailyChallengeFragment()
         }
     }
 }

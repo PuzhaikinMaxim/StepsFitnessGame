@@ -18,6 +18,7 @@
         android:fontFamily="@font/merriweather_bold"
         android:textColor="@color/white"
         android:text="@string/header_message_challenge"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -7,4 +7,7 @@ data class DungeonLevel(
     val isLocked: Boolean,
     val minimalLevelRequirements: Int
 ) {
+
+    val progress: Int
+        get() = (amountOfCompletedChallenges * 100)/amountOfChallenges
 }

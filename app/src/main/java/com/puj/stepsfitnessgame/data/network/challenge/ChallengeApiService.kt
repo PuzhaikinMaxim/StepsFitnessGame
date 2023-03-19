@@ -26,12 +26,12 @@ interface ChallengeApiService {
     @GET("active_challenges/end_challenge")
     suspend fun endActiveChallenge(
         @Header("token") enterToken: String
-    ): Response<CompletedChallengeDataDto>
+    ): Response<CompletedChallengeRewardDto>
 
-    @POST("active_challenges/start_challenge")
+    @POST("active_challenges/start_challenge/{challenge_id}")
     suspend fun startChallenge(
         @Header("token") enterToken: String,
-        @Body challengeId: Int
+        @Path("challenge_id") challengeId: Int
     ): Response<String>
 
     @DELETE("active_challenges/cancel_active_challenge")

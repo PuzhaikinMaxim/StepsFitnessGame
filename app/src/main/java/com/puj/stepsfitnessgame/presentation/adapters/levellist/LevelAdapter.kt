@@ -70,7 +70,7 @@ class LevelAdapter(): Adapter<LevelAdapter.LevelViewHolder>() {
                 ivLevelBackground.setOnClickListener {
                     onLevelClickListener?.invoke(level)
                 }
-
+                pbChallengeProgress.progress = level.progress
             }
             setLevelBackground(level.dungeonLevel, ivLevelBackground)
         }

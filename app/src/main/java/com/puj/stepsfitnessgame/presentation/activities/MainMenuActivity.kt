@@ -115,7 +115,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                             ChallengeListFragment.newFragment()
                         }
                         1 -> {
-                            DailyTasksFragment.newFragment()
+                            DailyChallengeFragment.newFragment()
                         }
                         2 -> {
                             ChallengeListFragment.newFragment()
@@ -239,6 +239,10 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                     val intent = UserProfileActivity.newIntent(this)
                     startActivity(intent)
                 }
+                R.id.menu_characteristics -> {
+                    val intent = CharacteristicsActivity.newIntent(this)
+                    startActivity(intent)
+                }
                 else -> {}
             }
             closeDrawer()
@@ -281,7 +285,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             is ChallengeListFragment -> {
                 selectTab(0)
             }
-            is DailyTasksFragment -> {
+            is DailyChallengeFragment -> {
                 selectTab(1)
             }
         }

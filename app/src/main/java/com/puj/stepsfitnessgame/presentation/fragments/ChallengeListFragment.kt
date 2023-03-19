@@ -138,7 +138,7 @@ class ChallengeListFragment: Fragment() {
 
         val adapter = ItemListAdapter()
 
-        viewModel.completedChallengeData.observe(requireActivity()){
+        viewModel.completedChallengeReward.observe(requireActivity()){
             if(it != null){
                 adapter.itemsList = it.itemsList
                 modal.tvAmountOfXpGained.text = getString(

@@ -61,7 +61,7 @@ class FakeChallengeRemoteDataSource(token: String): ChallengeRemoteDataSource {
         return Response.Success(Unit)
     }
 
-    override suspend fun endActiveChallenge(): Response<CompletedChallengeDataDto> {
+    override suspend fun endActiveChallenge(): Response<CompletedChallengeRewardDto> {
         TODO("Not yet implemented")
     }
 }

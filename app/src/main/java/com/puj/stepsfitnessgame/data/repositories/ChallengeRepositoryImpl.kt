@@ -4,10 +4,9 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeDataMapper
-import com.puj.stepsfitnessgame.data.network.challenge.FakeChallengeRemoteDataSource
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
-import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeData
+import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
 import com.puj.stepsfitnessgame.domain.repositories.ChallengeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +45,7 @@ class ChallengeRepositoryImpl(
         setChallengesList()
     }
 
-    override suspend fun endActiveChallenge(): CompletedChallengeData? {
+    override suspend fun endActiveChallenge(): CompletedChallengeReward? {
         return when(val response = challengeRemoteDataSource.endActiveChallenge()){
             is Response.Success -> {
                 completedChallengeDataMapper.mapCompletedChallengeDataDtoToCompletedChallengeData(

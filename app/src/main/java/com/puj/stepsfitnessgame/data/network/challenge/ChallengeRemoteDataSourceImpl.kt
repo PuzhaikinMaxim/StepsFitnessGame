@@ -71,7 +71,7 @@ class ChallengeRemoteDataSourceImpl(
         }
     }
 
-    override suspend fun endActiveChallenge(): Response<CompletedChallengeDataDto> {
+    override suspend fun endActiveChallenge(): Response<CompletedChallengeRewardDto> {
         return try {
             val response = challengeApiService.endActiveChallenge(enterToken)
 
