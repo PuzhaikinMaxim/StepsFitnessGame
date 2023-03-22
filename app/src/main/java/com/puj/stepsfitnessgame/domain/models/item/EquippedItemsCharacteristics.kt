@@ -1,12 +1,9 @@
 package com.puj.stepsfitnessgame.domain.models.item
 
-data class Item(
-    val itemId: Int,
-    val itemName: String,
+data class EquippedItemsCharacteristics(
     val plusMinutes: Int,
     val timeMultiplier: Double,
     val pointsFixed: Int,
-    val pointsMultiplier: Double,
-    val rarity: Int = 1
+    val pointsMultiplier: Double
 ) {
 }

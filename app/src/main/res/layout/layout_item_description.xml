@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_modal_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:visibility="gone"
+    tools:visibility="visible"
+    android:background="@drawable/bc_item_description_modal"
+    android:layout_marginHorizontal="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ic_close"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_close_square"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_item_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp"
+        android:padding="15dp"
+        android:background="@drawable/bc_game_item"
+        android:backgroundTint="@color/gray"
+        android:src="@drawable/ic_item_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="5dp"
+        android:fontFamily="@font/merriweather_regular"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_item_image"
+        tools:text="Предмет 1" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_name">
+
+        <TextView
+            android:id="@+id/tv_amount_of_points_fixed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/merriweather_regular"
+            android:text="@string/amount_of_points_fixed"
+            android:textColor="#221C1C"
+            android:textSize="20sp"
+            tools:text="+ 40 очков к 100 шагам" />
+
+        <TextView
+            android:id="@+id/tv_amount_of_points_multiplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/merriweather_regular"
+            android:text="@string/amount_of_points_multiplier"
+            android:textColor="#221C1C"
+            android:textSize="20sp"
+            tools:text="+ 1.2 к количеству очков" />
+
+        <TextView
+            android:id="@+id/tv_amount_of_minutes_fixed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/merriweather_regular"
+            android:text="@string/amount_of_minutes_fixed"
+            android:textColor="#221C1C"
+            android:textSize="20sp"
+            tools:text="+ 30 мин к продолжительности испытания" />
+
+        <TextView
+            android:id="@+id/tv_time_multiplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/merriweather_regular"
+            android:text="@string/time_multiplier"
+            android:textColor="#221C1C"
+            android:textSize="20sp"
+            tools:text="+ 1.2 к продолжительности испытания" />
+    </LinearLayout>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
+        app:justifyContent="flex_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_to_slot_1"
+            android:text="В слот 1"
+            android:textAllCaps="false"
+            android:fontFamily="@font/merriweather_bold"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bc_item_description_button"
+            tools:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_to_slot_2"
+            android:text="В слот 2"
+            android:textAllCaps="false"
+            android:fontFamily="@font/merriweather_bold"
+            android:layout_marginStart="10dp"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bc_item_description_button"
+            tools:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_remove_from_inventory"
+            android:text="Снять"
+            android:textAllCaps="false"
+            android:fontFamily="@font/merriweather_bold"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bc_item_description_button"/>
+    </com.google.android.flexbox.FlexboxLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

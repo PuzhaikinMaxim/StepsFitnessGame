@@ -1,16 +1,12 @@
 package com.puj.stepsfitnessgame.presentation.activities
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.ActivityCharacterisitcsBinding
-import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
-import com.puj.stepsfitnessgame.domain.models.characteristics.Characteristics
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.viewmodels.CharacteristicsViewModel

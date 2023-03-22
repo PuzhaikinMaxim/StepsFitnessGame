@@ -243,6 +243,10 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                     val intent = CharacteristicsActivity.newIntent(this)
                     startActivity(intent)
                 }
+                R.id.menu_inventory -> {
+                    val intent = InventoryActivity.newIntent(this)
+                    startActivity(intent)
+                }
                 else -> {}
             }
             closeDrawer()

@@ -38,45 +38,34 @@ class ItemListAdapter: Adapter<ItemListAdapter.ItemListViewHolder>() {
 
         with(holder.binding){
             tvItemName.text = item.itemName
-            setItemCharacteristicsFixedTextView(
+            setItemCharacteristicsTextView(
                 tvAmountOfMinutesFixed,
                 R.string.amount_of_minutes_fixed,
                 item.plusMinutes
             )
-            setItemCharacteristicsMultiplierTextView(
+            setItemCharacteristicsTextView(
                 tvTimeMultiplier,
                 R.string.time_multiplier,
-                item.timeMultiplier
+                item.timeMultiplier.toString()
             )
-            setItemCharacteristicsFixedTextView(
+            setItemCharacteristicsTextView(
                 tvAmountOfPointsFixed,
                 R.string.amount_of_points_fixed,
                 item.pointsFixed
             )
-            setItemCharacteristicsMultiplierTextView(
+            setItemCharacteristicsTextView(
                 tvAmountOfPointsMultiplier,
                 R.string.amount_of_points_multiplier,
-                item.pointsMultiplier
+                item.pointsMultiplier.toString()
             )
         }
     }
 
-    private fun setItemCharacteristicsFixedTextView(
-        tv: TextView, resId: Int, value: Int
+    private fun<T> setItemCharacteristicsTextView(
+        tv: TextView, resId: Int, value: T
     ){
         tv.text = if(value != 0){
             context?.getString(resId, value)
-        }
-        else{
-            ""
-        }
-    }
-
-    private fun setItemCharacteristicsMultiplierTextView(
-        tv: TextView, resId: Int, value: Double
-    ){
-        tv.text = if(value != 0.0){
-            context?.getString(resId, value.toString())
         }
         else{
             ""
