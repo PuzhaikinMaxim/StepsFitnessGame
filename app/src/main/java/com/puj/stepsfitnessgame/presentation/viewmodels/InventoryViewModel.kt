@@ -54,7 +54,7 @@ class InventoryViewModel(sharedPreferences: SharedPreferences): ViewModel() {
             val response = _selectedItem.value?.let { equipItemUseCase(it.inventoryId, slot + 1) }
             if(response is Response.Success){
                 val oldItem =_equippedItems.value?.get(slot)
-                val newList = _items.value?.toMutableList()
+                val newList = _items.value?.map { it.copy() }
                 if(oldItem != null) {
                     val oldItemCopy = newList!![oldItem.inventoryId]
                     oldItemCopy.isEquipped = false
@@ -63,6 +63,7 @@ class InventoryViewModel(sharedPreferences: SharedPreferences): ViewModel() {
                 _equippedItems.value?.set(slot, selectedItem.value)
                 val newItemCopy = newList!![_selectedItem.value!!.inventoryId]
                 newItemCopy.isEquipped = true
+                println(newList)
                 //_selectedItem.value?.isEquipped = true
                 updateInventoryItemsLiveData(newList)
                 _selectedItem.postValue(null)
@@ -76,9 +77,10 @@ class InventoryViewModel(sharedPreferences: SharedPreferences): ViewModel() {
             viewModelScope.launch(Dispatchers.Default) {
                 val response = unequipItemUseCase(slot + 1)
                 if (response is Response.Success) {
-                    val newList = _items.value?.toMutableList()
+                    val newList = _items.value?.map { it.copy() }
                     val newItem = newList!![item.inventoryId]
                     newItem.isEquipped = false
+                    println(newList)
 
                     _equippedItems.value?.set(slot, null)
                     updateInventoryItemsLiveData(newList)
