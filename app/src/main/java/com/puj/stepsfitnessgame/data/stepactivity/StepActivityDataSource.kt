@@ -1,7 +1,8 @@
-package com.puj.stepsfitnessgame.data.network.stepactivity
+package com.puj.stepsfitnessgame.data.stepactivity
 
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.database.laststepcount.LastStepCountUpdateDbModel
+import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
 import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
 import com.puj.stepsfitnessgame.domain.models.statistics.StepData
 import java.time.LocalDateTime
@@ -15,10 +16,6 @@ object StepActivityDataSource {
     private val userGoalDao = FitnessGameDatabase.getDatabase().goalDao()
 
     private val lastStepCountDao = FitnessGameDatabase.getDatabase().lastStepCountUpdateDao()
-
-    fun getTodayStepCount(): Int {
-        TODO()
-    }
 
     suspend fun getStepCountInInterval(): Int {
         val start = lastStepCountDao.getLastUpdate()?.lastStepCountUpdate ?: LocalDateTime.now()

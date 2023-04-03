@@ -9,7 +9,6 @@ class ViewModelFactory(
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        println(sharedPreferences.toString())
         if(sharedPreferences != null){
             return modelClass.getConstructor(SharedPreferences::class.java).newInstance(sharedPreferences)
         }

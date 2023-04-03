@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.database.usergoal.UserGoalDbModel
-import com.puj.stepsfitnessgame.data.network.stepactivity.StepActivityDataSource
+import com.puj.stepsfitnessgame.data.stepactivity.StepActivityDataSource
 import com.puj.stepsfitnessgame.domain.repositories.StatisticsRepository
 import com.puj.stepsfitnessgame.domain.models.statistics.DayData
 import com.puj.stepsfitnessgame.domain.models.statistics.Goal

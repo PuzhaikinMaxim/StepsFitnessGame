@@ -1,8 +1,7 @@
-package com.puj.stepsfitnessgame.presentation.adapters.levellist
+package com.puj.stepsfitnessgame.presentation.adapters.challengelevellist
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,18 +11,18 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.ItemLevelBinding
-import com.puj.stepsfitnessgame.domain.models.dungeonlevel.DungeonLevel
+import com.puj.stepsfitnessgame.domain.models.challengelevel.ChallengeLevel
 
 class LevelAdapter(): Adapter<LevelAdapter.LevelViewHolder>() {
 
-    var levelList: List<DungeonLevel> = listOf()
+    var levelList: List<ChallengeLevel> = listOf()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             notifyDataSetChanged()
             field = value
         }
 
-    var onLevelClickListener: ((level: DungeonLevel) -> Unit)? = null
+    var onLevelClickListener: ((level: ChallengeLevel) -> Unit)? = null
 
     lateinit var levelNames: ArrayList<String>
 

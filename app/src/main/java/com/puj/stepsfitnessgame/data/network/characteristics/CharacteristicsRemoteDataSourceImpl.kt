@@ -1,7 +1,6 @@
 package com.puj.stepsfitnessgame.data.network.characteristics
 
-import com.puj.stepsfitnessgame.data.AppErrorCodes
-import com.puj.stepsfitnessgame.data.network.ServerErrorResponseCodes
+import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.characteristics.Characteristics

@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.data
+package com.puj.stepsfitnessgame.data.workers
 
 import android.content.Context
 import androidx.core.app.NotificationCompat
@@ -9,7 +9,7 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
-import com.puj.stepsfitnessgame.data.network.stepactivity.StepActivityDataSource
+import com.puj.stepsfitnessgame.data.stepactivity.StepActivityDataSource
 import kotlinx.coroutines.delay
 
 class StepCountingWorker(

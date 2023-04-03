@@ -4,32 +4,32 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.puj.stepsfitnessgame.data.network.dungeonlevel.DungeonLevelDto
-import com.puj.stepsfitnessgame.data.network.dungeonlevel.DungeonLevelMapper
-import com.puj.stepsfitnessgame.data.network.dungeonlevel.LevelRemoteDataSourceImpl
+import com.puj.stepsfitnessgame.data.network.challengelevel.ChallengeLevelDto
+import com.puj.stepsfitnessgame.data.network.challengelevel.ChallengeLevelMapper
+import com.puj.stepsfitnessgame.data.network.challengelevel.ChallengeLevelRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.domain.models.Response
-import com.puj.stepsfitnessgame.domain.models.dungeonlevel.DungeonLevel
-import com.puj.stepsfitnessgame.domain.repositories.DungeonLevelRepository
+import com.puj.stepsfitnessgame.domain.models.challengelevel.ChallengeLevel
+import com.puj.stepsfitnessgame.domain.repositories.ChallengeLevelRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DungeonLevelRepositoryImpl(
+class ChallengeLevelRepositoryImpl(
     private val sharedPreferences: SharedPreferences
-): DungeonLevelRepository {
+): ChallengeLevelRepository {
 
-    private val levelList = MutableLiveData<List<DungeonLevelDto>>()
+    private val levelList = MutableLiveData<List<ChallengeLevelDto>>()
 
-    private val mapper = DungeonLevelMapper()
+    private val mapper = ChallengeLevelMapper()
 
     private val token: String = sharedPreferences.getString(
         TOKEN_KEY,
         TOKEN_DEFAULT
     ) ?: TOKEN_DEFAULT
 
-    private val levelDataSource = LevelRemoteDataSourceImpl(token)
+    private val levelDataSource = ChallengeLevelRemoteDataSourceImpl(token)
 
-    override fun getLevelList(): LiveData<List<DungeonLevel>> {
+    override fun getLevelList(): LiveData<List<ChallengeLevel>> {
         val scope = CoroutineScope(Dispatchers.Default)
         scope.launch {
             val response = levelDataSource.getLevelList()
@@ -38,7 +38,7 @@ class DungeonLevelRepositoryImpl(
             }
         }
         return Transformations.map(levelList) {
-            mapper.mapDungeonLevelDtoListToDungeonLevelList(it)
+            mapper.mapChallengeLevelDtoListToChallengeLevelList(it)
         }
     }
 

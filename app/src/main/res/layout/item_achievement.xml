@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_achievement_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/bc_achievement_icon"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:foreground="@drawable/fg_achievement_icon"
+            tools:src="@drawable/ic_achievement_challenge" />
+
+        <ImageView
+            android:id="@+id/iv_lock"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_lock"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_achievement_icon"
+            app:layout_constraintEnd_toEndOf="@+id/iv_achievement_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_achievement_icon"
+            app:layout_constraintTop_toTopOf="@+id/iv_achievement_icon"
+            tools:visibility="visible"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_challenge_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/bc_challenge_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_achievement_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_achievement_icon">
+
+            <TextView
+                android:id="@+id/tv_achievement_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/merriweather_regular"
+                android:textAlignment="center"
+                android:textColor="@color/bright_orange"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Мастер шагов" />
+
+            <TextView
+                android:id="@+id/tv_achievement_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/merriweather_regular"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_achievement_name"
+                tools:text="80000 шагов пройдено" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--
+        <ImageView
+            android:id="@+id/iv_achievement_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/bc_achievement_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:foreground="@drawable/fg_achievement_icon"
+            tools:src="@drawable/ic_achievement_challenge" />
+
+        <ImageView
+            android:id="@+id/iv_lock"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_lock"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_achievement_icon"
+            app:layout_constraintEnd_toEndOf="@+id/iv_achievement_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_achievement_icon"
+            app:layout_constraintTop_toTopOf="@+id/iv_achievement_icon"
+            tools:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/tv_achievement_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/bright_orange"
+            android:fontFamily="@font/merriweather_regular"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_achievement_icon"
+            app:layout_constraintEnd_toEndOf="@+id/iv_achievement_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_achievement_icon"
+            app:layout_constraintTop_toTopOf="@+id/iv_achievement_icon"
+            tools:text="Мастер шагов" />
+
+        <TextView
+            android:id="@+id/tv_achievement_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/merriweather_regular"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_achievement_icon"
+            tools:text="80000 шагов пройдено" />
+            -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

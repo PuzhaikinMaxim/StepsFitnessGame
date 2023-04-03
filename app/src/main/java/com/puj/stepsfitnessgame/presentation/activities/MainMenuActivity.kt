@@ -27,7 +27,7 @@ import com.google.android.gms.fitness.data.DataType
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.puj.stepsfitnessgame.R
-import com.puj.stepsfitnessgame.data.StepCountingWorker
+import com.puj.stepsfitnessgame.data.workers.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
@@ -127,7 +127,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                             ChallengeListFragment.newFragment()
                         }
                         else -> {
-                            throw RuntimeException("Bottom menu item not selected")
+                            throw RuntimeException("Bottom menu item not selected or not exists")
                         }
                     }
                     openFragment(fragment)

@@ -1,6 +1,6 @@
-package com.puj.stepsfitnessgame.domain.models.dungeonlevel
+package com.puj.stepsfitnessgame.domain.models.challengelevel
 
-data class DungeonLevel(
+data class ChallengeLevel(
     val dungeonLevel: Int,
     val amountOfChallenges: Int,
     val amountOfCompletedChallenges: Int,

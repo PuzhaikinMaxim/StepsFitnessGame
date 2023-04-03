@@ -1,6 +1,6 @@
 package com.puj.stepsfitnessgame.data.network.inventoryitem
 
-import com.puj.stepsfitnessgame.data.AppErrorCodes
+import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.domain.models.Response
 

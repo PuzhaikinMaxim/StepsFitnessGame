@@ -1,8 +1,8 @@
-package com.puj.stepsfitnessgame.data.network.dungeonlevel
+package com.puj.stepsfitnessgame.data.network.challengelevel
 
 import com.google.gson.annotations.SerializedName
 
-data class DungeonLevelDto(
+data class ChallengeLevelDto(
     val dungeonLevel: Int,
     val amountOfChallenges: Int,
     val amountOfCompletedChallenges: Int,

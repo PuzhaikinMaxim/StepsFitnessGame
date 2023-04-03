@@ -42,29 +42,29 @@ class ItemListAdapter: Adapter<ItemListAdapter.ItemListViewHolder>() {
                 tvAmountOfMinutesFixed,
                 R.string.amount_of_minutes_fixed,
                 item.plusMinutes
-            )
+            ){item.plusMinutes != 0}
             setItemCharacteristicsTextView(
                 tvTimeMultiplier,
                 R.string.time_multiplier,
                 item.timeMultiplier.toString()
-            )
+            ){item.timeMultiplier != 0.0}
             setItemCharacteristicsTextView(
                 tvAmountOfPointsFixed,
                 R.string.amount_of_points_fixed,
                 item.pointsFixed
-            )
+            ){item.pointsFixed != 0}
             setItemCharacteristicsTextView(
                 tvAmountOfPointsMultiplier,
                 R.string.amount_of_points_multiplier,
                 item.pointsMultiplier.toString()
-            )
+            ){item.pointsMultiplier != 0.0}
         }
     }
 
     private fun<T> setItemCharacteristicsTextView(
-        tv: TextView, resId: Int, value: T
+        tv: TextView, resId: Int, value: T, comparator: () -> Boolean
     ){
-        tv.text = if(value != 0){
+        tv.text = if(comparator.invoke()){
             context?.getString(resId, value)
         }
         else{

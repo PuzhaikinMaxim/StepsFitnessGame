@@ -48,7 +48,7 @@ abstract class FitnessGameDatabase: RoomDatabase() {
                 return tempDatabase
             }
             else {
-                throw RuntimeException("To be corrected")
+                throw RuntimeException("Database is not initialized")
             }
         }
     }

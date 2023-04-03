@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.presentation.adapters.inventoryitems
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -13,15 +14,15 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.ItemGameItemSmBinding
 import com.puj.stepsfitnessgame.domain.models.item.InventoryItem
 
-class InventoryItemsAdapter: Adapter<InventoryItemsAdapter.InventoryItemViewHolder>() {
+class InventoryItemsAdapter(
+    private val colorCodesList: List<String>
+): Adapter<InventoryItemsAdapter.InventoryItemViewHolder>() {
 
     var inventoryItemList = listOf<InventoryItem>()
         set(value) {
             val callback = InventoryItemsCallback(field,value)
             val diffResult = DiffUtil.calculateDiff(callback)
             diffResult.dispatchUpdatesTo(this)
-            println("old list: $field")
-            println("new list: $value")
             field = value
         }
 
@@ -46,6 +47,7 @@ class InventoryItemsAdapter: Adapter<InventoryItemsAdapter.InventoryItemViewHold
             clContainer.setOnClickListener {
                 onItemClickListener?.invoke(item.inventoryId)
             }
+            ivItemImage.background.setTint(Color.parseColor(colorCodesList[item.rarity-1]))
             if(item.isEquipped){
                 cvItemContainer.foreground =
                     AppCompatResources.getDrawable(context!!, R.drawable.bc_inventory_item_equiped)

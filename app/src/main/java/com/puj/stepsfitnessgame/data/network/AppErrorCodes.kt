@@ -1,4 +1,4 @@
-package com.puj.stepsfitnessgame.data
+package com.puj.stepsfitnessgame.data.network
 
 class AppErrorCodes {
 
