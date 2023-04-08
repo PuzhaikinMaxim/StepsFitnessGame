@@ -5,6 +5,7 @@ import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
 
 interface UserRemoteDataSource {
+
     suspend fun loginUser(userCredentials: UserCredentials): Response<String>
 
     suspend fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit>

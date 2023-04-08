@@ -32,6 +32,14 @@
         <item name="android:elevation">5dp</item>
     </style>
 
+    <style name="OpponentProgress" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/bc_opponent_health_progress_bar</item>
+    </style>
+
+    <style name="UserProgress" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/bc_user_health_progress_bar</item>
+    </style>
+
     <style name="DungeonLevelProgress" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/item_level_progress_bar</item>
         <item name="android:elevation">5dp</item>

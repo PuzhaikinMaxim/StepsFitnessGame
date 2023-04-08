@@ -9,6 +9,7 @@ import com.puj.stepsfitnessgame.data.repositories.UserRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
+import com.puj.stepsfitnessgame.domain.repositories.UserRepository
 import com.puj.stepsfitnessgame.domain.usecases.auth.LoginUserUseCase
 import com.puj.stepsfitnessgame.domain.usecases.auth.RegisterUserUseCase
 import com.puj.stepsfitnessgame.presentation.InputValidator
@@ -16,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegistrationViewModel(sharedPreferences: SharedPreferences) : ViewModel() {
-    private val repository = UserRepositoryImpl(sharedPreferences)
+    private val repository: UserRepository = UserRepositoryImpl(sharedPreferences)
 
     private val loginUserUseCase = LoginUserUseCase(repository)
 
