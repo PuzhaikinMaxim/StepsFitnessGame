@@ -35,6 +35,7 @@
         <activity android:name=".presentation.activities.UserProfileActivity"/>
         <activity android:name=".presentation.activities.CharacteristicsActivity"/>
         <activity android:name=".presentation.activities.InventoryActivity"/>
+        <activity android:name=".presentation.activities.AchievementActivity"/>
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"
             android:foregroundServiceType=""

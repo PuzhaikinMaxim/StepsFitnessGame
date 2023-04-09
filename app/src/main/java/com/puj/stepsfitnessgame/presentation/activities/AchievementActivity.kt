@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.presentation.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -45,5 +46,12 @@ class AchievementActivity: AppCompatActivity() {
         binding.rvStepsAchievements.adapter = stepAchievementListAdapter
         binding.rvChallengesAchievements.adapter = challengeAchievementListAdapter
         binding.rvDuelsAchievements.adapter = duelsAchievementListAdapter
+    }
+
+    companion object {
+
+        fun newIntent(context: Context): Intent {
+            return Intent(context, AchievementActivity::class.java)
+        }
     }
 }
