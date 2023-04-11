@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
+import com.puj.stepsfitnessgame.data.network.duel.DuelStompClient
 import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.databinding.ActivityMainBinding
 import com.puj.stepsfitnessgame.presentation.PreferencesValues

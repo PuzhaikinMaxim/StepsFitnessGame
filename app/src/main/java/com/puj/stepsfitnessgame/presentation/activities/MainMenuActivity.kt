@@ -29,6 +29,7 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.workers.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
+import com.puj.stepsfitnessgame.data.network.duel.DuelStompClient
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
@@ -66,6 +67,10 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         setDrawerLayout()
         setupBottomNavigationMenu()
         setupUserLevel()
+
+        //
+        val duelStompClient = DuelStompClient()
+        //
 
         FitnessGameDatabase.initializeDatabase(this)
 
