@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_seconds_passed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/merriweather_bold"
+        android:textSize="30sp"
+        android:text="@string/seconds_passed_text"
+        app:layout_constraintBottom_toTopOf="@+id/tv_opponent_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="30 секунд" />
+
+    <TextView
+        android:id="@+id/tv_opponent_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/merriweather_regular"
+        android:text="Поиск соперника..."
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cancel_search"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bc_btn_start_duel"
+        android:fontFamily="@font/merriweather_regular"
+        android:textAllCaps="false"
+        android:text="Отменить поиск"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_opponent_search" />
+</androidx.constraintlayout.widget.ConstraintLayout>

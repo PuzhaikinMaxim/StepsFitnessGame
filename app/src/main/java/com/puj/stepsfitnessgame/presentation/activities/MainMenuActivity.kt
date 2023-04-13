@@ -69,7 +69,14 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         setupUserLevel()
 
         //
-        val duelStompClient = DuelStompClient()
+        val duelStompClient = DuelStompClient(
+            "userf72afb76-8230-4587-ba04-f6c6639d8538",
+            "user"
+        )
+        val duelStompClient2 = DuelStompClient(
+            "user2f72afb76-8230-4587-ba04-f6c6639d8538",
+            "user2"
+        )
         //
 
         FitnessGameDatabase.initializeDatabase(this)

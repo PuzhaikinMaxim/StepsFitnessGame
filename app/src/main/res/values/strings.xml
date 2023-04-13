@@ -75,4 +75,5 @@
     <string name="user_rank_text">Ранг: %d</string>
     <string name="amount_of_duels_won">Количество побед: %d</string>
     <string name="amount_of_duels_lost_text">Количество поражений: %d</string>
+    <string name="seconds_passed_text">%d секунд</string>
 </resources>

@@ -1,8 +1,8 @@
 package com.puj.stepsfitnessgame.data.network.duel
 
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +16,7 @@ import ua.naiksoftware.stomp.dto.LifecycleEvent
 import ua.naiksoftware.stomp.dto.StompHeader
 import ua.naiksoftware.stomp.dto.StompMessage
 
-class DuelStompClient {
+class DuelStompClient(private val token: String, private val username: String) {
 
     private val gson: Gson = GsonBuilder().create()
     private var stompClient: StompClient? = null
@@ -24,9 +24,14 @@ class DuelStompClient {
     private var topicSubscribe: Disposable? = null
     private var lifecycleSubscribe: Disposable? = null
 
+    private val isOpponentFound = MutableLiveData(false)
+
     init {
-        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, SOCKET_URL).withClientHeartbeat(3000)
-        println(stompClient)
+        stompClient = Stomp.over(
+            Stomp.ConnectionProvider.OKHTTP,
+            SOCKET_URL
+        ).withClientHeartbeat(3000)
+
         CoroutineScope(Dispatchers.Default).launch{
             for(i in 0..100) {
                 delay(1000)
@@ -41,16 +46,17 @@ class DuelStompClient {
             lifecycleSubscribe?.dispose()
         }
 
-        testConnection()
+        initializeConnection()
     }
 
-    fun testConnection() {
+    private fun initializeConnection() {
         if (stompClient != null) {
-            topicSubscribe = stompClient!!.topic(TOPIC)
+            topicSubscribe = stompClient!!.topic("$TOPIC/$username")
                 .subscribeOn(Schedulers.io(), false)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ topicMessage: StompMessage ->
-                    println(topicMessage.payload)
+                    val opponentFound = topicMessage.payload.toBoolean()
+                    isOpponentFound.postValue(opponentFound)
                 },
                 {
                     it.printStackTrace()
@@ -72,7 +78,7 @@ class DuelStompClient {
                 }
 
             if (!stompClient!!.isConnected) {
-                val stompHeader = StompHeader("token","userf72afb76-8230-4587-ba04-f6c6639d8538")
+                val stompHeader = StompHeader("token",token)
                 stompClient!!.connect(listOf(stompHeader))
             }
 
@@ -82,9 +88,15 @@ class DuelStompClient {
         }
     }
 
+    fun stopDuelSearch() {
+        topicSubscribe?.dispose()
+        lifecycleSubscribe?.dispose()
+        stompClient?.disconnect()
+    }
+
     companion object {
         const val SOCKET_URL = "http://192.168.1.195:8080/ws"
-        const val METHOD_ADDRESS = "/api/sock_test"
-        const val TOPIC = "/topic/test"
+        const val METHOD_ADDRESS = "/api/try_find_opponent"
+        const val TOPIC = "/topic/duel"
     }
 }

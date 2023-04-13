@@ -61,20 +61,34 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/ic_crossed_swords"
         app:layout_constraintBottom_toTopOf="@+id/cl_user_status_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_give_up"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="Сдаться"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/merriweather_regular"
+        android:textAllCaps="false"
+        android:background="@drawable/bc_btn_start_duel"
+        app:layout_constraintBottom_toTopOf="@+id/cl_user_status_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_user_status_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -124,6 +138,7 @@
             tools:text="50000/1000000" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -189,5 +204,5 @@
                 android:id="@+id/equipped_item_2"
                 layout="@layout/item_game_item_sm" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
