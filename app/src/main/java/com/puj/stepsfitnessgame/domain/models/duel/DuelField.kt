@@ -8,6 +8,8 @@ data class DuelField(
     val opponentHp: Int,
     val opponentInitialHp: Int,
     val player: Player,
-    val opponent: Player
+    val opponent: Player,
+    val isDuelFinished: Boolean = false,
+    val isWon: Boolean = false
 ) {
 }

@@ -4,17 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.puj.stepsfitnessgame.data.repositories.StatisticsRepositoryImpl
-import com.puj.stepsfitnessgame.domain.models.statistics.Goal
-import com.puj.stepsfitnessgame.domain.usecases.statistics.goal.GetGoalsListUseCase
-import com.puj.stepsfitnessgame.domain.usecases.statistics.goal.SetGoalUseCase
-import com.puj.stepsfitnessgame.domain.usecases.statistics.goal.SetGoalsListUseCase
+import com.puj.stepsfitnessgame.data.repositories.StepStepStatisticsRepositoryImpl
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.Goal
+import com.puj.stepsfitnessgame.domain.usecases.stepstatistics.goal.GetGoalsListUseCase
+import com.puj.stepsfitnessgame.domain.usecases.stepstatistics.goal.SetGoalUseCase
+import com.puj.stepsfitnessgame.domain.usecases.stepstatistics.goal.SetGoalsListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GoalSelectionViewModel: ViewModel() {
 
-    private val repository = StatisticsRepositoryImpl()
+    private val repository = StepStepStatisticsRepositoryImpl()
     private val getGoalsListUseCase = GetGoalsListUseCase(repository)
     private val setGoalsListUseCase = SetGoalsListUseCase(repository)
     private val setGoalUseCase = SetGoalUseCase(repository)

@@ -11,5 +11,7 @@ interface MainMenuContainer {
         const val GOAL_SELECTION_FRAGMENT_CODE = 102
         const val LEVEL_SELECTION_FRAGMENT_CODE = 103
         const val BACK_TO_CHALLENGE_LIST_CODE = 104
+        const val DUEL_SEARCH_FRAGMENT_CODE = 105
+        const val DUEL_FIELD_FRAGMENT_CODE = 106
     }
 }

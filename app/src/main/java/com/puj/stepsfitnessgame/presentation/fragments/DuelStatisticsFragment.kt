@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentDuelStatisticsBinding
+import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.viewmodels.DuelStatisticsViewModel
@@ -20,11 +22,13 @@ class DuelStatisticsFragment : Fragment() {
 
     private lateinit var viewModel: DuelStatisticsViewModel
 
+    private lateinit var mainMenuContainer: MainMenuContainer
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDuelStatisticsBinding.inflate(inflater,container,false)
 
         val sharedPref =
@@ -36,15 +40,78 @@ class DuelStatisticsFragment : Fragment() {
             this, ViewModelFactory(sharedPref)
         )[DuelStatisticsViewModel::class.java]
 
+        val activity = requireActivity()
+        if(activity is MainMenuContainer){
+            mainMenuContainer = activity
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupDuelStatistics()
+        setupStartDuelButton()
+    }
+
+    private fun setupDuelStatistics() {
+        viewModel.duelStatistics.observe(requireActivity()){
+            with(binding){
+                tvAmountOfDuelsLost.text = getString(
+                    R.string.amount_of_duels_lost_text,
+                    it.amountOfDuelsLost
+                )
+                tvAmountOfDuelsWon.text = getString(
+                    R.string.amount_of_duels_won,
+                    it.amountOfDuelsWon
+                )
+                val rankText = requireActivity().resources.getStringArray(R.array.ranks)
+                tvUserRank.text = getString(
+                    R.string.user_rank_text,
+                    rankText[it.rank]
+                )
+                setRankImage(it.rank)
+            }
+        }
+    }
+
+    private fun setRankImage(rank: Int) {
+         val imageResource = when(rank){
+             0 -> {
+                 R.drawable.ic_no_rank
+             }
+             1 -> {
+                 R.drawable.ic_bronze
+             }
+             2 -> {
+                 R.drawable.ic_silver
+             }
+             3 -> {
+                 R.drawable.ic_gold
+             }
+             else -> {
+                 R.drawable.ic_no_rank
+             }
+         }
+
+        binding.ivRankImage.setImageResource(imageResource)
+    }
+
+    private fun setupStartDuelButton() {
+        binding.btnStartDuel.setOnClickListener {
+            mainMenuContainer.startNewScreen(MainMenuContainer.DUEL_SEARCH_FRAGMENT_CODE)
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+
+        fun newFragment(): DuelStatisticsFragment {
+            return DuelStatisticsFragment()
+        }
     }
 }

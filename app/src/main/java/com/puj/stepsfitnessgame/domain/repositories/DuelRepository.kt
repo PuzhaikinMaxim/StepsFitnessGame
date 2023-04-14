@@ -6,11 +6,13 @@ import com.puj.stepsfitnessgame.domain.models.duel.DuelStatistics
 
 interface DuelRepository {
 
-    fun startDuelSearch(): LiveData<Boolean>
+    fun startDuelSearch()
 
     fun stopDuelSearch()
 
     fun getDuelField(): LiveData<DuelField>
+
+    fun getIsOpponentFound(): LiveData<Boolean>
 
     fun getDuelStatistics(): LiveData<DuelStatistics>
 }

@@ -1,7 +1,7 @@
 package com.puj.stepsfitnessgame.presentation.adapters.goal
 
 import androidx.recyclerview.widget.DiffUtil
-import com.puj.stepsfitnessgame.domain.models.statistics.Goal
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.Goal
 
 class GoalListCallback(
     private val oldList: List<Goal>,

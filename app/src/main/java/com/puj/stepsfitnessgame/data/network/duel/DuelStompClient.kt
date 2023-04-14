@@ -1,5 +1,6 @@
 package com.puj.stepsfitnessgame.data.network.duel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -16,7 +17,7 @@ import ua.naiksoftware.stomp.dto.LifecycleEvent
 import ua.naiksoftware.stomp.dto.StompHeader
 import ua.naiksoftware.stomp.dto.StompMessage
 
-class DuelStompClient(private val token: String, private val username: String) {
+class DuelStompClient(private val token: String) {
 
     private val gson: Gson = GsonBuilder().create()
     private var stompClient: StompClient? = null
@@ -24,7 +25,9 @@ class DuelStompClient(private val token: String, private val username: String) {
     private var topicSubscribe: Disposable? = null
     private var lifecycleSubscribe: Disposable? = null
 
-    private val isOpponentFound = MutableLiveData(false)
+    private val _isOpponentFound = MutableLiveData(false)
+    val isOpponentFound: LiveData<Boolean>
+        get() = _isOpponentFound
 
     init {
         stompClient = Stomp.over(
@@ -32,6 +35,7 @@ class DuelStompClient(private val token: String, private val username: String) {
             SOCKET_URL
         ).withClientHeartbeat(3000)
 
+        /*
         CoroutineScope(Dispatchers.Default).launch{
             for(i in 0..100) {
                 delay(1000)
@@ -46,17 +50,28 @@ class DuelStompClient(private val token: String, private val username: String) {
             lifecycleSubscribe?.dispose()
         }
 
-        initializeConnection()
+         */
     }
 
-    private fun initializeConnection() {
+    fun tryFindGame() {
+        stompClient!!.send(METHOD_ADDRESS).subscribe({
+            println("Success")
+        },
+            {
+                it.printStackTrace()
+            })
+    }
+
+    fun initializeConnection(username: String) {
         if (stompClient != null) {
+            println("-------------------------------------------")
+            println(username)
             topicSubscribe = stompClient!!.topic("$TOPIC/$username")
                 .subscribeOn(Schedulers.io(), false)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ topicMessage: StompMessage ->
                     val opponentFound = topicMessage.payload.toBoolean()
-                    isOpponentFound.postValue(opponentFound)
+                    _isOpponentFound.postValue(opponentFound)
                 },
                 {
                     it.printStackTrace()

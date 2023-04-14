@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.BarChart
@@ -20,7 +19,7 @@ import com.google.android.material.tabs.TabLayout
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentStatisticsBinding
 import com.puj.stepsfitnessgame.databinding.ItemDayOfWeekBinding
-import com.puj.stepsfitnessgame.domain.models.statistics.StepData
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.StepData
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.viewmodels.StatisticsViewModel

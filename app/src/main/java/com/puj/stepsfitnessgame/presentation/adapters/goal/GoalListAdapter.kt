@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.ItemGoalBinding
-import com.puj.stepsfitnessgame.domain.models.statistics.Goal
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.Goal
 
 class GoalListAdapter: Adapter<GoalListAdapter.GoalItemViewHolder>() {
 

@@ -72,8 +72,9 @@
     <string name="plus_points_multiplier">(+%d%% к очкам)</string>
     <string name="plus_time_multiplier">(+%d%% ко времени)</string>
     <string name="unassigned_points">Нераспределенные очки характеристик: %d</string>
-    <string name="user_rank_text">Ранг: %d</string>
+    <string name="user_rank_text">Ранг: %s</string>
     <string name="amount_of_duels_won">Количество побед: %d</string>
     <string name="amount_of_duels_lost_text">Количество поражений: %d</string>
-    <string name="seconds_passed_text">%d секунд</string>
+    <string name="seconds_passed_text">Времени прошло: %dс</string>
+    <string name="health_text">%d/%d</string>
 </resources>

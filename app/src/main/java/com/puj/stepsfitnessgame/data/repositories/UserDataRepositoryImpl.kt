@@ -35,6 +35,15 @@ class UserDataRepositoryImpl(
         return userData
     }
 
+    override suspend fun getUsername(): String {
+        val response = userLevelRemoteDataSource.getUserLevel()
+
+        if(response is Response.Success){
+            return response.data.username
+        }
+        return ""
+    }
+
     companion object {
         private const val TOKEN_KEY = "authToken"
         private const val DEFAULT = "default"

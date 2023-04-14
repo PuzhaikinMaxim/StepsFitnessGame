@@ -3,10 +3,17 @@ package com.puj.stepsfitnessgame.data.repositories
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.puj.stepsfitnessgame.data.network.duel.DuelDto
+import com.puj.stepsfitnessgame.data.network.duel.DuelMapper
+import com.puj.stepsfitnessgame.data.network.duel.DuelRemoteDataSourceImpl
+import com.puj.stepsfitnessgame.data.network.duel.DuelStompClient
+import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.duel.DuelField
 import com.puj.stepsfitnessgame.domain.models.duel.DuelStatistics
 import com.puj.stepsfitnessgame.domain.repositories.DuelRepository
 import com.puj.stepsfitnessgame.domain.repositories.UserDataRepository
+import kotlinx.coroutines.*
 
 class DuelRepositoryImpl(
     private val sharedPreferences: SharedPreferences
@@ -19,22 +26,48 @@ class DuelRepositoryImpl(
 
     private val userDataRepository: UserDataRepository = UserDataRepositoryImpl(sharedPreferences)
 
+    private val duelMapper = DuelMapper()
+
     private val duelStatistics = MutableLiveData<DuelStatistics>()
 
-    private val duelField = MutableLiveData<DuelField>()
+    private val duelField = MutableLiveData<DuelDto>()
 
-    private val username = userDataRepository.getUserData().value?.username ?: ""
+    private val duelRemoteDataSourceImpl = DuelRemoteDataSourceImpl(token)
 
-    override fun startDuelSearch(): LiveData<Boolean> {
-        TODO("Not yet implemented")
+    private var searchCoroutine: Job? = null
+
+    override fun startDuelSearch() {
+        val coroutineScope = CoroutineScope(Dispatchers.Default)
+        searchCoroutine = coroutineScope.launch {
+            val username = userDataRepository.getUsername()
+            duelRemoteDataSourceImpl.startDuelSearch(username)
+            for(i in 0..360){
+                duelRemoteDataSourceImpl.tryFindGame()
+                delay(1000)
+            }
+        }
     }
 
     override fun stopDuelSearch() {
-        TODO("Not yet implemented")
+        searchCoroutine?.cancel()
+        duelRemoteDataSourceImpl.stopDuelSearch()
     }
 
     override fun getDuelField(): LiveData<DuelField> {
-        return duelField
+        val coroutineScope = CoroutineScope(Dispatchers.Default)
+        coroutineScope.launch {
+            val response = duelRemoteDataSourceImpl.getDuelField()
+            if(response is Response.Success){
+                duelField.postValue(response.data)
+            }
+        }
+        return Transformations.map(duelField) {
+            duelMapper.mapDuelDtoToDuelField(it)
+        }
+    }
+
+    override fun getIsOpponentFound(): LiveData<Boolean> {
+        return duelRemoteDataSourceImpl.getIsOpponentFound()
     }
 
     override fun getDuelStatistics(): LiveData<DuelStatistics> {

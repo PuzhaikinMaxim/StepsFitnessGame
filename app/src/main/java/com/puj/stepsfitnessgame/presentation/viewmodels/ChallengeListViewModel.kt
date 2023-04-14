@@ -6,22 +6,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.puj.stepsfitnessgame.data.repositories.ChallengeRepositoryImpl
-import com.puj.stepsfitnessgame.data.repositories.StatisticsRepositoryImpl
+import com.puj.stepsfitnessgame.data.repositories.StepStepStatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
-import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.TodayStatistics
 import com.puj.stepsfitnessgame.domain.usecases.challenge.CancelActiveChallengeUseCase
 import com.puj.stepsfitnessgame.domain.usecases.challenge.EndActiveChallengeUseCase
 import com.puj.stepsfitnessgame.domain.usecases.challenge.GetChallengeListUseCase
 import com.puj.stepsfitnessgame.domain.usecases.challenge.StartChallengeUseCase
-import com.puj.stepsfitnessgame.domain.usecases.statistics.GetTodayStatisticsUseCase
-import com.puj.stepsfitnessgame.domain.usecases.statistics.SetTodayStatisticsUseCase
+import com.puj.stepsfitnessgame.domain.usecases.stepstatistics.GetTodayStatisticsUseCase
+import com.puj.stepsfitnessgame.domain.usecases.stepstatistics.SetTodayStatisticsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() {
 
-    private val statisticsRepository = StatisticsRepositoryImpl()
+    private val statisticsRepository = StepStepStatisticsRepositoryImpl()
 
     private val setTodayStatisticsUseCase = SetTodayStatisticsUseCase(statisticsRepository)
 

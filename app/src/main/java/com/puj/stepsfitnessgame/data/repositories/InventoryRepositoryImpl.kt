@@ -57,7 +57,6 @@ class InventoryRepositoryImpl(private val sharedPreferences: SharedPreferences):
         } as MutableLiveData<Array<InventoryItem?>>
     }
 
-
     companion object {
         private const val TOKEN_KEY = "authToken"
         private const val TOKEN_DEFAULT = "default"

@@ -68,16 +68,20 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         setupBottomNavigationMenu()
         setupUserLevel()
 
-        //
+        /*
         val duelStompClient = DuelStompClient(
             "userf72afb76-8230-4587-ba04-f6c6639d8538",
             "user"
         )
+        */
+
+        /*
         val duelStompClient2 = DuelStompClient(
             "user2f72afb76-8230-4587-ba04-f6c6639d8538",
             "user2"
         )
-        //
+        
+         */
 
         FitnessGameDatabase.initializeDatabase(this)
 
@@ -130,7 +134,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                             DailyChallengeFragment.newFragment()
                         }
                         2 -> {
-                            ChallengeListFragment.newFragment()
+                            DuelStatisticsFragment.newFragment()
                         }
                         3 -> {
                             ChallengeListFragment.newFragment()
@@ -308,6 +312,15 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             is DailyChallengeFragment -> {
                 selectTab(1)
             }
+            is DuelSearchFragment -> {
+                selectTab(2)
+            }
+            is DuelStatisticsFragment -> {
+                selectTab(2)
+            }
+            is DuelFieldFragment -> {
+                selectTab(2)
+            }
         }
     }
 
@@ -350,6 +363,12 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             )
             MainMenuContainer.LEVEL_SELECTION_FRAGMENT_CODE -> openFragment(
                 SelectLevelFragment.newFragment()
+            )
+            MainMenuContainer.DUEL_SEARCH_FRAGMENT_CODE -> openFragment(
+                DuelSearchFragment.newFragment()
+            )
+            MainMenuContainer.DUEL_FIELD_FRAGMENT_CODE -> openFragment(
+                DuelFieldFragment.newFragment()
             )
             MainMenuContainer.BACK_TO_CHALLENGE_LIST_CODE -> {
                 removeTwoPreviousFragments()

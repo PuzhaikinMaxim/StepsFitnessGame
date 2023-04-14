@@ -8,6 +8,13 @@
         <item>Кристальные пещеры</item>
     </string-array>
 
+    <string-array name="ranks">
+        <item>Нет ранга</item>
+        <item>Бронза</item>
+        <item>Серебро</item>
+        <item>Золото</item>
+    </string-array>
+
     <string-array name="item_rarities_colors">
         <item>#A1A1A1</item>
         <item>#1F749C</item>

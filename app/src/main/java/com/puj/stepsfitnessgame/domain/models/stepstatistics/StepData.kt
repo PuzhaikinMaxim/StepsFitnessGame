@@ -1,6 +1,5 @@
-package com.puj.stepsfitnessgame.domain.models.statistics
+package com.puj.stepsfitnessgame.domain.models.stepstatistics
 
-import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

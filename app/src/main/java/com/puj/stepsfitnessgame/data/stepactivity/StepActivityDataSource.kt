@@ -3,8 +3,8 @@ package com.puj.stepsfitnessgame.data.stepactivity
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.database.laststepcount.LastStepCountUpdateDbModel
 import com.puj.stepsfitnessgame.data.network.stepactivity.GoogleFitDataProvider
-import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
-import com.puj.stepsfitnessgame.domain.models.statistics.StepData
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.TodayStatistics
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.StepData
 import java.time.LocalDateTime
 
 object StepActivityDataSource {

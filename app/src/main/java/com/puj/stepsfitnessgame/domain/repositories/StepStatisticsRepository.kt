@@ -1,12 +1,12 @@
 package com.puj.stepsfitnessgame.domain.repositories
 
 import androidx.lifecycle.LiveData
-import com.puj.stepsfitnessgame.domain.models.statistics.DayData
-import com.puj.stepsfitnessgame.domain.models.statistics.Goal
-import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
-import com.puj.stepsfitnessgame.domain.models.statistics.StepData
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.DayData
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.Goal
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.TodayStatistics
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.StepData
 
-interface StatisticsRepository {
+interface StepStatisticsRepository {
 
     fun getTodayStatistics(): LiveData<TodayStatistics>
 

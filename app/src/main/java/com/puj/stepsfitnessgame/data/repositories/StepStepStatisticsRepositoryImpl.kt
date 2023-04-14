@@ -6,13 +6,13 @@ import androidx.lifecycle.Transformations
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.database.usergoal.UserGoalDbModel
 import com.puj.stepsfitnessgame.data.stepactivity.StepActivityDataSource
-import com.puj.stepsfitnessgame.domain.repositories.StatisticsRepository
-import com.puj.stepsfitnessgame.domain.models.statistics.DayData
-import com.puj.stepsfitnessgame.domain.models.statistics.Goal
-import com.puj.stepsfitnessgame.domain.models.statistics.StepData
-import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
+import com.puj.stepsfitnessgame.domain.repositories.StepStatisticsRepository
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.DayData
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.Goal
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.StepData
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.TodayStatistics
 
-class StatisticsRepositoryImpl: StatisticsRepository {
+class StepStepStatisticsRepositoryImpl: StepStatisticsRepository {
 
     private val stepActivityDataSource = StepActivityDataSource
 

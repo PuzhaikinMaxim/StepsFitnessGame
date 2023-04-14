@@ -3,37 +3,37 @@ package com.puj.stepsfitnessgame.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.puj.stepsfitnessgame.data.repositories.StatisticsRepositoryImpl
-import com.puj.stepsfitnessgame.domain.repositories.StatisticsRepository
-import com.puj.stepsfitnessgame.domain.models.statistics.DayData
-import com.puj.stepsfitnessgame.domain.models.statistics.StepData
-import com.puj.stepsfitnessgame.domain.models.statistics.TodayStatistics
-import com.puj.stepsfitnessgame.domain.usecases.statistics.*
+import com.puj.stepsfitnessgame.data.repositories.StepStepStatisticsRepositoryImpl
+import com.puj.stepsfitnessgame.domain.repositories.StepStatisticsRepository
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.DayData
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.StepData
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.TodayStatistics
+import com.puj.stepsfitnessgame.domain.usecases.stepstatistics.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class StatisticsViewModel: ViewModel() {
 
-    private val statisticsRepository: StatisticsRepository = StatisticsRepositoryImpl()
+    private val stepStatisticsRepository: StepStatisticsRepository = StepStepStatisticsRepositoryImpl()
 
     private val setLastThirtyDaysStepDataUseCase =
-        SetLastThirtyDaysStepDataUseCase(statisticsRepository)
+        SetLastThirtyDaysStepDataUseCase(stepStatisticsRepository)
 
     private val setLastTwelveWeeksStepDataUseCase =
-        SetLastTwelveWeeksStepDataUseCase(statisticsRepository)
+        SetLastTwelveWeeksStepDataUseCase(stepStatisticsRepository)
 
     private val setLastTwelveMonthsStepDataUseCase =
-        SetLastTwelveMonthsStepDataUseCase(statisticsRepository)
+        SetLastTwelveMonthsStepDataUseCase(stepStatisticsRepository)
 
-    private val getTodayStatisticsUseCase = GetTodayStatisticsUseCase(statisticsRepository)
+    private val getTodayStatisticsUseCase = GetTodayStatisticsUseCase(stepStatisticsRepository)
 
-    private val setTodayStatisticsUseCase = SetTodayStatisticsUseCase(statisticsRepository)
+    private val setTodayStatisticsUseCase = SetTodayStatisticsUseCase(stepStatisticsRepository)
 
-    private val getLastDatesStepData = GetLastDatesStepData(statisticsRepository)
+    private val getLastDatesStepData = GetLastDatesStepData(stepStatisticsRepository)
 
-    private val getLastWeekStepDataUseCase = GetLastWeekStepDataUseCase(statisticsRepository)
+    private val getLastWeekStepDataUseCase = GetLastWeekStepDataUseCase(stepStatisticsRepository)
 
-    private val setLastWeekStepDataUseCase = SetLastWeekStepDataUseCase(statisticsRepository)
+    private val setLastWeekStepDataUseCase = SetLastWeekStepDataUseCase(stepStatisticsRepository)
 
     private val _stepData = getLastDatesStepData()
     val stepData: LiveData<List<StepData>>

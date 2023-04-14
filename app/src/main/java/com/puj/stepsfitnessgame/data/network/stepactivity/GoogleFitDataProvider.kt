@@ -11,7 +11,7 @@ import com.google.android.gms.fitness.data.DataType.TYPE_STEP_COUNT_DELTA
 import com.google.android.gms.fitness.data.Field
 import com.google.android.gms.fitness.request.DataReadRequest
 import com.puj.stepsfitnessgame.data.stepactivity.StepActivityDataProvider
-import com.puj.stepsfitnessgame.domain.models.statistics.StepData
+import com.puj.stepsfitnessgame.domain.models.stepstatistics.StepData
 import com.puj.stepsfitnessgame.presentation.ApplicationContextProvider
 import java.time.DayOfWeek
 import java.time.LocalDateTime
