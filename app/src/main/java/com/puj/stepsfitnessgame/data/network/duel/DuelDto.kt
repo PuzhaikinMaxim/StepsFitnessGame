@@ -7,11 +7,13 @@ data class DuelDto(
     val playerInitialHp: Int,
     val opponentHp: Int,
     val opponentInitialHp: Int,
-    val playerName: String,
-    val opponentName: String,
+    val playerName: String?,
+    val opponentName: String?,
     @SerializedName("duelFinished")
     val isDuelFinished: Boolean,
     @SerializedName("won")
-    val isWon: Boolean
+    val isWon: Boolean,
+    @SerializedName("canceled")
+    val isCanceled: Boolean
 ) {
 }

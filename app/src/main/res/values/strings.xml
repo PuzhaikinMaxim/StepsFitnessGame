@@ -67,6 +67,7 @@
     <string name="confirm">Подтвердить</string>
     <string name="amount_of_xp_gained">Получено опыта: %d</string>
     <string name="header_message_challenge">Испытание выполнено</string>
+    <string name="header_message_duel">Дуэль завершена</string>
     <string name="header_message_daily_challenge">Награда за ежедневные испытания</string>
     <string name="task_description">Наберите %d шагов за день</string>
     <string name="plus_points_multiplier">(+%d%% к очкам)</string>
@@ -77,4 +78,6 @@
     <string name="amount_of_duels_lost_text">Количество поражений: %d</string>
     <string name="seconds_passed_text">Времени прошло: %dс</string>
     <string name="health_text">%d/%d</string>
+    <string name="duel_result_win_text">Вы победили!</string>
+    <string name="duel_result_lose_text">Вы проиграли</string>
 </resources>

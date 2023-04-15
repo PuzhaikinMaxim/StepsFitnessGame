@@ -17,5 +17,9 @@ interface DuelRemoteDataSource {
 
     suspend fun getDuelField(): Response<DuelDto>
 
+    suspend fun claimReward(): Response<FinishedDuelRewardDto>
+
+    suspend fun cancelDuel(): Response<Boolean>
+
     fun tryFindGame()
 }

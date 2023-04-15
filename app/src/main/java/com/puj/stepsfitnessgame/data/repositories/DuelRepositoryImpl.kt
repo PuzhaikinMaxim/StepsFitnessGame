@@ -4,13 +4,11 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.puj.stepsfitnessgame.data.network.duel.DuelDto
-import com.puj.stepsfitnessgame.data.network.duel.DuelMapper
-import com.puj.stepsfitnessgame.data.network.duel.DuelRemoteDataSourceImpl
-import com.puj.stepsfitnessgame.data.network.duel.DuelStompClient
+import com.puj.stepsfitnessgame.data.network.duel.*
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.duel.DuelField
 import com.puj.stepsfitnessgame.domain.models.duel.DuelStatistics
+import com.puj.stepsfitnessgame.domain.models.duel.FinishedDuelReward
 import com.puj.stepsfitnessgame.domain.repositories.DuelRepository
 import com.puj.stepsfitnessgame.domain.repositories.UserDataRepository
 import kotlinx.coroutines.*
@@ -25,6 +23,8 @@ class DuelRepositoryImpl(
     ) ?: TOKEN_DEFAULT
 
     private val userDataRepository: UserDataRepository = UserDataRepositoryImpl(sharedPreferences)
+
+    private val finishedDuelRewardMapper: FinishedDuelRewardMapper = FinishedDuelRewardMapper()
 
     private val duelMapper = DuelMapper()
 
@@ -72,6 +72,24 @@ class DuelRepositoryImpl(
 
     override fun getDuelStatistics(): LiveData<DuelStatistics> {
         return duelStatistics
+    }
+
+    override suspend fun claimReward(): FinishedDuelReward? {
+        val response = duelRemoteDataSourceImpl.claimReward()
+        if(response is Response.Success){
+            return finishedDuelRewardMapper.mapFinishedDuelRewardDtoToFinishedDuelReward(
+                response.data
+            )
+        }
+        return null
+    }
+
+    override suspend fun cancelDuel(): Boolean {
+        val response = duelRemoteDataSourceImpl.cancelDuel()
+        if(response is Response.Success){
+            return response.data
+        }
+        return false
     }
 
     companion object {

@@ -3,7 +3,7 @@ package com.puj.stepsfitnessgame.data.network.challenge
 import com.puj.stepsfitnessgame.data.network.item.ItemMapper
 import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
 
-class CompletedChallengeDataMapper {
+class CompletedChallengeRewardMapper {
 
     private val itemMapper = ItemMapper()
 

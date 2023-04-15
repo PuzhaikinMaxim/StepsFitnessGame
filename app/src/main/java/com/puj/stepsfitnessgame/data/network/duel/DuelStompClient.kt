@@ -64,8 +64,6 @@ class DuelStompClient(private val token: String) {
 
     fun initializeConnection(username: String) {
         if (stompClient != null) {
-            println("-------------------------------------------")
-            println(username)
             topicSubscribe = stompClient!!.topic("$TOPIC/$username")
                 .subscribeOn(Schedulers.io(), false)
                 .observeOn(AndroidSchedulers.mainThread())

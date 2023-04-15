@@ -3,7 +3,7 @@ package com.puj.stepsfitnessgame.data.repositories
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
-import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeDataMapper
+import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeRewardMapper
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
@@ -24,7 +24,7 @@ class ChallengeRepositoryImpl(
 
     private val challengeList = MutableLiveData<List<Challenge>>()
 
-    private val completedChallengeDataMapper = CompletedChallengeDataMapper()
+    private val completedChallengeRewardMapper = CompletedChallengeRewardMapper()
 
     override fun getChallengesList(): MutableLiveData<List<Challenge>> {
         val coroutine = CoroutineScope(Dispatchers.Default)
@@ -48,7 +48,7 @@ class ChallengeRepositoryImpl(
     override suspend fun endActiveChallenge(): CompletedChallengeReward? {
         return when(val response = challengeRemoteDataSource.endActiveChallenge()){
             is Response.Success -> {
-                completedChallengeDataMapper.mapCompletedChallengeDataDtoToCompletedChallengeData(
+                completedChallengeRewardMapper.mapCompletedChallengeDataDtoToCompletedChallengeData(
                     response.data
                 )
             }

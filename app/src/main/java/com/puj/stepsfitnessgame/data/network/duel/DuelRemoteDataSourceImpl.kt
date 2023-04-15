@@ -52,4 +52,30 @@ class DuelRemoteDataSourceImpl(
             return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
         }
     }
+
+    override suspend fun claimReward(): Response<FinishedDuelRewardDto> {
+        try {
+            val response = duelApiService.claimReward(token)
+            if(response.isSuccessful && response.body() != null){
+                return Response.Success(response.body()!!)
+            }
+            return Response.Error(AppErrorCodes.DEFAULT_ERROR_CODE)
+        }
+        catch (ex: Exception) {
+            return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
+        }
+    }
+
+    override suspend fun cancelDuel(): Response<Boolean> {
+        try {
+            val response = duelApiService.cancelDuel(token)
+            if(response.isSuccessful && response.body() != null){
+                return Response.Success(response.body()!!)
+            }
+            return Response.Error(AppErrorCodes.DEFAULT_ERROR_CODE)
+        }
+        catch (ex: Exception) {
+            return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
+        }
+    }
 }

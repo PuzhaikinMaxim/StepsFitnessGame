@@ -1,5 +1,6 @@
 package com.puj.stepsfitnessgame.data.network.challenge
 
+import com.puj.stepsfitnessgame.data.network.duel.FinishedDuelRewardDto
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 

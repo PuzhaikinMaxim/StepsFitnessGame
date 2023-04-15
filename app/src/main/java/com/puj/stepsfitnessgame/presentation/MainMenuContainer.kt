@@ -13,5 +13,6 @@ interface MainMenuContainer {
         const val BACK_TO_CHALLENGE_LIST_CODE = 104
         const val DUEL_SEARCH_FRAGMENT_CODE = 105
         const val DUEL_FIELD_FRAGMENT_CODE = 106
+        const val DUEL_STATISTICS_FRAGMENT_CODE = 107
     }
 }

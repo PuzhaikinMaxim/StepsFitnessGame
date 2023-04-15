@@ -10,6 +10,7 @@ data class DuelField(
     val player: Player,
     val opponent: Player,
     val isDuelFinished: Boolean = false,
-    val isWon: Boolean = false
+    val isWon: Boolean = false,
+    val isDuelCanceled: Boolean = false
 ) {
 }
