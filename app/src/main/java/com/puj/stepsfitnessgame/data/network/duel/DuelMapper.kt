@@ -7,12 +7,12 @@ class DuelMapper {
 
     fun mapDuelDtoToDuelField(duelDto: DuelDto): DuelField {
         return DuelField(
-            duelDto.playerHp,
-            duelDto.playerInitialHp,
-            duelDto.opponentHp,
-            duelDto.opponentInitialHp,
-            Player(duelDto.playerName),
-            Player(duelDto.opponentName),
+            duelDto.player.hp,
+            duelDto.player.initialHp,
+            duelDto.opponent.hp,
+            duelDto.opponent.initialHp,
+            Player(duelDto.player.name),
+            Player(duelDto.opponent.name),
             duelDto.isDuelFinished,
             duelDto.isWon
         )

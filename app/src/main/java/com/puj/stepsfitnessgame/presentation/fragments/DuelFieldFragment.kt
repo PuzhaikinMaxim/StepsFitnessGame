@@ -135,6 +135,7 @@ class DuelFieldFragment : Fragment() {
     }
 
     private fun setupRewardModal() {
+        binding.lDuelRewardContainer.clLayoutRewardContainer.visibility = View.GONE
         viewModel.finishedDuelReward.observe(requireActivity()){
             binding.lDuelRewardContainer.clLayoutRewardContainer.visibility = View.VISIBLE
             val adapter = ItemListAdapter()

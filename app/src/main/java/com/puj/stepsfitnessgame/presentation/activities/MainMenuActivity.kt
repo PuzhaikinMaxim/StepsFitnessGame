@@ -36,6 +36,9 @@ import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.*
 import com.puj.stepsfitnessgame.presentation.viewmodels.MainMenuViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
@@ -75,13 +78,19 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         )
         */
 
-        /*
         val duelStompClient2 = DuelStompClient(
             "user2f72afb76-8230-4587-ba04-f6c6639d8538",
-            "user2"
         )
-        
-         */
+
+        duelStompClient2.initializeConnection("user2")
+
+        val scope = CoroutineScope(Dispatchers.Default)
+
+        scope.launch {
+            for(i in 0..50){
+                duelStompClient2.tryFindGame()
+            }
+        }
 
         FitnessGameDatabase.initializeDatabase(this)
 
