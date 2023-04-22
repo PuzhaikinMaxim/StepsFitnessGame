@@ -68,6 +68,11 @@ class GoalSelectionFragment: Fragment() {
         binding.rvGoalItemsList.adapter = adapter
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     companion object {
 
         fun newFragment(): GoalSelectionFragment {
