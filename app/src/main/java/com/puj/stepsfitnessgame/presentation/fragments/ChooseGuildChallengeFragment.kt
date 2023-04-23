@@ -7,26 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.puj.stepsfitnessgame.databinding.FragmentGuildEnterRequestsBinding
+import com.puj.stepsfitnessgame.databinding.FragmentChooseGuildChallengeBinding
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
-import com.puj.stepsfitnessgame.presentation.adapters.guildenterrequest.GuildEnterRequestAdapter
-import com.puj.stepsfitnessgame.presentation.viewmodels.GuildEnterRequestsViewModel
+import com.puj.stepsfitnessgame.presentation.adapters.guildchallenges.GuildChallengesAdapter
+import com.puj.stepsfitnessgame.presentation.viewmodels.ChooseGuildChallengeViewModel
 
-class GuildEnterRequestsFragment: Fragment() {
+class ChooseGuildChallengeFragment: Fragment() {
 
-    private var _binding: FragmentGuildEnterRequestsBinding? = null
-    private val binding: FragmentGuildEnterRequestsBinding
-        get() = _binding ?: throw RuntimeException("Fragment guild enter request binding is null")
+    private var _binding: FragmentChooseGuildChallengeBinding? = null
+    private val binding: FragmentChooseGuildChallengeBinding
+        get() = _binding ?: throw RuntimeException("Fragment choose guild challenge binding is null")
 
-    private lateinit var viewModel: GuildEnterRequestsViewModel
+    private lateinit var viewModel: ChooseGuildChallengeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGuildEnterRequestsBinding.inflate(inflater, container, false)
+        _binding = FragmentChooseGuildChallengeBinding.inflate(inflater, container, false)
         val sharedPref =
             activity?.getSharedPreferences(
                 PreferencesValues.PREFERENCES_KEY,
@@ -36,28 +36,31 @@ class GuildEnterRequestsFragment: Fragment() {
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(sharedPref)
-        )[GuildEnterRequestsViewModel::class.java]
+        )[ChooseGuildChallengeViewModel::class.java]
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupGuildEnterRequestList()
+        setupGuildChallengeList()
+        setupShouldCloseScreen()
         setupOnBackPressed()
     }
 
-    private fun setupGuildEnterRequestList() {
-        val adapter = GuildEnterRequestAdapter()
-        viewModel.guildEnterRequestList.observe(requireActivity()){
-            adapter.guildEnterRequestList = it
+    private fun setupGuildChallengeList() {
+        val adapter = GuildChallengesAdapter()
+        viewModel.guildChallenges.observe(requireActivity()){
+            adapter.challengesList = it
         }
-        adapter.onAcceptEnter = {
-            viewModel.acceptEnter(it)
+        adapter.onStartButtonClick = {
+            viewModel.selectGuildChallenge(it)
         }
-        adapter.onRefuseEnter = {
-            viewModel.refuseEnter(it)
+    }
+
+    private fun setupShouldCloseScreen() {
+        viewModel.shouldCloseScreen.observe(requireActivity()){
+            requireActivity().supportFragmentManager.popBackStack()
         }
-        binding.rvChooseChallenge.adapter = adapter
     }
 
     private fun setupOnBackPressed() {

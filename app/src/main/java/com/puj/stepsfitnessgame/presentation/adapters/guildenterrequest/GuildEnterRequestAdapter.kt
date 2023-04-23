@@ -23,9 +23,9 @@ class GuildEnterRequestAdapter: Adapter<GuildEnterRequestAdapter.GuildEnterReque
 
     private var context: Context? = null
 
-    private var onRefuseEnter: ((Long) -> (Unit))? = null
+    var onRefuseEnter: ((Long) -> (Unit))? = null
 
-    private var onAcceptEnter: ((Long) -> (Unit))? = null
+    var onAcceptEnter: ((Long) -> (Unit))? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GuildEnterRequestViewHolder {
         val binding = ItemRequestingPlayerBinding.inflate(
