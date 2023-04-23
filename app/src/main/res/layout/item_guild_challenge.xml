@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/bc_guild_section_container"
+    android:background="@drawable/item_challenge_card_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="10dp"
@@ -31,7 +31,7 @@
             android:layout_marginStart="5dp"
             android:fontFamily="@font/merriweather_bold"
             android:text="Совместное испытание"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="22sp"
             />
     </LinearLayout>
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:fontFamily="@font/merriweather_regular"
                 android:text="@string/goal"
                 />
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:fontFamily="@font/merriweather_regular"
                 android:text="@string/time_till_end"
                 />
@@ -106,6 +106,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/bc_btn_join_guild"
             android:text="Начать испытание"
+            android:textColor="@color/white"
             android:textAllCaps="false"
             android:fontFamily="@font/merriweather_regular"
             android:textSize="18sp"/>

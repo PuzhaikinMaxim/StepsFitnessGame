@@ -21,4 +21,13 @@
         <item>#7626D1</item>
         <item>#E8C50C</item>
     </string-array>
+
+    <integer-array name="guild_logos">
+        <item>@drawable/ic_guild_logo_1</item>
+        <item>@drawable/ic_guild_logo_2</item>
+        <item>@drawable/ic_guild_logo_3</item>
+        <item>@drawable/ic_guild_logo_4</item>
+        <item>@drawable/ic_guild_logo_5</item>
+        <item>@drawable/ic_guild_logo_6</item>
+    </integer-array>
 </resources>

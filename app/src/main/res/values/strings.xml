@@ -84,4 +84,8 @@
     <string name="amount_of_completed_tasks_text">Количество выполненных испытаний: %d</string>
     <string name="amount_of_participants_text">Количество участников: %d</string>
     <string name="collective_level_text">Общий уровень участников: %d</string>
+    <string name="guild_rank">Ранг: %d</string>
+    <string name="join_guild_join">Присоединится</string>
+    <string name="join_guild_cancel">Отменить</string>
+    <string name="participant_level">Уровень: %d</string>
 </resources>

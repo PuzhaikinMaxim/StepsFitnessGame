@@ -5,11 +5,13 @@ import com.puj.stepsfitnessgame.domain.models.guild.GuildEnterRequest
 
 interface GuildEnterRequestRepository {
 
-    fun requestEnter(guildId: Long)
+    suspend fun requestEnter(guildId: Long)
+
+    suspend fun cancelEnter(guildId: Long)
 
     fun getGuildEnterRequests(): LiveData<List<GuildEnterRequest>>
 
-    fun refuseEnter(userId: Long)
+    suspend fun refuseEnter(userId: Long)
 
-    fun acceptEnter(userId: Long)
+    suspend fun acceptEnter(userId: Long)
 }

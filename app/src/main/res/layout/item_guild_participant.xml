@@ -34,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Уровень: 10"
+        android:text="@string/participant_level"
         android:textColor="@color/black"
         android:fontFamily="@font/merriweather_regular"
         android:layout_marginTop="5dp"

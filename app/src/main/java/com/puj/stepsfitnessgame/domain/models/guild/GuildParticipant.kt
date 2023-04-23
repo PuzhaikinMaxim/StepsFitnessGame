@@ -1,7 +1,7 @@
 package com.puj.stepsfitnessgame.domain.models.guild
 
 data class GuildParticipant(
-    val participantId: Int,
+    val participantId: Long,
     val participantName: String,
     val participantLevel: Int
 ) {

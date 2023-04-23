@@ -6,7 +6,7 @@ import com.puj.stepsfitnessgame.domain.models.guild.GuildChallenge
 
 interface GuildChallengeRepository {
 
-    fun selectGuildChallenge(guildChallengeId: Long)
+    suspend fun selectGuildChallenge(guildChallengeId: Long)
 
     fun getGuildChallenges(): LiveData<List<GuildChallenge>>
 
