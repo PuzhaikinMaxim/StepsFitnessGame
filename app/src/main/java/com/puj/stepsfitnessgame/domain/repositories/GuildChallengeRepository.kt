@@ -10,5 +10,5 @@ interface GuildChallengeRepository {
 
     fun getGuildChallenges(): LiveData<List<GuildChallenge>>
 
-    fun getCurrentGuildChallenge(): LiveData<CurrentGuildChallenge>
+    fun getCurrentGuildChallenge(): LiveData<CurrentGuildChallenge?>
 }

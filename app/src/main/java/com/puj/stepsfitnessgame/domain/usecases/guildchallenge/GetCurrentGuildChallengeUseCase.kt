@@ -8,7 +8,7 @@ class GetCurrentGuildChallengeUseCase(
     private val guildChallengeRepository: GuildChallengeRepository
     ) {
 
-    operator fun invoke(): LiveData<CurrentGuildChallenge> {
+    operator fun invoke(): LiveData<CurrentGuildChallenge?> {
         return guildChallengeRepository.getCurrentGuildChallenge()
     }
 }

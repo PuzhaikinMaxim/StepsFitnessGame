@@ -81,7 +81,12 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
             val challengeReward = claimRewardUseCase() ?: return@launch
             _challengeReward.postValue(challengeReward)
             _shouldOpenRewardModal.postValue(true)
+            _hasReward.postValue(false)
         }
+    }
+
+    fun openRewardModal() {
+        _shouldOpenRewardModal.value = true
     }
 
     fun closeRewardModal() {

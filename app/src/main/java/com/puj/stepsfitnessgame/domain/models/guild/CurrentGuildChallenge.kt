@@ -5,4 +5,6 @@ data class CurrentGuildChallenge(
     val goal: Int,
     val timeTillEnd: String
 ) {
+    val progress: Int
+        get() = pointsGained*100/goal
 }

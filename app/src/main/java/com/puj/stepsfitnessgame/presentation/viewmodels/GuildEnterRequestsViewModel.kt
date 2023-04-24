@@ -24,16 +24,16 @@ class GuildEnterRequestsViewModel(private val sharedPreferences: SharedPreferenc
 
     val guildEnterRequestList = getGuildEnterRequestUseCase()
 
-    fun acceptEnter(userId: Long) {
+    fun acceptEnter(requestId: Long) {
         viewModelScope.launch(Dispatchers.Default) {
-            acceptEnterUseCase.invoke(userId)
+            acceptEnterUseCase.invoke(requestId)
             getGuildEnterRequestUseCase()
         }
     }
 
-    fun refuseEnter(userId: Long) {
+    fun refuseEnter(requestId: Long) {
         viewModelScope.launch(Dispatchers.Default) {
-            refuseEnterUseCase.invoke(userId)
+            refuseEnterUseCase.invoke(requestId)
             getGuildEnterRequestUseCase()
         }
     }

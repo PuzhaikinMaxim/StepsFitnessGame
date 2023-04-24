@@ -43,10 +43,10 @@ class GuildEnterRequestAdapter: Adapter<GuildEnterRequestAdapter.GuildEnterReque
             tvPlayerLevel.text = context?.getString(R.string.user_level_text, item.userLevel)
             tvPlayerName.text = item.userName
             ivAcceptRequest.setOnClickListener {
-                onAcceptEnter?.invoke(item.userId)
+                onAcceptEnter?.invoke(item.requestId)
             }
             ivRefuseRequest.setOnClickListener {
-                onRefuseEnter?.invoke(item.userId)
+                onRefuseEnter?.invoke(item.requestId)
             }
         }
     }
