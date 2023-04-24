@@ -8,6 +8,7 @@ import com.puj.stepsfitnessgame.data.repositories.GuildEnterRequestRepositoryImp
 import com.puj.stepsfitnessgame.data.repositories.GuildRepositoryImpl
 import com.puj.stepsfitnessgame.domain.repositories.GuildEnterRequestRepository
 import com.puj.stepsfitnessgame.domain.repositories.GuildRepository
+import com.puj.stepsfitnessgame.domain.usecases.guild.GetGuildDataUseCase
 import com.puj.stepsfitnessgame.domain.usecases.guild.GetGuildListUseCase
 import com.puj.stepsfitnessgame.domain.usecases.guildenterrequest.CancelEnterUseCase
 import com.puj.stepsfitnessgame.domain.usecases.guildenterrequest.RequestEnterUseCase
@@ -26,6 +27,10 @@ class GuildListViewModel(private val sharedPreferences: SharedPreferences): View
     private val requestEnterUseCase = RequestEnterUseCase(guildEnterRequestRepository)
 
     private val cancelEnterUseCase = CancelEnterUseCase(guildEnterRequestRepository)
+
+    private val getGuildDataUseCase = GetGuildDataUseCase(guildRepository)
+
+    val guildData = getGuildDataUseCase()
 
     val guildList = getGuildListUseCase()
 

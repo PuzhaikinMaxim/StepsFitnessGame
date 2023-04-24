@@ -64,9 +64,10 @@
                 android:background="@drawable/bc_btn_join_guild"
                 android:fontFamily="@font/merriweather_bold"
                 android:text="Настройки"
-
                 android:textAllCaps="false"
                 android:textSize="18sp"
+                android:visibility="gone"
+                tools:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/iv_guild_logo"
                 tools:layout_editor_absoluteX="10dp" />
 
@@ -92,6 +93,8 @@
                 android:text="Забрать награду"
                 android:textAllCaps="false"
                 android:textSize="18sp"
+                android:visibility="gone"
+                tools:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/btn_settings"
                 tools:layout_editor_absoluteX="10dp" />
 
@@ -117,6 +120,8 @@
                 android:text="Заявки на вход"
                 android:textAllCaps="false"
                 android:textSize="18sp"
+                android:visibility="gone"
+                tools:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/btn_claim_reward"
                 tools:layout_editor_absoluteX="10dp" />
 
@@ -193,7 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/merriweather_regular"
-                android:text="@string/amount_of_completed_tasks_text"
+                android:text="@string/amount_of_completed_challenges_text"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -238,6 +243,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cl_statistics_container" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_participant_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

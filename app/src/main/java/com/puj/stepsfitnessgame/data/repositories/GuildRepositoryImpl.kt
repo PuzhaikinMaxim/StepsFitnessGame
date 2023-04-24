@@ -20,7 +20,7 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
         TODO("Not yet implemented")
     }
 
-    override fun getGuildParticipants(): LiveData<GuildParticipant> {
+    override fun getGuildParticipants(): LiveData<List<GuildParticipant>> {
         TODO("Not yet implemented")
     }
 
@@ -33,6 +33,10 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
     }
 
     override suspend fun claimReward(): CompletedChallengeReward {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getHasReward(): Boolean {
         TODO("Not yet implemented")
     }
 

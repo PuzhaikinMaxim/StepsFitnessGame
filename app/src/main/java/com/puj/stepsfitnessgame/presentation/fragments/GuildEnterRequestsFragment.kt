@@ -70,4 +70,11 @@ class GuildEnterRequestsFragment: Fragment() {
         super.onDestroy()
         _binding = null
     }
+
+    companion object {
+
+        fun newFragment(): GuildEnterRequestsFragment {
+            return GuildEnterRequestsFragment()
+        }
+    }
 }

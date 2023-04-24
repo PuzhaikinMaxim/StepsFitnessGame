@@ -80,8 +80,8 @@
     <string name="health_text">%d/%d</string>
     <string name="duel_result_win_text">Вы победили!</string>
     <string name="duel_result_lose_text">Вы проиграли</string>
-    <string name="guild_players_amount_text">%d/%d игроков</string>
-    <string name="amount_of_completed_tasks_text">Количество выполненных испытаний: %d</string>
+    <string name="guild_players_amount_text">%d/15 игроков</string>
+    <string name="amount_of_completed_challenges_text">Количество выполненных испытаний: %d</string>
     <string name="amount_of_participants_text">Количество участников: %d</string>
     <string name="collective_level_text">Общий уровень участников: %d</string>
     <string name="guild_rank">Ранг: %d</string>

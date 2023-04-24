@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.databinding.FragmentGuildsListBinding
+import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
+import com.puj.stepsfitnessgame.presentation.adapters.guild.GuildListAdapter
 import com.puj.stepsfitnessgame.presentation.viewmodels.GuildCreationViewModel
 import com.puj.stepsfitnessgame.presentation.viewmodels.GuildListViewModel
 
@@ -20,6 +22,8 @@ class GuildListFragment: Fragment() {
         get() = _binding ?: throw RuntimeException("Fragment guild list binding is null")
 
     private lateinit var viewModel: GuildListViewModel
+
+    private lateinit var mainMenuContainer: MainMenuContainer
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +41,66 @@ class GuildListFragment: Fragment() {
             this,
             ViewModelFactory(sharedPref)
         )[GuildListViewModel::class.java]
+        val activity = requireActivity()
+        if(activity is MainMenuContainer){
+            mainMenuContainer = activity
+        }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupGuildList()
+        setupCurrentGuild()
+        setupCreateGuildButton()
+    }
+
+    private fun setupGuildList() {
+        val adapter = GuildListAdapter()
+        viewModel.guildList.observe(requireActivity()){
+            adapter.guildList = it
+        }
+        adapter.onJoinGuild = {
+            if(it.isEnterRequested){
+                viewModel.cancelEnterUseCase(it.guildId)
+            }
+            else{
+                viewModel.requestEnterUseCase(it.guildId)
+            }
+        }
+        binding.rvGuildList.adapter = adapter
+    }
+
+    private fun setupCurrentGuild() {
+        binding.btnGoToGuild.visibility = View.GONE
+        viewModel.guildData.observe(requireActivity()){
+            binding.btnGoToGuild.visibility = View.VISIBLE
+            binding.tvCurrentGuild.text = it.guildName
+            binding.btnGoToGuild.setOnClickListener {
+                mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_FRAGMENT_CODE)
+            }
+        }
+    }
+
+    private fun setupCreateGuildButton() {
+        binding.btnCreateGuild.visibility = View.GONE
+        viewModel.guildList.observe(requireActivity()){
+            binding.btnCreateGuild.visibility = View.VISIBLE
+            binding.btnCreateGuild.setOnClickListener {
+                mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_LIST_FRAGMENT_CODE)
+            }
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+
+        fun newFragment(): GuildListFragment {
+            return GuildListFragment()
+        }
     }
 }

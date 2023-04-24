@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.databinding.FragmentGuildCreationBinding
+import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
+import com.puj.stepsfitnessgame.presentation.adapters.guildlogo.GuildLogoAdapter
 import com.puj.stepsfitnessgame.presentation.viewmodels.GuildCreationViewModel
 
 class GuildCreationFragment: Fragment() {
@@ -21,11 +23,13 @@ class GuildCreationFragment: Fragment() {
 
     private lateinit var viewModel: GuildCreationViewModel
 
+    private lateinit var mainMenuContainer: MainMenuContainer
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentGuildCreationBinding.inflate(inflater, container, false)
         val sharedPref =
             activity?.getSharedPreferences(
@@ -37,11 +41,56 @@ class GuildCreationFragment: Fragment() {
             this,
             ViewModelFactory(sharedPref)
         )[GuildCreationViewModel::class.java]
+
+        val activity = requireActivity()
+        if(activity is MainMenuContainer){
+            mainMenuContainer = activity
+        }
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupLogoList()
+        setupOnCreateButtonListener()
+        setupShouldCloseScreenWindow()
+    }
+
+    private fun setupLogoList() {
+        val adapter = GuildLogoAdapter()
+        viewModel.guildLogoList.observe(requireActivity()){
+            adapter.guildLogoList = it
+        }
+        adapter.onSelectGuildLogo = {
+            viewModel.selectGuildLogo(it)
+        }
+        binding.rvGuildLogo.adapter = adapter
+    }
+
+    private fun setupOnCreateButtonListener() {
+        binding.btnCreateGuild.setOnClickListener {
+            val guildName = binding.etGuildName.text.toString()
+            viewModel.creteGuild(guildName)
+        }
+    }
+
+    private fun setupShouldCloseScreenWindow() {
+        viewModel.shouldCloseScreen.observe(requireActivity()){
+            requireActivity().supportFragmentManager.popBackStack()
+
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+
+        fun newFragment(): GuildCreationFragment {
+            return GuildCreationFragment()
+        }
     }
 }

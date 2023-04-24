@@ -28,7 +28,8 @@ class GuildCreationViewModel(private val sharedPreferences: SharedPreferences): 
     val shouldCloseScreen: LiveData<Unit>
         get() = _shouldCloseScreen
 
-    fun creteGuild(guildName: String, guildLogoId: Int) {
+    fun creteGuild(guildName: String) {
+        val guildLogoId = getSelectedGuildLogoId() ?: return
         val guildCreationInfo = GuildCreationInfo(guildName, guildLogoId)
         if(!isGuildNameValid(guildName)) return
         viewModelScope.launch(Dispatchers.Default) {
@@ -37,15 +38,30 @@ class GuildCreationViewModel(private val sharedPreferences: SharedPreferences): 
         }
     }
 
+    private fun getSelectedGuildLogoId(): Int? {
+        return _guildLogoList.value?.find { it.isSelected }?.guildLogoId
+    }
+
     fun createLogoList(guildLogoResourceIds: List<Int>) {
         val guildLogoList = ArrayList<GuildLogo>()
         for((counter, id) in guildLogoResourceIds.withIndex()){
-            var guildLogo = GuildLogo(
+            val guildLogo = GuildLogo(
                 id,
-                counter
+                counter,
+                false
             )
+            guildLogoList.add(guildLogo)
         }
         _guildLogoList.value = guildLogoList
+    }
+
+    fun selectGuildLogo(guildLogoId: Int) {
+        val newGuildLogoList = mutableListOf<GuildLogo>()
+        _guildLogoList.value?.forEach {
+            newGuildLogoList.add(it.copy(isSelected = false))
+        }
+        newGuildLogoList[guildLogoId] = newGuildLogoList[guildLogoId].copy(isSelected = true)
+        _guildLogoList.value = newGuildLogoList
     }
 
     private fun isGuildNameValid(guildName: String): Boolean {

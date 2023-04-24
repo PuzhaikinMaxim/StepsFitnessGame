@@ -23,7 +23,7 @@ class GuildListAdapter: Adapter<GuildListAdapter.GuildListViewHolder>() {
 
     var context: Context? = null
 
-    var onJoinGuild: ((Long) -> (Unit))? = null
+    var onJoinGuild: ((GuildListItem) -> (Unit))? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GuildListViewHolder {
         val binding = ItemGuildBinding.inflate(
@@ -46,7 +46,10 @@ class GuildListAdapter: Adapter<GuildListAdapter.GuildListViewHolder>() {
             else{
                 btnJoinGuild.text = context?.getString(R.string.join_guild_join)
             }
-            onJoinGuild?.invoke(item.guildId)
+            tvGuildPlayersAmount.text = context?.getString(
+                R.string.guild_players_amount_text, item.amountOfPlayers
+            )
+            onJoinGuild?.invoke(item)
         }
     }
 

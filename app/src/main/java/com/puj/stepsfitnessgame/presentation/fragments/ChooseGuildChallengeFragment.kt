@@ -73,4 +73,11 @@ class ChooseGuildChallengeFragment: Fragment() {
         super.onDestroy()
         _binding = null
     }
+
+    companion object {
+
+        fun newFragment(): ChooseGuildChallengeFragment {
+            return ChooseGuildChallengeFragment()
+        }
+    }
 }

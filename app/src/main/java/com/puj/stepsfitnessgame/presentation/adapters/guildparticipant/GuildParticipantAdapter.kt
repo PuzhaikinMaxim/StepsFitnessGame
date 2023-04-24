@@ -2,6 +2,7 @@ package com.puj.stepsfitnessgame.presentation.adapters.guildparticipant
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,9 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.ItemGuildParticipantBinding
 import com.puj.stepsfitnessgame.domain.models.guild.GuildParticipant
 
-class GuildParticipantAdapter: Adapter<GuildParticipantAdapter.GuildParticipantViewHolder>() {
+class GuildParticipantAdapter(
+    private val isGuildOwner: Boolean
+): Adapter<GuildParticipantAdapter.GuildParticipantViewHolder>() {
 
     var guildParticipantList = listOf<GuildParticipant>()
         set(value) {
@@ -43,6 +46,9 @@ class GuildParticipantAdapter: Adapter<GuildParticipantAdapter.GuildParticipantV
                 item.participantLevel
             )
             tvParticipantName.text = item.participantName
+            if(!isGuildOwner){
+                ivExpelUser.visibility = View.GONE
+            }
             ivExpelUser.setOnClickListener {
                 onExpelParticipant?.invoke(item.participantId)
             }

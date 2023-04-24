@@ -12,13 +12,15 @@ interface GuildRepository {
 
     fun getGuildStatistics(): LiveData<GuildStatistics>
 
-    fun getGuildParticipants(): LiveData<GuildParticipant>
+    fun getGuildParticipants(): LiveData<List<GuildParticipant>>
 
     suspend fun createGuild(guildCreationInfo: GuildCreationInfo)
 
     suspend fun expelGuildParticipant(guildParticipantId: Long)
 
     suspend fun claimReward(): CompletedChallengeReward?
+
+    suspend fun getHasReward(): Boolean
 
     suspend fun getIsOwner(): Boolean
 }

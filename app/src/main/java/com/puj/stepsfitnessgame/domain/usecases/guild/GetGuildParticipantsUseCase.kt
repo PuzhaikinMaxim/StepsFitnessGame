@@ -6,7 +6,7 @@ import com.puj.stepsfitnessgame.domain.repositories.GuildRepository
 
 class GetGuildParticipantsUseCase(private val guildRepository: GuildRepository) {
 
-    operator fun invoke(): LiveData<GuildParticipant> {
+    operator fun invoke(): LiveData<List<GuildParticipant>> {
         return guildRepository.getGuildParticipants()
     }
 }

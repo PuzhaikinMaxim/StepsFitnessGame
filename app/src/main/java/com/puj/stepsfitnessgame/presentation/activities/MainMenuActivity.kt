@@ -328,7 +328,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                 selectTab(2)
             }
             is DuelFieldFragment -> {
-                selectTab(2)
+                selectTab(4)
             }
         }
     }
@@ -382,6 +382,18 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             MainMenuContainer.BACK_TO_CHALLENGE_LIST_CODE -> {
                 removeTwoPreviousFragments()
                 openChallengeListFragment()
+            }
+            MainMenuContainer.GUILD_FRAGMENT_CODE -> {
+                openFragment(GuildFragment.newFragment())
+            }
+            MainMenuContainer.GUILD_ENTER_REQUESTS_FRAGMENT_CODE -> {
+                openFragment(GuildEnterRequestsFragment.newFragment())
+            }
+            MainMenuContainer.GUILD_LIST_FRAGMENT_CODE -> {
+                openFragment(GuildListFragment.newFragment())
+            }
+            MainMenuContainer.CHOOSE_GUILD_CHALLENGE_FRAGMENT_CODE -> {
+                openFragment(ChooseGuildChallengeFragment.newFragment())
             }
         }
     }

@@ -22,7 +22,7 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
     private val guildChallengeRepository:
             GuildChallengeRepository = GuildChallengeRepositoryImpl(sharedPreferences)
 
-    private val getGuildDataUseCase = GetGuildListUseCase(guildRepository)
+    private val getGuildDataUseCase = GetGuildDataUseCase(guildRepository)
 
     private val claimRewardUseCase = ClaimRewardUseCase(guildRepository)
 
@@ -34,6 +34,8 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
 
     private val getIsOwnerUseCase = GetIsOwnerUseCase(guildRepository)
 
+    private val getHasRewardUseCase = GetHasRewardUseCase(guildRepository)
+
     private val getCurrentGuildChallengeUseCase = GetCurrentGuildChallengeUseCase(guildChallengeRepository)
 
     private val _challengeReward = MutableLiveData<CompletedChallengeReward>()
@@ -44,6 +46,10 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
     val shouldOpenRewardModal: LiveData<Boolean>
         get() = _shouldOpenRewardModal
 
+    private val _hasReward = MutableLiveData<Boolean>()
+    val hasReward: LiveData<Boolean>
+        get() = _hasReward
+
     val guildParticipants = getGuildParticipantsUseCase()
 
     val currentChallenge = getCurrentGuildChallengeUseCase()
@@ -52,13 +58,14 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
 
     val guildData = getGuildDataUseCase()
 
-    private val _isOwner = MutableLiveData(false)
+    private val _isOwner = MutableLiveData<Boolean>()
     val isOwner: LiveData<Boolean>
         get() = _isOwner
 
     init {
         viewModelScope.launch(Dispatchers.Default) {
             _isOwner.postValue(getIsOwnerUseCase())
+            _hasReward.postValue(getHasRewardUseCase())
         }
     }
 
