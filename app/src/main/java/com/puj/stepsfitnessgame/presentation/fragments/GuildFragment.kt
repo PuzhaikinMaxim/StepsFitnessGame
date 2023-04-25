@@ -145,6 +145,8 @@ class GuildFragment: Fragment() {
             if(it){
                 binding.btnSettings.visibility = View.VISIBLE
                 binding.btnEnterRequests.visibility = View.VISIBLE
+                binding.ivSettings.visibility = View.VISIBLE
+                binding.ivEnterRequests.visibility = View.VISIBLE
             }
             setupParticipantList(it)
             setupCurrentChallenge(it)
@@ -155,6 +157,7 @@ class GuildFragment: Fragment() {
         viewModel.hasReward.observe(requireActivity()){
             if(it){
                 binding.btnClaimReward.visibility = View.VISIBLE
+                binding.ivClaimReward.visibility = View.VISIBLE
                 binding.btnClaimReward.setOnClickListener {
                     viewModel.claimReward()
                 }

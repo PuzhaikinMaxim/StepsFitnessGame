@@ -49,7 +49,9 @@ class GuildListAdapter: Adapter<GuildListAdapter.GuildListViewHolder>() {
             tvGuildPlayersAmount.text = context?.getString(
                 R.string.guild_players_amount_text, item.amountOfPlayers
             )
-            onJoinGuild?.invoke(item)
+            btnJoinGuild.setOnClickListener {
+                onJoinGuild?.invoke(item)
+            }
         }
     }
 

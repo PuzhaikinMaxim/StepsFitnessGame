@@ -53,9 +53,9 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
     override fun getGuildData(): LiveData<GuildData> {
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
-            val response = guildRemoteDataSource.getGuildList()
+            val response = guildRemoteDataSource.getGuildData()
             if(response is Response.Success){
-                guildList.postValue(response.data)
+                guildData.postValue(response.data)
             }
         }
         return guildData
@@ -64,9 +64,9 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
     override fun getGuildStatistics(): LiveData<GuildStatistics> {
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
-            val response = guildRemoteDataSource.getGuildList()
+            val response = guildRemoteDataSource.getGuildStatistics()
             if(response is Response.Success){
-                guildList.postValue(response.data)
+                guildStatistics.postValue(response.data)
             }
         }
         return guildStatistics
@@ -75,9 +75,9 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
     override fun getGuildParticipants(): LiveData<List<GuildParticipant>> {
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
-            val response = guildRemoteDataSource.getGuildList()
+            val response = guildRemoteDataSource.getGuildParticipants()
             if(response is Response.Success){
-                guildList.postValue(response.data)
+                guildParticipants.postValue(response.data)
             }
         }
         return guildParticipants

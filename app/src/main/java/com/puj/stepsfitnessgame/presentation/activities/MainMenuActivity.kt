@@ -395,6 +395,9 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             MainMenuContainer.CHOOSE_GUILD_CHALLENGE_FRAGMENT_CODE -> {
                 openFragment(ChooseGuildChallengeFragment.newFragment())
             }
+            MainMenuContainer.GUILD_CREATION_FRAGMENT_CODE -> openFragment(
+                GuildCreationFragment.newFragment()
+            )
         }
     }
 }

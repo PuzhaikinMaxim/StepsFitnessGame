@@ -47,6 +47,9 @@ class GuildChallengeRepositoryImpl(sharedPreferences: SharedPreferences): GuildC
             if(response is Response.Success){
                 currentGuildChallenge.postValue(response.data)
             }
+            else{
+                currentGuildChallenge.postValue(null)
+            }
         }
         return currentGuildChallenge
     }

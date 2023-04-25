@@ -29,7 +29,7 @@ class GuildListFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentGuildsListBinding.inflate(inflater, container, false)
         val sharedPref =
             activity?.getSharedPreferences(
@@ -74,6 +74,7 @@ class GuildListFragment: Fragment() {
     private fun setupCurrentGuild() {
         binding.btnGoToGuild.visibility = View.GONE
         viewModel.guildData.observe(requireActivity()){
+            binding.btnCreateGuild.isEnabled = false
             binding.btnGoToGuild.visibility = View.VISIBLE
             binding.tvCurrentGuild.text = it.guildName
             binding.btnGoToGuild.setOnClickListener {
@@ -87,7 +88,7 @@ class GuildListFragment: Fragment() {
         viewModel.guildList.observe(requireActivity()){
             binding.btnCreateGuild.visibility = View.VISIBLE
             binding.btnCreateGuild.setOnClickListener {
-                mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_LIST_FRAGMENT_CODE)
+                mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_CREATION_FRAGMENT_CODE)
             }
         }
     }

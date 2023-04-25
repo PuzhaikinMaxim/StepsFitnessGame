@@ -83,6 +83,8 @@
                         android:translationZ="10dp"
                         android:clickable="false"
                         android:src="@drawable/ic_side_menu_settings"
+                        android:visibility="gone"
+                        tools:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="@+id/btn_settings"
                         app:layout_constraintEnd_toEndOf="@+id/btn_settings"
                         app:layout_constraintTop_toTopOf="@+id/btn_settings" />
@@ -110,6 +112,8 @@
                         android:translationZ="10dp"
                         android:clickable="false"
                         android:src="@drawable/ic_claim_reward_chest"
+                        android:visibility="gone"
+                        tools:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="@+id/btn_claim_reward"
                         app:layout_constraintEnd_toEndOf="@+id/btn_claim_reward"
                         app:layout_constraintTop_toTopOf="@+id/btn_claim_reward" />
@@ -137,6 +141,8 @@
                         android:translationZ="10dp"
                         android:clickable="false"
                         android:src="@drawable/ic_list"
+                        android:visibility="gone"
+                        tools:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="@+id/btn_enter_requests"
                         app:layout_constraintEnd_toEndOf="@+id/btn_enter_requests"
                         app:layout_constraintTop_toTopOf="@+id/btn_enter_requests" />
@@ -272,6 +278,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible"
+        tools:visibility="gone"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
