@@ -149,7 +149,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                             ChallengeListFragment.newFragment()
                         }
                         4 -> {
-                            ChallengeListFragment.newFragment()
+                            GuildListFragment.newFragment()
                         }
                         else -> {
                             throw RuntimeException("Bottom menu item not selected or not exists")
