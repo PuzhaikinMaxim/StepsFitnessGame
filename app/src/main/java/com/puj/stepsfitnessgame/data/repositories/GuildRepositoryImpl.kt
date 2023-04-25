@@ -2,10 +2,19 @@ package com.puj.stepsfitnessgame.data.repositories
 
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeRewardMapper
 import com.puj.stepsfitnessgame.data.network.guild.GuildDataProviderImpl
+import com.puj.stepsfitnessgame.data.network.guild.GuildListItemDto
+import com.puj.stepsfitnessgame.data.network.guild.GuildMapper
+import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
 import com.puj.stepsfitnessgame.domain.models.guild.*
 import com.puj.stepsfitnessgame.domain.repositories.GuildRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository {
 
@@ -14,42 +23,99 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
         TOKEN_DEFAULT
     ) ?: TOKEN_DEFAULT
 
+    private val guildMapper = GuildMapper()
+
+    private val completedChallengeRewardMapper = CompletedChallengeRewardMapper()
+
     private val guildRemoteDataSource = GuildDataProviderImpl(token)
 
+    private val guildList = MutableLiveData<List<GuildListItemDto>>()
+
+    private val guildData = MutableLiveData<GuildData>()
+
+    private val guildStatistics = MutableLiveData<GuildStatistics>()
+
+    private val guildParticipants = MutableLiveData<List<GuildParticipant>>()
+
     override fun getGuildList(): LiveData<List<GuildListItem>> {
-        TODO("Not yet implemented")
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val response = guildRemoteDataSource.getGuildList()
+            if(response is Response.Success){
+                guildList.postValue(response.data)
+            }
+        }
+        return Transformations.map(guildList){
+            guildMapper.mapGuildListDtoToGuildList(it)
+        }
     }
 
     override fun getGuildData(): LiveData<GuildData> {
-        TODO("Not yet implemented")
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val response = guildRemoteDataSource.getGuildList()
+            if(response is Response.Success){
+                guildList.postValue(response.data)
+            }
+        }
+        return guildData
     }
 
     override fun getGuildStatistics(): LiveData<GuildStatistics> {
-        TODO("Not yet implemented")
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val response = guildRemoteDataSource.getGuildList()
+            if(response is Response.Success){
+                guildList.postValue(response.data)
+            }
+        }
+        return guildStatistics
     }
 
     override fun getGuildParticipants(): LiveData<List<GuildParticipant>> {
-        TODO("Not yet implemented")
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val response = guildRemoteDataSource.getGuildList()
+            if(response is Response.Success){
+                guildList.postValue(response.data)
+            }
+        }
+        return guildParticipants
     }
 
     override suspend fun createGuild(guildCreationInfo: GuildCreationInfo) {
-        TODO("Not yet implemented")
+        guildRemoteDataSource.createGuild(guildCreationInfo)
     }
 
     override suspend fun expelGuildParticipant(guildParticipantId: Long) {
-        TODO("Not yet implemented")
+        guildRemoteDataSource.expelGuildParticipant(guildParticipantId)
     }
 
     override suspend fun claimReward(): CompletedChallengeReward {
-        TODO("Not yet implemented")
+        val response = guildRemoteDataSource.claimReward()
+        if(response is Response.Success){
+            val completedChallengeRewardDto = response.data ?: throw RuntimeException("Reward is null")
+            return completedChallengeRewardMapper.mapCompletedChallengeDataDtoToCompletedChallengeData(
+                completedChallengeRewardDto
+            )
+        }
+        throw RuntimeException("Reward is null");
     }
 
     override suspend fun getHasReward(): Boolean {
-        TODO("Not yet implemented")
+        val response = guildRemoteDataSource.getHasReward()
+        if(response is Response.Success){
+            return response.data
+        }
+        return false
     }
 
     override suspend fun getIsOwner(): Boolean {
-        TODO("Not yet implemented")
+        val response = guildRemoteDataSource.getIsOwner()
+        if(response is Response.Success){
+            return response.data
+        }
+        return false
     }
 
     companion object {

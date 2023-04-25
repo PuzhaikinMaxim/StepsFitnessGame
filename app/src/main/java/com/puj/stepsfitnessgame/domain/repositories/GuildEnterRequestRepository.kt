@@ -11,7 +11,7 @@ interface GuildEnterRequestRepository {
 
     fun getGuildEnterRequests(): LiveData<List<GuildEnterRequest>>
 
-    suspend fun refuseEnter(userId: Long)
+    suspend fun refuseEnter(requestId: Long)
 
-    suspend fun acceptEnter(userId: Long)
+    suspend fun acceptEnter(requestId: Long)
 }

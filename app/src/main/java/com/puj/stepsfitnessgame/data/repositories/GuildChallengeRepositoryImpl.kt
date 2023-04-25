@@ -2,10 +2,15 @@ package com.puj.stepsfitnessgame.data.repositories
 
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.puj.stepsfitnessgame.data.network.guildchallenge.GuildChallengeDataProviderImpl
+import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.guild.CurrentGuildChallenge
 import com.puj.stepsfitnessgame.domain.models.guild.GuildChallenge
 import com.puj.stepsfitnessgame.domain.repositories.GuildChallengeRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class GuildChallengeRepositoryImpl(sharedPreferences: SharedPreferences): GuildChallengeRepository {
 
@@ -16,16 +21,34 @@ class GuildChallengeRepositoryImpl(sharedPreferences: SharedPreferences): GuildC
 
     private val guildChallengeDataProvider = GuildChallengeDataProviderImpl(token)
 
+    private val currentGuildChallenge = MutableLiveData<CurrentGuildChallenge?>()
+
+    private val guildChallenges = MutableLiveData<List<GuildChallenge>>()
+
     override suspend fun selectGuildChallenge(guildChallengeId: Long) {
-        TODO("Not yet implemented")
+        guildChallengeDataProvider.selectGuildChallenge(guildChallengeId)
     }
 
     override fun getGuildChallenges(): LiveData<List<GuildChallenge>> {
-        TODO("Not yet implemented")
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val response = guildChallengeDataProvider.getGuildChallenges()
+            if(response is Response.Success){
+                guildChallenges.postValue(response.data)
+            }
+        }
+        return guildChallenges
     }
 
     override fun getCurrentGuildChallenge(): LiveData<CurrentGuildChallenge?> {
-        TODO("Not yet implemented")
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val response = guildChallengeDataProvider.getCurrentGuildChallenge()
+            if(response is Response.Success){
+                currentGuildChallenge.postValue(response.data)
+            }
+        }
+        return currentGuildChallenge
     }
 
     companion object {
