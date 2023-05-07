@@ -196,6 +196,7 @@
             tools:text="Вы победили!" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_claim_reward"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bc_btn_start_duel"
@@ -222,72 +223,4 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="gone"
         />
-
-    <!--
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/tv_slot1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/merriweather_bold"
-            android:text="Слот 1"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/cl_equipped_item_1_container"
-            app:layout_constraintStart_toStartOf="@+id/cl_equipped_item_1_container" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_equipped_item_1_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bc_equipped_item_container"
-            android:padding="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_slot1">
-
-            <include
-                android:id="@+id/equipped_item_1"
-                layout="@layout/item_game_item_sm" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/tv_slot2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/merriweather_bold"
-            android:text="Слот 2"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/cl_equipped_item_2_container"
-            app:layout_constraintStart_toStartOf="@+id/cl_equipped_item_2_container" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_equipped_item_2_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/bc_equipped_item_container"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_slot2">
-
-            <include
-                android:id="@+id/equipped_item_2"
-                layout="@layout/item_game_item_sm" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

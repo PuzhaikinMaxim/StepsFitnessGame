@@ -32,14 +32,14 @@
     <string name="statistics_scale_weeks">Недели</string>
     <string name="statistics_scale_months">Месяцы</string>
     <string name="profile_statistics_header_text">Статистика</string>
-    <string name="profile_amount_of_completed_tasks">Количество выполненных испытаний: <font color="#FF7A00">%d</font></string>
+    <string name="profile_amount_of_completed_challenges">Количество выполненных испытаний: <font color="#FF7A00">%d</font></string>
     <string name="profile_amount_of_achievements">Всего получено достижений: <font color="#FF7A00">%d</font></string>
     <string name="profile_guild_header_text">Гильдия</string>
     <string name="user_profile_guild_name_text">Состоит в гильдии: %s</string>
     <string name="manu_achievements_title">Достижения</string>
     <string name="user_profile_level_text">Уровень</string>
     <string name="profile_duels_won">Выиграно дуэлей: <font color="#FF7A00">%d</font></string>
-    <string name="profile_steps_taken_total">Шагов пройдено всего: <font color="#FF7A00">%d</font></string>
+    <string name="profile_amount_of_steps">Шагов пройдено всего: <font color="#FF7A00">%d</font></string>
     <string name="achievements_list_header_text">Витрина достижений</string>
     <string name="menu_characteristics_title">Характеристики</string>
     <string name="profile_change_button_text">Редактировать профиль</string>

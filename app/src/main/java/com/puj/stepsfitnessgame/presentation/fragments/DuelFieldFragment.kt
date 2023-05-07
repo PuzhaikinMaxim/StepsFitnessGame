@@ -57,6 +57,7 @@ class DuelFieldFragment : Fragment() {
         setupGameField()
         setupRewardModal()
         setupShouldCloseScreen()
+        setupOnGiveUpListener()
     }
 
     private fun setupGameField() {
@@ -100,7 +101,9 @@ class DuelFieldFragment : Fragment() {
             else{
                 tvDuelResult.text = getString(R.string.duel_result_lose_text)
             }
-
+            binding.btnClaimReward.setOnClickListener {
+                viewModel.claimReward()
+            }
             setupDuelResultIcon(duelField)
         }
     }
@@ -159,6 +162,13 @@ class DuelFieldFragment : Fragment() {
             mainMenuContainer.startNewScreen(MainMenuContainer.DUEL_STATISTICS_FRAGMENT_CODE)
         }
     }
+
+    private fun setupOnGiveUpListener() {
+        binding.btnGiveUp.setOnClickListener {
+            viewModel.cancelDuel()
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

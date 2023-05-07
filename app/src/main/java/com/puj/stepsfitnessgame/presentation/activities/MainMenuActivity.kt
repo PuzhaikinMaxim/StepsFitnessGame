@@ -373,6 +373,9 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             MainMenuContainer.LEVEL_SELECTION_FRAGMENT_CODE -> openFragment(
                 SelectLevelFragment.newFragment()
             )
+            MainMenuContainer.DUEL_STATISTICS_FRAGMENT_CODE -> openFragment(
+                DuelStatisticsFragment.newFragment()
+            )
             MainMenuContainer.DUEL_SEARCH_FRAGMENT_CODE -> openFragment(
                 DuelSearchFragment.newFragment()
             )

@@ -43,7 +43,7 @@ class DuelFieldViewModel(sharedPreferences: SharedPreferences) : ViewModel() {
         }
     }
 
-    fun claimRewardUseCase() {
+    fun claimReward() {
         viewModelScope.launch(Dispatchers.Default) {
             val result = claimRewardUseCase.invoke()
             if(result != null){

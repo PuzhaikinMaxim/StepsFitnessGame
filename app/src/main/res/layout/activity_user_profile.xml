@@ -59,6 +59,7 @@
                 tools:text="Уровень" />
 
             <TextView
+                android:id="@+id/tv_level"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/level_background"
@@ -110,6 +111,7 @@
                 android:text="@string/profile_statistics_header_text"
                 />
             <TextView
+                android:id="@+id/tv_amount_of_completed_challenges"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/merriweather_bold"
@@ -118,9 +120,10 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                android:text="@string/profile_amount_of_completed_tasks"
+                android:text="@string/profile_amount_of_completed_challenges"
                 />
             <TextView
+                android:id="@+id/tv_amount_of_achievements"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -132,6 +135,7 @@
                 android:text="@string/profile_amount_of_achievements"
                 />
             <TextView
+                android:id="@+id/tv_duels_won"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -143,6 +147,7 @@
                 android:text="@string/profile_duels_won"
                 />
             <TextView
+                android:id="@+id/tv_amount_of_steps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -151,7 +156,7 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                android:text="@string/profile_steps_taken_total"
+                android:text="@string/profile_amount_of_steps"
                 />
         </LinearLayout>
 
@@ -235,6 +240,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_guild_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -254,6 +260,7 @@
                 android:text="@string/profile_guild_header_text"
                 />
             <TextView
+                android:id="@+id/tv_guild_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -264,6 +271,7 @@
                 tools:text="Ubuntu"
                 />
             <ImageView
+                android:id="@+id/iv_guild_logo"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"

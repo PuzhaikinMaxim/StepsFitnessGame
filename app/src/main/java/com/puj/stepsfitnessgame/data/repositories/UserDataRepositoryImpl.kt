@@ -7,6 +7,7 @@ import com.puj.stepsfitnessgame.data.network.userdata.FakeUserDataRemoteDataSour
 import com.puj.stepsfitnessgame.data.network.userdata.UserDataRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.userdata.UserData
+import com.puj.stepsfitnessgame.domain.models.userdata.UserProfileData
 import com.puj.stepsfitnessgame.domain.repositories.UserDataRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +34,10 @@ class UserDataRepositoryImpl(
             }
         }
         return userData
+    }
+
+    override fun getUserProfileData(): LiveData<UserProfileData> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun getUsername(): String {

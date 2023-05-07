@@ -4,6 +4,7 @@ import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.userdata.UserData
+import com.puj.stepsfitnessgame.domain.models.userdata.UserProfileData
 
 class UserDataRemoteDataSourceImpl(
     private val token: String
@@ -26,5 +27,9 @@ class UserDataRemoteDataSourceImpl(
         catch (ex: Exception) {
             return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
         }
+    }
+
+    override suspend fun getUserProfileData(): Response<UserProfileData> {
+        TODO("Not yet implemented")
     }
 }
