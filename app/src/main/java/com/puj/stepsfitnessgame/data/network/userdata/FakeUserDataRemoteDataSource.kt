@@ -2,6 +2,7 @@ package com.puj.stepsfitnessgame.data.network.userdata
 
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.userdata.UserData
+import com.puj.stepsfitnessgame.domain.models.userdata.UserProfileData
 
 class FakeUserDataRemoteDataSource(
     private val token: String
@@ -14,5 +15,9 @@ class FakeUserDataRemoteDataSource(
             100,
             200
         ))
+    }
+
+    override suspend fun getUserProfileData(): Response<UserProfileData> {
+        TODO("Not yet implemented")
     }
 }

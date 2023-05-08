@@ -2,6 +2,7 @@ package com.puj.stepsfitnessgame.presentation.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -20,11 +21,12 @@ class UserProfileActivity: AppCompatActivity() {
 
     private lateinit var viewModel: UserProfileViewModel
 
-    private val guildLogoIds = resources.obtainTypedArray(R.array.guild_logos)
+    private lateinit var guildLogoIds: TypedArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        guildLogoIds = resources.obtainTypedArray(R.array.guild_logos)
         val sharedPref = getSharedPreferences(
             PreferencesValues.PREFERENCES_KEY,
             Context.MODE_PRIVATE
@@ -56,10 +58,10 @@ class UserProfileActivity: AppCompatActivity() {
                     R.string.profile_duels_won,
                     it.duelsWon
                 )
-                if(it.guildData != null){
-                    tvGuildName.text = it.guildData.guildName
+                if(it.guildName != null && it.guildLogoId != null){
+                    tvGuildName.text = it.guildName
                     ivGuildLogo.setImageResource(guildLogoIds.getResourceId(
-                        it.guildData.guildLogoId, 0
+                        it.guildLogoId, 0
                     ))
                 }
                 else{

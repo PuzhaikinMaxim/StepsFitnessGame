@@ -8,6 +8,7 @@ data class UserProfileData(
     val amountOfAchievements: Int,
     val amountOfSteps: Int,
     val duelsWon: Int,
-    val guildData: GuildData?
+    val guildName: String?,
+    val guildLogoId: Int?
 ) {
 }

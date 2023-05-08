@@ -23,6 +23,8 @@ class UserDataRepositoryImpl(
 
     private val userData = MutableLiveData<UserData>()
 
+    private val userProfileData = MutableLiveData<UserProfileData>()
+
     override fun getUserData(): LiveData<UserData> {
         val coroutineScope = CoroutineScope(Dispatchers.Default)
 
@@ -37,7 +39,16 @@ class UserDataRepositoryImpl(
     }
 
     override fun getUserProfileData(): LiveData<UserProfileData> {
-        TODO("Not yet implemented")
+        val coroutineScope = CoroutineScope(Dispatchers.IO)
+
+        coroutineScope.launch {
+            val response = userLevelRemoteDataSource.getUserProfileData()
+
+            if(response is Response.Success){
+                userProfileData.postValue(response.data)
+            }
+        }
+        return userProfileData
     }
 
     override suspend fun getUsername(): String {

@@ -30,6 +30,19 @@ class UserDataRemoteDataSourceImpl(
     }
 
     override suspend fun getUserProfileData(): Response<UserProfileData> {
-        TODO("Not yet implemented")
+        try {
+            val response = userDataApiService.getUserProfileData(token)
+            if(response.isSuccessful){
+                val userData = response.body()
+                if(userData != null){
+                    return Response.Success(userData)
+                }
+                return Response.Error(404)
+            }
+            return Response.Error(404)
+        }
+        catch (ex: Exception) {
+            return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
+        }
     }
 }
