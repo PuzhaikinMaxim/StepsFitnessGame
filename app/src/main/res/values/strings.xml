@@ -88,6 +88,8 @@
     <string name="join_guild_join">Присоединится</string>
     <string name="join_guild_cancel">Отменить</string>
     <string name="participant_level">Уровень: %d</string>
-    <string name="tv_participant_rating_text">Место: %d</string>
+    <string name="tv_player_place_text">Место: %d</string>
     <string name="tv_list_update_countdown_text">Обновление списка через: %s</string>
+    <string name="player_rating_stat_steps_text">Количество шагов: %d</string>
+    <string name="player_rating_stat_duels_text">Количество выигранных дуэлей: %d</string>
 </resources>

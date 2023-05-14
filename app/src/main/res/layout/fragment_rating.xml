@@ -7,14 +7,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="10dp">
+        android:paddingHorizontal="10dp"
+        tools:background="@color/teal_700">
 
         <TextView
             android:id="@+id/tv_list_update_countdown_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv_list_update_countdown_text"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:fontFamily="@font/merriweather_regular"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
@@ -53,6 +54,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tl_rating_type"
-            tools:listitem="@layout/item_player_rating" />
+            tools:listitem="@layout/item_rating" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
