@@ -146,7 +146,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                             DuelStatisticsFragment.newFragment()
                         }
                         3 -> {
-                            ChallengeListFragment.newFragment()
+                            RatingFragment.newFragment()
                         }
                         4 -> {
                             GuildListFragment.newFragment()
@@ -324,8 +324,8 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             is DuelSearchFragment -> {
                 selectTab(2)
             }
-            is DuelStatisticsFragment -> {
-                selectTab(2)
+            is RatingFragment -> {
+                selectTab(3)
             }
             is DuelFieldFragment -> {
                 selectTab(4)

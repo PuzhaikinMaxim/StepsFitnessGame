@@ -88,4 +88,6 @@
     <string name="join_guild_join">Присоединится</string>
     <string name="join_guild_cancel">Отменить</string>
     <string name="participant_level">Уровень: %d</string>
+    <string name="tv_participant_rating_text">Место: %d</string>
+    <string name="tv_list_update_countdown_text">Обновление списка через: %s</string>
 </resources>

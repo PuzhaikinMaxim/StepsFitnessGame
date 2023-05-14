@@ -49,4 +49,9 @@
         <item name="android:textSize">10sp</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
+    <style name="RatingTab" parent="TextAppearance.AppCompat.Small">
+        <item name="android:fontFamily">@font/merriweather_regular</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 </resources>
