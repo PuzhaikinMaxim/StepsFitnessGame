@@ -33,4 +33,8 @@ class FakeDailyChallengeRemoteDataSource(
     override suspend fun claimDailyChallengesReward(): CompletedDailyChallengeRewardDto {
         TODO("Not yet implemented")
     }
+
+    override suspend fun generateDailyChallengeList() {
+        TODO("Not yet implemented")
+    }
 }

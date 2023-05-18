@@ -2,6 +2,7 @@ package com.puj.stepsfitnessgame.data.network.dailychallenge
 
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.domain.models.dailychallenge.DailyChallenge
+import java.time.OffsetDateTime
 
 class DailyChallengeRemoteDataSourceImpl(
     private val token: String
@@ -10,15 +11,28 @@ class DailyChallengeRemoteDataSourceImpl(
     private val dailyChallengeApiService = ServiceFactory.create(DailyChallengeApiService::class.java)
 
     override suspend fun getDailyChallengeList(): List<DailyChallengeDto> {
-        try {
+        return try {
             val response = dailyChallengeApiService.getDailyTasksList(token)
             if(response.isSuccessful){
-                return response.body() ?: ArrayList()
+                response.body() ?: ArrayList()
+            } else{
+                generateDailyChallengeList()
+                dailyChallengeApiService.getDailyTasksList(token).body() ?: ArrayList()
             }
-            return ArrayList()
+        } catch (ex: Exception) {
+            ArrayList()
         }
-        catch (ex: Exception) {
-            return ArrayList()
+    }
+
+    override suspend fun generateDailyChallengeList() {
+        try {
+            dailyChallengeApiService.generateDailyChallengeList(
+                token,
+                OffsetDateTime.now().toString()
+            )
+        }
+        catch (ex: Exception){
+
         }
     }
 

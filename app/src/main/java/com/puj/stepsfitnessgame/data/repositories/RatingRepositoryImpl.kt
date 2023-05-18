@@ -27,22 +27,22 @@ class RatingRepositoryImpl(private val sharedPreferences: SharedPreferences): Ra
     }
 
     override suspend fun setStepAmountRating() {
-        val response = ratingDataProvider.getDuelsAmountRating()
+        val response = ratingDataProvider.getStepAmountRating()
         if(response is Response.Success){
-            ratingList.value = ratingMapper.mapRatingDtoListToRatingList(
+            ratingList.postValue(ratingMapper.mapRatingDtoListToRatingList(
                 response.data,
                 Rating.RatingType.TYPE_STEPS
-            )
+            ))
         }
     }
 
     override suspend fun setDuelsAmountRating() {
         val response = ratingDataProvider.getDuelsAmountRating()
         if(response is Response.Success){
-            ratingList.value = ratingMapper.mapRatingDtoListToRatingList(
+            ratingList.postValue(ratingMapper.mapRatingDtoListToRatingList(
                 response.data,
                 Rating.RatingType.TYPE_DUELS
-            )
+            ))
         }
     }
 

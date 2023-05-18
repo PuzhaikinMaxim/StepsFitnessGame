@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.presentation.fragments
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,8 @@ class GuildFragment: Fragment() {
 
     private lateinit var viewModel: GuildViewModel
 
+    private lateinit var guildLogoIds: TypedArray
+
     private lateinit var mainMenuContainer: MainMenuContainer
 
     override fun onCreateView(
@@ -46,6 +49,7 @@ class GuildFragment: Fragment() {
                 Context.MODE_PRIVATE
             ) ?: throw RuntimeException()
 
+        guildLogoIds = resources.obtainTypedArray(R.array.guild_logos)
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(sharedPref)
@@ -210,7 +214,9 @@ class GuildFragment: Fragment() {
             with(binding){
                 tvGuildName.text = it.guildName
                 tvGuildRank.text = getString(R.string.guild_rank, it.guildRank)
-                ivGuildLogo.setImageResource(it.guildLogoId)
+                ivGuildLogo.setImageResource(guildLogoIds.getResourceId(
+                    it.guildLogoId,0
+                ))
             }
         }
     }

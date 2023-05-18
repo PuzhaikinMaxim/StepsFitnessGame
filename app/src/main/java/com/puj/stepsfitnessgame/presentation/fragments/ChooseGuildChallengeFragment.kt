@@ -55,12 +55,16 @@ class ChooseGuildChallengeFragment: Fragment() {
         adapter.onStartButtonClick = {
             viewModel.selectGuildChallenge(it)
         }
+        binding.rvChooseChallenge.adapter = adapter
     }
 
     private fun setupShouldCloseScreen() {
+        /*
         viewModel.shouldCloseScreen.observe(requireActivity()){
             requireActivity().supportFragmentManager.popBackStack()
         }
+
+         */
     }
 
     private fun setupOnBackPressed() {
