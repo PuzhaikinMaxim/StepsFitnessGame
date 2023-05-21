@@ -12,7 +12,9 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.ItemGuildLogoBinding
 import com.puj.stepsfitnessgame.domain.models.guild.GuildLogo
 
-class GuildLogoAdapter: Adapter<GuildLogoAdapter.GuildLogoViewHolder>() {
+class GuildLogoAdapter(
+    private var context: Context?
+    ): Adapter<GuildLogoAdapter.GuildLogoViewHolder>() {
 
     var guildLogoList = listOf<GuildLogo>()
         set(value) {
@@ -21,8 +23,6 @@ class GuildLogoAdapter: Adapter<GuildLogoAdapter.GuildLogoViewHolder>() {
             diffResult.dispatchUpdatesTo(this)
             field = value
         }
-
-    private var context: Context? = null
 
     var onSelectGuildLogo: ((Int) -> (Unit))? = null
 

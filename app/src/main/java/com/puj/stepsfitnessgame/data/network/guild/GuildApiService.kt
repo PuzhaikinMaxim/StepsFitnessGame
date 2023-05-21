@@ -46,6 +46,6 @@ interface GuildApiService {
     @GET("guild_challenges_reward/get_has_reward")
     suspend fun getHasReward(@Header("token") token: String): Response<Boolean>
 
-    @GET("guild_challenges_reward/edit_guild_data")
+    @PUT("guild/edit_guild_data")
     suspend fun editGuildData(@Header("token") token: String, @Body guildEditionInfo: GuildEditionInfo)
 }

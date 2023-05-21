@@ -22,10 +22,6 @@ class GuildCreationViewModel(
 
     private val createGuildUseCase = CreateGuildUseCase(guildRepository)
 
-    private val _shouldCloseScreen = MutableLiveData<Unit>()
-    val shouldCloseScreen: LiveData<Unit>
-        get() = _shouldCloseScreen
-
     fun creteGuild(guildName: String) {
         val guildLogoId = getSelectedGuildLogoId() ?: return
         val guildEditionInfo = GuildEditionInfo(guildName, guildLogoId)
@@ -34,11 +30,6 @@ class GuildCreationViewModel(
             createGuildUseCase.invoke(guildEditionInfo)
             _shouldCloseScreen.postValue(Unit)
         }
-    }
-
-    private fun isGuildNameValid(guildName: String): Boolean {
-        val validator = InputValidator(guildName)
-        return validator.minSymbols(6).maxSymbols(30).validate().isValid
     }
 
 }

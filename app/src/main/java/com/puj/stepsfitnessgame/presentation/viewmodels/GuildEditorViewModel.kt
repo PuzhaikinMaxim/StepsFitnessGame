@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.presentation.viewmodels
 
 import android.content.SharedPreferences
+import android.content.res.TypedArray
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,13 +17,29 @@ open class GuildEditorViewModel(sharedPreferences: SharedPreferences): ViewModel
     val guildLogoList: LiveData<List<GuildLogo>>
         get() = _guildLogoList
 
+    protected val _shouldCloseScreen = MutableLiveData<Unit>()
+    val shouldCloseScreen: LiveData<Unit>
+        get() = _shouldCloseScreen
+
 
     protected fun getSelectedGuildLogoId(): Int? {
         return _guildLogoList.value?.find { it.isSelected }?.guildLogoId
     }
 
-    fun createLogoList(guildLogoResourceIds: List<Int>) {
+    fun createLogoList(guildLogoResourceIds: TypedArray) {
         val guildLogoList = ArrayList<GuildLogo>()
+        var index = 0
+        while (guildLogoResourceIds.getResourceId(index, -1) != -1){
+            val guildLogoId = guildLogoResourceIds.getResourceId(index, -1)
+            val guildLogo = GuildLogo(
+                guildLogoId,
+                index,
+                false
+            )
+            guildLogoList.add(guildLogo)
+            index++
+        }
+        /*
         for((counter, id) in guildLogoResourceIds.withIndex()){
             val guildLogo = GuildLogo(
                 id,
@@ -31,6 +48,8 @@ open class GuildEditorViewModel(sharedPreferences: SharedPreferences): ViewModel
             )
             guildLogoList.add(guildLogo)
         }
+
+         */
         _guildLogoList.value = guildLogoList
     }
 
@@ -43,7 +62,7 @@ open class GuildEditorViewModel(sharedPreferences: SharedPreferences): ViewModel
         _guildLogoList.value = newGuildLogoList
     }
 
-    private fun isGuildNameValid(guildName: String): Boolean {
+    protected fun isGuildNameValid(guildName: String): Boolean {
         val validator = InputValidator(guildName)
         return validator.minSymbols(6).maxSymbols(30).validate().isValid
     }

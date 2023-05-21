@@ -92,4 +92,11 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
     fun closeRewardModal() {
         _shouldOpenRewardModal.value = false
     }
+
+    fun resetData() {
+        getGuildDataUseCase()
+        getCurrentGuildChallengeUseCase()
+        getGuildParticipantsUseCase()
+        getGuildStatisticsUseCase()
+    }
 }

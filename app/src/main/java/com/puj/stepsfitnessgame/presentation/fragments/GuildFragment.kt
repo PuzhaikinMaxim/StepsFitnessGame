@@ -152,9 +152,16 @@ class GuildFragment: Fragment() {
                 binding.ivSettings.visibility = View.VISIBLE
                 binding.ivEnterRequests.visibility = View.VISIBLE
                 setupOnEnterRequestsClickListener()
+                setupOnSettingsClickListener()
             }
             setupParticipantList(it)
             setupCurrentChallenge(it)
+        }
+    }
+
+    private fun setupOnSettingsClickListener() {
+        binding.btnSettings.setOnClickListener {
+            mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_EDITION_FRAGMENT_CODE)
         }
     }
 
@@ -245,6 +252,11 @@ class GuildFragment: Fragment() {
                 )
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.resetData()
     }
 
     override fun onDestroy() {

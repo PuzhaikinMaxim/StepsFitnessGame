@@ -92,4 +92,6 @@
     <string name="tv_list_update_countdown_text">Обновление списка через: %s</string>
     <string name="player_rating_stat_steps_text">Количество шагов: %d</string>
     <string name="player_rating_stat_duels_text">Количество выигранных дуэлей: %d</string>
+    <string name="guild_editor_header_create">Создать гильдию</string>
+    <string name="guild_editor_header_edit">Изменить гильдию</string>
 </resources>

@@ -19,5 +19,6 @@ interface MainMenuContainer {
         const val GUILD_LIST_FRAGMENT_CODE = 110
         const val CHOOSE_GUILD_CHALLENGE_FRAGMENT_CODE = 111
         const val GUILD_CREATION_FRAGMENT_CODE = 112
+        const val GUILD_EDITION_FRAGMENT_CODE = 113
     }
 }

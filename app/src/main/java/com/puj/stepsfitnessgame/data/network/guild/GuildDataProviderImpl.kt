@@ -133,8 +133,8 @@ class GuildDataProviderImpl(private val token: String): GuildDataProvider {
         try {
             service.editGuildData(token,guildEditionInfo)
         }
-        catch (_: Exception){
-
+        catch (ex: Exception){
+            ex.printStackTrace()
         }
     }
 

@@ -23,10 +23,6 @@ class GuildEditionViewModel(
     val guildEditionInfo: LiveData<GuildEditionInfo>
         get() = _guildEditionInfo
 
-    private val _shouldCloseScreen = MutableLiveData<Unit>()
-    val shouldCloseScreen: LiveData<Unit>
-        get() = _shouldCloseScreen
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val guildEditionInfo = getGuildEditionInfoUseCase.invoke()
@@ -43,10 +39,5 @@ class GuildEditionViewModel(
             editGuildUseCase.invoke(guildEditionInfo)
             _shouldCloseScreen.postValue(Unit)
         }
-    }
-
-    private fun isGuildNameValid(guildName: String): Boolean {
-        val validator = InputValidator(guildName)
-        return validator.minSymbols(6).maxSymbols(30).validate().isValid
     }
 }

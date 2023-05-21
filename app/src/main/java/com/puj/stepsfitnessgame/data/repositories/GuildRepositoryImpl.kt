@@ -123,7 +123,11 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
     }
 
     override suspend fun getGuildEditionInfo(): GuildEditionInfo? {
-        TODO("Not yet implemented")
+        val response = guildRemoteDataSource.getGuildEditionInfo()
+        if(response is Response.Success){
+            return response.data
+        }
+        return null
     }
 
     companion object {
