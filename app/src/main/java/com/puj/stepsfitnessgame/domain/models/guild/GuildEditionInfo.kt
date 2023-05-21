@@ -1,6 +1,6 @@
 package com.puj.stepsfitnessgame.domain.models.guild
 
-data class GuildCreationInfo(
+data class GuildEditionInfo(
     val guildName: String,
     val guildLogoId: Int
 ) {

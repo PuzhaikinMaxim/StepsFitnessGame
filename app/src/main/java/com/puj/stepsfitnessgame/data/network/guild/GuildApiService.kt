@@ -14,7 +14,7 @@ import retrofit2.http.Path
 interface GuildApiService {
 
     @POST("guild/create_guild")
-    suspend fun createGuild(@Header("token") token: String, @Body guildCreationInfo: GuildCreationInfo)
+    suspend fun createGuild(@Header("token") token: String, @Body guildEditionInfo: GuildEditionInfo)
 
     @PUT("guild/expel_player/{expelled_player_id}")
     suspend fun expelPlayer(
@@ -37,9 +37,15 @@ interface GuildApiService {
     @GET("guild/get_is_owner")
     suspend fun getIsOwner(@Header("token") token: String): Response<Boolean>
 
+    @GET("guild/get_guild_edition_info")
+    suspend fun getGuildEditionInfo(@Header("token") token: String): Response<GuildEditionInfo>
+
     @DELETE("guild_challenges_reward/claim_reward")
     suspend fun claimReward(@Header("token") token: String): Response<CompletedChallengeRewardDto>
 
     @GET("guild_challenges_reward/get_has_reward")
     suspend fun getHasReward(@Header("token") token: String): Response<Boolean>
+
+    @GET("guild_challenges_reward/edit_guild_data")
+    suspend fun editGuildData(@Header("token") token: String, @Body guildEditionInfo: GuildEditionInfo)
 }

@@ -14,7 +14,7 @@ interface GuildRepository {
 
     fun getGuildParticipants(): LiveData<List<GuildParticipant>>
 
-    suspend fun createGuild(guildCreationInfo: GuildCreationInfo)
+    suspend fun createGuild(guildEditionInfo: GuildEditionInfo)
 
     suspend fun expelGuildParticipant(guildParticipantId: Long)
 
@@ -23,4 +23,8 @@ interface GuildRepository {
     suspend fun getHasReward(): Boolean
 
     suspend fun getIsOwner(): Boolean
+
+    suspend fun editGuild(guildEditionInfo: GuildEditionInfo)
+
+    suspend fun getGuildEditionInfo(): GuildEditionInfo?
 }

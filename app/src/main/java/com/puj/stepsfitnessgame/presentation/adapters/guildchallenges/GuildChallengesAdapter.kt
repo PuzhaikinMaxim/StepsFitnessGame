@@ -37,7 +37,9 @@ class GuildChallengesAdapter(): Adapter<GuildChallengesAdapter.GuildChallengesVi
         with(holder.binding){
             tvGoal.text = context?.getString(R.string.goal, item.goal)
             tvTimeTillEnd.text = context?.getString(R.string.time_till_end, item.hoursToFinishString)
-            onStartButtonClick?.invoke(item.challengeId)
+            btnStartChallenge.setOnClickListener {
+                onStartButtonClick?.invoke(item.challengeId)
+            }
         }
     }
 

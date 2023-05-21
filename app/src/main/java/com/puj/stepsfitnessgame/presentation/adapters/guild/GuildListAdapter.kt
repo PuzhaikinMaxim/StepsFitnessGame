@@ -39,7 +39,7 @@ class GuildListAdapter: Adapter<GuildListAdapter.GuildListViewHolder>() {
         val item = guildList[position]
         with(holder.binding){
             tvGuildName.text = item.guildName
-            tvGuildRank.text = context?.getString(R.string.guild_rank)
+            tvGuildRank.text = context?.getString(R.string.guild_rank, item.rank)
             if(item.isEnterRequested){
                 btnJoinGuild.text = context?.getString(R.string.join_guild_cancel)
             }

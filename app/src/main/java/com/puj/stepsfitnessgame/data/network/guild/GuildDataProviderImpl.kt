@@ -4,7 +4,7 @@ import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeRewardDto
 import com.puj.stepsfitnessgame.domain.models.Response
-import com.puj.stepsfitnessgame.domain.models.guild.GuildCreationInfo
+import com.puj.stepsfitnessgame.domain.models.guild.GuildEditionInfo
 import com.puj.stepsfitnessgame.domain.models.guild.GuildData
 import com.puj.stepsfitnessgame.domain.models.guild.GuildParticipant
 import com.puj.stepsfitnessgame.domain.models.guild.GuildStatistics
@@ -69,9 +69,9 @@ class GuildDataProviderImpl(private val token: String): GuildDataProvider {
         }
     }
 
-    override suspend fun createGuild(guildCreationInfo: GuildCreationInfo) {
+    override suspend fun createGuild(guildEditionInfo: GuildEditionInfo) {
         try {
-            service.createGuild(token, guildCreationInfo)
+            service.createGuild(token, guildEditionInfo)
         }
         catch (ex: Exception){
             ex.printStackTrace()
@@ -118,6 +118,29 @@ class GuildDataProviderImpl(private val token: String): GuildDataProvider {
     override suspend fun getIsOwner(): Response<Boolean> {
         try {
             val response = service.getIsOwner(token)
+            if(response.isSuccessful && response.body() != null){
+                return Response.Success(response.body()!!)
+            }
+            return Response.Error(AppErrorCodes.DEFAULT_ERROR_CODE)
+        }
+        catch (ex: Exception){
+            ex.printStackTrace()
+            return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
+        }
+    }
+
+    override suspend fun editGuild(guildEditionInfo: GuildEditionInfo) {
+        try {
+            service.editGuildData(token,guildEditionInfo)
+        }
+        catch (_: Exception){
+
+        }
+    }
+
+    override suspend fun getGuildEditionInfo(): Response<GuildEditionInfo> {
+        try {
+            val response = service.getGuildEditionInfo(token)
             if(response.isSuccessful && response.body() != null){
                 return Response.Success(response.body()!!)
             }

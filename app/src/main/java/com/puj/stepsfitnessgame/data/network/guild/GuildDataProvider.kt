@@ -2,7 +2,6 @@ package com.puj.stepsfitnessgame.data.network.guild
 
 import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeRewardDto
 import com.puj.stepsfitnessgame.domain.models.Response
-import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
 import com.puj.stepsfitnessgame.domain.models.guild.*
 
 interface GuildDataProvider {
@@ -15,7 +14,7 @@ interface GuildDataProvider {
 
     suspend fun getGuildParticipants(): Response<List<GuildParticipant>>
 
-    suspend fun createGuild(guildCreationInfo: GuildCreationInfo)
+    suspend fun createGuild(guildEditionInfo: GuildEditionInfo)
 
     suspend fun expelGuildParticipant(guildParticipantId: Long)
 
@@ -24,4 +23,8 @@ interface GuildDataProvider {
     suspend fun getHasReward(): Response<Boolean>
 
     suspend fun getIsOwner(): Response<Boolean>
+
+    suspend fun editGuild(guildEditionInfo: GuildEditionInfo)
+
+    suspend fun getGuildEditionInfo(): Response<GuildEditionInfo>
 }

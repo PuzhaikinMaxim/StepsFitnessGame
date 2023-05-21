@@ -59,12 +59,9 @@ class ChooseGuildChallengeFragment: Fragment() {
     }
 
     private fun setupShouldCloseScreen() {
-        /*
         viewModel.shouldCloseScreen.observe(requireActivity()){
             requireActivity().supportFragmentManager.popBackStack()
         }
-
-         */
     }
 
     private fun setupOnBackPressed() {

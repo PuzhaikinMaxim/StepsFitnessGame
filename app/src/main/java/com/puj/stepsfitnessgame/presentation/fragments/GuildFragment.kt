@@ -151,9 +151,16 @@ class GuildFragment: Fragment() {
                 binding.btnEnterRequests.visibility = View.VISIBLE
                 binding.ivSettings.visibility = View.VISIBLE
                 binding.ivEnterRequests.visibility = View.VISIBLE
+                setupOnEnterRequestsClickListener()
             }
             setupParticipantList(it)
             setupCurrentChallenge(it)
+        }
+    }
+
+    private fun setupOnEnterRequestsClickListener() {
+        binding.btnEnterRequests.setOnClickListener {
+            mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_ENTER_REQUESTS_FRAGMENT_CODE)
         }
     }
 

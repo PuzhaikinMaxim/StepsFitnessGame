@@ -83,8 +83,8 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
         return guildParticipants
     }
 
-    override suspend fun createGuild(guildCreationInfo: GuildCreationInfo) {
-        guildRemoteDataSource.createGuild(guildCreationInfo)
+    override suspend fun createGuild(guildEditionInfo: GuildEditionInfo) {
+        guildRemoteDataSource.createGuild(guildEditionInfo)
     }
 
     override suspend fun expelGuildParticipant(guildParticipantId: Long) {
@@ -116,6 +116,14 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
             return response.data
         }
         return false
+    }
+
+    override suspend fun editGuild(guildEditionInfo: GuildEditionInfo) {
+        guildRemoteDataSource.editGuild(guildEditionInfo)
+    }
+
+    override suspend fun getGuildEditionInfo(): GuildEditionInfo? {
+        TODO("Not yet implemented")
     }
 
     companion object {

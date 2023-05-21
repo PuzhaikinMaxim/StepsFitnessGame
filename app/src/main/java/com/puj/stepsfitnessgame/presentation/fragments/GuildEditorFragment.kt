@@ -6,19 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.puj.stepsfitnessgame.databinding.FragmentGuildCreationBinding
+import com.puj.stepsfitnessgame.databinding.FragmentGuildEditorBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.adapters.guildlogo.GuildLogoAdapter
 import com.puj.stepsfitnessgame.presentation.viewmodels.GuildCreationViewModel
 
-class GuildCreationFragment: Fragment() {
+class GuildEditorFragment: Fragment() {
 
-    private var _binding: FragmentGuildCreationBinding? = null
-    private val binding: FragmentGuildCreationBinding
+    private var _binding: FragmentGuildEditorBinding? = null
+    private val binding: FragmentGuildEditorBinding
         get() = _binding ?: throw RuntimeException("Fragment guild creation binding is null")
 
     private lateinit var viewModel: GuildCreationViewModel
@@ -30,7 +29,7 @@ class GuildCreationFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGuildCreationBinding.inflate(inflater, container, false)
+        _binding = FragmentGuildEditorBinding.inflate(inflater, container, false)
         val sharedPref =
             activity?.getSharedPreferences(
                 PreferencesValues.PREFERENCES_KEY,
@@ -89,8 +88,8 @@ class GuildCreationFragment: Fragment() {
 
     companion object {
 
-        fun newFragment(): GuildCreationFragment {
-            return GuildCreationFragment()
+        fun newFragment(): GuildEditorFragment {
+            return GuildEditorFragment()
         }
     }
 }

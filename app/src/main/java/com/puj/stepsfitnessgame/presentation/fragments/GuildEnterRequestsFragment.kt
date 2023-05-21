@@ -50,6 +50,9 @@ class GuildEnterRequestsFragment: Fragment() {
         val adapter = GuildEnterRequestAdapter()
         viewModel.guildEnterRequestList.observe(requireActivity()){
             adapter.guildEnterRequestList = it
+            if(it.isEmpty()){
+                binding.tvNoGuildEnterRequests.visibility = View.VISIBLE
+            }
         }
         adapter.onAcceptEnter = {
             viewModel.acceptEnter(it)
@@ -57,7 +60,7 @@ class GuildEnterRequestsFragment: Fragment() {
         adapter.onRefuseEnter = {
             viewModel.refuseEnter(it)
         }
-        binding.rvChooseChallenge.adapter = adapter
+        binding.rvGuildEnterRequest.adapter = adapter
     }
 
     private fun setupOnBackPressed() {

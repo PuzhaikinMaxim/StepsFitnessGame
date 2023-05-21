@@ -29,16 +29,12 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.workers.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
-import com.puj.stepsfitnessgame.data.network.duel.DuelStompClient
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.*
 import com.puj.stepsfitnessgame.presentation.viewmodels.MainMenuViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
@@ -402,7 +398,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
                 openFragment(ChooseGuildChallengeFragment.newFragment())
             }
             MainMenuContainer.GUILD_CREATION_FRAGMENT_CODE -> openFragment(
-                GuildCreationFragment.newFragment()
+                GuildEditorFragment.newFragment()
             )
         }
     }
