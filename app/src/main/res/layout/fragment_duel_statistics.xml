@@ -1,81 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#AF6F44"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#AF6F44"
+    android:paddingTop="50dp"
+    android:paddingBottom="70dp">
 
-        <TextView
-            android:id="@+id/tv_user_rank"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textSize="24sp"
-            android:fontFamily="@font/merriweather_bold"
-            android:textColor="@color/black"
-            android:text="@string/user_rank_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Ранг: Бронза" />
+    <TextView
+        android:id="@+id/tv_user_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="24sp"
+        android:fontFamily="@font/merriweather_bold"
+        android:textColor="@color/black"
+        android:text="@string/user_rank_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Ранг: Бронза" />
 
-        <ImageView
-            android:id="@+id/iv_rank_image"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_marginTop="10dp"
-            tools:src="@drawable/ic_silver"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_rank" />
+    <ImageView
+        android:id="@+id/iv_rank_image"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="10dp"
+        tools:src="@drawable/ic_silver"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_rank" />
 
-        <TextView
-            android:id="@+id/tv_amount_of_duels_won"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/amount_of_duels_won"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/merriweather_regular"
-            android:textSize="18sp"
-            android:textAlignment="center"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_rank_image" />
+    <TextView
+        android:id="@+id/tv_amount_of_duels_won"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/amount_of_duels_won"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/merriweather_regular"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_rank_image" />
 
-        <TextView
-            android:id="@+id/tv_amount_of_duels_lost"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/amount_of_duels_lost_text"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/merriweather_regular"
-            android:textSize="18sp"
-            android:textAlignment="center"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_amount_of_duels_won" />
+    <TextView
+        android:id="@+id/tv_amount_of_duels_lost"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/amount_of_duels_lost_text"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/merriweather_regular"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_amount_of_duels_won" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_start_duel"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:maxWidth="300dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="40dp"
-            android:text="Начать дуэль"
-            android:textAllCaps="false"
-            android:fontFamily="@font/merriweather_regular"
-            android:background="@drawable/bc_btn_start_duel"
-            app:layout_constraintTop_toBottomOf="@id/tv_amount_of_duels_lost"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_start_duel"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:maxWidth="300dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
+        android:text="Начать дуэль"
+        android:textAllCaps="false"
+        android:fontFamily="@font/merriweather_regular"
+        android:background="@drawable/bc_btn_start_duel"
+        app:layout_constraintTop_toBottomOf="@id/tv_amount_of_duels_lost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

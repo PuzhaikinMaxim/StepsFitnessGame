@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentGuildsListBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
@@ -76,7 +77,7 @@ class GuildListFragment: Fragment() {
         viewModel.guildData.observe(requireActivity()){
             binding.btnCreateGuild.isEnabled = false
             binding.btnGoToGuild.visibility = View.VISIBLE
-            binding.tvCurrentGuild.text = it.guildName
+            binding.tvCurrentGuild.text = getString(R.string.current_guild_text, it.guildName)
             binding.btnGoToGuild.setOnClickListener {
                 mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_FRAGMENT_CODE)
             }

@@ -10,8 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:background="@drawable/main_menu_container_background">
-        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="50dp"
+            android:paddingBottom="70dp"
             >
 
             <LinearLayout

@@ -94,4 +94,5 @@
     <string name="player_rating_stat_duels_text">Количество выигранных дуэлей: %d</string>
     <string name="guild_editor_header_create">Создать гильдию</string>
     <string name="guild_editor_header_edit">Изменить гильдию</string>
+    <string name="current_guild_text">Текущая гильдия: %s</string>
 </resources>

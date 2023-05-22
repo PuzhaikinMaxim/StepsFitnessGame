@@ -10,17 +10,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include
-            android:id="@+id/tb_header"
-            layout="@layout/toolbar_header"
-            />
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fc_main_fragments_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/tb_header"
-            app:layout_constraintBottom_toTopOf="@id/tb_footer"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"
             />
+        <include
+            android:id="@+id/tb_header"
+            layout="@layout/toolbar_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <include
             android:id="@+id/tb_footer"
             layout="@layout/toolbar_footer"
@@ -39,7 +41,7 @@
         app:headerLayout="@layout/navigation_view_header_main"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        tools:layout_gravity=""
+        tools:layout_gravity="end"
         >
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
