@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.data.network.dailychallenge
 
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
+import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.domain.models.dailychallenge.DailyChallenge
 import java.time.OffsetDateTime
 
@@ -37,7 +38,12 @@ class DailyChallengeRemoteDataSourceImpl(
     }
 
     override suspend fun updateDailyChallengesProgress(stepCount: Int) {
-        TODO("Not yet implemented")
+        try {
+            dailyChallengeApiService.updateProgress(token, StepCount(stepCount))
+        }
+        catch (ex: Exception){
+
+        }
     }
 
     override suspend fun claimDailyChallengesReward(): CompletedDailyChallengeRewardDto? {

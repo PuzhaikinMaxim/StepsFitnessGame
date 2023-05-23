@@ -2,6 +2,7 @@ package com.puj.stepsfitnessgame.data.network.guildchallenge
 
 import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
+import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.guild.CurrentGuildChallenge
 import com.puj.stepsfitnessgame.domain.models.guild.GuildChallenge
@@ -44,6 +45,15 @@ class GuildChallengeDataProviderImpl(private val token: String): GuildChallengeD
         catch (ex: Exception){
             ex.printStackTrace()
             return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
+        }
+    }
+
+    override suspend fun updateProgress(stepCount: Int) {
+        try {
+            service.updateProgress(token, StepCount(stepCount))
+        }
+        catch (ex: Exception){
+
         }
     }
 }

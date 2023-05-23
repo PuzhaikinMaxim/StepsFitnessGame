@@ -37,7 +37,12 @@ class DuelRemoteDataSourceImpl(
     }
 
     override suspend fun updateStepAmount(amountOfSteps: Int): Boolean {
-        TODO("Not yet implemented")
+        return try {
+            duelApiService.updateProgress(token, amountOfSteps.toString())
+            true
+        } catch (ex: Exception){
+            false
+        }
     }
 
     override suspend fun getDuelField(): Response<DuelDto> {

@@ -1,5 +1,6 @@
 package com.puj.stepsfitnessgame.data.network.challenge
 
+import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 import retrofit2.Response
 import retrofit2.http.*
@@ -9,7 +10,7 @@ interface ChallengeApiService {
     @PUT("active_challenges/update_user_progress")
     suspend fun updateChallengeProgress(
         @Header("token") enterToken: String,
-        @Body stepCount: Int
+        @Body stepCount: StepCount
     ): Response<String>
 
     @GET("challenges/{level}")

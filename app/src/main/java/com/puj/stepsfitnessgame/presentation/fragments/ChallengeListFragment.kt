@@ -1,12 +1,16 @@
 package com.puj.stepsfitnessgame.presentation.fragments
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentChallengeListBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
@@ -26,6 +30,21 @@ class ChallengeListFragment: Fragment() {
     private lateinit var viewModel: ChallengeListViewModel
 
     private lateinit var mainMenuContainer: MainMenuContainer
+
+    private val localBroadcastManager by lazy {
+        LocalBroadcastManager.getInstance(requireActivity())
+    }
+
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            val action = p1?.action
+            when(action) {
+                "step_count_updated" -> {
+                    viewModel.updateData()
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +75,14 @@ class ChallengeListFragment: Fragment() {
         setupChooseLevelButton()
         setShowStatisticsButton()
         setupItemsModal()
+        setupIntentFilter()
+    }
+
+    private fun setupIntentFilter() {
+        val intentFilter = IntentFilter().apply {
+            addAction("step_count_updated")
+        }
+        localBroadcastManager.registerReceiver(receiver, intentFilter)
     }
 
     private fun setupTodayStatistics() {

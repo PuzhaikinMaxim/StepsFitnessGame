@@ -11,4 +11,6 @@ interface GuildChallengeDataProvider {
     suspend fun getGuildChallenges(): Response<List<GuildChallenge>>
 
     suspend fun getCurrentGuildChallenge(): Response<CurrentGuildChallenge?>
+
+    suspend fun updateProgress(stepCount: Int)
 }

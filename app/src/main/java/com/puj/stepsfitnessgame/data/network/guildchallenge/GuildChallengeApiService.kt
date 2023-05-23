@@ -1,5 +1,6 @@
 package com.puj.stepsfitnessgame.data.network.guildchallenge
 
+import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.domain.models.guild.CurrentGuildChallenge
 import com.puj.stepsfitnessgame.domain.models.guild.GuildChallenge
 import retrofit2.Response
@@ -19,6 +20,9 @@ interface GuildChallengeApiService {
     suspend fun getCurrentGuildChallenge(
         @Header("token") token: String
     ): Response<CurrentGuildChallenge>
+
+    @PUT("guild_challenge/update_progress")
+    suspend fun updateProgress(@Header("token") token: String, @Body stepCount: StepCount)
 
     //@GET("guild_challenge/get_guild_challenges")
 }

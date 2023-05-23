@@ -6,4 +6,6 @@ import com.puj.stepsfitnessgame.domain.models.duel.DuelStatistics
 interface PlayerStatisticsDataProvider {
 
     suspend fun getDuelStatistics(): Response<DuelStatistics>
+
+    suspend fun updateProgress(stepCount: Int)
 }

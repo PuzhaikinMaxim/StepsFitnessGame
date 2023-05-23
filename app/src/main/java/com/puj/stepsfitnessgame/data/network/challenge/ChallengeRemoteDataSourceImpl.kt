@@ -3,6 +3,7 @@ package com.puj.stepsfitnessgame.data.network.challenge
 import com.puj.stepsfitnessgame.data.network.AppErrorCodes.Companion.DEFAULT_ERROR_CODE
 import com.puj.stepsfitnessgame.data.network.AppErrorCodes.Companion.SERVER_NOT_RESPONDING_CODE
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
+import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.data.network.duel.FinishedDuelRewardDto
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
@@ -16,7 +17,7 @@ class ChallengeRemoteDataSourceImpl(
     private val activeChallengeMapper = ActiveChallengeMapper()
 
     override suspend fun updateChallengeProgress(stepCount: Int) {
-        challengeApiService.updateChallengeProgress(enterToken, stepCount)
+        challengeApiService.updateChallengeProgress(enterToken, StepCount(stepCount))
     }
 
     override suspend fun getChallengesListByLevel(challengeLevel: Int): Response<List<Challenge>> {

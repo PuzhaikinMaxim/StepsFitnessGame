@@ -9,5 +9,6 @@ interface DailyChallengeRemoteDataSource {
     suspend fun updateDailyChallengesProgress(stepCount: Int)
 
     suspend fun claimDailyChallengesReward(): CompletedDailyChallengeRewardDto?
+
     suspend fun generateDailyChallengeList()
 }

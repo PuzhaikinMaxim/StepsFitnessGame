@@ -95,4 +95,9 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
     fun closeRewardModal() {
         _shouldShowRewardModal.value = false
     }
+
+    fun updateData() {
+        getChallengeListUseCase()
+        getTodayStatisticsUseCase()
+    }
 }
