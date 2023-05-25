@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentDuelStatisticsBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
@@ -21,8 +22,6 @@ class DuelStatisticsFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentDuelStatisticsBinding is null")
 
     private lateinit var viewModel: DuelStatisticsViewModel
-
-    private lateinit var mainMenuContainer: MainMenuContainer
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,11 +38,6 @@ class DuelStatisticsFragment : Fragment() {
         viewModel = ViewModelProvider(
             this, ViewModelFactory(sharedPref)
         )[DuelStatisticsViewModel::class.java]
-
-        val activity = requireActivity()
-        if(activity is MainMenuContainer){
-            mainMenuContainer = activity
-        }
 
         return binding.root
     }
@@ -99,7 +93,9 @@ class DuelStatisticsFragment : Fragment() {
 
     private fun setupStartDuelButton() {
         binding.btnStartDuel.setOnClickListener {
-            mainMenuContainer.startNewScreen(MainMenuContainer.DUEL_SEARCH_FRAGMENT_CODE)
+            findNavController().navigate(
+                R.id.action_duelStatisticsFragment_to_duelSearchFragment
+            )
         }
     }
 

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.navigation.fragment.findNavController
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentChallengeListBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
@@ -28,8 +29,6 @@ class ChallengeListFragment: Fragment() {
         get() = _binding ?: throw RuntimeException("${_binding.toString()} is not set")
 
     private lateinit var viewModel: ChallengeListViewModel
-
-    private lateinit var mainMenuContainer: MainMenuContainer
 
     private val localBroadcastManager by lazy {
         LocalBroadcastManager.getInstance(requireActivity())
@@ -61,10 +60,6 @@ class ChallengeListFragment: Fragment() {
             this, ViewModelFactory(sharedPref)
         )[ChallengeListViewModel::class.java]
 
-        val activity = requireActivity()
-        if(activity is MainMenuContainer){
-            mainMenuContainer = activity
-        }
         setupTodayStatistics()
         return binding.root
     }
@@ -141,13 +136,17 @@ class ChallengeListFragment: Fragment() {
 
     private fun setShowStatisticsButton() {
         binding.btnShowStatisticsButton.setOnClickListener {
-            mainMenuContainer.startNewScreen(MainMenuContainer.STATISTICS_FRAGMENT_CODE)
+            findNavController().navigate(
+                R.id.action_challengeListFragment_to_statisticsFragment
+            )
         }
     }
 
     private fun setupChooseLevelButton() {
         binding.btnChooseLevel.setOnClickListener {
-            mainMenuContainer.startNewScreen(MainMenuContainer.LEVEL_SELECTION_FRAGMENT_CODE)
+            findNavController().navigate(
+                R.id.action_challengeListFragment_to_selectLevelFragment
+            )
         }
     }
 

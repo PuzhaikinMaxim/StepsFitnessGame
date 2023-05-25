@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_duel"
+    app:startDestination="@id/duelStatisticsFragment">
+
+    <fragment
+        android:id="@+id/duelStatisticsFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.DuelStatisticsFragment"
+        android:label="DuelStatisticsFragment" >
+        <action
+            android:id="@+id/action_duelStatisticsFragment_to_duelSearchFragment"
+            app:destination="@id/duelSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/duelSearchFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.DuelSearchFragment"
+        android:label="DuelSearchFragment" >
+        <action
+            android:id="@+id/action_duelSearchFragment_to_duelFieldFragment"
+            app:destination="@id/duelFieldFragment"
+            app:popUpTo="@id/duelStatisticsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/duelFieldFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.DuelFieldFragment"
+        android:label="DuelFieldFragment" >
+        <action
+            android:id="@+id/action_duelFieldFragment_to_duelStatisticsFragment"
+            app:destination="@id/duelStatisticsFragment"
+            app:popUpTo="@id/duelStatisticsFragment" />
+    </fragment>
+</navigation>

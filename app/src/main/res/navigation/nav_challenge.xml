@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_challenge"
+    app:startDestination="@id/challengeListFragment">
+
+    <fragment
+        android:id="@+id/challengeListFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.ChallengeListFragment"
+        android:label="ChallengeListFragment" >
+        <action
+            android:id="@+id/action_challengeListFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_challengeListFragment_to_selectLevelFragment"
+            app:destination="@id/selectLevelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.StatisticsFragment"
+        android:label="StatisticsFragment" >
+        <action
+            android:id="@+id/action_statisticsFragment_to_challengeListFragment"
+            app:destination="@id/challengeListFragment"
+            app:popUpTo="@id/challengeListFragment" />
+        <action
+            android:id="@+id/action_statisticsFragment_to_goalSelectionFragment"
+            app:destination="@id/goalSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectLevelFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.SelectLevelFragment"
+        android:label="SelectLevelFragment" >
+        <action
+            android:id="@+id/action_selectLevelFragment_to_challengeListFragment"
+            app:destination="@id/challengeListFragment"
+            app:popUpTo="@id/challengeListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalSelectionFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.GoalSelectionFragment"
+        android:label="GoalSelectionFragment" >
+        <action
+            android:id="@+id/action_goalSelectionFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment"
+            app:popUpTo="@id/statisticsFragment" />
+    </fragment>
+</navigation>

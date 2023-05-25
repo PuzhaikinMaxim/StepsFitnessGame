@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentDuelFieldBinding
 import com.puj.stepsfitnessgame.domain.models.duel.DuelField
@@ -26,8 +27,6 @@ class DuelFieldFragment : Fragment() {
 
     private lateinit var viewModel: DuelFieldViewModel
 
-    private lateinit var mainMenuContainer: MainMenuContainer
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,11 +42,6 @@ class DuelFieldFragment : Fragment() {
         viewModel = ViewModelProvider(
             this, ViewModelFactory(sharedPref)
         )[DuelFieldViewModel::class.java]
-
-        val activity = requireActivity()
-        if(activity is MainMenuContainer){
-            mainMenuContainer = activity
-        }
 
         return binding.root
     }
@@ -159,7 +153,9 @@ class DuelFieldFragment : Fragment() {
 
     private fun setupShouldCloseScreen() {
         viewModel.shouldCloseScreen.observe(requireActivity()){
-            mainMenuContainer.startNewScreen(MainMenuContainer.DUEL_STATISTICS_FRAGMENT_CODE)
+            findNavController().navigate(
+                R.id.action_duelFieldFragment_to_duelStatisticsFragment
+            )
         }
     }
 

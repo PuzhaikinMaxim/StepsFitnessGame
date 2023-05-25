@@ -17,6 +17,8 @@ import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -36,7 +38,7 @@ import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.*
 import com.puj.stepsfitnessgame.presentation.viewmodels.MainMenuViewModel
 
-class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
+class MainMenuActivity: AppCompatActivity() {
 
     private val binding by lazy {
         ActivityMenuContainerBinding.inflate(layoutInflater)
@@ -44,7 +46,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
     private lateinit var viewModel: MainMenuViewModel
 
-    private var isOnBackPressed = false
+    //private var isOnBackPressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +61,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             ViewModelFactory(sharedPref)
         )[MainMenuViewModel::class.java]
 
-        openChallengeListFragment()
+        //openChallengeListFragment()
 
         setupGoogleSignIn()
         setupRequestPermission()
@@ -127,6 +129,13 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
     }
 
     private fun setupBottomNavigationMenu() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fc_main_fragments_container) as NavHostFragment
+
+        binding.tbFooter.bnvFooter.setupWithNavController(navHostFragment.navController)
+    }
+
+    /*
+    private fun setupBottomNavigationMenu() {
         val onMenuItemSelectedListener = object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if(isOnBackPressed) {
@@ -170,6 +179,8 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
 
         binding.tbFooter.root.addOnTabSelectedListener(onMenuItemSelectedListener)
     }
+
+     */
 
     private fun setupGoogleSignIn() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -293,16 +304,6 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             .commit()
     }
 
-    override fun onBackPressed() {
-        if(supportFragmentManager.backStackEntryCount > 1) {
-            super.onBackPressed()
-            setSelectedItem()
-        }
-        else {
-            finishAffinity()
-        }
-    }
-
     private fun removeTwoPreviousFragments() {
         supportFragmentManager.popBackStack(
             supportFragmentManager.getBackStackEntryAt(
@@ -312,6 +313,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         )
     }
 
+    /*
     private fun setSelectedItem() {
         when(supportFragmentManager.fragments.lastOrNull()){
             is ChallengeListFragment -> {
@@ -332,6 +334,9 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         }
     }
 
+     */
+
+    /*
     private fun selectTab(tabIndex: Int){
         if(binding.tbFooter.root.selectedTabPosition == tabIndex){
             return
@@ -340,6 +345,8 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         isOnBackPressed = true
         binding.tbFooter.root.selectTab(tab)
     }
+
+     */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == RC_GOOGLE_SIGN_IN){
@@ -360,6 +367,7 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
         }
     }
 
+    /*
     override fun startNewScreen(screenId: Int) {
         when(screenId){
             MainMenuContainer.CHALLENGE_LIST_FRAGMENT_CODE -> openChallengeListFragment()
@@ -405,4 +413,6 @@ class MainMenuActivity: AppCompatActivity(), MainMenuContainer {
             )
         }
     }
+
+     */
 }

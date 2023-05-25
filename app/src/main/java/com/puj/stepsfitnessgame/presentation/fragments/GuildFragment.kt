@@ -12,6 +12,7 @@ import androidx.core.view.children
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentGuildBinding
 import com.puj.stepsfitnessgame.databinding.LayoutChallengeBinding
@@ -35,8 +36,6 @@ class GuildFragment: Fragment() {
 
     private lateinit var guildLogoIds: TypedArray
 
-    private lateinit var mainMenuContainer: MainMenuContainer
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,10 +53,7 @@ class GuildFragment: Fragment() {
             this,
             ViewModelFactory(sharedPref)
         )[GuildViewModel::class.java]
-        val activity = requireActivity()
-        if(activity is MainMenuContainer){
-            mainMenuContainer = activity
-        }
+
         return binding.root
     }
 
@@ -129,7 +125,9 @@ class GuildFragment: Fragment() {
         binding.clChallengeContainer.removeAllViews()
         binding.clChallengeContainer.addView(startChallengeBinding.root)
         startChallengeBinding.btnStartChallenge.setOnClickListener {
-            mainMenuContainer.startNewScreen(MainMenuContainer.CHOOSE_GUILD_CHALLENGE_FRAGMENT_CODE)
+            findNavController().navigate(
+                R.id.action_guildFragment_to_chooseGuildChallengeFragment
+            )
         }
         setupChallengeLayoutParams(startChallengeBinding.root)
     }
@@ -161,13 +159,19 @@ class GuildFragment: Fragment() {
 
     private fun setupOnSettingsClickListener() {
         binding.btnSettings.setOnClickListener {
-            mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_EDITION_FRAGMENT_CODE)
+            findNavController().navigate(
+                GuildFragmentDirections.actionGuildFragmentToGuildEditorFragment(
+                    GuildEditorFragment.TYPE_EDIT
+                )
+            )
         }
     }
 
     private fun setupOnEnterRequestsClickListener() {
         binding.btnEnterRequests.setOnClickListener {
-            mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_ENTER_REQUESTS_FRAGMENT_CODE)
+            findNavController().navigate(
+                R.id.action_guildFragment_to_guildEnterRequestsFragment
+            )
         }
     }
 

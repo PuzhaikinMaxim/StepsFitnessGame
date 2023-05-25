@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentGuildsListBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
@@ -24,8 +25,6 @@ class GuildListFragment: Fragment() {
 
     private lateinit var viewModel: GuildListViewModel
 
-    private lateinit var mainMenuContainer: MainMenuContainer
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,10 +41,6 @@ class GuildListFragment: Fragment() {
             this,
             ViewModelFactory(sharedPref)
         )[GuildListViewModel::class.java]
-        val activity = requireActivity()
-        if(activity is MainMenuContainer){
-            mainMenuContainer = activity
-        }
         return binding.root
     }
 
@@ -79,7 +74,9 @@ class GuildListFragment: Fragment() {
             binding.btnGoToGuild.visibility = View.VISIBLE
             binding.tvCurrentGuild.text = getString(R.string.current_guild_text, it.guildName)
             binding.btnGoToGuild.setOnClickListener {
-                mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_FRAGMENT_CODE)
+                findNavController().navigate(
+                    R.id.action_guildListFragment_to_guildFragment
+                )
             }
         }
     }
@@ -89,7 +86,12 @@ class GuildListFragment: Fragment() {
         viewModel.guildList.observe(requireActivity()){
             binding.btnCreateGuild.visibility = View.VISIBLE
             binding.btnCreateGuild.setOnClickListener {
-                mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_CREATION_FRAGMENT_CODE)
+                findNavController().navigate(
+                    GuildListFragmentDirections.actionGuildListFragmentToGuildEditorFragment(
+                        GuildEditorFragment.TYPE_CREATE
+                    )
+                )
+                //mainMenuContainer.startNewScreen(MainMenuContainer.GUILD_CREATION_FRAGMENT_CODE)
             }
         }
     }

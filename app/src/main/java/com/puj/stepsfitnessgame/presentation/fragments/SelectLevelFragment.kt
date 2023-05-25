@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentSelectLevelBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
@@ -66,7 +68,9 @@ class SelectLevelFragment: Fragment() {
 
         adapter.onLevelClickListener = {
             viewModel.selectLevel(it.dungeonLevel)
-            mainMenuContainer.startNewScreen(MainMenuContainer.BACK_TO_CHALLENGE_LIST_CODE)
+            findNavController().navigate(
+                R.id.action_selectLevelFragment_to_challengeListFragment
+            )
         }
 
         binding.rvLevelList.adapter = adapter

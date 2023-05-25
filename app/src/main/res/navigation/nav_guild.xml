@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_guild"
+    app:startDestination="@id/guildListFragment">
+
+    <fragment
+        android:id="@+id/guildListFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.GuildListFragment"
+        android:label="GuildListFragment" >
+        <action
+            android:id="@+id/action_guildListFragment_to_guildFragment"
+            app:destination="@id/guildFragment" />
+        <action
+            android:id="@+id/action_guildListFragment_to_guildEditorFragment"
+            app:destination="@id/guildEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/guildFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.GuildFragment"
+        android:label="GuildFragment" >
+        <action
+            android:id="@+id/action_guildFragment_to_chooseGuildChallengeFragment"
+            app:destination="@id/chooseGuildChallengeFragment" />
+        <action
+            android:id="@+id/action_guildFragment_to_guildEnterRequestsFragment"
+            app:destination="@id/guildEnterRequestsFragment" />
+        <action
+            android:id="@+id/action_guildFragment_to_guildEditorFragment"
+            app:destination="@id/guildEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/guildEditorFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.GuildEditorFragment"
+        android:label="GuildEditorFragment" >
+        <argument
+            android:name="editorType"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_guildEditorFragment_to_guildFragment"
+            app:destination="@id/guildFragment"
+            app:popUpTo="@id/guildEditorFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseGuildChallengeFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.ChooseGuildChallengeFragment"
+        android:label="ChooseGuildChallengeFragment" >
+        <action
+            android:id="@+id/action_chooseGuildChallengeFragment_to_guildFragment"
+            app:destination="@id/guildFragment"
+            app:popUpTo="@id/guildFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/guildEnterRequestsFragment"
+        android:name="com.puj.stepsfitnessgame.presentation.fragments.GuildEnterRequestsFragment"
+        android:label="GuildEnterRequestsFragment" >
+        <action
+            android:id="@+id/action_guildEnterRequestsFragment_to_guildFragment"
+            app:destination="@id/guildFragment"
+            app:popUpTo="@id/guildFragment" />
+    </fragment>
+</navigation>

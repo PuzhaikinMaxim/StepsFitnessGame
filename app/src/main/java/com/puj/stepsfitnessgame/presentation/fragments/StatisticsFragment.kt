@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -20,7 +21,6 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentStatisticsBinding
 import com.puj.stepsfitnessgame.databinding.ItemDayOfWeekBinding
 import com.puj.stepsfitnessgame.domain.models.stepstatistics.StepData
-import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.viewmodels.StatisticsViewModel
 
@@ -32,8 +32,6 @@ class StatisticsFragment: Fragment() {
 
     private lateinit var viewModel: StatisticsViewModel
 
-    private lateinit var mainMenuContainer: MainMenuContainer
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,11 +41,6 @@ class StatisticsFragment: Fragment() {
             this,
             ViewModelFactory(null)
         )[StatisticsViewModel::class.java]
-
-        val activity = requireActivity()
-        if(activity is MainMenuContainer){
-            mainMenuContainer = activity
-        }
 
         _binding = FragmentStatisticsBinding.inflate(inflater, container, false)
         return binding.root
@@ -158,7 +151,9 @@ class StatisticsFragment: Fragment() {
 
     private fun setupChangeGoalButton() {
         binding.tvChangeGoal.setOnClickListener {
-            mainMenuContainer.startNewScreen(MainMenuContainer.GOAL_SELECTION_FRAGMENT_CODE)
+            findNavController().navigate(
+                R.id.action_statisticsFragment_to_goalSelectionFragment
+            )
         }
     }
 

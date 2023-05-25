@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_challenge"
+        android:title="@string/toolbar_tab_challenges_text"
+        android:icon="@drawable/ic_menu_dungeon"
+        />
+    <item
+        android:id="@+id/nav_daily_challenge"
+        android:title="@string/toolbar_tab_daily_text"
+        android:icon="@drawable/ic_menu_daily_challenges"
+        />
+    <item
+        android:id="@+id/nav_duel"
+        android:title="@string/toolbar_tab_duels"
+        android:icon="@drawable/ic_menu_duels"
+        />
+    <item
+        android:id="@+id/nav_rating"
+        android:title="@string/toolbar_tab_rating_text"
+        android:icon="@drawable/ic_menu_rating"
+        />
+    <item
+        android:id="@+id/nav_guild"
+        android:title="@string/toolbar_tab_guilds_text"
+        android:icon="@drawable/ic_menu_guilds"
+        />
+</menu>

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentGoalSelectionBinding
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
@@ -20,8 +22,6 @@ class GoalSelectionFragment: Fragment() {
 
     private lateinit var viewModel: GoalSelectionViewModel
 
-    private lateinit var mainMenuContainer: MainMenuContainer
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,11 +34,6 @@ class GoalSelectionFragment: Fragment() {
             ViewModelFactory(null)
         )[GoalSelectionViewModel::class.java]
 
-        val activity = requireActivity()
-        if(activity is MainMenuContainer){
-            mainMenuContainer = activity
-        }
-
         return binding.root
     }
 
@@ -50,7 +45,9 @@ class GoalSelectionFragment: Fragment() {
 
     private fun setupCloseScreen() {
         viewModel.shouldCloseScreen.observe(requireActivity()){
-            requireActivity().onBackPressed()
+            findNavController().navigate(
+                R.id.action_goalSelectionFragment_to_statisticsFragment
+            )
         }
     }
 

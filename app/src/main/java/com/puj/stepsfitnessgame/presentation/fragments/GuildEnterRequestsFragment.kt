@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentGuildEnterRequestsBinding
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
@@ -65,7 +67,9 @@ class GuildEnterRequestsFragment: Fragment() {
 
     private fun setupOnBackPressed() {
         binding.ivClose.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            findNavController().navigate(
+                R.id.action_guildEnterRequestsFragment_to_guildFragment
+            )
         }
     }
 

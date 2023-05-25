@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentGuildEditorBinding
 import com.puj.stepsfitnessgame.domain.usecases.guild.EditGuildUseCase
@@ -26,11 +28,11 @@ class GuildEditorFragment: Fragment() {
     private val binding: FragmentGuildEditorBinding
         get() = _binding ?: throw RuntimeException("Fragment guild creation binding is null")
 
+    private val args by navArgs<GuildEditorFragmentArgs>()
+
     private lateinit var viewModel: GuildEditorViewModel
 
     private lateinit var guildLogoIds: TypedArray
-
-    private lateinit var mainMenuContainer: MainMenuContainer
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,11 +41,6 @@ class GuildEditorFragment: Fragment() {
     ): View {
         _binding = FragmentGuildEditorBinding.inflate(inflater, container, false)
         guildLogoIds = resources.obtainTypedArray(R.array.guild_logos)
-
-        val activity = requireActivity()
-        if(activity is MainMenuContainer){
-            mainMenuContainer = activity
-        }
 
         return binding.root
     }
@@ -54,9 +51,7 @@ class GuildEditorFragment: Fragment() {
     }
 
     private fun parseParams() {
-        val bundle = arguments ?: throw RuntimeException("Arguments is null")
-        val type = bundle.getString(EDITOR_TYPE_KEY) ?: throw RuntimeException("Type not set")
-        when(type){
+        when(args.editorType){
             TYPE_EDIT -> {
                 viewModel = ViewModelProvider(
                     this,
@@ -118,7 +113,9 @@ class GuildEditorFragment: Fragment() {
 
     private fun setupShouldCloseScreenWindow() {
         viewModel.shouldCloseScreen.observe(requireActivity()){
-            requireActivity().supportFragmentManager.popBackStack()
+            findNavController().navigate(
+                R.id.action_guildEditorFragment_to_guildFragment
+            )
         }
     }
 
@@ -131,9 +128,9 @@ class GuildEditorFragment: Fragment() {
 
         private const val EDITOR_TYPE_KEY = "editor_type_key"
 
-        private const val TYPE_CREATE = "type_create"
+        const val TYPE_CREATE = "type_create"
 
-        private const val TYPE_EDIT = "type_edit"
+        const val TYPE_EDIT = "type_edit"
 
         fun newFragment(): GuildEditorFragment {
             return GuildEditorFragment()
