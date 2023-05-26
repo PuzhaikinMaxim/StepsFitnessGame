@@ -4,7 +4,7 @@ import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeRewardD
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.guild.*
 
-interface GuildDataProvider {
+interface GuildDataSource {
 
     suspend fun getGuildList(): Response<List<GuildListItemDto>>
 

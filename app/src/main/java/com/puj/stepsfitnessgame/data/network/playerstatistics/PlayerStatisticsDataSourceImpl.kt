@@ -6,7 +6,7 @@ import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.duel.DuelStatistics
 
-class PlayerStatisticsDataProviderImpl(private val token: String) : PlayerStatisticsDataProvider {
+class PlayerStatisticsDataSourceImpl(private val token: String) : PlayerStatisticsDataSource {
 
     private val playerStatisticsApiService = ServiceFactory.create(
         PlayerStatisticsApiService::class.java

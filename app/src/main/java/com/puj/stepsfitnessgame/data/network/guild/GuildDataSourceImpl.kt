@@ -9,7 +9,7 @@ import com.puj.stepsfitnessgame.domain.models.guild.GuildData
 import com.puj.stepsfitnessgame.domain.models.guild.GuildParticipant
 import com.puj.stepsfitnessgame.domain.models.guild.GuildStatistics
 
-class GuildDataProviderImpl(private val token: String): GuildDataProvider {
+class GuildDataSourceImpl(private val token: String): GuildDataSource {
 
     private val service = ServiceFactory.create(GuildApiService::class.java)
 

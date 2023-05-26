@@ -3,7 +3,7 @@ package com.puj.stepsfitnessgame.data.repositories
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.puj.stepsfitnessgame.data.network.rating.RatingDataProviderImpl
+import com.puj.stepsfitnessgame.data.network.rating.RatingDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.rating.RatingMapper
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.rating.Rating
@@ -20,14 +20,14 @@ class RatingRepositoryImpl(private val sharedPreferences: SharedPreferences): Ra
         TOKEN_DEFAULT
     ) ?: TOKEN_DEFAULT
 
-    private val ratingDataProvider = RatingDataProviderImpl(token)
+    private val ratingDataSource = RatingDataSourceImpl(token)
 
     override fun getRatingListUseCase(): LiveData<List<Rating>> {
         return ratingList
     }
 
     override suspend fun setStepAmountRating() {
-        val response = ratingDataProvider.getStepAmountRating()
+        val response = ratingDataSource.getStepAmountRating()
         if(response is Response.Success){
             ratingList.postValue(ratingMapper.mapRatingDtoListToRatingList(
                 response.data,
@@ -37,7 +37,7 @@ class RatingRepositoryImpl(private val sharedPreferences: SharedPreferences): Ra
     }
 
     override suspend fun setDuelsAmountRating() {
-        val response = ratingDataProvider.getDuelsAmountRating()
+        val response = ratingDataSource.getDuelsAmountRating()
         if(response is Response.Success){
             ratingList.postValue(ratingMapper.mapRatingDtoListToRatingList(
                 response.data,

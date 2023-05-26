@@ -3,7 +3,7 @@ package com.puj.stepsfitnessgame.data.network.guildenterrequest
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.guild.GuildEnterRequest
 
-interface GuildEnterRequestDataProvider {
+interface GuildEnterRequestDataSource {
 
     suspend fun requestEnter(guildId: Long)
 

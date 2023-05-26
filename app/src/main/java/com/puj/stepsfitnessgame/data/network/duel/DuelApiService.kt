@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.data.network.duel
 
 
+import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeRewardDto
 import retrofit2.Response
 import retrofit2.http.Body
@@ -20,5 +21,5 @@ interface DuelApiService {
     suspend fun cancelDuel(@Header("token") token: String): Response<Boolean>
 
     @PUT("duel/update_progress")
-    suspend fun updateProgress(@Header("token") token: String, @Body stepCount: String)
+    suspend fun updateProgress(@Header("token") token: String, @Body stepCount: StepCount)
 }

@@ -2,7 +2,7 @@ package com.puj.stepsfitnessgame.data.network.rating
 
 import com.puj.stepsfitnessgame.domain.models.Response
 
-interface RatingDataProvider {
+interface RatingDataSource {
 
     suspend fun getStepAmountRating(): Response<List<RatingDto>>
 

@@ -4,7 +4,7 @@ import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.guild.CurrentGuildChallenge
 import com.puj.stepsfitnessgame.domain.models.guild.GuildChallenge
 
-interface GuildChallengeDataProvider {
+interface GuildChallengeDataSource {
 
     suspend fun selectGuildChallenge(guildChallengeId: Long)
 

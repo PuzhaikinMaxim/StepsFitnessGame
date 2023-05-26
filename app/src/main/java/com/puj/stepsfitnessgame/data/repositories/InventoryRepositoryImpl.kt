@@ -3,7 +3,7 @@ package com.puj.stepsfitnessgame.data.repositories
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.puj.stepsfitnessgame.data.network.inventoryitem.InventoryItemDataProviderImpl
+import com.puj.stepsfitnessgame.data.network.inventoryitem.InventoryItemDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.inventoryitem.InventoryItemDto
 import com.puj.stepsfitnessgame.data.network.inventoryitem.InventoryItemMapper
 import com.puj.stepsfitnessgame.domain.models.Response
@@ -20,7 +20,7 @@ class InventoryRepositoryImpl(private val sharedPreferences: SharedPreferences):
         TOKEN_DEFAULT
     ) ?: TOKEN_DEFAULT
 
-    private val inventoryItemDataProvider = InventoryItemDataProviderImpl(token)
+    private val inventoryItemDataSource = InventoryItemDataSourceImpl(token)
 
     private val inventoryItemsList = MutableLiveData<List<InventoryItemDto>>()
 
@@ -29,18 +29,18 @@ class InventoryRepositoryImpl(private val sharedPreferences: SharedPreferences):
     private val inventoryItemMapper = InventoryItemMapper()
 
     override suspend fun equipItem(inventoryId: Int, slot: Int): Response<Unit> {
-        return inventoryItemDataProvider.equipItem(inventoryId, slot)
+        return inventoryItemDataSource.equipItem(inventoryId, slot)
     }
 
     override suspend fun unequipItem(slot: Int): Response<Unit> {
-        return inventoryItemDataProvider.unequipItem(slot)
+        return inventoryItemDataSource.unequipItem(slot)
     }
 
     override fun getInventoryItems(): MutableLiveData<List<InventoryItem>> {
         val scope = CoroutineScope(Dispatchers.Default)
 
         scope.launch {
-            val response = inventoryItemDataProvider.getInventoryItemList()
+            val response = inventoryItemDataSource.getInventoryItemList()
             if(response is Response.Success){
                 inventoryItemsList.postValue(response.data)
             }

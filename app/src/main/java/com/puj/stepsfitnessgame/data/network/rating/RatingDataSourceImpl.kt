@@ -4,7 +4,7 @@ import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.domain.models.Response
 
-class RatingDataProviderImpl(private val token: String): RatingDataProvider {
+class RatingDataSourceImpl(private val token: String): RatingDataSource {
 
     private val service = ServiceFactory.create(RatingApiService::class.java)
 

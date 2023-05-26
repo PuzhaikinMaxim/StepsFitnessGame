@@ -3,7 +3,7 @@ package com.puj.stepsfitnessgame.data.network.playerstatistics
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.duel.DuelStatistics
 
-interface PlayerStatisticsDataProvider {
+interface PlayerStatisticsDataSource {
 
     suspend fun getDuelStatistics(): Response<DuelStatistics>
 

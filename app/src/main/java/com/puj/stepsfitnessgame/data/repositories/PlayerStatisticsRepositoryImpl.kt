@@ -3,7 +3,7 @@ package com.puj.stepsfitnessgame.data.repositories
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.puj.stepsfitnessgame.data.network.playerstatistics.PlayerStatisticsDataProviderImpl
+import com.puj.stepsfitnessgame.data.network.playerstatistics.PlayerStatisticsDataSourceImpl
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.duel.DuelStatistics
 import com.puj.stepsfitnessgame.domain.repositories.PlayerStatisticsRepository
@@ -20,14 +20,14 @@ class PlayerStatisticsRepositoryImpl(
         TOKEN_DEFAULT
     ) ?: TOKEN_DEFAULT
 
-    private val playerStatisticsDataProvider = PlayerStatisticsDataProviderImpl(token)
+    private val playerStatisticsDataSource = PlayerStatisticsDataSourceImpl(token)
 
     private val duelStatistics = MutableLiveData<DuelStatistics>()
 
     override fun getDuelStatistics(): LiveData<DuelStatistics> {
         val scope = CoroutineScope(Dispatchers.Default)
         scope.launch {
-            val response = playerStatisticsDataProvider.getDuelStatistics()
+            val response = playerStatisticsDataSource.getDuelStatistics()
             if(response is Response.Success){
                 duelStatistics.postValue(response.data)
             }

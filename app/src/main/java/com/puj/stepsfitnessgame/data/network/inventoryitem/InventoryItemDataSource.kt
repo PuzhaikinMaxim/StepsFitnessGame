@@ -2,7 +2,7 @@ package com.puj.stepsfitnessgame.data.network.inventoryitem
 
 import com.puj.stepsfitnessgame.domain.models.Response
 
-interface InventoryItemDataProvider {
+interface InventoryItemDataSource {
 
     suspend fun equipItem(inventoryId: Int, slot: Int): Response<Unit>
 

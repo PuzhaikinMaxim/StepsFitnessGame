@@ -14,8 +14,8 @@ import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
 import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.dailychallenge.DailyChallengeRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.duel.DuelRemoteDataSourceImpl
-import com.puj.stepsfitnessgame.data.network.guildchallenge.GuildChallengeDataProviderImpl
-import com.puj.stepsfitnessgame.data.repositories.CharacteristicsRepositoryImpl
+import com.puj.stepsfitnessgame.data.network.guildchallenge.GuildChallengeDataSourceImpl
+import com.puj.stepsfitnessgame.data.network.playerstatistics.PlayerStatisticsDataSourceImpl
 import com.puj.stepsfitnessgame.data.stepactivity.StepActivityDataSource
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import kotlinx.coroutines.delay
@@ -47,9 +47,11 @@ class StepCountingWorker(
 
     private val dailyChallengeRemoteDataSource = DailyChallengeRemoteDataSourceImpl(token)
 
-    private val guildChallengeRemoteDataSource = GuildChallengeDataProviderImpl(token)
+    private val guildChallengeRemoteDataSource = GuildChallengeDataSourceImpl(token)
 
     private val challengeRemoteDataSource = ChallengeRemoteDataSourceImpl(token)
+
+    private val playerStatisticsDataProvider = PlayerStatisticsDataSourceImpl(token)
 
     override suspend fun doWork(): Result {
         startForegroundService()
@@ -63,6 +65,7 @@ class StepCountingWorker(
                 duelRemoteDataSource.updateStepAmount(stepCount)
                 dailyChallengeRemoteDataSource.updateDailyChallengesProgress(stepCount)
                 guildChallengeRemoteDataSource.updateProgress(stepCount)
+                playerStatisticsDataProvider.updateProgress(stepCount)
                 stepActivityDataSource.updateLastStepCount()
                 Intent("step_count_updated").apply {
                     localBroadcastManager.sendBroadcast(this)

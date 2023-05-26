@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeRewardMapper
-import com.puj.stepsfitnessgame.data.network.guild.GuildDataProviderImpl
+import com.puj.stepsfitnessgame.data.network.guild.GuildDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.guild.GuildListItemDto
 import com.puj.stepsfitnessgame.data.network.guild.GuildMapper
 import com.puj.stepsfitnessgame.domain.models.Response
@@ -27,7 +27,7 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
 
     private val completedChallengeRewardMapper = CompletedChallengeRewardMapper()
 
-    private val guildRemoteDataSource = GuildDataProviderImpl(token)
+    private val guildRemoteDataSource = GuildDataSourceImpl(token)
 
     private val guildList = MutableLiveData<List<GuildListItemDto>>()
 

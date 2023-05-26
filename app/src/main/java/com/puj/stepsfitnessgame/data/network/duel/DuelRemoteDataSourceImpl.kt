@@ -3,6 +3,7 @@ package com.puj.stepsfitnessgame.data.network.duel
 import androidx.lifecycle.LiveData
 import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
+import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.domain.models.Response
 
 class DuelRemoteDataSourceImpl(
@@ -38,7 +39,7 @@ class DuelRemoteDataSourceImpl(
 
     override suspend fun updateStepAmount(amountOfSteps: Int): Boolean {
         return try {
-            duelApiService.updateProgress(token, amountOfSteps.toString())
+            duelApiService.updateProgress(token, StepCount(amountOfSteps))
             true
         } catch (ex: Exception){
             false

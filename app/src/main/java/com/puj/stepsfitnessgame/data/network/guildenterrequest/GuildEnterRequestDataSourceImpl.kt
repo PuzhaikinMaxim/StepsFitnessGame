@@ -5,7 +5,7 @@ import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.guild.GuildEnterRequest
 
-class GuildEnterRequestDataProviderImpl(private val token: String): GuildEnterRequestDataProvider {
+class GuildEnterRequestDataSourceImpl(private val token: String): GuildEnterRequestDataSource {
 
     private val service = ServiceFactory.create(GuildEnterRequestApiService::class.java)
 

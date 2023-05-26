@@ -7,7 +7,7 @@ import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.guild.CurrentGuildChallenge
 import com.puj.stepsfitnessgame.domain.models.guild.GuildChallenge
 
-class GuildChallengeDataProviderImpl(private val token: String): GuildChallengeDataProvider {
+class GuildChallengeDataSourceImpl(private val token: String): GuildChallengeDataSource {
 
     private val service = ServiceFactory.create(GuildChallengeApiService::class.java)
 

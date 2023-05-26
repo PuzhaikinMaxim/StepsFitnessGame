@@ -4,9 +4,9 @@ import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.domain.models.Response
 
-class InventoryItemDataProviderImpl(
+class InventoryItemDataSourceImpl(
     private val token: String
-): InventoryItemDataProvider {
+): InventoryItemDataSource {
 
     private val service = ServiceFactory.create(InventoryItemApiService::class.java)
 
