@@ -99,6 +99,12 @@ class GuildListFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.guildList.removeObservers(requireActivity())
+        viewModel.guildData.removeObservers(requireActivity())
     }
 
     companion object {

@@ -76,6 +76,11 @@ class GuildEnterRequestsFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.guildEnterRequestList.removeObservers(requireActivity())
     }
 
     companion object {

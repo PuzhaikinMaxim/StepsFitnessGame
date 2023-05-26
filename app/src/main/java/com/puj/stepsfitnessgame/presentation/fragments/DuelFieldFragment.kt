@@ -168,6 +168,13 @@ class DuelFieldFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.duelField.removeObservers(requireActivity())
+        viewModel.finishedDuelReward.removeObservers(requireActivity())
+        viewModel.shouldCloseScreen.removeObservers(requireActivity())
     }
 
     companion object {

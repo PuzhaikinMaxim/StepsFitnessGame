@@ -102,6 +102,11 @@ class DuelStatisticsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.duelStatistics.removeObservers(requireActivity())
     }
 
     companion object {

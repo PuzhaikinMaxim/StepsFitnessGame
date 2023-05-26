@@ -124,6 +124,12 @@ class GuildEditorFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.guildLogoList.removeObservers(requireActivity())
+        viewModel.shouldCloseScreen.removeObservers(requireActivity())
     }
 
     companion object {

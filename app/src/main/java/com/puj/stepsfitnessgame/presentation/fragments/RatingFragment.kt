@@ -91,6 +91,11 @@ class RatingFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.ratingList.removeObservers(requireActivity())
     }
 
     companion object {

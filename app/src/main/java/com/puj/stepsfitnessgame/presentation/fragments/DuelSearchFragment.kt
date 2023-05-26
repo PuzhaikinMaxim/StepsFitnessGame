@@ -86,6 +86,12 @@ class DuelSearchFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.timer.removeObservers(requireActivity())
+        viewModel.isOpponentFound.removeObservers(requireActivity())
     }
 
     companion object {

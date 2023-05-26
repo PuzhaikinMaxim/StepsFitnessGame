@@ -119,8 +119,15 @@ class DailyChallengeFragment: Fragment() {
     }
 
     override fun onDestroy() {
-        _binding = null
         super.onDestroy()
+        _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.dailyTasksList.removeObservers(requireActivity())
+        viewModel.completedDailyChallengeReward.removeObservers(requireActivity())
+        viewModel.shouldShowRewardModal.removeObservers(requireActivity())
     }
 
     companion object {
