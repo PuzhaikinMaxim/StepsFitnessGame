@@ -114,7 +114,9 @@ class GuildEditorFragment: Fragment() {
     private fun setupShouldCloseScreenWindow() {
         viewModel.shouldCloseScreen.observe(requireActivity()){
             findNavController().navigate(
-                R.id.action_guildEditorFragment_to_guildFragment
+                GuildEditorFragmentDirections.actionGuildEditorFragmentToGuildFragment().apply {
+                    isDataChanged = args.editorType == TYPE_EDIT
+                }
             )
         }
     }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -32,6 +33,8 @@ class StatisticsFragment: Fragment() {
 
     private lateinit var viewModel: StatisticsViewModel
 
+    private val args by navArgs<StatisticsFragmentArgs>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,6 +56,10 @@ class StatisticsFragment: Fragment() {
         setupLastWeekStatistics()
         setupGraph()
         setupChangeGoalButton()
+        //viewModel.resetStatistics()
+        if(args.isDataChanged){
+            viewModel.resetStatistics()
+        }
     }
 
     private fun setupTodayStatistics() {
@@ -235,12 +242,19 @@ class StatisticsFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        removeAllObservers()
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         viewModel.resetStatistics()
         println("On restore")
+    }
+
+    private fun removeAllObservers() {
+        viewModel.stepData.removeObservers(requireActivity())
+        viewModel.todayStatistics.removeObservers(requireActivity())
+        viewModel.weekStatistics.removeObservers(requireActivity())
     }
 
     companion object {

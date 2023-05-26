@@ -63,21 +63,21 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
         get() = _isOwner
 
     init {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             _isOwner.postValue(getIsOwnerUseCase())
             _hasReward.postValue(getHasRewardUseCase())
         }
     }
 
     fun expelGuildParticipant(participantId: Long) {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             expelGuildParticipantUseCase.invoke(participantId)
             getGuildParticipantsUseCase.invoke()
         }
     }
 
     fun claimReward() {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             val challengeReward = claimRewardUseCase() ?: return@launch
             _challengeReward.postValue(challengeReward)
             _shouldOpenRewardModal.postValue(true)

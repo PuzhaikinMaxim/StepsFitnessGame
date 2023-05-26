@@ -7,19 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.view.children
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentGuildBinding
 import com.puj.stepsfitnessgame.databinding.LayoutChallengeBinding
 import com.puj.stepsfitnessgame.databinding.LayoutNoChallengeBinding
 import com.puj.stepsfitnessgame.databinding.LayoutStartChallengeBinding
 import com.puj.stepsfitnessgame.domain.models.guild.CurrentGuildChallenge
-import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.adapters.guildparticipant.GuildParticipantAdapter
@@ -33,6 +31,8 @@ class GuildFragment: Fragment() {
         get() = _binding ?: throw RuntimeException("Fragment guild binding is null")
 
     private lateinit var viewModel: GuildViewModel
+
+    private val args by navArgs<GuildFragmentArgs>()
 
     private lateinit var guildLogoIds: TypedArray
 
@@ -64,6 +64,9 @@ class GuildFragment: Fragment() {
         setupIsGuildOwner()
         setupHasReward()
         setupRewardModal()
+        if(args.isDataChanged){
+            viewModel.resetData()
+        }
     }
 
     private fun setupCurrentChallenge(isGuildOwner: Boolean) {
@@ -266,6 +269,18 @@ class GuildFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.isOwner.removeObservers(requireActivity())
+        viewModel.challengeReward.removeObservers(requireActivity())
+        viewModel.guildStatistics.removeObservers(requireActivity())
+        viewModel.guildData.removeObservers(requireActivity())
+        viewModel.shouldOpenRewardModal.removeObservers(requireActivity())
+        viewModel.hasReward.removeObservers(requireActivity())
+        viewModel.currentChallenge.removeObservers(requireActivity())
+        viewModel.guildParticipants.removeObservers(requireActivity())
     }
 
     companion object {

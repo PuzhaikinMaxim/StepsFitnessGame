@@ -48,7 +48,7 @@ class StatisticsViewModel: ViewModel() {
         get() = _weekStepData
 
     init {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             setTodayStatisticsUseCase()
             setLastThirtyDaysStepDataUseCase()
             setLastWeekStepDataUseCase()
@@ -56,25 +56,25 @@ class StatisticsViewModel: ViewModel() {
     }
 
     fun setLastThirtyDaysStepData() {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             setLastThirtyDaysStepDataUseCase()
         }
     }
 
     fun setLastTwelveWeeksStepData() {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             setLastTwelveWeeksStepDataUseCase()
         }
     }
 
     fun setLastTwelveMonthsStepData() {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             setLastTwelveMonthsStepDataUseCase()
         }
     }
 
     fun resetStatistics() {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             setTodayStatisticsUseCase()
             setLastWeekStepDataUseCase()
         }

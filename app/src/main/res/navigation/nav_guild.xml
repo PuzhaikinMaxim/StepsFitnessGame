@@ -28,6 +28,10 @@
         <action
             android:id="@+id/action_guildFragment_to_guildEditorFragment"
             app:destination="@id/guildEditorFragment" />
+        <argument
+            android:name="isDataChanged"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/guildEditorFragment"

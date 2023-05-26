@@ -76,6 +76,16 @@ class SelectLevelFragment: Fragment() {
         binding.rvLevelList.adapter = adapter
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        viewModel.levelList.removeObservers(requireActivity())
+    }
+
     companion object {
 
         fun newFragment(): SelectLevelFragment {

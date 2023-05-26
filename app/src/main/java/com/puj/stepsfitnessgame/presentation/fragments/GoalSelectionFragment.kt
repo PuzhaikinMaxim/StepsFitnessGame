@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentGoalSelectionBinding
-import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.adapters.goal.GoalListAdapter
 import com.puj.stepsfitnessgame.presentation.viewmodels.GoalSelectionViewModel
@@ -46,7 +45,9 @@ class GoalSelectionFragment: Fragment() {
     private fun setupCloseScreen() {
         viewModel.shouldCloseScreen.observe(requireActivity()){
             findNavController().navigate(
-                R.id.action_goalSelectionFragment_to_statisticsFragment
+                GoalSelectionFragmentDirections.actionGoalSelectionFragmentToStatisticsFragment().apply {
+                    isDataChanged = true
+                }
             )
         }
     }

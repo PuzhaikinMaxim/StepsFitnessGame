@@ -88,6 +88,11 @@ class RatingFragment: Fragment() {
         binding.tlRatingType.addOnTabSelectedListener(onTabSelectedListener)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     companion object {
 
         fun newFragment(): RatingFragment {

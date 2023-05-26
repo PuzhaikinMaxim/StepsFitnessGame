@@ -26,6 +26,10 @@
         <action
             android:id="@+id/action_statisticsFragment_to_goalSelectionFragment"
             app:destination="@id/goalSelectionFragment" />
+        <argument
+            android:name="isDataChanged"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/selectLevelFragment"
