@@ -184,6 +184,15 @@ class ChallengeListFragment: Fragment() {
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+        removeAllObservers()
+    }
+
+    private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
+        viewModel.challengeList.removeObservers(requireActivity())
+        viewModel.completedChallengeReward.removeObservers(requireActivity())
+        viewModel.todayStatistics.removeObservers(requireActivity())
+        viewModel.shouldShowRewardModal.removeObservers(requireActivity())
     }
 
     companion object {

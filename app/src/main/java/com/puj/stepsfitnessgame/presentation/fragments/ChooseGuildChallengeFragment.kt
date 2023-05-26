@@ -83,6 +83,7 @@ class ChooseGuildChallengeFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.guildChallenges.removeObservers(requireActivity())
         viewModel.shouldCloseScreen.removeObservers(requireActivity())
     }

@@ -73,6 +73,7 @@ class GoalSelectionFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.goalList.removeObservers(requireActivity())
         viewModel.shouldCloseScreen.removeObservers(requireActivity())
     }

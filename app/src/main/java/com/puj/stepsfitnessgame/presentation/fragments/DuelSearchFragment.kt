@@ -90,6 +90,7 @@ class DuelSearchFragment : Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.timer.removeObservers(requireActivity())
         viewModel.isOpponentFound.removeObservers(requireActivity())
     }

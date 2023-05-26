@@ -273,6 +273,7 @@ class GuildFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.isOwner.removeObservers(requireActivity())
         viewModel.challengeReward.removeObservers(requireActivity())
         viewModel.guildStatistics.removeObservers(requireActivity())

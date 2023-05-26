@@ -106,6 +106,7 @@ class DuelStatisticsFragment : Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.duelStatistics.removeObservers(requireActivity())
     }
 

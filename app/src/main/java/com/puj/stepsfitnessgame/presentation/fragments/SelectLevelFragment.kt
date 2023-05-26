@@ -83,6 +83,7 @@ class SelectLevelFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.levelList.removeObservers(requireActivity())
     }
 

@@ -22,7 +22,8 @@
         <action
             android:id="@+id/action_statisticsFragment_to_challengeListFragment"
             app:destination="@id/challengeListFragment"
-            app:popUpTo="@id/challengeListFragment" />
+            app:popUpTo="@id/challengeListFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_statisticsFragment_to_goalSelectionFragment"
             app:destination="@id/goalSelectionFragment" />
@@ -38,7 +39,8 @@
         <action
             android:id="@+id/action_selectLevelFragment_to_challengeListFragment"
             app:destination="@id/challengeListFragment"
-            app:popUpTo="@id/challengeListFragment" />
+            app:popUpTo="@id/challengeListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/goalSelectionFragment"
@@ -47,6 +49,7 @@
         <action
             android:id="@+id/action_goalSelectionFragment_to_statisticsFragment"
             app:destination="@id/statisticsFragment"
-            app:popUpTo="@id/statisticsFragment" />
+            app:popUpTo="@id/statisticsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

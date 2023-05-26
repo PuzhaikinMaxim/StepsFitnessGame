@@ -252,6 +252,7 @@ class StatisticsFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.stepData.removeObservers(requireActivity())
         viewModel.todayStatistics.removeObservers(requireActivity())
         viewModel.weekStatistics.removeObservers(requireActivity())

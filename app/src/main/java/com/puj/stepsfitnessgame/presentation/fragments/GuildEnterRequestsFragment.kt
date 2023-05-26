@@ -80,6 +80,7 @@ class GuildEnterRequestsFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.guildEnterRequestList.removeObservers(requireActivity())
     }
 

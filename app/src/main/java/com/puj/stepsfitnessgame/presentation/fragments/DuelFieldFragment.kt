@@ -172,6 +172,7 @@ class DuelFieldFragment : Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.duelField.removeObservers(requireActivity())
         viewModel.finishedDuelReward.removeObservers(requireActivity())
         viewModel.shouldCloseScreen.removeObservers(requireActivity())

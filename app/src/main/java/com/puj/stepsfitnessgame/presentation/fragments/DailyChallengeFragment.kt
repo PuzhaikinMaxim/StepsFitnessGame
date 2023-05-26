@@ -125,6 +125,7 @@ class DailyChallengeFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.dailyTasksList.removeObservers(requireActivity())
         viewModel.completedDailyChallengeReward.removeObservers(requireActivity())
         viewModel.shouldShowRewardModal.removeObservers(requireActivity())

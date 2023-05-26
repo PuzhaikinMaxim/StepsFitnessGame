@@ -128,6 +128,7 @@ class GuildEditorFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.guildLogoList.removeObservers(requireActivity())
         viewModel.shouldCloseScreen.removeObservers(requireActivity())
     }

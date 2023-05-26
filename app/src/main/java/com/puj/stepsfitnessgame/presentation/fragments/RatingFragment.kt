@@ -95,6 +95,7 @@ class RatingFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.ratingList.removeObservers(requireActivity())
     }
 

@@ -103,6 +103,7 @@ class GuildListFragment: Fragment() {
     }
 
     private fun removeAllObservers() {
+        if(!this::viewModel.isInitialized) return
         viewModel.guildList.removeObservers(requireActivity())
         viewModel.guildData.removeObservers(requireActivity())
     }
