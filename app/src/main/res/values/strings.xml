@@ -24,7 +24,7 @@
     <string name="menu_inventory_title">Инвентарь</string>
     <string name="menu_rewards_title">Награды</string>
     <string name="user_level_text">Уровень: %d</string>
-    <string name="menu_rewards_settings">Настройки</string>
+    <string name="menu_edit_profile">Редактировать профиль</string>
     <string name="item_challenge_start_challenge_button_text">Начать испытание</string>
     <string name="statistics_today_step_count_goal"><font color="#FF7A00">%d шаг за сегодня</font>, цель - %d</string>
     <string name="statistics_change_score_sign_text">Изменить цель</string>

@@ -22,7 +22,7 @@
         />
     <item
         android:id="@+id/menu_settings"
-        android:title="@string/menu_rewards_settings"
+        android:title="@string/menu_edit_profile"
         android:icon="@drawable/ic_side_menu_settings"
         />
 </menu>
