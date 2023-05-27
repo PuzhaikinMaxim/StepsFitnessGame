@@ -40,15 +40,6 @@ class MainActivity : AppCompatActivity() {
             ViewModelProvider(this, ViewModelFactory(sharedPref))[MainViewModel::class.java]
         setIsUserAuthorizedListener()
         viewModel.isUserLoggedIn()
-        val source = UserRemoteDataSourceImpl()
-        scope.launch {
-            try {
-                source.test()
-            }
-            catch (ex: SocketTimeoutException) {
-
-            }
-        }
     }
 
     private fun setIsUserAuthorizedListener() {

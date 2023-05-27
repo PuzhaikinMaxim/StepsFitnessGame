@@ -9,7 +9,7 @@ import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
 
-class UserRemoteDataSourceImpl: UserRemoteDataSource {
+class UserRemoteDataSourceImpl(private val token: String): UserRemoteDataSource {
 
     private val userService = ServiceFactory.create(UserApiService::class.java)
 
@@ -51,6 +51,32 @@ class UserRemoteDataSourceImpl: UserRemoteDataSource {
             }
             if(result.code() == ServerErrorResponseCodes.UNAUTHORIZED){
                 return Response.Error(UNAUTHORIZED_CODE)
+            }
+            return Response.Error(DEFAULT_ERROR_CODE)
+        }
+        catch (ex: Exception){
+            return Response.Error(SERVER_NOT_RESPONDING_CODE)
+        }
+    }
+
+    override suspend fun changeUsername(username: String): Response<Boolean> {
+        try {
+            val result = userService.changeUsername(token, UsernameChangeRequest(username))
+            if(result.isSuccessful){
+                return Response.Success(true)
+            }
+            return Response.Error(DEFAULT_ERROR_CODE)
+        }
+        catch (ex: Exception){
+            return Response.Error(SERVER_NOT_RESPONDING_CODE)
+        }
+    }
+
+    override suspend fun setProfileImage(profileImageId: Int): Response<Boolean> {
+        try {
+            val result = userService.setPlayerProfileImage(token, profileImageId)
+            if(result.isSuccessful){
+                return Response.Success(result.body() ?: false)
             }
             return Response.Error(DEFAULT_ERROR_CODE)
         }

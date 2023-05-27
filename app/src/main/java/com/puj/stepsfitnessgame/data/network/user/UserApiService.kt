@@ -7,6 +7,8 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface UserApiService {
 
@@ -21,4 +23,16 @@ interface UserApiService {
 
     @POST("login")
     suspend fun loginUser(@Body userCredentials: UserCredentials): Response<String>
+
+    @PUT("change_username")
+    suspend fun changeUsername(
+        @Header("token") token: String,
+        @Body usernameChangeRequest: UsernameChangeRequest
+    ): Response<String>
+
+    @PUT("player/set_player_profile_image/{imageId}")
+    suspend fun setPlayerProfileImage(
+        @Header("token") token: String,
+        @Path("imageId") imageId: Int
+    ): Response<Boolean>
 }

@@ -28,6 +28,14 @@ class FakeUserRemoteDataSource: UserRemoteDataSource {
         return Response.Success(Unit)
     }
 
+    override suspend fun changeUsername(username: String): Response<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun setProfileImage(profileImageId: Int): Response<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun test() {
         TODO("Not yet implemented")
     }

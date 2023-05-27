@@ -4,6 +4,7 @@ import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.ServiceFactory
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.userdata.UserData
+import com.puj.stepsfitnessgame.domain.models.userdata.UserEditProfileData
 import com.puj.stepsfitnessgame.domain.models.userdata.UserProfileData
 
 class UserDataRemoteDataSourceImpl(
@@ -40,6 +41,23 @@ class UserDataRemoteDataSourceImpl(
                 return Response.Error(404)
             }
             return Response.Error(404)
+        }
+        catch (ex: Exception) {
+            return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
+        }
+    }
+
+    override suspend fun getEditProfileData(): Response<UserEditProfileData> {
+        try {
+            val response = userDataApiService.getEditProfileData(token)
+            if(response.isSuccessful){
+                val userData = response.body()
+                if(userData != null){
+                    return Response.Success(userData)
+                }
+                return Response.Error(AppErrorCodes.DEFAULT_ERROR_CODE)
+            }
+            return Response.Error(AppErrorCodes.DEFAULT_ERROR_CODE)
         }
         catch (ex: Exception) {
             return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)

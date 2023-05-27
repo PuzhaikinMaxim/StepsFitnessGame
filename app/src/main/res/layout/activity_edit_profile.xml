@@ -17,7 +17,9 @@
             android:background="@drawable/bc_edit_user_data_container"
             android:paddingEnd="40dp"
             android:paddingStart="10dp"
-            android:text="dsssssssssssssssssssssssssssdsssssssssssssss"
+            android:fontFamily="@font/merriweather_regular"
+
+            tools:text="dsssssssssssssssssssssssssssdsssssssssssssss"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,11 +32,13 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/merriweather_regular"
             android:textColor="#EF1414"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/et_username"
             app:layout_constraintTop_toBottomOf="@+id/et_username"
             tools:text="Имя пользователя уже существует"/>
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_change_username"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_checkmark"
@@ -50,7 +54,9 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="50dp"
             android:paddingHorizontal="10dp"
-            android:background="@drawable/bc_edit_user_data_container"
+            android:background="@drawable/bc_edit_user_data_container_ripple"
+            android:clickable="true"
+            android:clipToPadding="false"
             app:justifyContent="space_between"
             app:alignItems="center"
             app:layout_constraintTop_toBottomOf="@id/et_username">
@@ -73,7 +79,8 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:paddingHorizontal="10dp"
-            android:background="@drawable/bc_edit_user_data_container"
+            android:background="@drawable/bc_edit_user_data_container_ripple"
+            android:clickable="true"
             app:justifyContent="space_between"
             app:alignItems="center"
             app:layout_constraintTop_toBottomOf="@id/ll_email_edit_container">
@@ -102,13 +109,14 @@
             app:layout_constraintTop_toBottomOf="@+id/ll_password_edit_container" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_profile_images"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="50dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/ll_password_edit_container"
-            tools:listitem="@layout/item_user_image"
+            tools:listitem="@layout/item_profile_image"
             app:spanCount="5"
             tools:itemCount="30"
             />

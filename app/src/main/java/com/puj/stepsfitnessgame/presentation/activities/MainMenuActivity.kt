@@ -286,6 +286,10 @@ class MainMenuActivity: AppCompatActivity() {
                     val intent = AchievementActivity.newIntent(this)
                     startActivity(intent)
                 }
+                R.id.menu_settings -> {
+                    val intent = EditProfileActivity.newIntent(this)
+                    startActivity(intent)
+                }
                 else -> {}
             }
             closeDrawer()

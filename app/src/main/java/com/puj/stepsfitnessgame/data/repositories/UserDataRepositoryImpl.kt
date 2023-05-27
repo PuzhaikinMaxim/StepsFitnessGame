@@ -3,10 +3,10 @@ package com.puj.stepsfitnessgame.data.repositories
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.puj.stepsfitnessgame.data.network.userdata.FakeUserDataRemoteDataSource
 import com.puj.stepsfitnessgame.data.network.userdata.UserDataRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.userdata.UserData
+import com.puj.stepsfitnessgame.domain.models.userdata.UserEditProfileData
 import com.puj.stepsfitnessgame.domain.models.userdata.UserProfileData
 import com.puj.stepsfitnessgame.domain.repositories.UserDataRepository
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +19,7 @@ class UserDataRepositoryImpl(
 
     private val token: String = sharedPreferences.getString(TOKEN_KEY, DEFAULT) ?: DEFAULT
 
-    private val userLevelRemoteDataSource = UserDataRemoteDataSourceImpl(token)
+    private val userDataRemoteDataSource = UserDataRemoteDataSourceImpl(token)
 
     private val userData = MutableLiveData<UserData>()
 
@@ -29,7 +29,7 @@ class UserDataRepositoryImpl(
         val coroutineScope = CoroutineScope(Dispatchers.Default)
 
         coroutineScope.launch {
-            val response = userLevelRemoteDataSource.getUserLevel()
+            val response = userDataRemoteDataSource.getUserLevel()
 
             if(response is Response.Success){
                 userData.postValue(response.data)
@@ -42,7 +42,7 @@ class UserDataRepositoryImpl(
         val coroutineScope = CoroutineScope(Dispatchers.IO)
 
         coroutineScope.launch {
-            val response = userLevelRemoteDataSource.getUserProfileData()
+            val response = userDataRemoteDataSource.getUserProfileData()
 
             if(response is Response.Success){
                 userProfileData.postValue(response.data)
@@ -51,8 +51,18 @@ class UserDataRepositoryImpl(
         return userProfileData
     }
 
+    override suspend fun getUserEditProfileData(): UserEditProfileData? {
+        val response = userDataRemoteDataSource.getEditProfileData()
+
+        if(response is Response.Success){
+            return response.data
+        }
+
+        return null
+    }
+
     override suspend fun getUsername(): String {
-        val response = userLevelRemoteDataSource.getUserLevel()
+        val response = userDataRemoteDataSource.getUserLevel()
 
         if(response is Response.Success){
             return response.data.username

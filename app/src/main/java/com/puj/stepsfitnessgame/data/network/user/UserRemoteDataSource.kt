@@ -12,5 +12,9 @@ interface UserRemoteDataSource {
 
     suspend fun isUserLoggedIn(token: String): Response<Unit>
 
+    suspend fun changeUsername(username: String): Response<Boolean>
+
+    suspend fun setProfileImage(profileImageId: Int): Response<Boolean>
+
     suspend fun test()
 }

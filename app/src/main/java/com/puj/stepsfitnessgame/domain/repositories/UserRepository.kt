@@ -12,4 +12,8 @@ interface UserRepository {
     suspend fun loginUser(userCredentials: UserCredentials): Response<Unit>
 
     suspend fun isUserLoggedIn(): Response<Unit>
+
+    suspend fun changeUsername(username: String): Boolean
+
+    suspend fun setProfileImage(profileImageId: Int): Boolean
 }

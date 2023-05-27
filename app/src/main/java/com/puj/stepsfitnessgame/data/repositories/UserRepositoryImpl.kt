@@ -10,7 +10,12 @@ import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
 
 class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : UserRepository {
 
-    private val userRemoteDataSource = UserRemoteDataSourceImpl()
+    private val token: String = sharedPreferences.getString(
+        TOKEN_KEY,
+        DEFAULT
+    ) ?: DEFAULT
+
+    private val userRemoteDataSource = UserRemoteDataSourceImpl(token)
 
     override suspend fun registerUser(userRegistrationInfo: UserRegistrationInfo): Response<Unit> {
         return userRemoteDataSource.registerUser(userRegistrationInfo)
@@ -26,6 +31,22 @@ class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : Use
                 Response.Error(response.errorCode)
             }
         }
+    }
+
+    override suspend fun changeUsername(username: String): Boolean {
+        val response = userRemoteDataSource.changeUsername(username)
+        if(response is Response.Success){
+            return response.data
+        }
+        return false
+    }
+
+    override suspend fun setProfileImage(profileImageId: Int): Boolean {
+        val response = userRemoteDataSource.setProfileImage(profileImageId)
+        if(response is Response.Success){
+            return response.data
+        }
+        return false
     }
 
     private fun saveToSharedPreferences(key: String, value: String) {

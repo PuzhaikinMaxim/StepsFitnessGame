@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentGuildEditorBinding
 import com.puj.stepsfitnessgame.domain.usecases.guild.EditGuildUseCase
@@ -47,7 +48,17 @@ class GuildEditorFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setRecyclerViewSpanCount()
         parseParams()
+    }
+
+    private fun setRecyclerViewSpanCount() {
+        val layoutManager = binding.rvGuildLogo.layoutManager
+        if(layoutManager is GridLayoutManager){
+            val displayMetrics = resources.displayMetrics
+            val dpWidth = displayMetrics.widthPixels / displayMetrics.density
+            layoutManager.spanCount = (dpWidth/90).toInt()
+        }
     }
 
     private fun parseParams() {
@@ -145,20 +156,5 @@ class GuildEditorFragment: Fragment() {
             return GuildEditorFragment()
         }
 
-        fun newGuildCreationFragment(): GuildEditorFragment {
-            val fragment = GuildEditorFragment()
-            val bundle = Bundle()
-            bundle.putString(EDITOR_TYPE_KEY, TYPE_CREATE)
-            fragment.arguments = bundle
-            return fragment
-        }
-
-        fun newGuildEditionFragment(): GuildEditorFragment {
-            val fragment = GuildEditorFragment()
-            val bundle = Bundle()
-            bundle.putString(EDITOR_TYPE_KEY, TYPE_EDIT)
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 }

@@ -6,5 +6,6 @@ class AppErrorCodes {
         const val DEFAULT_ERROR_CODE = -1
         const val SERVER_NOT_RESPONDING_CODE = 1
         const val UNAUTHORIZED_CODE = 2
+        const val USERNAME_ALREADY_EXIST = 3
     }
 }

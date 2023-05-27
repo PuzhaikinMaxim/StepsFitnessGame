@@ -30,4 +30,13 @@
         <item>@drawable/ic_guild_logo_5</item>
         <item>@drawable/ic_guild_logo_6</item>
     </integer-array>
+
+    <integer-array name="profile_images">
+        <item>@drawable/ic_user_picture_1</item>
+        <item>@drawable/ic_user_picture_2</item>
+        <item>@drawable/ic_user_picture_3</item>
+        <item>@drawable/ic_user_picture_4</item>
+        <item>@drawable/ic_user_picture_5</item>
+        <item>@drawable/ic_user_picture_6</item>
+    </integer-array>
 </resources>
