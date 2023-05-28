@@ -16,4 +16,5 @@ interface UserRepository {
     suspend fun changeUsername(username: String): Boolean
 
     suspend fun setProfileImage(profileImageId: Int): Boolean
+    suspend fun logOut()
 }

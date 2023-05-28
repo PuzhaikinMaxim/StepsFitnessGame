@@ -85,6 +85,15 @@ class UserRemoteDataSourceImpl(private val token: String): UserRemoteDataSource 
         }
     }
 
+    override suspend fun logOut() {
+        try {
+            userService.logOut(token)
+        }
+        catch (ex: Exception) {
+
+        }
+    }
+
     override suspend fun test() {
         try {
             println(userService.test().body())

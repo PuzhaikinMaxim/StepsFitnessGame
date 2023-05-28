@@ -134,54 +134,6 @@ class MainMenuActivity: AppCompatActivity() {
         binding.tbFooter.bnvFooter.setupWithNavController(navHostFragment.navController)
     }
 
-    /*
-    private fun setupBottomNavigationMenu() {
-        val onMenuItemSelectedListener = object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if(isOnBackPressed) {
-                    isOnBackPressed = false
-                    return
-                }
-                if (tab != null) {
-                    val fragment = when(tab.position){
-                        0 -> {
-                            ChallengeListFragment.newFragment()
-                        }
-                        1 -> {
-                            DailyChallengeFragment.newFragment()
-                        }
-                        2 -> {
-                            DuelStatisticsFragment.newFragment()
-                        }
-                        3 -> {
-                            RatingFragment.newFragment()
-                        }
-                        4 -> {
-                            GuildListFragment.newFragment()
-                        }
-                        else -> {
-                            throw RuntimeException("Bottom menu item not selected or not exists")
-                        }
-                    }
-                    openFragment(fragment)
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-
-        }
-
-        binding.tbFooter.root.addOnTabSelectedListener(onMenuItemSelectedListener)
-    }
-
-     */
-
     private fun setupGoogleSignIn() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -290,6 +242,14 @@ class MainMenuActivity: AppCompatActivity() {
                     val intent = EditProfileActivity.newIntent(this)
                     startActivity(intent)
                 }
+                R.id.menu_exit -> {
+                    viewModel.isUserLoggedOut.observe(this){
+                        val intent = MainActivity.newIntent(this)
+                        startActivity(intent)
+                        finish()
+                    }
+                    viewModel.logOut()
+                }
                 else -> {}
             }
             closeDrawer()
@@ -307,50 +267,6 @@ class MainMenuActivity: AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
-
-    private fun removeTwoPreviousFragments() {
-        supportFragmentManager.popBackStack(
-            supportFragmentManager.getBackStackEntryAt(
-                supportFragmentManager.backStackEntryCount-2
-            ).id,
-            FragmentManager.POP_BACK_STACK_INCLUSIVE
-        )
-    }
-
-    /*
-    private fun setSelectedItem() {
-        when(supportFragmentManager.fragments.lastOrNull()){
-            is ChallengeListFragment -> {
-                selectTab(0)
-            }
-            is DailyChallengeFragment -> {
-                selectTab(1)
-            }
-            is DuelSearchFragment -> {
-                selectTab(2)
-            }
-            is RatingFragment -> {
-                selectTab(3)
-            }
-            is DuelFieldFragment -> {
-                selectTab(4)
-            }
-        }
-    }
-
-     */
-
-    /*
-    private fun selectTab(tabIndex: Int){
-        if(binding.tbFooter.root.selectedTabPosition == tabIndex){
-            return
-        }
-        val tab = binding.tbFooter.root.getTabAt(tabIndex)
-        isOnBackPressed = true
-        binding.tbFooter.root.selectTab(tab)
-    }
-
-     */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == RC_GOOGLE_SIGN_IN){
@@ -370,53 +286,4 @@ class MainMenuActivity: AppCompatActivity() {
             return Intent(context, MainMenuActivity::class.java)
         }
     }
-
-    /*
-    override fun startNewScreen(screenId: Int) {
-        when(screenId){
-            MainMenuContainer.CHALLENGE_LIST_FRAGMENT_CODE -> openChallengeListFragment()
-            MainMenuContainer.STATISTICS_FRAGMENT_CODE -> openFragment(
-                StatisticsFragment.newFragment()
-            )
-            MainMenuContainer.GOAL_SELECTION_FRAGMENT_CODE -> openFragment(
-                GoalSelectionFragment.newFragment()
-            )
-            MainMenuContainer.LEVEL_SELECTION_FRAGMENT_CODE -> openFragment(
-                SelectLevelFragment.newFragment()
-            )
-            MainMenuContainer.DUEL_STATISTICS_FRAGMENT_CODE -> openFragment(
-                DuelStatisticsFragment.newFragment()
-            )
-            MainMenuContainer.DUEL_SEARCH_FRAGMENT_CODE -> openFragment(
-                DuelSearchFragment.newFragment()
-            )
-            MainMenuContainer.DUEL_FIELD_FRAGMENT_CODE -> openFragment(
-                DuelFieldFragment.newFragment()
-            )
-            MainMenuContainer.BACK_TO_CHALLENGE_LIST_CODE -> {
-                removeTwoPreviousFragments()
-                openChallengeListFragment()
-            }
-            MainMenuContainer.GUILD_FRAGMENT_CODE -> {
-                openFragment(GuildFragment.newFragment())
-            }
-            MainMenuContainer.GUILD_ENTER_REQUESTS_FRAGMENT_CODE -> {
-                openFragment(GuildEnterRequestsFragment.newFragment())
-            }
-            MainMenuContainer.GUILD_LIST_FRAGMENT_CODE -> {
-                openFragment(GuildListFragment.newFragment())
-            }
-            MainMenuContainer.CHOOSE_GUILD_CHALLENGE_FRAGMENT_CODE -> {
-                openFragment(ChooseGuildChallengeFragment.newFragment())
-            }
-            MainMenuContainer.GUILD_CREATION_FRAGMENT_CODE -> openFragment(
-                GuildEditorFragment.newGuildCreationFragment()
-            )
-            MainMenuContainer.GUILD_EDITION_FRAGMENT_CODE -> openFragment(
-                GuildEditorFragment.newGuildEditionFragment()
-            )
-        }
-    }
-
-     */
 }

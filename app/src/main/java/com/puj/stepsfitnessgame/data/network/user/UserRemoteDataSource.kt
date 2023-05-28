@@ -16,5 +16,7 @@ interface UserRemoteDataSource {
 
     suspend fun setProfileImage(profileImageId: Int): Response<Boolean>
 
+    suspend fun logOut()
+
     suspend fun test()
 }

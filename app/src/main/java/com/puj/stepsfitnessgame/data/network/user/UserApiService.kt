@@ -35,4 +35,7 @@ interface UserApiService {
         @Header("token") token: String,
         @Path("imageId") imageId: Int
     ): Response<Boolean>
+
+    @PUT("logout")
+    suspend fun logOut(@Header("token") token: String)
 }

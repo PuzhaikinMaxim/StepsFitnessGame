@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.puj.stepsfitnessgame.R
@@ -26,8 +28,6 @@ class EditProfileActivity: AppCompatActivity() {
 
     private lateinit var viewModel: EditProfileViewModel
 
-    private lateinit var profileImages: TypedArray
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -40,13 +40,15 @@ class EditProfileActivity: AppCompatActivity() {
             this,
             ViewModelFactory(sharedPref)
         )[EditProfileViewModel::class.java]
-        profileImages = resources.obtainTypedArray(R.array.profile_images)
+        val profileImages = resources.obtainTypedArray(R.array.profile_images)
         viewModel.createProfileImageList(profileImages)
+        profileImages.recycle()
 
         setRecyclerViewSpanCount()
         setupProfileImagesAdapter()
         setupEditProfileDataObserver()
         setupChangeUsername()
+        viewModel.getUserProfileData()
     }
 
     private fun setupProfileImagesAdapter() {

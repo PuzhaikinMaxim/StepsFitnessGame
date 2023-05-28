@@ -36,6 +36,10 @@ class FakeUserRemoteDataSource: UserRemoteDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun logOut() {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun test() {
         TODO("Not yet implemented")
     }

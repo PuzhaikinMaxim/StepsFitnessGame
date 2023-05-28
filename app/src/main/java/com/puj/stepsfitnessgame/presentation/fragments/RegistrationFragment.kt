@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentRegistrationBinding
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
+import com.puj.stepsfitnessgame.presentation.activities.MainActivity
 import com.puj.stepsfitnessgame.presentation.viewmodels.AuthViewModel
 import com.puj.stepsfitnessgame.presentation.viewmodels.RegistrationViewModel
 
@@ -51,6 +52,7 @@ class RegistrationFragment : Fragment() {
         }
 
         viewModel.isAuthenticated.observe(requireActivity()){
+            startFragment(AuthFragment.newFragment())
             println("Success")
         }
 
@@ -86,8 +88,6 @@ class RegistrationFragment : Fragment() {
             .addToBackStack(null)
             .commit()
     }
-
-
 
     override fun onDestroy() {
         super.onDestroy()

@@ -63,6 +63,11 @@ class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : Use
         return userRemoteDataSource.isUserLoggedIn(token)
     }
 
+    override suspend fun logOut() {
+        sharedPreferences.edit().remove(TOKEN_KEY).apply()
+        userRemoteDataSource.logOut()
+    }
+
     companion object {
         private const val TOKEN_KEY = "authToken"
         private const val DEFAULT = "default"

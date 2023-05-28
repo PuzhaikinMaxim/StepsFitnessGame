@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.presentation.activities
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -66,5 +67,12 @@ class MainActivity : AppCompatActivity() {
         val intent = MainMenuActivity.newIntent(this)
         startActivity(intent)
         finish()
+    }
+
+    companion object {
+
+        fun newIntent(context: Context): Intent{
+            return Intent(context, MainActivity::class.java)
+        }
     }
 }

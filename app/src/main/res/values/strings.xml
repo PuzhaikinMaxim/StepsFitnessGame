@@ -95,4 +95,5 @@
     <string name="guild_editor_header_create">Создать гильдию</string>
     <string name="guild_editor_header_edit">Изменить гильдию</string>
     <string name="current_guild_text">Текущая гильдия: %s</string>
+    <string name="menu_exit">Выйти</string>
 </resources>

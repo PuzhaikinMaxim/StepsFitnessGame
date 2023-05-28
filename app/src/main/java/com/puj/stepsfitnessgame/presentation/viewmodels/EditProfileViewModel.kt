@@ -80,16 +80,13 @@ class EditProfileViewModel(sharedPreferences: SharedPreferences): ViewModel() {
 
     fun createProfileImageList(profileImageResourceIds: TypedArray) {
         val profileImageList = ArrayList<ProfileImage>()
-        var index = 0
-        while (profileImageResourceIds.getResourceId(index, -1) != -1){
-            val profileImageId = profileImageResourceIds.getResourceId(index, -1)
+        for(i in 0 until profileImageResourceIds.length()){
             val guildLogo = ProfileImage(
-                profileImageId,
-                index,
+                profileImageResourceIds.getResourceId(i, -1),
+                i,
                 false
             )
             profileImageList.add(guildLogo)
-            index++
         }
         _profileImageList.value = profileImageList
     }
