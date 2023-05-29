@@ -2,6 +2,7 @@ package com.puj.stepsfitnessgame.presentation.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.TypedArray
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,8 @@ class CharacteristicsActivity: AppCompatActivity() {
 
     private lateinit var viewModel: CharacteristicsViewModel
 
+    private lateinit var userProfileImages: TypedArray
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -30,6 +33,7 @@ class CharacteristicsActivity: AppCompatActivity() {
             this,
             ViewModelFactory(sharedPref)
         )[CharacteristicsViewModel::class.java]
+        userProfileImages = resources.obtainTypedArray(R.array.profile_images)
         observeCharacteristics()
         setupOnButtonEnduranceClickListener()
         setupOnButtonStrengthClickListener()
@@ -66,6 +70,10 @@ class CharacteristicsActivity: AppCompatActivity() {
         viewModel.userData.observe(this){
             binding.tvUserLevel.text = getString(R.string.user_level_text, it.level)
             binding.tvUserName.text = it.username
+            binding.ivUserProfileImage.setImageResource(userProfileImages.getResourceId(
+                it.profileImageId,
+                -1
+            ))
         }
     }
 
@@ -83,6 +91,11 @@ class CharacteristicsActivity: AppCompatActivity() {
     private fun setButtonsClickable(isClickable: Boolean) {
         binding.btnAddStrengthCharacteristic.isClickable = isClickable
         binding.btnAddEnduranceCharacteristic.isClickable = isClickable
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        userProfileImages.recycle()
     }
 
     companion object {

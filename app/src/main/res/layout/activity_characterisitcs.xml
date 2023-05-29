@@ -10,12 +10,14 @@
         android:layout_height="match_parent"
         android:background="#A15A24">
 
-        <ImageView
-            android:id="@+id/iv_use_icon"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_user_profile_image"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:src="@drawable/ic_user"
             android:layout_marginTop="30dp"
+            android:background="@drawable/bc_user_profile"
+            app:shapeAppearanceOverlay="@style/UserProfileImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +34,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_use_icon"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_profile_image"
             tools:text="user" />
 
         <TextView

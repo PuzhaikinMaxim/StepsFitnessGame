@@ -13,6 +13,7 @@ class RatingMapper {
             index,
             ratingDto.playerName,
             ratingDto.playerLevel,
+            ratingDto.profileImageId,
             ratingDto.place,
             ratingDto.amountOfSteps,
             ratingDto.amountOfDuelsWon,

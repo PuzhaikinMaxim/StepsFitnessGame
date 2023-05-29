@@ -76,6 +76,7 @@ class GuildEditorFragment: Fragment() {
                     this,
                     ViewModelFactory(getSharedPreferences())
                 )[GuildCreationViewModel::class.java]
+                viewModel.createLogoList(guildLogoIds)
                 setupOnCreateButtonListener()
             }
         }

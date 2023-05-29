@@ -23,10 +23,13 @@ class UserProfileActivity: AppCompatActivity() {
 
     private lateinit var guildLogoIds: TypedArray
 
+    private lateinit var userProfileImagesIds: TypedArray
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         guildLogoIds = resources.obtainTypedArray(R.array.guild_logos)
+        userProfileImagesIds = resources.obtainTypedArray(R.array.profile_images)
         val sharedPref = getSharedPreferences(
             PreferencesValues.PREFERENCES_KEY,
             Context.MODE_PRIVATE
@@ -57,6 +60,9 @@ class UserProfileActivity: AppCompatActivity() {
                 tvDuelsWon.text = getString(
                     R.string.profile_duels_won,
                     it.duelsWon
+                )
+                ivUserProfilePicture.setImageResource(
+                    userProfileImagesIds.getResourceId(it.userData.profileImageId, -1)
                 )
                 if(it.guildName != null && it.guildLogoId != null){
                     tvGuildName.text = it.guildName

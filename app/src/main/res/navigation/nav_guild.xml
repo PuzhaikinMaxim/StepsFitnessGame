@@ -43,8 +43,7 @@
         <action
             android:id="@+id/action_guildEditorFragment_to_guildFragment"
             app:destination="@id/guildFragment"
-            app:popUpTo="@id/guildFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/guildListFragment" />
     </fragment>
     <fragment
         android:id="@+id/chooseGuildChallengeFragment"

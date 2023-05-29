@@ -12,6 +12,7 @@ class FakeUserDataRemoteDataSource(
     override suspend fun getUserLevel(): Response<UserData> {
         return Response.Success(UserData(
             "username",
+            0,
             5,
             100,
             200

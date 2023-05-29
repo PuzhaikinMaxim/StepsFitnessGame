@@ -52,6 +52,10 @@ class RegistrationFragment : Fragment() {
         }
 
         viewModel.isAuthenticated.observe(requireActivity()){
+            val activity = requireActivity()
+            if(activity is MainActivity){
+                activity.showAccountCreatedToast()
+            }
             startFragment(AuthFragment.newFragment())
             println("Success")
         }

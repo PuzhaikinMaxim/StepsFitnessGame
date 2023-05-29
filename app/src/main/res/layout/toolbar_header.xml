@@ -6,12 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/toolbar_background"
     >
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_user_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_user"
-        android:contentDescription="@string/user_icon_description" />
+        android:contentDescription="@string/user_icon_description"
+        android:background="@drawable/bc_user_profile"
+        app:shapeAppearanceOverlay="@style/UserProfileImage"/>
 
     <TextView
         android:id="@+id/tv_user_name"

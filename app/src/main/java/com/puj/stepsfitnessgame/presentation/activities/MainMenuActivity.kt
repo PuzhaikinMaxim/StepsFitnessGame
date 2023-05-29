@@ -4,9 +4,11 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.TypedArray
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -46,6 +48,8 @@ class MainMenuActivity: AppCompatActivity() {
 
     private lateinit var viewModel: MainMenuViewModel
 
+    private lateinit var userProfileImages: TypedArray
+
     //private var isOnBackPressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +64,8 @@ class MainMenuActivity: AppCompatActivity() {
             this,
             ViewModelFactory(sharedPref)
         )[MainMenuViewModel::class.java]
+
+        userProfileImages = resources.obtainTypedArray(R.array.profile_images)
 
         //openChallengeListFragment()
 
@@ -111,6 +117,7 @@ class MainMenuActivity: AppCompatActivity() {
         val pbUserLevelProgress = headerView.findViewById<ProgressBar>(R.id.pb_user_level_progress)
         val tvAmountOfXp = headerView.findViewById<TextView>(R.id.tv_amount_of_xp)
         val tvUserName = headerView.findViewById<TextView>(R.id.tv_user_name)
+        val ivUserImage = headerView.findViewById<ImageView>(R.id.iv_user_icon)
 
         viewModel.userData.observe(this){
             tvUserLevel.text = getString(
@@ -124,6 +131,10 @@ class MainMenuActivity: AppCompatActivity() {
                 it.amountToGain
             )
             tvUserName.text = it.username
+            ivUserImage.setImageResource(userProfileImages.getResourceId(it.profileImageId, -1))
+            binding.tbHeader.ivUserIcon.setImageResource(
+                userProfileImages.getResourceId(it.profileImageId, -1)
+            )
             binding.tbHeader.tvUserName.text = it.username
         }
     }
@@ -277,6 +288,11 @@ class MainMenuActivity: AppCompatActivity() {
             println(gso.account)
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        userProfileImages.recycle()
     }
 
     companion object {
