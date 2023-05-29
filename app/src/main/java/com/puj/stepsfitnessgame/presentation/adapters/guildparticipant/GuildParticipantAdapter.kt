@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.presentation.adapters.guildparticipant
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,8 @@ import com.puj.stepsfitnessgame.databinding.ItemGuildParticipantBinding
 import com.puj.stepsfitnessgame.domain.models.guild.GuildParticipant
 
 class GuildParticipantAdapter(
-    private val isGuildOwner: Boolean
+    private val isGuildOwner: Boolean,
+    private val playerProfileImage: TypedArray
 ): Adapter<GuildParticipantAdapter.GuildParticipantViewHolder>() {
 
     var guildParticipantList = listOf<GuildParticipant>()
@@ -52,6 +54,9 @@ class GuildParticipantAdapter(
             ivExpelUser.setOnClickListener {
                 onExpelParticipant?.invoke(item.participantId)
             }
+            ivParticipantIcon.setImageResource(
+                playerProfileImage.getResourceId(item.participantProfileImageId, -1)
+            )
         }
     }
 

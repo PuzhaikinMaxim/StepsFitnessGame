@@ -11,8 +11,16 @@ class DuelMapper {
             duelDto.player.initialHp,
             duelDto.opponent.hp,
             duelDto.opponent.initialHp,
-            Player(duelDto.player.name),
-            Player(duelDto.opponent.name),
+            Player(
+                duelDto.player.name,
+                duelDto.player.level,
+                duelDto.player.profileImageId
+            ),
+            Player(
+                duelDto.opponent.name,
+                duelDto.player.level,
+                duelDto.player.profileImageId
+            ),
             duelDto.isDuelFinished,
             duelDto.isWon
         )

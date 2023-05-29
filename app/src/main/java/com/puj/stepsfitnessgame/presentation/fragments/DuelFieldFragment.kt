@@ -1,6 +1,7 @@
 package com.puj.stepsfitnessgame.presentation.fragments
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,8 @@ class DuelFieldFragment : Fragment() {
 
     private lateinit var viewModel: DuelFieldViewModel
 
+    private lateinit var playerProfileImages: TypedArray
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +45,8 @@ class DuelFieldFragment : Fragment() {
         viewModel = ViewModelProvider(
             this, ViewModelFactory(sharedPref)
         )[DuelFieldViewModel::class.java]
+
+        playerProfileImages = resources.obtainTypedArray(R.array.profile_images)
 
         return binding.root
     }
@@ -59,7 +64,16 @@ class DuelFieldFragment : Fragment() {
             setupHealthBars(it)
             setupGameEndedInfoContainer(it)
             binding.tvUserName.text = it.player.name
+            binding.tvUserLevel.text = it.player.level.toString()
+            binding.ivUserIcon.setImageResource(playerProfileImages.getResourceId(
+                it.player.profileImageId, -1
+            ))
+
             binding.tvOpponentName.text = it.opponent.name
+            binding.tvOpponentLevel.text = it.opponent.level.toString()
+            binding.ivOpponentIcon.setImageResource(playerProfileImages.getResourceId(
+                it.opponent.profileImageId, -1
+            ))
         }
     }
 
@@ -169,6 +183,7 @@ class DuelFieldFragment : Fragment() {
         super.onDestroy()
         _binding = null
         removeAllObservers()
+        playerProfileImages.recycle()
     }
 
     private fun removeAllObservers() {

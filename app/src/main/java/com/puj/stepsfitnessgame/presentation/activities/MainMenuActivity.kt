@@ -33,12 +33,16 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.workers.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
+import com.puj.stepsfitnessgame.data.network.duel.DuelStompClient
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.*
 import com.puj.stepsfitnessgame.presentation.viewmodels.MainMenuViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainMenuActivity: AppCompatActivity() {
 
@@ -82,9 +86,8 @@ class MainMenuActivity: AppCompatActivity() {
         )
         */
 
-        /*
         val duelStompClient2 = DuelStompClient(
-            "user2f72afb76-8230-4587-ba04-f6c6639d8538",
+            "testtest95ddaf83-dbf0-479c-9f8b-73c6ee9e65ce",
         )
 
         duelStompClient2.initializeConnection("user2")
@@ -96,8 +99,6 @@ class MainMenuActivity: AppCompatActivity() {
                 duelStompClient2.tryFindGame()
             }
         }
-
-         */
 
         FitnessGameDatabase.initializeDatabase(this)
 

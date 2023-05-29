@@ -21,7 +21,7 @@ class RatingAdapter(var context: Context?): Adapter<RatingAdapter.ItemRatingView
             diffResult.dispatchUpdatesTo(this)
         }
 
-    var playerProfileImage = context!!.resources.obtainTypedArray(R.array.profile_images)
+    var playerProfileImages = context!!.resources.obtainTypedArray(R.array.profile_images)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemRatingViewHolder {
         val binding = ItemRatingBinding.inflate(
@@ -37,7 +37,9 @@ class RatingAdapter(var context: Context?): Adapter<RatingAdapter.ItemRatingView
         with(holder.binding){
             tvPlayerName.text = item.playerName
             tvPlayerLevel.text = context!!.getString(R.string.user_level_text, item.playerLevel)
-            ivPlayerIcon.setImageResource(playerProfileImage.getResourceId(item.profileImageId, -1))
+            ivPlayerIcon.setImageResource(
+                playerProfileImages.getResourceId(item.profileImageId, -1)
+            )
             if(item.place != null){
                 tvPlayerPlace.text = context!!.getString(R.string.tv_player_place_text, item.place)
             }
@@ -65,7 +67,7 @@ class RatingAdapter(var context: Context?): Adapter<RatingAdapter.ItemRatingView
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
         context = null
-        playerProfileImage.recycle()
+        playerProfileImages.recycle()
     }
 
     class ItemRatingViewHolder(val binding: ItemRatingBinding): ViewHolder(binding.root)

@@ -36,6 +36,8 @@ class GuildFragment: Fragment() {
 
     private lateinit var guildLogoIds: TypedArray
 
+    private lateinit var playerProfileImages: TypedArray
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +51,7 @@ class GuildFragment: Fragment() {
             ) ?: throw RuntimeException()
 
         guildLogoIds = resources.obtainTypedArray(R.array.guild_logos)
+        playerProfileImages = resources.obtainTypedArray(R.array.profile_images)
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(sharedPref)
@@ -220,7 +223,7 @@ class GuildFragment: Fragment() {
     }
 
     private fun setupParticipantList(isGuildOwner: Boolean) {
-        val adapter = GuildParticipantAdapter(isGuildOwner)
+        val adapter = GuildParticipantAdapter(isGuildOwner, playerProfileImages)
         viewModel.guildParticipants.observe(requireActivity()){
             adapter.guildParticipantList = it
         }
@@ -269,6 +272,8 @@ class GuildFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        playerProfileImages.recycle()
+        guildLogoIds.recycle()
         removeAllObservers()
     }
 
