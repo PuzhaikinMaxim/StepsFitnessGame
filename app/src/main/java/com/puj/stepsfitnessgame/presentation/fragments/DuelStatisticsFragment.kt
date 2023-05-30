@@ -46,6 +46,7 @@ class DuelStatisticsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupDuelStatistics()
         setupStartDuelButton()
+        setupIsDuelNotFinishedObserver()
     }
 
     private fun setupDuelStatistics() {
@@ -99,6 +100,14 @@ class DuelStatisticsFragment : Fragment() {
         }
     }
 
+    private fun setupIsDuelNotFinishedObserver() {
+        viewModel.isDuelNotFinished.observe(requireActivity()){
+            findNavController().navigate(
+                R.id.action_duelStatisticsFragment_to_duelFieldFragment
+            )
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -108,6 +117,7 @@ class DuelStatisticsFragment : Fragment() {
     private fun removeAllObservers() {
         if(!this::viewModel.isInitialized) return
         viewModel.duelStatistics.removeObservers(requireActivity())
+        viewModel.isDuelNotFinished.removeObservers(requireActivity())
     }
 
     companion object {

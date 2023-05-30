@@ -84,4 +84,17 @@ class DuelRemoteDataSourceImpl(
             return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
         }
     }
+
+    override suspend fun getIsDuelNotFinished(): Boolean {
+        try {
+            val response = duelApiService.isDuelNotFinished(token)
+            if(response.isSuccessful && response.body() != null){
+                return response.body()!!
+            }
+            return false
+        }
+        catch (ex: Exception) {
+            return false
+        }
+    }
 }

@@ -11,6 +11,11 @@
         <action
             android:id="@+id/action_duelStatisticsFragment_to_duelSearchFragment"
             app:destination="@id/duelSearchFragment" />
+        <action
+            android:id="@+id/action_duelStatisticsFragment_to_duelFieldFragment"
+            app:destination="@id/duelFieldFragment"
+            app:popUpTo="@id/duelStatisticsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/duelSearchFragment"

@@ -35,4 +35,18 @@ class RatingDataSourceImpl(private val token: String): RatingDataSource {
             return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
         }
     }
+
+    override suspend fun getRatingListUpdateCountdown(): Response<String> {
+        try {
+            val response = service.getRatingListUpdateCountdown(token)
+            if(response.isSuccessful && response.body() != null){
+                return Response.Success(response.body()!!)
+            }
+            return Response.Error(AppErrorCodes.DEFAULT_ERROR_CODE)
+        }
+        catch (ex: Exception){
+            ex.printStackTrace()
+            return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
+        }
+    }
 }

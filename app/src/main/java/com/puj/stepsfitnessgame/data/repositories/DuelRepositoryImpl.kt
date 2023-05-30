@@ -74,6 +74,10 @@ class DuelRepositoryImpl(
         return duelStatistics
     }
 
+    override suspend fun getIsDuelNotFinished(): Boolean {
+        return duelRemoteDataSourceImpl.getIsDuelNotFinished()
+    }
+
     override suspend fun claimReward(): FinishedDuelReward? {
         val response = duelRemoteDataSourceImpl.claimReward()
         if(response is Response.Success){

@@ -8,12 +8,17 @@ import com.puj.stepsfitnessgame.data.network.rating.RatingMapper
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.rating.Rating
 import com.puj.stepsfitnessgame.domain.repositories.RatingRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class RatingRepositoryImpl(private val sharedPreferences: SharedPreferences): RatingRepository {
 
     private val ratingMapper = RatingMapper()
 
     private val ratingList = MutableLiveData<List<Rating>>()
+
+    private val countdown = MutableLiveData<String>()
 
     private val token: String = sharedPreferences.getString(
         TOKEN_KEY,
@@ -24,6 +29,16 @@ class RatingRepositoryImpl(private val sharedPreferences: SharedPreferences): Ra
 
     override fun getRatingListUseCase(): LiveData<List<Rating>> {
         return ratingList
+    }
+
+    override fun getRatingListUpdateCountdown(): LiveData<String> {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = ratingDataSource.getRatingListUpdateCountdown()
+            if(response is Response.Success){
+                countdown.postValue(response.data)
+            }
+        }
+        return countdown
     }
 
     override suspend fun setStepAmountRating() {

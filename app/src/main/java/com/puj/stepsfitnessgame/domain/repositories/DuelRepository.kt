@@ -19,6 +19,8 @@ interface DuelRepository {
 
     fun getDuelStatistics(): LiveData<DuelStatistics>
 
+    suspend fun getIsDuelNotFinished(): Boolean
+
     suspend fun claimReward(): FinishedDuelReward?
 
     suspend fun cancelDuel(): Boolean

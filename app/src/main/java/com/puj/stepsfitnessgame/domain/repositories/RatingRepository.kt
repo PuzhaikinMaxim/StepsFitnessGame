@@ -10,4 +10,5 @@ interface RatingRepository {
     suspend fun setStepAmountRating()
 
     suspend fun setDuelsAmountRating()
+    fun getRatingListUpdateCountdown(): LiveData<String>
 }

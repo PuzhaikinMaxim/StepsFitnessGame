@@ -21,5 +21,7 @@ interface DuelRemoteDataSource {
 
     suspend fun cancelDuel(): Response<Boolean>
 
+    suspend fun getIsDuelNotFinished(): Boolean
+
     fun tryFindGame()
 }

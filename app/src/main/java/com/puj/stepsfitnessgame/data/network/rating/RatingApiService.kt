@@ -12,4 +12,7 @@ interface RatingApiService {
 
     @GET("players_rating/get_top_players_by_amount_of_duels_won")
     suspend fun getTopOneHundredPlayersByAmountOfDuelsWon(@Header("token") token: String): Response<List<RatingDto>>
+
+    @GET("players_rating/get_rating_list_update_countdown")
+    suspend fun getRatingListUpdateCountdown(@Header("token") token: String): Response<String>
 }

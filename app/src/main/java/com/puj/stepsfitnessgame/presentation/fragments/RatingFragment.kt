@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentRatingBinding
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
@@ -51,6 +52,7 @@ class RatingFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRatingList()
         setupRatingTypeMenu()
+        setupCountdownTimer()
     }
 
     private fun setupRatingList() {
@@ -59,6 +61,15 @@ class RatingFragment: Fragment() {
             adapter.ratingList = it
         }
         binding.rvPlayerRating.adapter = adapter
+    }
+
+    private fun setupCountdownTimer() {
+        viewModel.ratingListUpdateCountdown.observe(requireActivity()){
+            binding.tvListUpdateCountdownText.text = getString(
+                R.string.tv_list_update_countdown_text,
+                it
+            )
+        }
     }
 
     private fun setupRatingTypeMenu() {
@@ -97,6 +108,7 @@ class RatingFragment: Fragment() {
     private fun removeAllObservers() {
         if(!this::viewModel.isInitialized) return
         viewModel.ratingList.removeObservers(requireActivity())
+        viewModel.ratingListUpdateCountdown.removeObservers(requireActivity())
     }
 
     companion object {

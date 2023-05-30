@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.puj.stepsfitnessgame.data.repositories.RatingRepositoryImpl
 import com.puj.stepsfitnessgame.domain.repositories.RatingRepository
+import com.puj.stepsfitnessgame.domain.usecases.rating.GetRatingListUpdateCountdown
 import com.puj.stepsfitnessgame.domain.usecases.rating.GetRatingListUseCase
 import com.puj.stepsfitnessgame.domain.usecases.rating.SetDuelsAmountRatingUseCase
 import com.puj.stepsfitnessgame.domain.usecases.rating.SetStepAmountRatingUseCase
@@ -21,7 +22,11 @@ class RatingViewModel(sharedPreferences: SharedPreferences): ViewModel() {
 
     private val getRatingListUseCase = GetRatingListUseCase(repository)
 
+    private val getRatingListUpdateCountdown = GetRatingListUpdateCountdown(repository)
+
     val ratingList = getRatingListUseCase()
+
+    val ratingListUpdateCountdown = getRatingListUpdateCountdown()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

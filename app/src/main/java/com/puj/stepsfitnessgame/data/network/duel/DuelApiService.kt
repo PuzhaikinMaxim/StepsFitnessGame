@@ -22,4 +22,7 @@ interface DuelApiService {
 
     @PUT("duel/update_progress")
     suspend fun updateProgress(@Header("token") token: String, @Body stepCount: StepCount)
+
+    @GET("duel/is_duel_not_finished")
+    suspend fun isDuelNotFinished(@Header("token") token: String): Response<Boolean>
 }
