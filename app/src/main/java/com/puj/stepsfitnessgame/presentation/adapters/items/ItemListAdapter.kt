@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.puj.stepsfitnessgame.R
+import com.puj.stepsfitnessgame.databinding.ItemGameItemAltBinding
 import com.puj.stepsfitnessgame.databinding.ItemGameItemBinding
 import com.puj.stepsfitnessgame.domain.models.item.Item
 
@@ -24,7 +25,7 @@ class ItemListAdapter: Adapter<ItemListAdapter.ItemListViewHolder>() {
     var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
-        val binding = ItemGameItemBinding.inflate(
+        val binding = ItemGameItemAltBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -81,5 +82,5 @@ class ItemListAdapter: Adapter<ItemListAdapter.ItemListViewHolder>() {
         context = null
     }
 
-    class ItemListViewHolder(val binding: ItemGameItemBinding): ViewHolder(binding.root)
+    class ItemListViewHolder(val binding: ItemGameItemAltBinding): ViewHolder(binding.root)
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.puj.stepsfitnessgame.data.repositories.ChallengeRepositoryImpl
-import com.puj.stepsfitnessgame.data.repositories.StepStepStatisticsRepositoryImpl
+import com.puj.stepsfitnessgame.data.repositories.StepStatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
 import com.puj.stepsfitnessgame.domain.models.stepstatistics.TodayStatistics
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() {
 
-    private val statisticsRepository = StepStepStatisticsRepositoryImpl()
+    private val statisticsRepository = StepStatisticsRepositoryImpl()
 
     private val setTodayStatisticsUseCase = SetTodayStatisticsUseCase(statisticsRepository)
 

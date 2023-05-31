@@ -3,7 +3,7 @@ package com.puj.stepsfitnessgame.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.puj.stepsfitnessgame.data.repositories.StepStepStatisticsRepositoryImpl
+import com.puj.stepsfitnessgame.data.repositories.StepStatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.repositories.StepStatisticsRepository
 import com.puj.stepsfitnessgame.domain.models.stepstatistics.DayData
 import com.puj.stepsfitnessgame.domain.models.stepstatistics.StepData
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class StatisticsViewModel: ViewModel() {
 
-    private val stepStatisticsRepository: StepStatisticsRepository = StepStepStatisticsRepositoryImpl()
+    private val stepStatisticsRepository: StepStatisticsRepository = StepStatisticsRepositoryImpl()
 
     private val setLastThirtyDaysStepDataUseCase =
         SetLastThirtyDaysStepDataUseCase(stepStatisticsRepository)

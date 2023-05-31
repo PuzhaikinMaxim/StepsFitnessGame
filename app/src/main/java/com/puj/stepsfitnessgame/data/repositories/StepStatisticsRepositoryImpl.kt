@@ -12,7 +12,7 @@ import com.puj.stepsfitnessgame.domain.models.stepstatistics.Goal
 import com.puj.stepsfitnessgame.domain.models.stepstatistics.StepData
 import com.puj.stepsfitnessgame.domain.models.stepstatistics.TodayStatistics
 
-class StepStepStatisticsRepositoryImpl: StepStatisticsRepository {
+class StepStatisticsRepositoryImpl: StepStatisticsRepository {
 
     private val stepActivityDataSource = StepActivityDataSource
 
