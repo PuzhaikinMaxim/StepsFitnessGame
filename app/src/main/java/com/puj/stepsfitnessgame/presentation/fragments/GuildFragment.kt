@@ -67,6 +67,7 @@ class GuildFragment: Fragment() {
         setupIsGuildOwner()
         setupHasReward()
         setupRewardModal()
+        viewModel.startPeriodicalDataUpdate()
         if(args.isDataChanged){
             viewModel.resetData()
         }
@@ -267,11 +268,13 @@ class GuildFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.resetData()
+        viewModel.startPeriodicalDataUpdate()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        viewModel.stopPeriodicalDataUpdate()
         playerProfileImages.recycle()
         guildLogoIds.recycle()
         removeAllObservers()

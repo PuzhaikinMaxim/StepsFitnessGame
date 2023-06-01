@@ -1,12 +1,16 @@
 package com.puj.stepsfitnessgame.presentation.fragments
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.databinding.FragmentDailyChallengesBinding
 import com.puj.stepsfitnessgame.databinding.ItemDailyTaskBinding
@@ -23,6 +27,20 @@ class DailyChallengeFragment: Fragment() {
 
     private lateinit var viewModel: DailyChallengeViewModel
 
+    private val localBroadcastManager by lazy {
+        LocalBroadcastManager.getInstance(requireActivity())
+    }
+
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            when(p1?.action) {
+                "step_count_updated" -> {
+                    viewModel.updateDailyTasksList()
+                }
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,7 +56,6 @@ class DailyChallengeFragment: Fragment() {
             this,
             ViewModelFactory(sharedPref)
         )[DailyChallengeViewModel::class.java]
-
         return binding.root
     }
 
@@ -48,6 +65,14 @@ class DailyChallengeFragment: Fragment() {
         setupAmountOfDailyTasksCompletedTextView()
         setupClaimRewardButton()
         setupModal()
+        setupIntentFilter()
+    }
+
+    private fun setupIntentFilter() {
+        val intentFilter = IntentFilter().apply {
+            addAction("step_count_updated")
+        }
+        localBroadcastManager.registerReceiver(receiver, intentFilter)
     }
 
     private fun setupDailyTasksList() {

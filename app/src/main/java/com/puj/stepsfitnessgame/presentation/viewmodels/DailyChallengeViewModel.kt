@@ -51,6 +51,10 @@ class DailyChallengeViewModel(
         }
     }
 
+    fun updateDailyTasksList() {
+        getDailyChallengesUseCase()
+    }
+
     fun closeModal() {
         _shouldShowRewardModal.postValue(false)
     }

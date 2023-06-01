@@ -11,8 +11,7 @@ import com.puj.stepsfitnessgame.domain.repositories.DuelRepository
 import com.puj.stepsfitnessgame.domain.usecases.duel.CancelDuelUseCase
 import com.puj.stepsfitnessgame.domain.usecases.duel.ClaimRewardUseCase
 import com.puj.stepsfitnessgame.domain.usecases.duel.GetDuelFieldUseCase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class DuelFieldViewModel(sharedPreferences: SharedPreferences) : ViewModel() {
 
@@ -31,6 +30,8 @@ class DuelFieldViewModel(sharedPreferences: SharedPreferences) : ViewModel() {
     private val _shouldCloseScreen = MutableLiveData<Unit>()
     val shouldCloseScreen: LiveData<Unit>
         get() = _shouldCloseScreen
+
+    private lateinit var duelFieldUpdateCoroutine: Job
 
     val duelField = getDuelFieldUseCase()
 
@@ -52,7 +53,29 @@ class DuelFieldViewModel(sharedPreferences: SharedPreferences) : ViewModel() {
         }
     }
 
+    fun startPeriodicalDataUpdate() {
+        if(this::duelFieldUpdateCoroutine.isInitialized && !duelFieldUpdateCoroutine.isActive){
+            duelFieldUpdateCoroutine.start()
+        }
+        duelFieldUpdateCoroutine = viewModelScope.launch(Dispatchers.Main) {
+            while (true) {
+                delay(ONE_MINUTE)
+                ensureActive()
+                getDuelFieldUseCase()
+            }
+        }
+    }
+
+    fun stopPeriodicalDataUpdate() {
+        duelFieldUpdateCoroutine.cancel()
+    }
+
     fun closeScreen() {
         _shouldCloseScreen.value = Unit
+    }
+
+    companion object {
+
+        private const val ONE_MINUTE = 1000L * 60
     }
 }

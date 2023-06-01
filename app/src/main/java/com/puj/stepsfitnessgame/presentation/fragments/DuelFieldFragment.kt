@@ -57,6 +57,7 @@ class DuelFieldFragment : Fragment() {
         setupRewardModal()
         setupShouldCloseScreen()
         setupOnGiveUpListener()
+        viewModel.startPeriodicalDataUpdate()
     }
 
     private fun setupGameField() {
@@ -179,9 +180,15 @@ class DuelFieldFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.startPeriodicalDataUpdate()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        viewModel.stopPeriodicalDataUpdate()
         removeAllObservers()
         playerProfileImages.recycle()
     }

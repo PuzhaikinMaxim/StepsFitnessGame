@@ -36,8 +36,7 @@ class ChallengeListFragment: Fragment() {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(p0: Context?, p1: Intent?) {
-            val action = p1?.action
-            when(action) {
+            when(p1?.action) {
                 "step_count_updated" -> {
                     viewModel.updateData()
                 }

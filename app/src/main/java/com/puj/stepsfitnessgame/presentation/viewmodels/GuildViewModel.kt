@@ -12,8 +12,7 @@ import com.puj.stepsfitnessgame.domain.repositories.GuildChallengeRepository
 import com.puj.stepsfitnessgame.domain.repositories.GuildRepository
 import com.puj.stepsfitnessgame.domain.usecases.guild.*
 import com.puj.stepsfitnessgame.domain.usecases.guildchallenge.GetCurrentGuildChallengeUseCase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewModel() {
 
@@ -58,6 +57,8 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
 
     val guildData = getGuildDataUseCase()
 
+    private lateinit var guildDataUpdateCoroutine: Job
+
     private val _isOwner = MutableLiveData<Boolean>()
     val isOwner: LiveData<Boolean>
         get() = _isOwner
@@ -93,10 +94,33 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
         _shouldOpenRewardModal.value = false
     }
 
+    fun startPeriodicalDataUpdate() {
+        if(this::guildDataUpdateCoroutine.isInitialized && !guildDataUpdateCoroutine.isActive){
+            guildDataUpdateCoroutine.start()
+        }
+        guildDataUpdateCoroutine = viewModelScope.launch(Dispatchers.Main) {
+            while (true) {
+                delay(THREE_MINUTES)
+                ensureActive()
+                getGuildParticipantsUseCase()
+                getCurrentGuildChallengeUseCase()
+                getGuildStatisticsUseCase()
+            }
+        }
+    }
+
+    fun stopPeriodicalDataUpdate() {
+        guildDataUpdateCoroutine.cancel()
+    }
+
     fun resetData() {
         getGuildDataUseCase()
         getCurrentGuildChallengeUseCase()
         getGuildParticipantsUseCase()
         getGuildStatisticsUseCase()
+    }
+
+    companion object {
+        private const val THREE_MINUTES = 1000L * 60 * 3
     }
 }
