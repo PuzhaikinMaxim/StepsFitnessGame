@@ -21,13 +21,14 @@ class FakeDailyChallengeRemoteDataSource(
         return dailyChallenges
     }
 
-    override suspend fun updateDailyChallengesProgress(stepCount: Int) {
+    override suspend fun updateDailyChallengesProgress(stepCount: Int): Boolean {
         dailyTaskProgress += stepCount
         if(dailyTaskProgress >= 500) dailyChallenges[1] = dailyChallenges[1].copy(isCompleted = true)
         if(dailyTaskProgress >= 1000) dailyChallenges[2] = dailyChallenges[2].copy(isCompleted = true)
         if(dailyTaskProgress >= 5000) dailyChallenges[3] = dailyChallenges[3].copy(isCompleted = true)
         if(dailyTaskProgress >= 10000) dailyChallenges[4] = dailyChallenges[4].copy(isCompleted = true)
         if(dailyTaskProgress >= 15000) dailyChallenges[4] = dailyChallenges[4].copy(isCompleted = true)
+        return true
     }
 
     override suspend fun claimDailyChallengesReward(): CompletedDailyChallengeRewardDto {

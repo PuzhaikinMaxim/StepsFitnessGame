@@ -40,4 +40,8 @@ class MainMenuViewModel(sharedPreferences: SharedPreferences): ViewModel() {
             _isUserLoggedOut.postValue(Unit)
         }
     }
+
+    fun resetUserData() {
+        getUserDataUseCase()
+    }
 }

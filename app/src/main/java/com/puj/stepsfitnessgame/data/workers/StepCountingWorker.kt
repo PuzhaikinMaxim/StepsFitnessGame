@@ -60,8 +60,6 @@ class StepCountingWorker(
 
     override suspend fun doWork(): Result {
         createNotificationBuilder()
-        startForegroundService(notificationBuilder)
-        var i = 0
         while (true) {
             delay(FIFTEEN_SECONDS)
             val todayStatistics = stepActivityDataSource.getTodayStatistics()
@@ -73,7 +71,7 @@ class StepCountingWorker(
             try {
                 challengeRemoteDataSource.updateChallengeProgress(stepCount)
                 duelRemoteDataSource.updateStepAmount(stepCount)
-                dailyChallengeRemoteDataSource.updateDailyChallengesProgress(stepCount)
+                updateDailyChallengeList(stepCount)
                 guildChallengeRemoteDataSource.updateProgress(stepCount)
                 playerStatisticsDataProvider.updateProgress(stepCount)
                 stepActivityDataSource.updateLastStepCount()
@@ -91,6 +89,14 @@ class StepCountingWorker(
                 "test" to "test"
             )
         )
+    }
+
+    private suspend fun updateDailyChallengeList(stepCount: Int) {
+        val shouldUpdateDailyChallengeList =
+            dailyChallengeRemoteDataSource.updateDailyChallengesProgress(stepCount)
+        if(shouldUpdateDailyChallengeList) {
+            dailyChallengeRemoteDataSource.generateDailyChallengeList()
+        }
     }
 
     private suspend fun startForegroundService(notificationBuilder: Builder) {
@@ -130,8 +136,9 @@ class StepCountingWorker(
             .setContentTitle("Шаги RPG. Фитнес игра с шагомером")
             .setOngoing(true)
             .setOnlyAlertOnce(true)
+            .setSilent(true)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.ic_dungeon_white_transparent)
         return notificationBuilder
     }
 

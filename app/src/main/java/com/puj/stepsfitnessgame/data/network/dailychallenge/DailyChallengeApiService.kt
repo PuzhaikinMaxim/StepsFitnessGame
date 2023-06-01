@@ -30,5 +30,5 @@ interface DailyChallengeApiService {
     suspend fun updateProgress(
         @Header("token") token: String,
         @Body stepCount: StepCount
-    )
+    ): Response<String>
 }

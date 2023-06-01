@@ -291,6 +291,11 @@ class MainMenuActivity: AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        viewModel.resetUserData()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         userProfileImages.recycle()

@@ -37,12 +37,16 @@ class DailyChallengeRemoteDataSourceImpl(
         }
     }
 
-    override suspend fun updateDailyChallengesProgress(stepCount: Int) {
+    override suspend fun updateDailyChallengesProgress(stepCount: Int): Boolean {
         try {
-            dailyChallengeApiService.updateProgress(token, StepCount(stepCount))
+            val response = dailyChallengeApiService.updateProgress(token, StepCount(stepCount))
+            if(!response.isSuccessful || response.body() == null) return false
+            if(response.body() == "Daily challenges is outdated") return true
+            if(response.body() == "Daily challenges not found") return true
+            return false
         }
         catch (ex: Exception){
-
+            return false
         }
     }
 
