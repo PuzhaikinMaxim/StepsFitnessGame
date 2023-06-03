@@ -27,4 +27,6 @@ interface GuildRepository {
     suspend fun editGuild(guildEditionInfo: GuildEditionInfo)
 
     suspend fun getGuildEditionInfo(): GuildEditionInfo?
+
+    suspend fun leaveGuild(): Boolean
 }

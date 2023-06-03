@@ -151,4 +151,13 @@ class GuildDataSourceImpl(private val token: String): GuildDataSource {
             return Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
         }
     }
+
+    override suspend fun leaveGuild(): Response<Unit> {
+        return try {
+            service.leaveGuild(token)
+            Response.Success(Unit)
+        } catch (ex: Exception) {
+            Response.Error(AppErrorCodes.SERVER_NOT_RESPONDING_CODE)
+        }
+    }
 }

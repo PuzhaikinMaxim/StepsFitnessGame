@@ -48,4 +48,7 @@ interface GuildApiService {
 
     @PUT("guild/edit_guild_data")
     suspend fun editGuildData(@Header("token") token: String, @Body guildEditionInfo: GuildEditionInfo)
+
+    @PUT("guild/leave_guild")
+    suspend fun leaveGuild(@Header("token") token: String)
 }

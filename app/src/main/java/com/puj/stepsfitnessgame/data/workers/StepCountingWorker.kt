@@ -67,7 +67,7 @@ class StepCountingWorker(
             startForegroundService(notificationBuilder)
             //val stepCount = stepActivityDataSource.getStepCountInInterval()
             //if(stepCount == 0) continue
-            val stepCount = 10
+            val stepCount = 1000
             try {
                 challengeRemoteDataSource.updateChallengeProgress(stepCount)
                 duelRemoteDataSource.updateStepAmount(stepCount)
@@ -146,7 +146,7 @@ class StepCountingWorker(
         private const val TOKEN_KEY = "authToken"
         private const val DEFAULT = "default"
         private const val ID = 1
-        private const val FIFTEEN_SECONDS = 15 * 1000L
+        private const val FIFTEEN_SECONDS = 3 * 1000L
         private const val THREE_MINUTES = 3 * 60 * 1000L
     }
 }

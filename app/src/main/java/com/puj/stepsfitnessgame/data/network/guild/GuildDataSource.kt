@@ -27,4 +27,6 @@ interface GuildDataSource {
     suspend fun editGuild(guildEditionInfo: GuildEditionInfo)
 
     suspend fun getGuildEditionInfo(): Response<GuildEditionInfo>
+
+    suspend fun leaveGuild(): Response<Unit>
 }

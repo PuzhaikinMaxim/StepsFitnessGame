@@ -156,11 +156,24 @@ class GuildFragment: Fragment() {
                 binding.btnEnterRequests.visibility = View.VISIBLE
                 binding.ivSettings.visibility = View.VISIBLE
                 binding.ivEnterRequests.visibility = View.VISIBLE
+                binding.btnLeaveGuild.visibility = View.GONE
                 setupOnEnterRequestsClickListener()
                 setupOnSettingsClickListener()
             }
+            else {
+                setupLeaveGuildListeners()
+            }
             setupParticipantList(it)
             setupCurrentChallenge(it)
+        }
+    }
+
+    private fun setupLeaveGuildListeners() {
+        binding.btnLeaveGuild.setOnClickListener {
+            viewModel.leaveGuild()
+        }
+        viewModel.hasLeftFromGuild.observe(requireActivity()){
+            findNavController().navigate(R.id.action_guildFragment_to_guildListFragment)
         }
     }
 
@@ -290,6 +303,7 @@ class GuildFragment: Fragment() {
         viewModel.hasReward.removeObservers(requireActivity())
         viewModel.currentChallenge.removeObservers(requireActivity())
         viewModel.guildParticipants.removeObservers(requireActivity())
+        viewModel.hasLeftFromGuild.removeObservers(requireActivity())
     }
 
     companion object {

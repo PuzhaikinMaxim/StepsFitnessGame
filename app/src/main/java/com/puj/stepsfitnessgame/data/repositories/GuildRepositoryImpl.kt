@@ -130,6 +130,12 @@ class GuildRepositoryImpl(sharedPreferences: SharedPreferences): GuildRepository
         return null
     }
 
+    override suspend fun leaveGuild(): Boolean {
+        val response = guildRemoteDataSource.leaveGuild()
+        if(response is Response.Success) return true
+        return false
+    }
+
     companion object {
         private const val TOKEN_KEY = "authToken"
         private const val TOKEN_DEFAULT = "default"

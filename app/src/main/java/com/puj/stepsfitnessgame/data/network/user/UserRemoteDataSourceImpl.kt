@@ -55,6 +55,7 @@ class UserRemoteDataSourceImpl(private val token: String): UserRemoteDataSource 
             return Response.Error(DEFAULT_ERROR_CODE)
         }
         catch (ex: Exception){
+            ex.printStackTrace()
             return Response.Error(SERVER_NOT_RESPONDING_CODE)
         }
     }

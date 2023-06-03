@@ -1,10 +1,12 @@
 package com.puj.stepsfitnessgame.data.repositories
 
 import android.content.SharedPreferences
+import com.puj.stepsfitnessgame.data.network.AppErrorCodes
 import com.puj.stepsfitnessgame.data.network.user.FakeUserRemoteDataSource
 import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.domain.repositories.UserRepository
 import com.puj.stepsfitnessgame.domain.models.Response
+import com.puj.stepsfitnessgame.domain.models.authresult.AuthResult
 import com.puj.stepsfitnessgame.domain.models.user.UserCredentials
 import com.puj.stepsfitnessgame.domain.models.user.UserRegistrationInfo
 
@@ -57,10 +59,17 @@ class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : Use
         }
     }
 
-    override suspend fun isUserLoggedIn(): Response<Unit> {
+    override suspend fun isUserLoggedIn(): AuthResult {
         val token = sharedPreferences.getString(TOKEN_KEY, DEFAULT) ?: DEFAULT
         println("token $token")
-        return userRemoteDataSource.isUserLoggedIn(token)
+        val authResult = userRemoteDataSource.isUserLoggedIn(token)
+        if(authResult is Response.Success){
+            return AuthResult.SUCCESS
+        }
+        if(authResult is Response.Error && authResult.errorCode == AppErrorCodes.UNAUTHORIZED_CODE){
+            return AuthResult.NOT_AUTHORIZED
+        }
+        return AuthResult.NO_CONNECTION_TO_SERVER
     }
 
     override suspend fun logOut() {

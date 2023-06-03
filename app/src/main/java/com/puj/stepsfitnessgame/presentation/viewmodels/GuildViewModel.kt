@@ -35,6 +35,8 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
 
     private val getHasRewardUseCase = GetHasRewardUseCase(guildRepository)
 
+    private val leaveGuildUseCase = LeaveGuildUseCase(guildRepository)
+
     private val getCurrentGuildChallengeUseCase = GetCurrentGuildChallengeUseCase(guildChallengeRepository)
 
     private val _challengeReward = MutableLiveData<CompletedChallengeReward>()
@@ -48,6 +50,10 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
     private val _hasReward = MutableLiveData<Boolean>()
     val hasReward: LiveData<Boolean>
         get() = _hasReward
+
+    private val _hasLeftFromGuild = MutableLiveData<Boolean>()
+    val hasLeftFromGuild: LiveData<Boolean>
+        get() = _hasLeftFromGuild
 
     val guildParticipants = getGuildParticipantsUseCase()
 
@@ -118,6 +124,15 @@ class GuildViewModel(private val sharedPreferences: SharedPreferences): ViewMode
         getCurrentGuildChallengeUseCase()
         getGuildParticipantsUseCase()
         getGuildStatisticsUseCase()
+    }
+
+    fun leaveGuild() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val isLeftFromGuild = leaveGuildUseCase()
+            if(isLeftFromGuild) {
+                _hasLeftFromGuild.postValue(true)
+            }
+        }
     }
 
     companion object {

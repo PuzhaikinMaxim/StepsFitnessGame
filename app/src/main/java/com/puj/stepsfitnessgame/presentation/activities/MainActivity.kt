@@ -11,6 +11,7 @@ import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.network.duel.DuelStompClient
 import com.puj.stepsfitnessgame.data.network.user.UserRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.databinding.ActivityMainBinding
+import com.puj.stepsfitnessgame.domain.models.authresult.AuthResult
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.AuthFragment
@@ -47,11 +48,14 @@ class MainActivity : AppCompatActivity() {
     private fun setIsUserAuthorizedListener() {
         viewModel.isUserLoggedIn.observe(this){
             when(it){
-                true -> {
+                AuthResult.SUCCESS -> {
                     openMainScreen()
                 }
-                false -> {
+                AuthResult.NOT_AUTHORIZED -> {
                     startFragment(AuthFragment.newFragment())
+                }
+                AuthResult.NO_CONNECTION_TO_SERVER -> {
+                    openNoConnectionActivity()
                 }
             }
         }
@@ -76,6 +80,12 @@ class MainActivity : AppCompatActivity() {
             "Учетная запись была успешно создана!",
             Toast.LENGTH_LONG
         ).show()
+    }
+
+    private fun openNoConnectionActivity() {
+        val intent = NoConnectionActivity.newIntent(this)
+        startActivity(intent)
+        finish()
     }
 
     companion object {

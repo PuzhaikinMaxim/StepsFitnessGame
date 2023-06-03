@@ -32,6 +32,10 @@
             android:name="isDataChanged"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_guildFragment_to_guildListFragment"
+            app:destination="@id/guildListFragment"
+            app:popUpTo="@id/guildListFragment" />
     </fragment>
     <fragment
         android:id="@+id/guildEditorFragment"
