@@ -206,6 +206,7 @@ class GuildFragment: Fragment() {
             }
             else{
                 binding.btnClaimReward.visibility = View.GONE
+                binding.ivClaimReward.visibility = View.GONE
             }
         }
     }
