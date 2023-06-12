@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Начать испытание"
         android:textAllCaps="false"
-        android:background="@drawable/bc_btn_join_guild"
+        android:background="@drawable/bc_guild_btn"
         android:paddingHorizontal="10dp"
         android:textColor="@color/black"
         android:fontFamily="@font/merriweather_regular"

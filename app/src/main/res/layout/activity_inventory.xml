@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A15A24">
+    android:background="#3A5678">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_content_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#A15A24">
+        android:background="#3A5678">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#A15A24">
+            android:background="#3A5678">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ll_summary_characteristics"
@@ -35,8 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/merriweather_regular"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
                     tools:text="+ 40 очков к 100 шагам" />
 
                 <TextView
@@ -45,8 +45,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/merriweather_regular"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
                     tools:text="+ 1.2 к количеству очков" />
 
                 <TextView
@@ -55,8 +55,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/merriweather_regular"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
                     tools:text="+ 30 мин к продолжительности испытания" />
 
                 <TextView
@@ -65,8 +65,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/merriweather_regular"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
                     tools:text="+ 1.2 к продолжительности испытания" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -75,8 +75,8 @@
                 android:layout_height="wrap_content"
                 android:text="Слот 1"
                 android:fontFamily="@font/merriweather_bold"
-                android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/cl_equipped_item_1_container"
                 app:layout_constraintEnd_toEndOf="@+id/cl_equipped_item_1_container"
                 app:layout_constraintStart_toStartOf="@+id/cl_equipped_item_1_container" />
@@ -101,8 +101,8 @@
                 android:layout_height="wrap_content"
                 android:text="Слот 2"
                 android:fontFamily="@font/merriweather_bold"
-                android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/cl_equipped_item_2_container"
                 app:layout_constraintEnd_toEndOf="@+id/cl_equipped_item_2_container"
                 app:layout_constraintStart_toStartOf="@+id/cl_equipped_item_2_container" />

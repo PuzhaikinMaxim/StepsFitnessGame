@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A15A24">
+    android:background="#3A5678">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#A15A24">
+        android:background="#3A5678">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_user_profile_image"
@@ -29,7 +29,7 @@
             android:layout_marginHorizontal="20dp"
             android:fontFamily="@font/merriweather_regular"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="28sp"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
             android:layout_marginHorizontal="20dp"
             android:fontFamily="@font/merriweather_bold"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:layout_marginTop="10dp"
             android:text="@string/user_level_text"
@@ -59,7 +59,7 @@
             android:layout_marginHorizontal="20dp"
             android:fontFamily="@font/merriweather_regular"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:layout_marginTop="10dp"
             android:text="@string/unassigned_points"
@@ -84,7 +84,7 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:fontFamily="@font/merriweather_bold"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="32sp"
                 tools:text="20"/>
 
@@ -132,7 +132,7 @@
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:fontFamily="@font/merriweather_regular"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="@string/plus_points_multiplier"
                 tools:text="(+20% к очкам)"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -153,7 +153,7 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:fontFamily="@font/merriweather_bold"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="32sp"
                 tools:text="10"/>
 
@@ -202,7 +202,7 @@
                 android:text="@string/plus_time_multiplier"
                 android:textSize="16sp"
                 android:fontFamily="@font/merriweather_regular"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 tools:text="(+10% ко времени)"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>
