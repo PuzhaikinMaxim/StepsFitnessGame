@@ -3,6 +3,7 @@ package com.puj.stepsfitnessgame.presentation.activities
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.content.res.TypedArray
 import android.os.Build
@@ -17,32 +18,23 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.puj.stepsfitnessgame.R
 import com.puj.stepsfitnessgame.data.workers.StepCountingWorker
 import com.puj.stepsfitnessgame.data.database.FitnessGameDatabase
-import com.puj.stepsfitnessgame.data.network.duel.DuelStompClient
 import com.puj.stepsfitnessgame.databinding.ActivityMenuContainerBinding
 import com.puj.stepsfitnessgame.presentation.PreferencesValues
-import com.puj.stepsfitnessgame.presentation.MainMenuContainer
 import com.puj.stepsfitnessgame.presentation.ViewModelFactory
 import com.puj.stepsfitnessgame.presentation.fragments.*
 import com.puj.stepsfitnessgame.presentation.viewmodels.MainMenuViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainMenuActivity: AppCompatActivity() {
 
@@ -55,6 +47,10 @@ class MainMenuActivity: AppCompatActivity() {
     private lateinit var userProfileImages: TypedArray
 
     //private var isOnBackPressed = false
+
+    private val localBroadcastManager by lazy {
+        LocalBroadcastManager.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +67,10 @@ class MainMenuActivity: AppCompatActivity() {
 
         userProfileImages = resources.obtainTypedArray(R.array.profile_images)
 
+        val intentFilter = IntentFilter().apply {
+            addAction("test")
+        }
+
         //openChallengeListFragment()
 
         setupGoogleSignIn()
@@ -86,11 +86,14 @@ class MainMenuActivity: AppCompatActivity() {
         )
         */
 
+        /*
         val duelStompClient2 = DuelStompClient(
             "testtest95ddaf83-dbf0-479c-9f8b-73c6ee9e65ce",
         )
 
         duelStompClient2.initializeConnection("user2")
+
+
 
         val scope = CoroutineScope(Dispatchers.Default)
 
@@ -99,10 +102,16 @@ class MainMenuActivity: AppCompatActivity() {
                 duelStompClient2.tryFindGame()
             }
         }
+         */
 
         FitnessGameDatabase.initializeDatabase(this)
 
-        val request = OneTimeWorkRequestBuilder<StepCountingWorker>()
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.NOT_ROAMING)
+            .setRequiresBatteryNotLow(true)
+            .build()
+
+        val request = OneTimeWorkRequestBuilder<StepCountingWorker>().setConstraints(constraints)
             .build()
 
         WorkManager.getInstance(applicationContext).enqueueUniqueWork(
@@ -184,16 +193,41 @@ class MainMenuActivity: AppCompatActivity() {
             ) {
 
             }
-
         if(
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACTIVITY_RECOGNITION
-            ) == PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_DENIED
         ) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 requestPermissionLauncher.launch(
                     Manifest.permission.ACTIVITY_RECOGNITION
+                )
+            }
+        }
+        requestPermissionLauncher.launch(
+            Manifest.permission.FOREGROUND_SERVICE
+        )
+        ifPermissionDeniedShowPermissionLauncher(Manifest.permission.FOREGROUND_SERVICE)
+        ifPermissionDeniedShowPermissionLauncher(Manifest.permission.INTERNET)
+    }
+
+    private fun ifPermissionDeniedShowPermissionLauncher(permission: String) {
+        val requestPermissionLauncher =
+            registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) {
+
+            }
+        if(
+            ContextCompat.checkSelfPermission(
+                this,
+                permission
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                requestPermissionLauncher.launch(
+                    permission
                 )
             }
         }

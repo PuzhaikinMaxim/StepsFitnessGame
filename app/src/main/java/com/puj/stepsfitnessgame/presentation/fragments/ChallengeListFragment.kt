@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -58,7 +59,7 @@ class ChallengeListFragment: Fragment() {
         viewModel = ViewModelProvider(
             this, ViewModelFactory(sharedPref)
         )[ChallengeListViewModel::class.java]
-
+        //Toast.makeText(requireActivity(), "Test", Toast.LENGTH_LONG).show()
         setupTodayStatistics()
         return binding.root
     }
@@ -68,6 +69,7 @@ class ChallengeListFragment: Fragment() {
         setupChallengeList()
         setupChooseLevelButton()
         setShowStatisticsButton()
+        setupChallengeStatistics()
         setupItemsModal()
         setupIntentFilter()
     }
@@ -141,6 +143,16 @@ class ChallengeListFragment: Fragment() {
         }
     }
 
+    private fun setupChallengeStatistics() {
+        viewModel.challengeStatistics.observe(requireActivity()){
+            binding.tvAmountOfCompletedChallenges.text = getString(
+                R.string.statistics_amount_of_completed_challenges,
+                it.amountOfCompletedChallenges,
+                it.amountOfChallenges
+            )
+        }
+    }
+
     private fun setupChooseLevelButton() {
         binding.btnChooseLevel.setOnClickListener {
             findNavController().navigate(
@@ -192,6 +204,7 @@ class ChallengeListFragment: Fragment() {
         viewModel.completedChallengeReward.removeObservers(requireActivity())
         viewModel.todayStatistics.removeObservers(requireActivity())
         viewModel.shouldShowRewardModal.removeObservers(requireActivity())
+        viewModel.challengeStatistics.removeObservers(requireActivity())
     }
 
     companion object {

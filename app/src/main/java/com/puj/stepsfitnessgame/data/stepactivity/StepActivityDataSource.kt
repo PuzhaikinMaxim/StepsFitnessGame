@@ -18,7 +18,8 @@ object StepActivityDataSource {
     private val lastStepCountDao = FitnessGameDatabase.getDatabase().lastStepCountUpdateDao()
 
     suspend fun getStepCountInInterval(): Int {
-        val start = lastStepCountDao.getLastUpdate()?.lastStepCountUpdate ?: LocalDateTime.now()
+        val start = lastStepCountDao.getLastUpdate()?.lastStepCountUpdate
+            ?: LocalDateTime.now().withHour(0).withMinute(0).withSecond(1)
         val end = LocalDateTime.now()
         return stepActivityDataProvider.getStepCountInInterval(start, end)
     }

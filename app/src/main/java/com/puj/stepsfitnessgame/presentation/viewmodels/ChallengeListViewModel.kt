@@ -10,10 +10,7 @@ import com.puj.stepsfitnessgame.data.repositories.StepStatisticsRepositoryImpl
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
 import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
 import com.puj.stepsfitnessgame.domain.models.stepstatistics.TodayStatistics
-import com.puj.stepsfitnessgame.domain.usecases.challenge.CancelActiveChallengeUseCase
-import com.puj.stepsfitnessgame.domain.usecases.challenge.EndActiveChallengeUseCase
-import com.puj.stepsfitnessgame.domain.usecases.challenge.GetChallengeListUseCase
-import com.puj.stepsfitnessgame.domain.usecases.challenge.StartChallengeUseCase
+import com.puj.stepsfitnessgame.domain.usecases.challenge.*
 import com.puj.stepsfitnessgame.domain.usecases.stepstatistics.GetTodayStatisticsUseCase
 import com.puj.stepsfitnessgame.domain.usecases.stepstatistics.SetTodayStatisticsUseCase
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +34,8 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
 
     private val endActiveChallengeUseCase = EndActiveChallengeUseCase(challengeRepository)
 
+    private val getChallengeStatisticsUseCase = GetChallengeStatisticsUseCase(challengeRepository)
+
     private var _completedChallengeReward = MutableLiveData<CompletedChallengeReward>()
     val completedChallengeReward: LiveData<CompletedChallengeReward>
         get() = _completedChallengeReward
@@ -45,13 +44,15 @@ class ChallengeListViewModel(sharedPreferences: SharedPreferences): ViewModel() 
     val shouldShowRewardModal: LiveData<Boolean>
         get() = _shouldShowRewardModal
 
-    private var _challengeList = getChallengeListUseCase.invoke()
+    private var _challengeList = getChallengeListUseCase()
     val challengeList: LiveData<List<Challenge>>
         get() = _challengeList
 
-    private var _todayStatistics = getTodayStatisticsUseCase.invoke()
+    private var _todayStatistics = getTodayStatisticsUseCase()
     val todayStatistics: LiveData<TodayStatistics>
         get() = _todayStatistics
+
+    val challengeStatistics = getChallengeStatisticsUseCase()
 
     init {
         viewModelScope.launch(Dispatchers.Default) {

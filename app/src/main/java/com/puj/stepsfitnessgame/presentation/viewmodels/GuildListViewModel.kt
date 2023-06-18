@@ -37,12 +37,19 @@ class GuildListViewModel(private val sharedPreferences: SharedPreferences): View
     fun cancelEnterUseCase(guildId: Long) {
         viewModelScope.launch(Dispatchers.Default) {
             cancelEnterUseCase.invoke(guildId)
+            getGuildListUseCase()
         }
     }
 
     fun requestEnterUseCase(guildId: Long) {
         viewModelScope.launch(Dispatchers.Default) {
             requestEnterUseCase.invoke(guildId)
+            getGuildListUseCase()
         }
+    }
+
+    fun resetLiveData() {
+        getGuildListUseCase()
+        getGuildDataUseCase()
     }
 }

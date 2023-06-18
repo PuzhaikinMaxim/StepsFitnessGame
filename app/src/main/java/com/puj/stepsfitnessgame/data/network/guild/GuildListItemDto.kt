@@ -7,7 +7,7 @@ data class GuildListItemDto(
     val guildName: String,
     val rank: Int,
     val amountOfPlayers: Int,
-    @SerializedName("enterRequested")
+    @SerializedName("isEnterRequested")
     val isEnterRequested: Boolean
 ) {
 }

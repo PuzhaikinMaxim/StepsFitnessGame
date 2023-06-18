@@ -3,6 +3,7 @@ package com.puj.stepsfitnessgame.data.workers
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.Builder
 import androidx.lifecycle.MutableLiveData
@@ -60,14 +61,16 @@ class StepCountingWorker(
 
     override suspend fun doWork(): Result {
         createNotificationBuilder()
+        startForegroundService(notificationBuilder)
         while (true) {
             delay(FIFTEEN_SECONDS)
             val todayStatistics = stepActivityDataSource.getTodayStatistics()
-            notificationBuilder.setCustomContentView(createCustomContentView(todayStatistics))
+            //notificationBuilder.setCustomContentView(createCustomContentView(todayStatistics))
+            createNotificationBuilder()
             startForegroundService(notificationBuilder)
-            //val stepCount = stepActivityDataSource.getStepCountInInterval()
-            //if(stepCount == 0) continue
-            val stepCount = 1000
+            val stepCount = stepActivityDataSource.getStepCountInInterval()
+            if(stepCount == 0) continue
+            //val stepCount = 1000
             try {
                 challengeRemoteDataSource.updateChallengeProgress(stepCount)
                 duelRemoteDataSource.updateStepAmount(stepCount)
@@ -137,10 +140,39 @@ class StepCountingWorker(
             .setOngoing(true)
             .setOnlyAlertOnce(true)
             .setSilent(true)
+            //.setSubText(getSubText(todayStatistics))
+            .setSmallIcon(R.drawable.ic_dungeon_white_transparent)
+        //setProgress(notificationBuilder, todayStatistics)
+        return notificationBuilder
+    }
+
+    private fun getSubText(todayStatistics: TodayStatistics?): String {
+        if(todayStatistics == null) return ""
+        return context.getString(
+            R.string.statistics_amount_of_steps_passed,
+            todayStatistics.stepAmount,
+            todayStatistics.kilometersPassed
+        )
+    }
+
+    private fun setProgress(builder: Builder, todayStatistics: TodayStatistics?) {
+        if(todayStatistics == null) return
+        builder.setProgress(todayStatistics.goal,todayStatistics.stepAmount,false)
+    }
+
+    /*
+    private fun createNotificationBuilder(): Builder {
+        notificationBuilder = Builder(context, "step_counting_channel")
+            .setContentTitle("Шаги RPG. Фитнес игра с шагомером")
+            .setOngoing(true)
+            .setOnlyAlertOnce(true)
+            .setSilent(true)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
             .setSmallIcon(R.drawable.ic_dungeon_white_transparent)
         return notificationBuilder
     }
+
+     */
 
     companion object {
         private const val TOKEN_KEY = "authToken"

@@ -2,6 +2,7 @@ package com.puj.stepsfitnessgame.data.network.challenge
 
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
+import com.puj.stepsfitnessgame.domain.models.challenge.ChallengeStatistics
 
 class FakeChallengeRemoteDataSource(token: String): ChallengeRemoteDataSource {
 
@@ -62,6 +63,10 @@ class FakeChallengeRemoteDataSource(token: String): ChallengeRemoteDataSource {
     }
 
     override suspend fun endActiveChallenge(): Response<CompletedChallengeRewardDto> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getChallengeStatistics(challengeLevel: Int): Response<ChallengeStatistics> {
         TODO("Not yet implemented")
     }
 }

@@ -87,13 +87,14 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_amount_of_completed_challenges"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/merriweather_bold"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    tools:text="@string/statistics_amount_of_completed_tasks"
+                    tools:text="@string/statistics_amount_of_completed_challenges"
                     />
             </LinearLayout>
 

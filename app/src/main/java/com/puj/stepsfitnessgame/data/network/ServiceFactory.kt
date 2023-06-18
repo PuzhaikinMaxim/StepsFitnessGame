@@ -7,6 +7,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 object ServiceFactory {
 
     private const val BASE_URL = "http://192.168.1.195:8080/"
+    //private const val BASE_URL = "http://188.120.241.13:8080/"
 
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(ScalarsConverterFactory.create())

@@ -102,6 +102,11 @@ class GuildListFragment: Fragment() {
         removeAllObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.resetLiveData()
+    }
+
     private fun removeAllObservers() {
         if(!this::viewModel.isInitialized) return
         viewModel.guildList.removeObservers(requireActivity())

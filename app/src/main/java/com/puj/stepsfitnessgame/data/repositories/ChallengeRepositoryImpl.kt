@@ -1,11 +1,13 @@
 package com.puj.stepsfitnessgame.data.repositories
 
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.puj.stepsfitnessgame.data.network.challenge.ChallengeRemoteDataSourceImpl
 import com.puj.stepsfitnessgame.data.network.challenge.CompletedChallengeRewardMapper
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
+import com.puj.stepsfitnessgame.domain.models.challenge.ChallengeStatistics
 import com.puj.stepsfitnessgame.domain.models.challenge.CompletedChallengeReward
 import com.puj.stepsfitnessgame.domain.repositories.ChallengeRepository
 import kotlinx.coroutines.CoroutineScope
@@ -23,6 +25,8 @@ class ChallengeRepositoryImpl(
     private val challengeRemoteDataSource = ChallengeRemoteDataSourceImpl(token)
 
     private val challengeList = MutableLiveData<List<Challenge>>()
+
+    private val challengeStatistics = MutableLiveData<ChallengeStatistics>()
 
     private val completedChallengeRewardMapper = CompletedChallengeRewardMapper()
 
@@ -57,6 +61,17 @@ class ChallengeRepositoryImpl(
             }
         }
 
+    }
+
+    override fun getChallengeStatistics(): LiveData<ChallengeStatistics> {
+        val coroutine = CoroutineScope(Dispatchers.IO)
+        coroutine.launch {
+            val response = challengeRemoteDataSource.getChallengeStatistics(level)
+            if(response is Response.Success){
+                challengeStatistics.postValue(response.data)
+            }
+        }
+        return challengeStatistics
     }
 
     private suspend fun setChallengesList() {

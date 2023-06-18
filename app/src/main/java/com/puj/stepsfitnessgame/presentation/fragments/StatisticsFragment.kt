@@ -149,6 +149,7 @@ class StatisticsFragment: Fragment() {
             binding.hbrChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
             val dataSet = BarDataSet(entries, "")
             dataSet.setDrawValues(false)
+            dataSet.color = resources.getColor(R.color.orange, null)
             val barData = BarData(dataSet)
             binding.hbrChart.data = barData
             setupChartStyles(chart, maxValue.toFloat())

@@ -7,6 +7,7 @@ import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.data.network.duel.FinishedDuelRewardDto
 import com.puj.stepsfitnessgame.domain.models.Response
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
+import com.puj.stepsfitnessgame.domain.models.challenge.ChallengeStatistics
 
 class ChallengeRemoteDataSourceImpl(
     private val enterToken: String
@@ -76,6 +77,20 @@ class ChallengeRemoteDataSourceImpl(
     override suspend fun endActiveChallenge(): Response<CompletedChallengeRewardDto> {
         return try {
             val response = challengeApiService.endActiveChallenge(enterToken)
+
+            if (response.isSuccessful && response.body() != null) {
+                Response.Success(response.body()!!)
+            } else {
+                Response.Error(DEFAULT_ERROR_CODE)
+            }
+        } catch (ex: Exception){
+            Response.Error(SERVER_NOT_RESPONDING_CODE)
+        }
+    }
+
+    override suspend fun getChallengeStatistics(challengeLevel: Int): Response<ChallengeStatistics> {
+        return try {
+            val response = challengeApiService.getChallengeStatistics(enterToken, challengeLevel)
 
             if (response.isSuccessful && response.body() != null) {
                 Response.Success(response.body()!!)

@@ -2,6 +2,7 @@ package com.puj.stepsfitnessgame.data.network.challenge
 
 import com.puj.stepsfitnessgame.data.network.StepCount
 import com.puj.stepsfitnessgame.domain.models.challenge.Challenge
+import com.puj.stepsfitnessgame.domain.models.challenge.ChallengeStatistics
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -12,6 +13,12 @@ interface ChallengeApiService {
         @Header("token") enterToken: String,
         @Body stepCount: StepCount
     ): Response<String>
+
+    @GET("challenges/challenge_statistics/{level}")
+    suspend fun getChallengeStatistics(
+        @Header("token") enterToken: String,
+        @Path("level") challengeLevel: Int
+    ): Response<ChallengeStatistics>
 
     @GET("challenges/{level}")
     suspend fun getChallengesListByLevel(

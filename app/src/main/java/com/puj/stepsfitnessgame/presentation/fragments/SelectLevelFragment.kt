@@ -20,7 +20,7 @@ class SelectLevelFragment: Fragment() {
 
     private var _binding: FragmentSelectLevelBinding? = null
     private val binding: FragmentSelectLevelBinding
-        get() = _binding ?: throw RuntimeException("Choose level fragment not set")
+        get() = _binding ?: throw RuntimeException("Select level fragment not set")
 
     private lateinit var viewModel: SelectLevelViewModel
 
