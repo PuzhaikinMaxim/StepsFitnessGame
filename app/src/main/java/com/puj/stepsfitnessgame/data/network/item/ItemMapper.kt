@@ -20,7 +20,9 @@ class ItemMapper {
             itemDto.plusMinutes,
             itemDto.timeMultiplier,
             itemDto.pointsFixed,
-            itemDto.pointsMultiplier
+            itemDto.pointsMultiplier,
+            itemDto.rarityLevel,
+            itemDto.imageId
         )
     }
 }

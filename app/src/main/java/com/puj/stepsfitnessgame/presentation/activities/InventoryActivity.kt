@@ -2,6 +2,8 @@ package com.puj.stepsfitnessgame.presentation.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.TypedArray
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -25,6 +27,8 @@ class InventoryActivity: AppCompatActivity() {
 
     private lateinit var viewModel: InventoryViewModel
 
+    private lateinit var itemImgIds: TypedArray
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,6 +41,7 @@ class InventoryActivity: AppCompatActivity() {
             ViewModelFactory(sharedPref)
         )[InventoryViewModel::class.java]
         setContentView(binding.root)
+        itemImgIds = resources.obtainTypedArray(R.array.item_imgs)
         setRecyclerViewSpanCount()
         setupInventoryItemsRecyclerView()
         setupEquippedItems()
@@ -55,7 +60,7 @@ class InventoryActivity: AppCompatActivity() {
 
     private fun setupInventoryItemsRecyclerView() {
         val colorsList = resources.getStringArray(R.array.item_rarities_colors).asList()
-        val adapter = InventoryItemsAdapter(colorsList)
+        val adapter = InventoryItemsAdapter(colorsList, itemImgIds)
         adapter.onItemClickListener = {
             viewModel.selectItem(it)
         }
@@ -91,6 +96,15 @@ class InventoryActivity: AppCompatActivity() {
         binding.clContainer.visibility = View.VISIBLE
         binding.clContainer.setOnClickListener {
             viewModel.equipItem(slot)
+        }
+        val colorsList = resources.getStringArray(R.array.item_rarities_colors).asList()
+        binding.ivItemImage.background.setTint(
+            Color.parseColor(colorsList[inventoryItem.rarity-1])
+        )
+        if(inventoryItem.imageId != null){
+            val image = itemImgIds.getResourceId(inventoryItem.imageId - 1, -1)
+            if(image == -1) return
+            binding.ivItemImage.setImageResource(image)
         }
     }
 
@@ -200,6 +214,11 @@ class InventoryActivity: AppCompatActivity() {
         else{
             ""
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        itemImgIds.recycle()
     }
 
     companion object {

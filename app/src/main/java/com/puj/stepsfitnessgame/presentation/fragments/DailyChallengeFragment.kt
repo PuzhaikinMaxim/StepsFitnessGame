@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,8 @@ class DailyChallengeFragment: Fragment() {
         get() = _binding ?: throw RuntimeException("${_binding.toString()} is not set")
 
     private lateinit var viewModel: DailyChallengeViewModel
+
+    private lateinit var itemImgIds: TypedArray
 
     private val localBroadcastManager by lazy {
         LocalBroadcastManager.getInstance(requireActivity())
@@ -56,6 +59,7 @@ class DailyChallengeFragment: Fragment() {
             this,
             ViewModelFactory(sharedPref)
         )[DailyChallengeViewModel::class.java]
+        itemImgIds = resources.obtainTypedArray(R.array.item_imgs)
         return binding.root
     }
 
@@ -125,7 +129,10 @@ class DailyChallengeFragment: Fragment() {
             }
         }
 
-        val adapter = ItemListAdapter()
+        val adapter = ItemListAdapter(
+            resources.getStringArray(R.array.item_rarities_colors).asList(),
+            itemImgIds
+        )
 
         viewModel.completedDailyChallengeReward.observe(requireActivity()){
             binding.lModal.tvHeaderMessage.text = getString(R.string.header_message_daily_challenge)
@@ -147,6 +154,7 @@ class DailyChallengeFragment: Fragment() {
         super.onDestroy()
         _binding = null
         removeAllObservers()
+        itemImgIds.recycle()
     }
 
     private fun removeAllObservers() {

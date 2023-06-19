@@ -9,7 +9,9 @@ data class ItemDto(
     val plusMinutes: Int,
     val timeMultiplier: Double,
     val pointsFixed: Int,
-    val pointsMultiplier: Double
+    val pointsMultiplier: Double,
+    val rarityLevel: Int = 1,
+    val imageId: Int?
 ) {
 
 }

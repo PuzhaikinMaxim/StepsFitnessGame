@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,8 @@ class ChallengeListFragment: Fragment() {
     private var _binding: FragmentChallengeListBinding? = null
     private val binding: FragmentChallengeListBinding
         get() = _binding ?: throw RuntimeException("${_binding.toString()} is not set")
+
+    private lateinit var itemImgIds: TypedArray
 
     private lateinit var viewModel: ChallengeListViewModel
 
@@ -59,6 +62,7 @@ class ChallengeListFragment: Fragment() {
         viewModel = ViewModelProvider(
             this, ViewModelFactory(sharedPref)
         )[ChallengeListViewModel::class.java]
+        itemImgIds = resources.obtainTypedArray(R.array.item_imgs)
         //Toast.makeText(requireActivity(), "Test", Toast.LENGTH_LONG).show()
         setupTodayStatistics()
         return binding.root
@@ -173,7 +177,10 @@ class ChallengeListFragment: Fragment() {
             }
         }
 
-        val adapter = ItemListAdapter()
+        val adapter = ItemListAdapter(
+            resources.getStringArray(R.array.item_rarities_colors).asList(),
+            itemImgIds
+        )
 
         viewModel.completedChallengeReward.observe(requireActivity()){
             if(it != null){
@@ -196,6 +203,7 @@ class ChallengeListFragment: Fragment() {
         _binding = null
         super.onDestroy()
         removeAllObservers()
+        itemImgIds.recycle()
     }
 
     private fun removeAllObservers() {

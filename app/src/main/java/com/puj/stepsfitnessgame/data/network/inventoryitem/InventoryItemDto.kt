@@ -13,6 +13,7 @@ data class InventoryItemDto(
     val rarityLevel: Int,
     @SerializedName("equipped")
     val isEquipped: Boolean,
-    val slot: Int?
+    val slot: Int?,
+    val imageId: Int?
 ) {
 }

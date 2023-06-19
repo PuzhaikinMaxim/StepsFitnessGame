@@ -9,5 +9,6 @@ data class InventoryItem(
     val pointsFixed: Int,
     val pointsMultiplier: Double,
     val rarity: Int = 1,
-    var isEquipped: Boolean = false
+    var isEquipped: Boolean = false,
+    val imageId: Int?
 )

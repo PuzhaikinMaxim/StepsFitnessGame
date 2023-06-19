@@ -1,10 +1,10 @@
 package com.puj.stepsfitnessgame.presentation.adapters.inventoryitems
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +15,8 @@ import com.puj.stepsfitnessgame.databinding.ItemGameItemSmBinding
 import com.puj.stepsfitnessgame.domain.models.item.InventoryItem
 
 class InventoryItemsAdapter(
-    private val colorCodesList: List<String>
+    private val colorCodesList: List<String>,
+    private val itemImgIds: TypedArray
 ): Adapter<InventoryItemsAdapter.InventoryItemViewHolder>() {
 
     var inventoryItemList = listOf<InventoryItem>()
@@ -56,6 +57,11 @@ class InventoryItemsAdapter(
             else{
                 cvItemContainer.foreground = null
                 cvItemContainer.setCardBackgroundColor(context!!.getColor(R.color.item_light_orange))
+            }
+            if(item.imageId != null){
+                val image = itemImgIds.getResourceId(item.imageId - 1, -1)
+                if(image == -1) return
+                ivItemImage.setImageResource(image)
             }
         }
     }

@@ -2,6 +2,8 @@ package com.puj.stepsfitnessgame.presentation.adapters.items
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.TypedArray
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -13,7 +15,10 @@ import com.puj.stepsfitnessgame.databinding.ItemGameItemAltBinding
 import com.puj.stepsfitnessgame.databinding.ItemGameItemBinding
 import com.puj.stepsfitnessgame.domain.models.item.Item
 
-class ItemListAdapter: Adapter<ItemListAdapter.ItemListViewHolder>() {
+class ItemListAdapter(
+    private val colorCodesList: List<String>,
+    private val itemImgIds: TypedArray
+): Adapter<ItemListAdapter.ItemListViewHolder>() {
 
     var itemsList: List<Item> = listOf()
     @SuppressLint("NotifyDataSetChanged")
@@ -59,6 +64,12 @@ class ItemListAdapter: Adapter<ItemListAdapter.ItemListViewHolder>() {
                 R.string.amount_of_points_multiplier,
                 item.pointsMultiplier.toString()
             ){item.pointsMultiplier != 0.0}
+            ivItemImage.background.setTint(Color.parseColor(colorCodesList[item.rarityLevel-1]))
+            if(item.imageId != null){
+                val image = itemImgIds.getResourceId(item.imageId - 1, -1)
+                if(image == -1) return
+                ivItemImage.setImageResource(image)
+            }
         }
     }
 

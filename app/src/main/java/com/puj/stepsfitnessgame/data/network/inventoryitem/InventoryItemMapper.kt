@@ -38,7 +38,8 @@ class InventoryItemMapper {
             itemDto.pointsFixed,
             itemDto.pointsMultiplier,
             itemDto.rarityLevel,
-            itemDto.isEquipped
+            itemDto.isEquipped,
+            itemDto.imageId
         )
     }
 }

@@ -39,4 +39,24 @@
         <item>@drawable/ic_user_picture_5</item>
         <item>@drawable/ic_user_picture_6</item>
     </integer-array>
+
+    <integer-array name="item_imgs">
+        <item>@drawable/item_1</item>
+        <item>@drawable/item_2</item>
+        <item>@drawable/item_3</item>
+        <item>@drawable/item_4</item>
+        <item>@drawable/item_5</item>
+        <item>@drawable/item_6</item>
+        <item>@drawable/item_7</item>
+        <item>@drawable/item_8</item>
+        <item>@drawable/item_9</item>
+        <item>@drawable/item_10</item>
+        <item>@drawable/item_11</item>
+        <item>@drawable/item_12</item>
+        <item>@drawable/item_13</item>
+        <item>@drawable/item_14</item>
+        <item>@drawable/item_15</item>
+        <item>@drawable/item_16</item>
+        <item>@drawable/item_17</item>
+    </integer-array>
 </resources>

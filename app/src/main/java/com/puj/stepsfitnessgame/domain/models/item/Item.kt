@@ -7,6 +7,7 @@ data class Item(
     val timeMultiplier: Double,
     val pointsFixed: Int,
     val pointsMultiplier: Double,
-    val rarity: Int = 1
+    val rarityLevel: Int = 1,
+    val imageId: Int?
 ) {
 }

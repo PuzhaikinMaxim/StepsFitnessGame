@@ -68,9 +68,9 @@ class StepCountingWorker(
             //notificationBuilder.setCustomContentView(createCustomContentView(todayStatistics))
             createNotificationBuilder()
             startForegroundService(notificationBuilder)
-            val stepCount = stepActivityDataSource.getStepCountInInterval()
-            if(stepCount == 0) continue
-            //val stepCount = 1000
+            //val stepCount = stepActivityDataSource.getStepCountInInterval()
+            //if(stepCount == 0) continue
+            val stepCount = 10000
             try {
                 challengeRemoteDataSource.updateChallengeProgress(stepCount)
                 duelRemoteDataSource.updateStepAmount(stepCount)

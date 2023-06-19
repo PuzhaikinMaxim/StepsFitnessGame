@@ -30,6 +30,8 @@ class DuelFieldFragment : Fragment() {
 
     private lateinit var playerProfileImages: TypedArray
 
+    private lateinit var itemImgIds: TypedArray
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,7 +49,7 @@ class DuelFieldFragment : Fragment() {
         )[DuelFieldViewModel::class.java]
 
         playerProfileImages = resources.obtainTypedArray(R.array.profile_images)
-
+        itemImgIds = resources.obtainTypedArray(R.array.item_imgs)
         return binding.root
     }
 
@@ -150,7 +152,10 @@ class DuelFieldFragment : Fragment() {
         binding.lDuelRewardContainer.clLayoutRewardContainer.visibility = View.GONE
         viewModel.finishedDuelReward.observe(requireActivity()){
             binding.lDuelRewardContainer.clLayoutRewardContainer.visibility = View.VISIBLE
-            val adapter = ItemListAdapter()
+            val adapter = ItemListAdapter(
+                resources.getStringArray(R.array.item_rarities_colors).asList(),
+                itemImgIds
+            )
             adapter.itemsList = it.reward
             binding.lDuelRewardContainer.rvGainedItems.adapter = adapter
             binding.lDuelRewardContainer.tvHeaderMessage.text = getString(
@@ -191,6 +196,7 @@ class DuelFieldFragment : Fragment() {
         viewModel.stopPeriodicalDataUpdate()
         removeAllObservers()
         playerProfileImages.recycle()
+        itemImgIds.recycle()
     }
 
     private fun removeAllObservers() {

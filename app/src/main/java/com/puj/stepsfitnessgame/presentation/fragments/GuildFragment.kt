@@ -38,6 +38,8 @@ class GuildFragment: Fragment() {
 
     private lateinit var playerProfileImages: TypedArray
 
+    private lateinit var itemImgIds: TypedArray
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,7 +58,7 @@ class GuildFragment: Fragment() {
             this,
             ViewModelFactory(sharedPref)
         )[GuildViewModel::class.java]
-
+        itemImgIds = resources.obtainTypedArray(R.array.item_imgs)
         return binding.root
     }
 
@@ -224,7 +226,10 @@ class GuildFragment: Fragment() {
     }
 
     private fun setupReward() {
-        val adapter = ItemListAdapter()
+        val adapter = ItemListAdapter(
+            resources.getStringArray(R.array.item_rarities_colors).asList(),
+            itemImgIds
+        )
         viewModel.challengeReward.observe(requireActivity()){
             with(binding.lReward){
                 tvAmountOfXpGained.text = getString(R.string.amount_of_xp_gained, it.amountOfXp)
@@ -291,6 +296,7 @@ class GuildFragment: Fragment() {
         viewModel.stopPeriodicalDataUpdate()
         playerProfileImages.recycle()
         guildLogoIds.recycle()
+        itemImgIds.recycle()
         removeAllObservers()
     }
 
